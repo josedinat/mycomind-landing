@@ -13,6 +13,7 @@
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/index.min.js"></script>
     
     <style>
         * {
@@ -40,7 +41,7 @@
             font-family: 'Inter', sans-serif;
             color: var(--charcoal);
             line-height: 1.7;
-            background-color: var(--white);
+            background-color: transparent;
         }
 
         /* ===== NAVIGATION ===== */
@@ -225,7 +226,7 @@
 
         /* ===== VIDEO SECTION ===== */
         .video-section {
-            background: var(--white);
+            background: transparent;
             padding: 100px 60px;
             position: relative;
             overflow: hidden;
@@ -880,33 +881,48 @@
     <!-- FOOTER -->
     <footer>
         <div class="footer-content">
-            <img src="/home/ubuntu/mycomind_logo.png" alt="My-CoMind" class="footer-logo">
+            <img src="https://mycomind-landing-h8in0ppzi-josedinats-projects.vercel.app/mycomind_logo.png" alt="My-CoMind" class="footer-logo">
             <p class="footer-text">© 2026 My-CoMind. All rights reserved.</p>
             <div class="footer-links">
                 <a href="#privacy">Privacy Policy</a>
                 <span>|</span>
-                <a href="mailto:hello@my-comind.com">Contact</a>
+                <a href="mailto:contact@my-comind.com">Contact</a>
             </div>
             <div class="social-icons">
-                <a href="https://instagram.com/mycomind" class="social-icon" target="_blank" title="Instagram">
-                    <i class="fab fa-instagram"></i>
-                </a>
-                <a href="https://linkedin.com/company/my-comind" class="social-icon" target="_blank" title="LinkedIn">
+                <a href="https://www.linkedin.com/company/my-comind" class="social-icon" target="_blank" title="LinkedIn">
                     <i class="fab fa-linkedin-in"></i>
-                </a>
-                <a href="https://tiktok.com/@mycomind" class="social-icon" target="_blank" title="TikTok">
-                    <i class="fab fa-tiktok"></i>
                 </a>
             </div>
         </div>
     </footer>
 
     <script>
+        // Initialize EmailJS with your public key
+        emailjs.init('YOUR_PUBLIC_KEY_HERE');
+        
         function handleEmailSubmit(event) {
             event.preventDefault();
             const email = event.target.querySelector('.email-input').value;
-            alert(`Thank you for joining the waitlist! We'll send updates to ${email}`);
-            event.target.reset();
+            const button = event.target.querySelector('.btn-waitlist');
+            
+            button.disabled = true;
+            button.textContent = 'Sending...';
+            
+            emailjs.send('service_mycomind', 'template_waitlist', {
+                to_email: 'contact@my-comind.com',
+                user_email: email,
+                message: 'New waitlist signup: ' + email
+            }).then(function(response) {
+                alert('Thank you for joining the waitlist! We will send updates to ' + email);
+                event.target.reset();
+                button.disabled = false;
+                button.textContent = 'Join the Waitlist';
+            }, function(error) {
+                console.error('Error:', error);
+                alert('There was an error. Please try again.');
+                button.disabled = false;
+                button.textContent = 'Join the Waitlist';
+            });
         }
 
         // Scroll animations
