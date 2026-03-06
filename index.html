@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My-CoMind — Your thinking shouldn't disappear under pressure</title>
+    <meta name="description" content="Keep your thinking with you. Capture what matters. Continue where you left off.">
+    <meta name="keywords" content="memory, continuity, context, thinking, cognitive wellness">
+    <meta property="og:title" content="My-CoMind — Your thinking shouldn't disappear under pressure">
+    <meta property="og:description" content="Keep your thinking with you. Capture what matters. Continue where you left off.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://my-comind.com">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0066CC;
+            --secondary: #00C9A7;
+            --accent: #9B7EBD;
+            --charcoal: #1A1F36;
+            --light-gray: #F5F7FA;
+            --white: #FFFFFF;
+            --text-gray: #4B5563;
+            --dark-gray: #2D3748;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--charcoal);
+            line-height: 1.7;
+            background-color: var(--white);
+        }
+
+        /* ===== NAVIGATION ===== */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+            z-index: 1000;
+            padding: 16px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            height: 45px;
+            object-fit: contain;
+        }
+
+        .nav-cta {
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+            padding: 12px 28px;
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-cta:hover {
+            background: #0052A3;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 102, 204, 0.3);
+        }
+
+        /* ===== HERO SECTION ===== */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, #0052A3 100%);
+            color: var(--white);
+            padding: 200px 60px 160px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            margin-top: 60px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -200px;
+            right: -200px;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0) 70%);
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -300px;
+            left: -300px;
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0) 70%);
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-logo {
+            height: 120px;
+            object-fit: contain;
+            margin-bottom: 50px;
+            filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.2));
+            animation: fadeInDown 0.8s ease;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 64px;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 32px;
+            color: var(--white);
+            letter-spacing: -1px;
+        }
+
+        .hero p {
+            font-size: 24px;
+            color: rgba(255, 255, 255, 0.95);
+            margin-bottom: 60px;
+            line-height: 1.6;
+            font-weight: 500;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 24px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: var(--secondary);
+            color: var(--charcoal);
+            border: none;
+            padding: 18px 48px;
+            border-radius: 12px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 24px rgba(0, 201, 167, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: #00B394;
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(0, 201, 167, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--white);
+            padding: 16px 46px;
+            border-radius: 12px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: var(--white);
+            color: var(--primary);
+            transform: translateY(-4px);
+        }
+
+        /* ===== VIDEO SECTION ===== */
+        .video-section {
+            background: var(--white);
+            padding: 100px 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .video-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            aspect-ratio: 16 / 9;
+            background: #000;
+        }
+
+        .video-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .video-placeholder::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675"><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="1200" height="675" fill="url(%23grid)"/></svg>');
+            opacity: 0.5;
+        }
+
+        .play-button {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        .play-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .play-button i {
+            color: var(--primary);
+            font-size: 40px;
+            margin-left: 8px;
+        }
+
+        .video-label {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            background: rgba(255, 255, 255, 0.2);
+            color: var(--white);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            backdrop-filter: blur(10px);
+            z-index: 10;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* ===== SOLUTION SECTION ===== */
+        .solution {
+            background: linear-gradient(135deg, var(--secondary) 0%, #00A88A 100%);
+            color: var(--white);
+            padding: 160px 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .solution::before {
+            content: '';
+            position: absolute;
+            top: -200px;
+            right: -200px;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0) 70%);
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        .solution-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .solution h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 56px;
+            font-weight: 800;
+            margin-bottom: 32px;
+            color: var(--white);
+            line-height: 1.2;
+            letter-spacing: -1px;
+        }
+
+        .solution p {
+            font-size: 22px;
+            color: rgba(255, 255, 255, 0.95);
+            line-height: 1.8;
+            margin-bottom: 24px;
+            font-weight: 500;
+        }
+
+        .solution-highlight {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 48px;
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            margin-top: 50px;
+            backdrop-filter: blur(10px);
+        }
+
+        .solution-highlight p {
+            margin-bottom: 16px;
+        }
+
+        .solution-highlight p strong {
+            color: var(--white);
+            font-weight: 700;
+        }
+
+        .differentiator {
+            background: var(--charcoal);
+            color: var(--white);
+            padding: 40px;
+            border-radius: 12px;
+            margin-top: 50px;
+            font-size: 20px;
+            line-height: 1.8;
+            font-weight: 600;
+        }
+
+        /* ===== HOW IT WORKS ===== */
+        .how-it-works {
+            background: var(--light-gray);
+            padding: 160px 60px;
+            position: relative;
+        }
+
+        .how-it-works h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 56px;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 100px;
+            color: var(--charcoal);
+            letter-spacing: -1px;
+        }
+
+        .steps-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .step {
+            text-align: center;
+            animation: slideUp 0.8s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .step-number {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary) 0%, #0052A3 100%);
+            color: var(--white);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Poppins', sans-serif;
+            font-size: 48px;
+            font-weight: 800;
+            margin: 0 auto 32px;
+            box-shadow: 0 8px 24px rgba(0, 102, 204, 0.3);
+        }
+
+        .step h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            color: var(--charcoal);
+        }
+
+        .step p {
+            font-size: 16px;
+            color: var(--text-gray);
+            line-height: 1.8;
+        }
+
+        /* ===== FOR YOU SECTION ===== */
+        .for-you {
+            background: var(--white);
+            padding: 160px 60px;
+        }
+
+        .for-you h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 56px;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 100px;
+            color: var(--charcoal);
+            letter-spacing: -1px;
+        }
+
+        .profiles-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 50px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .profile-card {
+            background: var(--light-gray);
+            padding: 50px;
+            border-radius: 16px;
+            border-top: 6px solid var(--secondary);
+            transition: all 0.3s ease;
+        }
+
+        .profile-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .profile-card h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--charcoal);
+        }
+
+        .profile-card p {
+            font-size: 16px;
+            color: var(--text-gray);
+            line-height: 1.8;
+        }
+
+        /* ===== CTA SECTION ===== */
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary) 0%, #0052A3 100%);
+            color: var(--white);
+            padding: 160px 60px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: -200px;
+            right: -200px;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0) 70%);
+            border-radius: 50%;
+            z-index: 0;
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .cta-section h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 56px;
+            font-weight: 800;
+            margin-bottom: 32px;
+            color: var(--white);
+            letter-spacing: -1px;
+        }
+
+        .cta-section p {
+            font-size: 20px;
+            margin-bottom: 60px;
+            opacity: 0.95;
+            line-height: 1.8;
+            font-weight: 500;
+        }
+
+        .email-form {
+            display: flex;
+            gap: 12px;
+            max-width: 550px;
+            margin: 0 auto 32px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .email-input {
+            flex: 1;
+            min-width: 250px;
+            padding: 18px 28px;
+            border: none;
+            border-radius: 12px;
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            background: var(--white);
+            color: var(--charcoal);
+            transition: all 0.3s ease;
+        }
+
+        .email-input::placeholder {
+            color: #999;
+        }
+
+        .email-input:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-waitlist {
+            background: var(--secondary);
+            color: var(--charcoal);
+            border: none;
+            padding: 18px 48px;
+            border-radius: 12px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 24px rgba(0, 201, 167, 0.3);
+        }
+
+        .btn-waitlist:hover {
+            background: #00B394;
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(0, 201, 167, 0.4);
+        }
+
+        .privacy-note {
+            font-size: 14px;
+            opacity: 0.85;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: var(--charcoal);
+            color: var(--white);
+            padding: 80px 60px;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-logo {
+            height: 50px;
+            object-fit: contain;
+            margin-bottom: 32px;
+        }
+
+        .footer-text {
+            font-size: 14px;
+            margin-bottom: 28px;
+            opacity: 0.8;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: 14px;
+            transition: opacity 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            opacity: 0.7;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 32px;
+        }
+
+        .social-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--white);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 20px;
+        }
+
+        .social-icon:hover {
+            background: var(--secondary);
+            transform: translateY(-4px);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            nav {
+                padding: 12px 20px;
+            }
+
+            .hero {
+                padding: 120px 20px 100px;
+                margin-top: 60px;
+                min-height: auto;
+            }
+
+            .hero h1 {
+                font-size: 44px;
+            }
+
+            .hero p {
+                font-size: 18px;
+            }
+
+            .hero-logo {
+                height: 80px;
+            }
+
+            .video-section,
+            .solution,
+            .how-it-works,
+            .for-you,
+            .cta-section,
+            footer {
+                padding: 100px 20px;
+            }
+
+            .solution h2,
+            .how-it-works h2,
+            .for-you h2,
+            .cta-section h2 {
+                font-size: 40px;
+                margin-bottom: 60px;
+            }
+
+            .steps-container,
+            .profiles-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+
+            .email-form {
+                flex-direction: column;
+            }
+
+            .email-input {
+                min-width: 100%;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .btn-primary, .btn-secondary {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .solution h2,
+            .how-it-works h2,
+            .for-you h2,
+            .cta-section h2 {
+                font-size: 32px;
+            }
+
+            .profiles-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .step-number {
+                width: 80px;
+                height: 80px;
+                font-size: 36px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVIGATION -->
+    <nav>
+            <img src="./mycomind_logo.png" alt="My-CoMind" class="nav-logo">
+        <button class="nav-cta" onclick="document.querySelector('.cta-section').scrollIntoView({behavior: 'smooth'})">Get Early Access</button>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="hero-content">
+            <img src="./mycomind_logo.png" alt="My-CoMind Logo" class="hero-logo">
+            <h1>Your thinking shouldn't disappear under pressure.</h1>
+            <p>Life moves fast. Your mind shouldn't have to fall apart to keep up.</p>
+            <div class="hero-buttons">
+                <button class="btn-primary" onclick="document.querySelector('.cta-section').scrollIntoView({behavior: 'smooth'})">Get Early Access</button>
+                <button class="btn-secondary" onclick="document.querySelector('.video-section').scrollIntoView({behavior: 'smooth'})">See How It Works ↓</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- VIDEO SECTION -->
+    <section class="video-section">
+        <div class="video-container">
+            <div class="video-placeholder">
+                <div class="video-label">How It Works</div>
+                <div class="play-button" onclick="alert('Video player would be integrated here. Upload your 1-minute video.')">
+                    <i class="fas fa-play"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SOLUTION SECTION -->
+    <section class="solution">
+        <div class="solution-content">
+            <h2>Meet My-CoMind</h2>
+            <p>My-CoMind is a way to keep your thinking with you.</p>
+
+            <div class="solution-highlight">
+                <p>When a decision happens, <strong>you speak it.</strong></p>
+                <p>When an insight appears, <strong>you capture it.</strong></p>
+                <p>When life pulls you away, <strong>your context doesn't disappear.</strong></p>
+                <p>You don't start over.</p>
+                <p><strong>You continue.</strong></p>
+            </div>
+
+            <div class="differentiator">
+                My-CoMind doesn't make you smarter.<br>It makes your thinking stay.
+            </div>
+        </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="how-it-works">
+        <h2>How It Works</h2>
+        <div class="steps-container">
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3>You Speak</h3>
+                <p>Capture what matters in the moment. No friction.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3>It Connects</h3>
+                <p>Decisions, context, and insights become part of your living timeline.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3>You Continue</h3>
+                <p>When you return, you don't reconstruct. You pick up where you left off.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOR YOU SECTION -->
+    <section class="for-you">
+        <h2>If This Feels Like You…</h2>
+        <div class="profiles-grid">
+            <div class="profile-card">
+                <h3>You manage multiple responsibilities</h3>
+                <p>And your brain never truly clocks out.</p>
+            </div>
+            <div class="profile-card">
+                <h3>You are capable, driven, and thoughtful</h3>
+                <p>But constantly interrupted.</p>
+            </div>
+            <div class="profile-card">
+                <h3>You carry invisible cognitive weight</h3>
+                <p>That no one else sees.</p>
+            </div>
+            <div class="profile-card">
+                <h3>You want to trust your own mind again</h3>
+                <p>To be reliable to yourself.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA SECTION -->
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2>Stay in the Loop</h2>
+            <p>We're building this with people who live this reality.<br>If this feels personal — join us early.</p>
+            <form class="email-form" onsubmit="handleEmailSubmit(event)">
+                <input type="email" class="email-input" placeholder="Enter your email address" required>
+                <button type="submit" class="btn-waitlist">Join the Waitlist</button>
+            </form>
+            <p class="privacy-note">No spam. No pressure. Just progress.</p>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <img src="/home/ubuntu/mycomind_logo.png" alt="My-CoMind" class="footer-logo">
+            <p class="footer-text">© 2026 My-CoMind. All rights reserved.</p>
+            <div class="footer-links">
+                <a href="#privacy">Privacy Policy</a>
+                <span>|</span>
+                <a href="mailto:hello@my-comind.com">Contact</a>
+            </div>
+            <div class="social-icons">
+                <a href="https://instagram.com/mycomind" class="social-icon" target="_blank" title="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://linkedin.com/company/my-comind" class="social-icon" target="_blank" title="LinkedIn">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a href="https://tiktok.com/@mycomind" class="social-icon" target="_blank" title="TikTok">
+                    <i class="fab fa-tiktok"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function handleEmailSubmit(event) {
+            event.preventDefault();
+            const email = event.target.querySelector('.email-input').value;
+            alert(`Thank you for joining the waitlist! We'll send updates to ${email}`);
+            event.target.reset();
+        }
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.step, .profile-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'all 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
