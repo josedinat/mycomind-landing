@@ -3,34 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My-CoMind — Your thinking shouldn't disappear under pressure</title>
-    <meta name="description" content="Keep your thinking with you. Capture what matters. Continue where you left off.">
-    <meta name="keywords" content="memory, continuity, context, thinking, cognitive wellness">
-    <meta property="og:title" content="My-CoMind — Your thinking shouldn't disappear under pressure">
-    <meta property="og:description" content="Keep your thinking with you. Capture what matters. Continue where you left off.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://my-comind.com">
+    <title>My-CoMind — Your Personal Cognitive Infrastructure</title>
+    <meta name="description" content="Preserve how you think, not just what you remember. Keep your thinking with you under pressure.">
     
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/index.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     
     <style>
+        :root {
+            --ocean-blue: #0066CC;
+            --mint-green: #00C9A7;
+            --lavender: #9B7EBD;
+            --charcoal: #1A1F36;
+            --soft-gray: #F5F7FA;
+            --light-gray: #E8EBF0;
+            --white: #FFFFFF;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-        }
-
-        :root {
-            --primary: #0066CC;
-            --secondary: #00C9A7;
-            --accent: #9B7EBD;
-            --charcoal: #1A1F36;
-            --light-gray: #F5F7FA;
-            --white: #FFFFFF;
-            --text-gray: #4B5563;
-            --dark-gray: #2D3748;
         }
 
         html {
@@ -40,870 +36,1336 @@
         body {
             font-family: 'Inter', sans-serif;
             color: var(--charcoal);
-            line-height: 1.7;
-            background-color: transparent;
+            background: var(--soft-gray);
+            overflow-x: hidden;
+            line-height: 1.6;
         }
 
-        /* ===== NAVIGATION ===== */
+        /* ===== SMOOTH SCROLL & REVEAL ===== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(60px);
+            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== NAVIGATION (Apple-style) ===== */
         nav {
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
-            z-index: 1000;
-            padding: 16px 60px;
+            padding: 20px 60px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            z-index: 1000;
+            transition: all 0.4s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px) saturate(180%);
+            box-shadow: 0 1px 0 rgba(0,0,0,0.05);
+            padding: 16px 60px;
         }
 
         .nav-logo {
-            height: 45px;
-            object-fit: contain;
+            height: 40px;
+            opacity: 0;
+            transform: translateY(-20px);
+            animation: fadeDown 0.8s ease forwards;
+        }
+
+        @keyframes fadeDown {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .nav-link {
+            font-size: 14px;
+            color: var(--charcoal);
+            text-decoration: none;
+            font-weight: 500;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--ocean-blue);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
         }
 
         .nav-cta {
-            background: var(--primary);
-            color: var(--white);
+            background: var(--ocean-blue);
+            color: white;
             border: none;
-            padding: 12px 28px;
-            border-radius: 8px;
-            font-family: 'Poppins', sans-serif;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-family: 'Inter', sans-serif;
             font-weight: 600;
             font-size: 14px;
             cursor: pointer;
             transition: all 0.3s ease;
+            opacity: 0;
+            animation: fadeIn 0.8s ease 0.3s forwards;
         }
 
         .nav-cta:hover {
             background: #0052A3;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(0, 102, 204, 0.3);
+            transform: scale(1.05);
         }
 
-        /* ===== HERO SECTION ===== */
+        /* ===== HERO (Calm-inspired) ===== */
         .hero {
-            background: linear-gradient(135deg, var(--primary) 0%, #0052A3 100%);
-            color: var(--white);
-            padding: 200px 60px 160px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            margin-top: 60px;
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
+            position: relative;
+            background: linear-gradient(180deg, var(--soft-gray) 0%, white 100%);
+            overflow: hidden;
+            padding: 120px 40px 80px;
         }
 
-        .hero::before {
-            content: '';
+        /* Animated gradient orbs - Calm style */
+        .hero-orb {
             position: absolute;
-            top: -200px;
-            right: -200px;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .orb-1 {
             width: 600px;
             height: 600px;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0) 70%);
-            border-radius: 50%;
-            z-index: 0;
+            background: var(--mint-green);
+            top: -200px;
+            right: -100px;
+            animation-delay: 0s;
         }
 
-        .hero::after {
-            content: '';
-            position: absolute;
-            bottom: -300px;
-            left: -300px;
-            width: 700px;
-            height: 700px;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0) 70%);
-            border-radius: 50%;
-            z-index: 0;
+        .orb-2 {
+            width: 500px;
+            height: 500px;
+            background: var(--lavender);
+            bottom: -150px;
+            left: -100px;
+            animation-delay: -5s;
+        }
+
+        .orb-3 {
+            width: 400px;
+            height: 400px;
+            background: var(--ocean-blue);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0.1;
+            animation-delay: -10s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -30px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
         }
 
         .hero-content {
-            position: relative;
-            z-index: 1;
+            text-align: center;
             max-width: 900px;
-            margin: 0 auto;
-            animation: fadeInUp 0.8s ease;
+            z-index: 10;
+            position: relative;
         }
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .hero-logo {
-            height: 120px;
-            object-fit: contain;
-            margin-bottom: 50px;
-            filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.2));
-            animation: fadeInDown 0.8s ease;
-        }
-
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0, 201, 167, 0.1);
+            color: var(--mint-green);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 40px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.8s ease 0.2s forwards;
+            border: 1px solid rgba(0, 201, 167, 0.2);
         }
 
         .hero h1 {
             font-family: 'Poppins', sans-serif;
-            font-size: 64px;
+            font-size: clamp(40px, 6vw, 72px);
             font-weight: 800;
-            line-height: 1.2;
+            line-height: 1.1;
             margin-bottom: 32px;
-            color: var(--white);
-            letter-spacing: -1px;
+            color: var(--charcoal);
+            letter-spacing: -2px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 0.8s ease 0.4s forwards;
         }
 
-        .hero p {
-            font-size: 24px;
-            color: rgba(255, 255, 255, 0.95);
-            margin-bottom: 60px;
+        .hero h1 span {
+            background: linear-gradient(135deg, var(--ocean-blue), var(--mint-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 22px;
+            color: var(--charcoal);
+            opacity: 0.7;
+            max-width: 600px;
+            margin: 0 auto 50px;
             line-height: 1.6;
-            font-weight: 500;
+            font-weight: 400;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.8s ease 0.6s forwards;
+        }
+
+        @keyframes fadeUp {
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .hero-buttons {
             display: flex;
-            gap: 24px;
+            gap: 20px;
             justify-content: center;
             flex-wrap: wrap;
+            opacity: 0;
+            animation: fadeUp 0.8s ease 0.8s forwards;
         }
 
         .btn-primary {
-            background: var(--secondary);
-            color: var(--charcoal);
+            background: var(--ocean-blue);
+            color: white;
             border: none;
-            padding: 18px 48px;
-            border-radius: 12px;
-            font-family: 'Poppins', sans-serif;
-            font-weight: 700;
+            padding: 18px 40px;
+            border-radius: 50px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
             font-size: 16px;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 24px rgba(0, 201, 167, 0.3);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .btn-primary:hover {
-            background: #00B394;
-            transform: translateY(-4px);
-            box-shadow: 0 12px 32px rgba(0, 201, 167, 0.4);
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 102, 204, 0.3);
         }
 
         .btn-secondary {
             background: transparent;
-            color: var(--white);
-            border: 2px solid var(--white);
-            padding: 16px 46px;
-            border-radius: 12px;
-            font-family: 'Poppins', sans-serif;
-            font-weight: 700;
+            color: var(--charcoal);
+            border: 2px solid var(--light-gray);
+            padding: 16px 38px;
+            border-radius: 50px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
             font-size: 16px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .btn-secondary:hover {
-            background: var(--white);
-            color: var(--primary);
+            border-color: var(--ocean-blue);
+            color: var(--ocean-blue);
             transform: translateY(-4px);
         }
 
-        /* ===== VIDEO SECTION ===== */
-        .video-section {
-            background: transparent;
-            padding: 100px 60px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .video-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            position: relative;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
-            aspect-ratio: 16 / 9;
-            background: #000;
-        }
-
-        .video-placeholder {
-            width: 100%;
-            height: 100%;
+        /* Scroll indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
             display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: center;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            gap: 8px;
+            opacity: 0;
+            animation: fadeUp 0.8s ease 1.2s forwards;
+            cursor: pointer;
+        }
+
+        .scroll-indicator span {
+            font-size: 12px;
+            color: var(--charcoal);
+            opacity: 0.5;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .scroll-arrow {
+            width: 24px;
+            height: 24px;
+            border-right: 2px solid var(--charcoal);
+            border-bottom: 2px solid var(--charcoal);
+            transform: rotate(45deg);
+            animation: bounce 2s infinite;
+            opacity: 0.3;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: rotate(45deg) translateY(0); }
+            50% { transform: rotate(45deg) translateY(10px); }
+        }
+
+        /* ===== PROBLEM SECTION (Wysa-style empathy) ===== */
+        .problem-section {
+            padding: 160px 40px;
+            background: white;
+            position: relative;
+        }
+
+        .problem-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .section-label {
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--lavender);
+            margin-bottom: 24px;
+        }
+
+        .problem-section h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: clamp(32px, 4vw, 48px);
+            font-weight: 700;
+            margin-bottom: 60px;
+            color: var(--charcoal);
+            line-height: 1.3;
+        }
+
+        .problem-cards {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .problem-card {
+            background: var(--soft-gray);
+            padding: 40px;
+            border-radius: 24px;
+            text-align: left;
+            transform: translateX(-100px);
+            opacity: 0;
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            border-left: 4px solid transparent;
+        }
+
+        .problem-card:nth-child(2) {
+            transform: translateX(100px);
+            margin-left: 40px;
+        }
+
+        .problem-card:nth-child(3) {
+            margin-left: 80px;
+        }
+
+        .problem-card.visible {
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        .problem-card:hover {
+            border-left-color: var(--mint-green);
+            transform: translateX(10px);
+        }
+
+        .problem-card i {
+            font-size: 32px;
+            color: var(--ocean-blue);
+            margin-bottom: 16px;
+            display: block;
+        }
+
+        .problem-card h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .problem-card p {
+            color: var(--charcoal);
+            opacity: 0.7;
+            font-size: 16px;
+            line-height: 1.7;
+        }
+
+        /* ===== SOLUTION SECTION (Apple Health-style) ===== */
+        .solution-section {
+            padding: 160px 40px;
+            background: var(--charcoal);
+            color: white;
             position: relative;
             overflow: hidden;
         }
 
-        .video-placeholder::before {
-            content: '';
+        .solution-bg-pattern {
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 675"><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="1"/></pattern></defs><rect width="1200" height="675" fill="url(%23grid)"/></svg>');
-            opacity: 0.5;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(0, 201, 167, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(155, 126, 189, 0.1) 0%, transparent 50%);
         }
 
-        .play-button {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            background: var(--white);
+        .solution-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+        }
+
+        .solution-header {
+            text-align: center;
+            margin-bottom: 100px;
+        }
+
+        .solution-section h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: clamp(40px, 5vw, 64px);
+            font-weight: 800;
+            margin-bottom: 24px;
+            background: linear-gradient(135deg, white, var(--mint-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .solution-subtitle {
+            font-size: 20px;
+            opacity: 0.8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Feature grid - Apple style */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 80px;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 32px;
+            padding: 48px;
+            text-align: center;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            opacity: 0;
+            transform: translateY(40px);
+        }
+
+        .feature-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(0, 201, 167, 0.3);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--mint-green), var(--ocean-blue));
+            border-radius: 24px;
             display: flex;
             align-items: center;
             justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            z-index: 10;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+            margin: 0 auto 32px;
+            font-size: 36px;
+            color: white;
+            transition: transform 0.5s ease;
         }
 
-        .play-button:hover {
-            transform: scale(1.1);
-            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1) rotate(5deg);
         }
 
-        .play-button i {
-            color: var(--primary);
-            font-size: 40px;
-            margin-left: 8px;
-        }
-
-        .video-label {
-            position: absolute;
-            top: 30px;
-            left: 30px;
-            background: rgba(255, 255, 255, 0.2);
-            color: var(--white);
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 12px;
+        .feature-card h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 24px;
             font-weight: 600;
-            backdrop-filter: blur(10px);
-            z-index: 10;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            margin-bottom: 16px;
         }
 
-        /* ===== SOLUTION SECTION ===== */
-        .solution {
-            background: linear-gradient(135deg, var(--secondary) 0%, #00A88A 100%);
-            color: var(--white);
-            padding: 160px 60px;
+        .feature-card p {
+            font-size: 16px;
+            opacity: 0.7;
+            line-height: 1.7;
+        }
+
+        /* Large showcase card */
+        .showcase-card {
+            background: linear-gradient(135deg, rgba(0, 102, 204, 0.2), rgba(0, 201, 167, 0.2));
+            border-radius: 40px;
+            padding: 80px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
             position: relative;
             overflow: hidden;
         }
 
-        .solution::before {
+        .showcase-card::before {
             content: '';
             position: absolute;
-            top: -200px;
-            right: -200px;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0) 70%);
-            border-radius: 50%;
-            z-index: 0;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: rotate 30s linear infinite;
         }
 
-        .solution-content {
+        @keyframes rotate {
+            to { transform: rotate(360deg); }
+        }
+
+        .showcase-content {
             position: relative;
-            z-index: 1;
-            max-width: 900px;
-            margin: 0 auto;
-            text-align: center;
+            z-index: 10;
         }
 
-        .solution h2 {
+        .showcase-card h3 {
             font-family: 'Poppins', sans-serif;
-            font-size: 56px;
-            font-weight: 800;
-            margin-bottom: 32px;
-            color: var(--white);
-            line-height: 1.2;
-            letter-spacing: -1px;
-        }
-
-        .solution p {
-            font-size: 22px;
-            color: rgba(255, 255, 255, 0.95);
-            line-height: 1.8;
+            font-size: 36px;
+            font-weight: 700;
             margin-bottom: 24px;
-            font-weight: 500;
         }
 
-        .solution-highlight {
-            background: rgba(255, 255, 255, 0.15);
-            padding: 48px;
-            border-radius: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            margin-top: 50px;
-            backdrop-filter: blur(10px);
-        }
-
-        .solution-highlight p {
-            margin-bottom: 16px;
-        }
-
-        .solution-highlight p strong {
-            color: var(--white);
-            font-weight: 700;
-        }
-
-        .differentiator {
-            background: var(--charcoal);
-            color: var(--white);
-            padding: 40px;
-            border-radius: 12px;
-            margin-top: 50px;
+        .showcase-card p {
             font-size: 20px;
-            line-height: 1.8;
-            font-weight: 600;
-        }
-
-        /* ===== HOW IT WORKS ===== */
-        .how-it-works {
-            background: var(--light-gray);
-            padding: 160px 60px;
-            position: relative;
-        }
-
-        .how-it-works h2 {
-            font-family: 'Poppins', sans-serif;
-            font-size: 56px;
-            font-weight: 800;
-            text-align: center;
-            margin-bottom: 100px;
-            color: var(--charcoal);
-            letter-spacing: -1px;
-        }
-
-        .steps-container {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 60px;
-            max-width: 1200px;
+            opacity: 0.9;
+            max-width: 600px;
             margin: 0 auto;
-        }
-
-        .step {
-            text-align: center;
-            animation: slideUp 0.8s ease;
-        }
-
-        @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .step-number {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--primary) 0%, #0052A3 100%);
-            color: var(--white);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-family: 'Poppins', sans-serif;
-            font-size: 48px;
-            font-weight: 800;
-            margin: 0 auto 32px;
-            box-shadow: 0 8px 24px rgba(0, 102, 204, 0.3);
-        }
-
-        .step h3 {
-            font-family: 'Poppins', sans-serif;
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 16px;
-            color: var(--charcoal);
-        }
-
-        .step p {
-            font-size: 16px;
-            color: var(--text-gray);
             line-height: 1.8;
         }
 
-        /* ===== FOR YOU SECTION ===== */
-        .for-you {
-            background: var(--white);
-            padding: 160px 60px;
+        /* ===== HOW IT WORKS (Step animation) ===== */
+        .how-section {
+            padding: 160px 40px;
+            background: white;
         }
 
-        .for-you h2 {
-            font-family: 'Poppins', sans-serif;
-            font-size: 56px;
-            font-weight: 800;
-            text-align: center;
-            margin-bottom: 100px;
-            color: var(--charcoal);
-            letter-spacing: -1px;
-        }
-
-        .profiles-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 50px;
+        .how-container {
             max-width: 1000px;
             margin: 0 auto;
         }
 
-        .profile-card {
-            background: var(--light-gray);
-            padding: 50px;
-            border-radius: 16px;
-            border-top: 6px solid var(--secondary);
-            transition: all 0.3s ease;
+        .how-header {
+            text-align: center;
+            margin-bottom: 100px;
         }
 
-        .profile-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
-        }
-
-        .profile-card h3 {
+        .how-section h2 {
             font-family: 'Poppins', sans-serif;
-            font-size: 22px;
+            font-size: clamp(36px, 4vw, 52px);
+            font-weight: 800;
+            color: var(--charcoal);
+            margin-bottom: 20px;
+        }
+
+        .step-item {
+            display: flex;
+            align-items: center;
+            gap: 60px;
+            margin-bottom: 100px;
+            opacity: 0;
+            transform: translateY(60px);
+        }
+
+        .step-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .step-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .step-visual {
+            flex: 1;
+            position: relative;
+        }
+
+        .step-circle {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--soft-gray), white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+            color: var(--ocean-blue);
+            box-shadow: 
+                0 20px 60px rgba(0, 102, 204, 0.15),
+                inset 0 0 0 2px rgba(0, 102, 204, 0.1);
+            position: relative;
+            transition: transform 0.5s ease;
+        }
+
+        .step-item:hover .step-circle {
+            transform: scale(1.05);
+        }
+
+        .step-number-badge {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 60px;
+            height: 60px;
+            background: var(--mint-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Poppins', sans-serif;
+            font-size: 24px;
             font-weight: 700;
-            margin-bottom: 12px;
+            color: white;
+            box-shadow: 0 10px 30px rgba(0, 201, 167, 0.3);
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step-content h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 20px;
             color: var(--charcoal);
         }
 
-        .profile-card p {
-            font-size: 16px;
-            color: var(--text-gray);
+        .step-content p {
+            font-size: 18px;
+            color: var(--charcoal);
+            opacity: 0.7;
             line-height: 1.8;
+        }
+
+        /* ===== TESTIMONIALS (Calm-style) ===== */
+        .testimonials-section {
+            padding: 160px 40px;
+            background: linear-gradient(180deg, var(--soft-gray) 0%, white 100%);
+        }
+
+        .testimonials-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .testimonials-section h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 40px;
+            font-weight: 700;
+            margin-bottom: 80px;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 60px;
+            border-radius: 32px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+            max-width: 700px;
+            margin: 0 auto;
+            position: relative;
+            opacity: 0;
+            transform: scale(0.9);
+        }
+
+        .testimonial-card.visible {
+            opacity: 1;
+            transform: scale(1);
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .quote-icon {
+            font-size: 60px;
+            color: var(--mint-green);
+            opacity: 0.3;
+            position: absolute;
+            top: 30px;
+            left: 40px;
+        }
+
+        .testimonial-text {
+            font-size: 24px;
+            line-height: 1.7;
+            color: var(--charcoal);
+            margin-bottom: 40px;
+            font-weight: 400;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+        }
+
+        .author-avatar {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--ocean-blue), var(--mint-green));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 20px;
+        }
+
+        .author-info {
+            text-align: left;
+        }
+
+        .author-name {
+            font-weight: 600;
+            color: var(--charcoal);
+        }
+
+        .author-role {
+            font-size: 14px;
+            color: var(--charcoal);
+            opacity: 0.6;
         }
 
         /* ===== CTA SECTION ===== */
         .cta-section {
-            background: linear-gradient(135deg, var(--primary) 0%, #0052A3 100%);
-            color: var(--white);
-            padding: 160px 60px;
+            padding: 160px 40px;
+            background: linear-gradient(135deg, var(--ocean-blue) 0%, #0052A3 100%);
+            color: white;
             text-align: center;
             position: relative;
             overflow: hidden;
         }
 
-        .cta-section::before {
-            content: '';
+        .cta-orb {
             position: absolute;
-            top: -200px;
-            right: -200px;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0) 70%);
             border-radius: 50%;
-            z-index: 0;
+            filter: blur(100px);
+            opacity: 0.3;
         }
 
-        .cta-content {
-            position: relative;
-            z-index: 1;
-            max-width: 800px;
+        .cta-orb-1 {
+            width: 600px;
+            height: 600px;
+            background: var(--mint-green);
+            top: -300px;
+            right: -200px;
+        }
+
+        .cta-orb-2 {
+            width: 400px;
+            height: 400px;
+            background: white;
+            bottom: -200px;
+            left: -100px;
+            opacity: 0.1;
+        }
+
+        .cta-container {
+            max-width: 700px;
             margin: 0 auto;
+            position: relative;
+            z-index: 10;
         }
 
         .cta-section h2 {
             font-family: 'Poppins', sans-serif;
-            font-size: 56px;
+            font-size: clamp(36px, 4vw, 52px);
             font-weight: 800;
-            margin-bottom: 32px;
-            color: var(--white);
-            letter-spacing: -1px;
+            margin-bottom: 24px;
         }
 
         .cta-section p {
             font-size: 20px;
-            margin-bottom: 60px;
-            opacity: 0.95;
-            line-height: 1.8;
-            font-weight: 500;
+            opacity: 0.9;
+            margin-bottom: 50px;
         }
 
         .email-form {
             display: flex;
-            gap: 12px;
-            max-width: 550px;
-            margin: 0 auto 32px;
-            flex-wrap: wrap;
+            gap: 16px;
             justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 24px;
         }
 
         .email-input {
             flex: 1;
-            min-width: 250px;
-            padding: 18px 28px;
+            min-width: 300px;
+            max-width: 400px;
+            padding: 20px 28px;
             border: none;
-            border-radius: 12px;
-            font-family: 'Inter', sans-serif;
+            border-radius: 16px;
             font-size: 16px;
-            background: var(--white);
-            color: var(--charcoal);
-            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s;
         }
 
         .email-input::placeholder {
-            color: #999;
+            color: rgba(255, 255, 255, 0.6);
         }
 
         .email-input:focus {
             outline: none;
+            background: rgba(255, 255, 255, 0.25);
             box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.2);
         }
 
-        .btn-waitlist {
-            background: var(--secondary);
+        .btn-cta {
+            background: var(--mint-green);
             color: var(--charcoal);
             border: none;
-            padding: 18px 48px;
-            border-radius: 12px;
-            font-family: 'Poppins', sans-serif;
+            padding: 20px 40px;
+            border-radius: 16px;
+            font-family: 'Inter', sans-serif;
             font-weight: 700;
             font-size: 16px;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 24px rgba(0, 201, 167, 0.3);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        .btn-waitlist:hover {
-            background: #00B394;
-            transform: translateY(-4px);
-            box-shadow: 0 12px 32px rgba(0, 201, 167, 0.4);
+        .btn-cta:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
         }
 
         .privacy-note {
             font-size: 14px;
-            opacity: 0.85;
+            opacity: 0.7;
         }
 
         /* ===== FOOTER ===== */
         footer {
             background: var(--charcoal);
-            color: var(--white);
-            padding: 80px 60px;
-            text-align: center;
+            color: white;
+            padding: 80px 40px 40px;
         }
 
-        .footer-content {
+        .footer-container {
             max-width: 1200px;
             margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+
+        .footer-brand {
+            max-width: 300px;
         }
 
         .footer-logo {
-            height: 50px;
-            object-fit: contain;
-            margin-bottom: 32px;
+            height: 40px;
+            margin-bottom: 20px;
+            opacity: 0.9;
         }
 
-        .footer-text {
+        .footer-brand p {
             font-size: 14px;
-            margin-bottom: 28px;
-            opacity: 0.8;
+            opacity: 0.6;
+            line-height: 1.7;
         }
 
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-bottom: 40px;
-            flex-wrap: wrap;
+        .footer-column h4 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            opacity: 0.9;
         }
 
-        .footer-links a {
-            color: var(--white);
+        .footer-column a {
+            display: block;
+            color: white;
             text-decoration: none;
             font-size: 14px;
-            transition: opacity 0.3s ease;
+            opacity: 0.6;
+            margin-bottom: 12px;
+            transition: opacity 0.3s;
         }
 
-        .footer-links a:hover {
-            opacity: 0.7;
+        .footer-column a:hover {
+            opacity: 1;
         }
 
-        .social-icons {
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 40px;
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
             gap: 20px;
-            margin-top: 32px;
         }
 
-        .social-icon {
-            width: 48px;
-            height: 48px;
+        .footer-copyright {
+            font-size: 14px;
+            opacity: 0.5;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 16px;
+        }
+
+        .social-link {
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
             background: rgba(255, 255, 255, 0.1);
             display: flex;
-            justify-content: center;
             align-items: center;
-            color: var(--white);
+            justify-content: center;
+            color: white;
             text-decoration: none;
-            transition: all 0.3s ease;
-            font-size: 20px;
+            transition: all 0.3s;
         }
 
-        .social-icon:hover {
-            background: var(--secondary);
+        .social-link:hover {
+            background: var(--mint-green);
             transform: translateY(-4px);
         }
 
         /* ===== RESPONSIVE ===== */
-        @media (max-width: 768px) {
-            nav {
-                padding: 12px 20px;
-            }
-
-            .hero {
-                padding: 120px 20px 100px;
-                margin-top: 60px;
-                min-height: auto;
-            }
-
-            .hero h1 {
-                font-size: 44px;
-            }
-
-            .hero p {
-                font-size: 18px;
-            }
-
-            .hero-logo {
-                height: 80px;
-            }
-
-            .video-section,
-            .solution,
-            .how-it-works,
-            .for-you,
-            .cta-section,
-            footer {
-                padding: 100px 20px;
-            }
-
-            .solution h2,
-            .how-it-works h2,
-            .for-you h2,
-            .cta-section h2 {
-                font-size: 40px;
-                margin-bottom: 60px;
-            }
-
-            .steps-container,
-            .profiles-grid {
+        @media (max-width: 1024px) {
+            .features-grid {
                 grid-template-columns: 1fr;
-                gap: 30px;
             }
-
-            .email-form {
+            
+            .step-item, .step-item:nth-child(even) {
                 flex-direction: column;
+                text-align: center;
             }
-
-            .email-input {
-                min-width: 100%;
-            }
-
-            .hero-buttons {
-                flex-direction: column;
-            }
-
-            .btn-primary, .btn-secondary {
-                width: 100%;
+            
+            .footer-container {
+                grid-template-columns: 1fr 1fr;
             }
         }
 
-        @media (max-width: 480px) {
-            .hero h1 {
-                font-size: 32px;
+        @media (max-width: 768px) {
+            nav {
+                padding: 16px 20px;
             }
-
-            .hero p {
-                font-size: 16px;
+            
+            .nav-links {
+                display: none;
             }
-
-            .solution h2,
-            .how-it-works h2,
-            .for-you h2,
-            .cta-section h2 {
-                font-size: 32px;
+            
+            .hero {
+                padding: 100px 20px 60px;
             }
-
-            .profiles-grid {
+            
+            .problem-card:nth-child(2),
+            .problem-card:nth-child(3) {
+                margin-left: 0;
+            }
+            
+            .features-grid {
                 grid-template-columns: 1fr;
             }
-
-            .step-number {
-                width: 80px;
-                height: 80px;
-                font-size: 36px;
+            
+            .showcase-card {
+                padding: 40px;
+            }
+            
+            .footer-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .footer-brand {
+                max-width: 100%;
             }
         }
     </style>
 </head>
 <body>
     <!-- NAVIGATION -->
-    <nav>
-            <img src="./mycomind_logo.png" alt="My-CoMind" class="nav-logo">
-        <button class="nav-cta" onclick="document.querySelector('.cta-section').scrollIntoView({behavior: 'smooth'})">Get Early Access</button>
+    <nav id="navbar">
+        <img src="./mycomind_logo.png" alt="My-CoMind" class="nav-logo">
+        <div class="nav-links">
+            <a href="#problem" class="nav-link">The Problem</a>
+            <a href="#solution" class="nav-link">Solution</a>
+            <a href="#how" class="nav-link">How It Works</a>
+        </div>
+        <button class="nav-cta" onclick="document.querySelector('.cta-section').scrollIntoView({behavior: 'smooth'})">
+            Get Early Access
+        </button>
     </nav>
 
     <!-- HERO SECTION -->
     <section class="hero">
+        <div class="hero-orb orb-1"></div>
+        <div class="hero-orb orb-2"></div>
+        <div class="hero-orb orb-3"></div>
+        
         <div class="hero-content">
-            <img src="./mycomind_logo.png" alt="My-CoMind Logo" class="hero-logo">
-            <h1>Your thinking shouldn't disappear under pressure.</h1>
-            <p>Life moves fast. Your mind shouldn't have to fall apart to keep up.</p>
+            <div class="hero-badge">
+				<i class="fas fa-brain"></i>
+				A new way to keep your thinking organized
+				</div>
+
+				<h1>
+				Your mind shouldn't have to<br>
+				start from <span>zero</span> every day.
+				</h1>
+
+				<p class="hero-subtitle">
+				Between work, family, messages, meetings and responsibilities,
+				your thinking gets interrupted hundreds of times a day.
+
+				My-CoMind helps you return to what you were thinking
+				with clarity, context, and confidence.
+				
+				Ask questions about past decisions, recover context,
+				and prepare for what comes next.
+				</p>
             <div class="hero-buttons">
-                <button class="btn-primary" onclick="document.querySelector('.cta-section').scrollIntoView({behavior: 'smooth'})">Get Early Access</button>
-                <button class="btn-secondary" onclick="document.querySelector('.video-section').scrollIntoView({behavior: 'smooth'})">See How It Works ↓</button>
+                <button class="btn-primary" onclick="document.querySelector('.cta-section').scrollIntoView({behavior: 'smooth'})">
+                    <i class="fas fa-rocket"></i>
+                    Get Early Access
+                </button>
+                <button class="btn-secondary" onclick="document.querySelector('#problem').scrollIntoView({behavior: 'smooth'})">
+                    See the Problem
+                </button>
             </div>
+        </div>
+        
+        <div class="scroll-indicator" onclick="document.querySelector('#problem').scrollIntoView({behavior: 'smooth'})">
+            <span>Scroll</span>
+            <div class="scroll-arrow"></div>
         </div>
     </section>
 
-    <!-- VIDEO SECTION -->
-    <section class="video-section">
-        <div class="video-container">
-            <div class="video-placeholder">
-                <div class="video-label">How It Works</div>
-                <div class="play-button" onclick="alert('Video player would be integrated here. Upload your 1-minute video.')">
-                    <i class="fas fa-play"></i>
+    <!-- PROBLEM SECTION -->
+    <section class="problem-section" id="problem">
+        <div class="problem-container">
+            <div class="section-label reveal">The Reality</div>
+            <h2 class="reveal">Sound familiar?</h2>
+            
+            <div class="problem-cards">
+                <div class="problem-card reveal">
+                    <i class="fas fa-bolt"></i>
+                    <h3>You had it clear yesterday.</h3>
+					<p>
+					You understood the problem, the trade-offs, the reasoning behind the decision.
+					But today everything moved fast — meetings, tasks, family, notifications.
+					Now you need time just to remember where you left off.
+					</p>
+                </div>
+                
+                <div class="problem-card reveal">
+                    <i class="fas fa-question-circle"></i>
+                    <h3>You had it clear yesterday.</h3>
+					<p>
+					You understood the problem, the trade-offs, the reasoning behind the decision.
+					But today everything moved fast — meetings, tasks, family, notifications.
+					Now you need time just to remember where you left off.
+					</p>
+                </div>
+                
+                <div class="problem-card reveal">
+                    <i class="fas fa-fire"></i>
+                    <h3>“Why did we choose this again?”</h3>
+					<p>
+						You know there was a reason. A discussion. A moment where it made sense.
+						But the context is gone — buried under messages, notes, and half-finished thoughts.
+					</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- SOLUTION SECTION -->
-    <section class="solution">
-        <div class="solution-content">
-            <h2>Meet My-CoMind</h2>
-            <p>My-CoMind is a way to keep your thinking with you.</p>
+    <section class="solution-section" id="solution">
+        <div class="solution-bg-pattern"></div>
+        
+        <div class="solution-container">
+            <div class="solution-header reveal">
+                <div class="section-label" style="color: var(--mint-green);">The Solution</div>
+                <h2>Meet My-CoMind, Your cognitive continuity system</h2>
+                <p class="solution-subtitle">
+					My-CoMind captures the moments where your thinking happens.
 
-            <div class="solution-highlight">
-                <p>When a decision happens, <strong>you speak it.</strong></p>
-                <p>When an insight appears, <strong>you capture it.</strong></p>
-                <p>When life pulls you away, <strong>your context doesn't disappear.</strong></p>
-                <p>You don't start over.</p>
-                <p><strong>You continue.</strong></p>
+					Decisions.
+					Conversations.
+					Insights.
+					Trade-offs.
+
+					It connects them into a living knowledge graph of your reasoning.
+
+					So when you ask:
+
+					“Why did we choose this?”
+
+					You don’t get a note.
+
+					You get the context behind the decision.
+				</p>
             </div>
-
-            <div class="differentiator">
-                My-CoMind doesn't make you smarter.<br>It makes your thinking stay.
+            
+            <div class="features-grid">
+                <div class="feature-card reveal">
+                    <div class="feature-icon">
+                        <i class="fas fa-microphone"></i>
+                    </div>
+                    <h3>Capture thoughts instantly</h3>
+                    <p>
+						Speak or write ideas the moment they appear.
+						My-CoMind organizes them into a timeline so nothing important disappears.
+					</p>
+                </div>
+                
+                <div class="feature-card reveal">
+                    <div class="feature-icon">
+                        <i class="fas fa-project-diagram"></i>
+                    </div>
+                    <h3>Ask your own context</h3>
+                    <p>Instead of searching through notes and messages, simply ask your assistant what changed, what was decided, or what matters now.. Context never disappears.</p>
+					<p>Ask anything about yourself. "Why did I choose Feature A?" Get the full context, not just fragments.</p>
+                </div>
+                
+                <div class="feature-card reveal">
+                    <div class="feature-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3>Return exactly where you left off</h3>
+                    <p>When your day interrupts your thinking, My-CoMind helps you recover the thread — so you can continue instead of restarting.</p>
+                </div>
+            </div>
+            
+            <div class="showcase-card reveal">
+                <div class="showcase-content">
+                    <h3>Trust your own thinking again</h3>
+                    <p>My-CoMind doesn't replace your mind.
+						It protects the context around it —
+						Your decisions, insights, and ideas remain connected over time.
+					</p>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- HOW IT WORKS -->
-    <section class="how-it-works">
-        <h2>How It Works</h2>
-        <div class="steps-container">
-            <div class="step">
-                <div class="step-number">1</div>
-                <h3>You Speak</h3>
-                <p>Capture what matters in the moment. No friction.</p>
+    <section class="how-section" id="how">
+        <div class="how-container">
+            <div class="how-header reveal">
+                <div class="section-label">Simple Process</div>
+                <h2>How It Works</h2>
             </div>
-            <div class="step">
-                <div class="step-number">2</div>
-                <h3>It Connects</h3>
-                <p>Decisions, context, and insights become part of your living timeline.</p>
+            
+            <div class="step-item">
+                <div class="step-visual reveal">
+                    <div class="step-circle">
+                        <i class="fas fa-microphone-alt"></i>
+                        <div class="step-number-badge">1</div>
+                    </div>
+                </div>
+                <div class="step-content reveal">
+                    <h3>You Speak</h3>
+                    <p>Capture what matters in the moment. A decision, an insight, a conversation. No friction, no complex interfaces. Just speak naturally and My-CoMind listens.</p>
+                </div>
             </div>
-            <div class="step">
-                <div class="step-number">3</div>
-                <h3>You Continue</h3>
-                <p>When you return, you don't reconstruct. You pick up where you left off.</p>
+            
+            <div class="step-item">
+                <div class="step-visual reveal">
+                    <div class="step-circle">
+                        <i class="fas fa-brain"></i>
+                        <div class="step-number-badge">2</div>
+                    </div>
+                </div>
+                <div class="step-content reveal">
+                    <h3>It Connects</h3>
+                    <p>Decisions, context, and insights become part of your living timeline. Automatic transcription, intelligent categorization, and connection to related memories.</p>
+                </div>
+            </div>
+            
+            <div class="step-item">
+                <div class="step-visual reveal">
+                    <div class="step-circle">
+                        <i class="fas fa-infinity"></i>
+                        <div class="step-number-badge">3</div>
+                    </div>
+                </div>
+                <div class="step-content reveal">
+                    <h3>You Continue</h3>
+                    <p>When you return, you don't reconstruct. You pick up exactly where you left off. Ask "What did I decide?" and get the full reasoning, not just the outcome.</p>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- FOR YOU SECTION -->
-    <section class="for-you">
-        <h2>If This Feels Like You…</h2>
-        <div class="profiles-grid">
-            <div class="profile-card">
-                <h3>You manage multiple responsibilities</h3>
-                <p>And your brain never truly clocks out.</p>
-            </div>
-            <div class="profile-card">
-                <h3>You are capable, driven, and thoughtful</h3>
-                <p>But constantly interrupted.</p>
-            </div>
-            <div class="profile-card">
-                <h3>You carry invisible cognitive weight</h3>
-                <p>That no one else sees.</p>
-            </div>
-            <div class="profile-card">
-                <h3>You want to trust your own mind again</h3>
-                <p>To be reliable to yourself.</p>
+    <!-- TESTIMONIALS -->
+    <section class="testimonials-section">
+        <div class="testimonials-container">
+            <div class="section-label reveal">Early Feedback</div>
+            <h2 class="reveal">What people are saying</h2>
+            
+            <div class="testimonial-card reveal">
+                <i class="fas fa-quote-left quote-icon"></i>
+                <p class="testimonial-text">
+				“Some days I felt like I spent more time remembering what I was doing
+				than actually doing it.
+				My-CoMind will help me reconnect my thoughts and decisions.”
+				</p>
+
+				<div class="author-name">Early Beta User</div>
+				<div class="author-role">Product Manager & Parent of two</div>
             </div>
         </div>
     </section>
 
     <!-- CTA SECTION -->
     <section class="cta-section">
-        <div class="cta-content">
-            <h2>Stay in the Loop</h2>
-            <p>We're building this with people who live this reality.<br>If this feels personal — join us early.</p>
-            <form class="email-form" onsubmit="handleEmailSubmit(event)">
-                <input type="email" class="email-input" placeholder="Enter your email address" required>
-                <button type="submit" class="btn-waitlist">Join the Waitlist</button>
+        <div class="cta-orb cta-orb-1"></div>
+        <div class="cta-orb cta-orb-2"></div>
+        
+        <div class="cta-container reveal">
+            <h2>Be among the first to experience My-CoMind</h2>
+            <p>We are building the first Cognitive Continuity System.
+				Join early users helping shape how people work with their own thinking.
+			</p>
+            
+            <form class="email-form" onsubmit="handleSubmit(event)">
+                <input type="email" class="email-input" placeholder="Enter your email" required>
+                <button type="submit" class="btn-cta">Join the Waitlist</button>
             </form>
-            <p class="privacy-note">No spam. No pressure. Just progress.</p>
+            
+            <p class="privacy-note">No spam. No pressure. Just progress. Unsubscribe anytime.</p>
         </div>
     </section>
 
     <!-- FOOTER -->
     <footer>
-        <div class="footer-content">
-            <img src="https://mycomind-landing-h8in0ppzi-josedinats-projects.vercel.app/mycomind_logo.png" alt="My-CoMind" class="footer-logo">
-            <p class="footer-text">© 2026 My-CoMind. All rights reserved.</p>
-            <div class="footer-links">
-                <a href="#privacy">Privacy Policy</a>
-                <span>|</span>
-                <a href="mailto:joserenato.camargo@gmail.com">Contact</a>
+        <div class="footer-container">
+            <div class="footer-brand">
+                <img src="./mycomind_logo.png" alt="My-CoMind" class="footer-logo">
+                <p>Your Personal Cognitive Infrastructure. Preserving how you think, not just what you remember.</p>
             </div>
-            <div class="social-icons">
-                <a href="https://www.linkedin.com/company/my-comind" class="social-icon" target="_blank" title="LinkedIn">
-                    <i class="fab fa-linkedin-in"></i>
-                </a>
+            
+            <div class="footer-column">
+                <h4>Product</h4>
+                <a href="#features">Features</a>
+                <a href="#how">How It Works</a>
+                <a href="#pricing">Pricing</a>
+            </div>          
+            
+            
+            <div class="footer-column">
+                <h4>Legal</h4>
+                <a href="#privacy">Privacy</a>
+                <a href="#terms">Terms</a>
+                <a href="#contact">Contact</a>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p class="footer-copyright">© 2026 My-CoMind. All rights reserved.</p>
+            <div class="social-links">
+                <a href="https://www.linkedin.com/company/my-comind" class="social-link" target="_blank"><i class="fab fa-linkedin-in"></i></a>
             </div>
         </div>
     </footer>
 
     <script>
-        // Initialize EmailJS with your public key
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Intersection Observer for reveal animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal, .problem-card, .feature-card, .step-item, .testimonial-card').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Stagger animation for cards
+        const cards = document.querySelectorAll('.feature-card');
+        cards.forEach((card, index) => {
+            card.style.transitionDelay = `${index * 0.1}s`;
+        });
+
+        // Initialize EmailJS
         emailjs.init('YOUR_PUBLIC_KEY_HERE');
         
-        function handleEmailSubmit(event) {
-            event.preventDefault();
-            const email = event.target.querySelector('.email-input').value;
-            const button = event.target.querySelector('.btn-waitlist');
+        // Form submission
+        function handleSubmit(e) {
+            e.preventDefault();
+            const email = e.target.querySelector('input').value;
+            const button = e.target.querySelector('button');
             
             button.disabled = true;
             button.textContent = 'Sending...';
@@ -913,8 +1375,8 @@
                 user_email: email,
                 message: 'New waitlist signup: ' + email
             }).then(function(response) {
-                alert('Thank you for joining the waitlist! We will send updates to ' + email);
-                event.target.reset();
+                alert(`Thank you! We'll contact you at ${email} when early access is available.`);
+                e.target.reset();
                 button.disabled = false;
                 button.textContent = 'Join the Waitlist';
             }, function(error) {
@@ -925,27 +1387,33 @@
             });
         }
 
-        // Scroll animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
-        };
-
-        const observer = new IntersectionObserver(function(entries) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
+        // Smooth scroll for nav links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             });
-        }, observerOptions);
-
-        document.querySelectorAll('.step, .profile-card').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(20px)';
-            el.style.transition = 'all 0.6s ease';
-            observer.observe(el);
         });
+
+        // GSAP animations if available
+        if (typeof gsap !== 'undefined') {
+            gsap.registerPlugin(ScrollTrigger);
+            
+            // Parallax for orbs
+            gsap.to('.hero-orb', {
+                scrollTrigger: {
+                    trigger: '.hero',
+                    start: 'top top',
+                    end: 'bottom top',
+                    scrub: 1
+                },
+                y: 200,
+                opacity: 0
+            });
+        }
     </script>
 </body>
 </html>
