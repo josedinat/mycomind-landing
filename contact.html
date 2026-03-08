@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us — My-CoMind</title>
+    <meta name="description" content="Get in touch with the My-CoMind team. We're here to help you preserve your thinking.">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --ocean-blue: #0066CC;
+            --mint-green: #00C9A7;
+            --lavender: #9B7EBD;
+            --charcoal: #1A1F36;
+            --soft-gray: #F5F7FA;
+            --light-gray: #E8EBF0;
+            --white: #FFFFFF;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--charcoal);
+            background: var(--soft-gray);
+            line-height: 1.6;
+        }
+
+        /* NAVIGATION */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            transition: all 0.4s ease;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(20px) saturate(180%);
+            box-shadow: 0 1px 0 rgba(0,0,0,0.05);
+        }
+        .nav-logo { height: 40px; }
+        .nav-links { display: flex; gap: 40px; align-items: center; }
+        .nav-link {
+            font-size: 14px;
+            color: var(--charcoal);
+            text-decoration: none;
+            font-weight: 500;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--ocean-blue);
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after { width: 100%; }
+        .nav-cta {
+            background: var(--ocean-blue);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .nav-cta:hover { background: #0052A3; transform: scale(1.05); }
+
+        /* CONTACT PAGE */
+        .contact-section {
+            padding: 140px 40px 80px;
+            background: linear-gradient(180deg, var(--soft-gray) 0%, white 100%);
+            min-height: 100vh;
+        }
+        .contact-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .contact-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        .contact-section h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: clamp(32px, 4vw, 48px);
+            font-weight: 700;
+            color: var(--charcoal);
+            margin-bottom: 16px;
+        }
+        .contact-subtitle {
+            font-size: 18px;
+            color: var(--charcoal);
+            opacity: 0.7;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        /* Communitech Badge */
+        .communitech-banner {
+            background: linear-gradient(135deg, var(--ocean-blue), var(--mint-green));
+            border-radius: 20px;
+            padding: 30px 40px;
+            margin-bottom: 60px;
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            color: white;
+            box-shadow: 0 20px 40px rgba(0, 102, 204, 0.2);
+        }
+        .communitech-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+        }
+        .communitech-content h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        .communitech-content p {
+            font-size: 15px;
+            opacity: 0.9;
+        }
+
+        /* Contact Grid */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        /* Contact Cards */
+        .contact-card {
+            background: white;
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .contact-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.12);
+        }
+        .contact-card h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            color: var(--charcoal);
+        }
+
+        /* Contact Methods */
+        .contact-method {
+            display: flex;
+            align-items: flex-start;
+            gap: 16px;
+            margin-bottom: 24px;
+            padding: 20px;
+            background: var(--soft-gray);
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
+        .contact-method:hover {
+            background: linear-gradient(135deg, var(--soft-gray), white);
+            transform: translateX(5px);
+        }
+        .method-icon {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--ocean-blue), var(--mint-green));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+        .method-content h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: var(--charcoal);
+        }
+        .method-content p {
+            font-size: 14px;
+            color: var(--charcoal);
+            opacity: 0.7;
+        }
+        .method-content a {
+            color: var(--ocean-blue);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .method-content a:hover {
+            text-decoration: underline;
+        }
+
+        /* Contact Form */
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--charcoal);
+            margin-bottom: 8px;
+        }
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 16px;
+            border: 2px solid var(--light-gray);
+            border-radius: 12px;
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            background: var(--soft-gray);
+        }
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--ocean-blue);
+            background: white;
+            box-shadow: 0 0 0 4px rgba(0, 102, 204, 0.1);
+        }
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+        .btn-submit {
+            width: 100%;
+            background: linear-gradient(135deg, var(--ocean-blue), var(--mint-green));
+            color: white;
+            border: none;
+            padding: 18px;
+            border-radius: 12px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0, 102, 204, 0.3);
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            margin-top: 80px;
+            padding-top: 60px;
+            border-top: 1px solid var(--light-gray);
+        }
+        .faq-section h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 32px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--charcoal);
+        }
+        .faq-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+        .faq-item {
+            background: white;
+            padding: 24px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+        }
+        .faq-item h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--charcoal);
+        }
+        .faq-item p {
+            font-size: 14px;
+            color: var(--charcoal);
+            opacity: 0.7;
+            line-height: 1.6;
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--charcoal);
+            color: white;
+            padding: 80px 40px 40px;
+        }
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+        .footer-brand { max-width: 300px; }
+        .footer-logo {
+            height: 40px;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+        .footer-brand p {
+            font-size: 14px;
+            opacity: 0.6;
+            line-height: 1.7;
+        }
+        .footer-column h4 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            opacity: 0.9;
+        }
+        .footer-column a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            opacity: 0.6;
+            margin-bottom: 12px;
+            transition: opacity 0.3s;
+        }
+        .footer-column a:hover { opacity: 1; }
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .footer-copyright { font-size: 14px; opacity: 0.5; }
+        .social-links { display: flex; gap: 16px; }
+        .social-link {
+            width: 44px; height: 44px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        .social-link:hover {
+            background: var(--mint-green);
+            transform: translateY(-4px);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            .contact-grid { grid-template-columns: 1fr; }
+            .faq-grid { grid-template-columns: 1fr; }
+            .footer-container { grid-template-columns: 1fr 1fr; }
+            .communitech-banner {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+        @media (max-width: 768px) {
+            nav { padding: 16px 20px; }
+            .nav-links { display: none; }
+            .contact-section { padding: 100px 20px 60px; }
+            .footer-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .footer-brand { max-width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVIGATION -->
+    <nav id="navbar">
+        <a href="index.html"><img src="./mycomind_logo_full_transparent.png" alt="My-CoMind" class="nav-logo"></a>
+        <div class="nav-links">
+            <a href="index.html#problem" class="nav-link">The Problem</a>
+            <a href="index.html#product" class="nav-link">Product</a>
+            <a href="index.html#how" class="nav-link">How It Works</a>
+        </div>
+        <a href="index.html#cta" class="nav-cta">Get Early Access</a>
+    </nav>
+
+    <!-- CONTACT SECTION -->
+    <section class="contact-section">
+        <div class="contact-container">
+            <div class="contact-header">
+                <h1>Get in Touch</h1>
+                <p class="contact-subtitle">Have questions about My-CoMind? We're here to help you preserve your thinking.</p>
+            </div>
+
+            <!-- Communitech Banner -->
+            <div class="communitech-banner">
+                <div class="communitech-icon">
+                    <i class="fas fa-rocket"></i>
+                </div>
+                <div class="communitech-content">
+                    <h3>Proudly Part of Communitech</h3>
+                    <p>We're a startup based in the Communitech Hub in Kitchener-Waterloo, building the future of cognitive continuity.</p>
+                </div>
+            </div>
+
+            <div class="contact-grid">
+                <!-- Contact Info -->
+                <div class="contact-card">
+                    <h2>Contact Information</h2>
+                    
+                    <div class="contact-method">
+                        <div class="method-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="method-content">
+                            <h3>Email Us</h3>
+                            <p><a href="mailto:contact@mycomind.com">contact@mycomind.com</a></p>
+                            <p style="font-size: 13px; margin-top: 4px;">We typically respond within 24 hours</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-method">
+                        <div class="method-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="method-content">
+                            <h3>Visit Us</h3>
+                            <p>Catalyst Commons<br>210-137 Glasgow Street<br>Kitchener<br>Canada</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-method">
+                        <div class="method-icon">
+                            <i class="fab fa-linkedin-in"></i>
+                        </div>
+                        <div class="method-content">
+                            <h3>Connect on LinkedIn</h3>
+                            <p><a href="https://www.linkedin.com/company/my-comind" target="_blank">linkedin.com/company/my-comind</a></p>
+                            <p style="font-size: 13px; margin-top: 4px;">Follow our journey</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-method">
+                        <div class="method-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div class="method-content">
+                            <h3>Privacy & Legal</h3>
+                            <p><a href="privacy.html">Privacy Policy</a> & <a href="terms.html">Terms</a></p>
+                            <p style="font-size: 13px; margin-top: 4px;">Your data belongs to you</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="contact-card">
+                    <h2>Send us a Message</h2>
+                    <form action="https://formspree.io/f/xdawozpv" method="POST">
+                        <div class="form-group">
+                            <label for="name">Your Name</label>
+                            <input type="text" id="name" name="name" placeholder="John Doe" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email Address</label>
+                            <input type="email" id="email" name="email" placeholder="john@example.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Subject</label>
+                            <select id="subject" name="subject" required>
+                                <option value="">Select a topic...</option>
+                                <option value="general">General Inquiry</option>
+                                <option value="support">Technical Support</option>
+                                <option value="partnership">Partnership Opportunity</option>
+                                <option value="press">Press & Media</option>
+                                <option value="feedback">Product Feedback</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Your Message</label>
+                            <textarea id="message" name="message" placeholder="Tell us how we can help you..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn-submit">
+                            <i class="fas fa-paper-plane" style="margin-right: 8px;"></i>
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- FAQ Section -->
+            <div class="faq-section">
+                <h2>Frequently Asked Questions</h2>
+                <div class="faq-grid">
+                    <div class="faq-item">
+                        <h3>When will My-CoMind be available?</h3>
+                        <p>We're currently in beta development. Join our waitlist to be among the first to access the platform when we launch.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3>Is my data secure?</h3>
+                        <p>Absolutely. We use end-to-end encryption, never train AI on your content without permission, and give you full control to delete your data anytime.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3>What platforms will be supported?</h3>
+                        <p>We're starting with iOS and Android apps, with web access planned shortly after. Sign up to get notified about platform availability.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3>How much will it cost?</h3>
+                        <p>We're still determining our pricing model. Early waitlist members may receive special founding user rates. Join the waitlist for updates!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-brand">
+                <img src="./mycomind_logo_full_transparent.png" alt="My-CoMind" class="footer-logo">
+                <p>Your Personal Cognitive Infrastructure. Preserving how you think, not just what you remember.</p>
+            </div>
+            <div class="footer-column">
+                <h4>Product</h4>
+                <a href="index.html#product">Features</a>
+                <a href="index.html#how">How It Works</a>
+                <a href="index.html#problem">The Problem</a>
+            </div>          
+            <div class="footer-column">
+                <h4>Legal</h4>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Service</a>
+                <a href="contact.html">Contact</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p class="footer-copyright">© 2026 My-CoMind. All rights reserved.</p>
+            <div class="social-links">
+                <a href="https://www.linkedin.com/company/my-comind" class="social-link" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

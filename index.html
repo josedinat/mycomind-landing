@@ -22,16 +22,8 @@
             --white: #FFFFFF;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
         body {
             font-family: 'Inter', sans-serif;
             color: var(--charcoal);
@@ -40,19 +32,14 @@
             line-height: 1.6;
         }
 
-        /* ===== SMOOTH SCROLL & REVEAL ===== */
         .reveal {
             opacity: 0;
             transform: translateY(60px);
             transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
         }
+        .reveal.active { opacity: 1; transform: translateY(0); }
 
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* ===== NAVIGATION (Apple-style) ===== */
+        /* NAVIGATION */
         nav {
             position: fixed;
             top: 0;
@@ -64,31 +51,21 @@
             z-index: 1000;
             transition: all 0.4s ease;
         }
-
         nav.scrolled {
             background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(20px) saturate(180%);
             box-shadow: 0 1px 0 rgba(0,0,0,0.05);
             padding: 16px 60px;
         }
-
         .nav-logo {
             height: 40px;
             opacity: 0;
             transform: translateY(-20px);
             animation: fadeDown 0.8s ease forwards;
         }
-
-        @keyframes fadeDown {
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 40px;
-            align-items: center;
-        }
-
+        @keyframes fadeDown { to { opacity: 1; transform: translateY(0); } }
+        
+        .nav-links { display: flex; gap: 40px; align-items: center; }
         .nav-link {
             font-size: 14px;
             color: var(--charcoal);
@@ -98,7 +75,6 @@
             transition: opacity 0.3s;
             position: relative;
         }
-
         .nav-link::after {
             content: '';
             position: absolute;
@@ -109,11 +85,8 @@
             background: var(--ocean-blue);
             transition: width 0.3s ease;
         }
-
-        .nav-link:hover::after {
-            width: 100%;
-        }
-
+        .nav-link:hover::after { width: 100%; }
+        
         .nav-cta {
             background: var(--ocean-blue);
             color: white;
@@ -128,13 +101,9 @@
             opacity: 0;
             animation: fadeIn 0.8s ease 0.3s forwards;
         }
+        .nav-cta:hover { background: #0052A3; transform: scale(1.05); }
 
-        .nav-cta:hover {
-            background: #0052A3;
-            transform: scale(1.05);
-        }
-
-        /* ===== HERO (Calm-inspired) ===== */
+        /* HERO */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -145,8 +114,6 @@
             overflow: hidden;
             padding: 120px 40px 80px;
         }
-
-        /* Animated gradient orbs - Calm style */
         .hero-orb {
             position: absolute;
             border-radius: 50%;
@@ -154,49 +121,38 @@
             opacity: 0.4;
             animation: float 20s infinite ease-in-out;
         }
-
         .orb-1 {
-            width: 600px;
-            height: 600px;
+            width: 600px; height: 600px;
             background: var(--mint-green);
-            top: -200px;
-            right: -100px;
+            top: -200px; right: -100px;
             animation-delay: 0s;
         }
-
         .orb-2 {
-            width: 500px;
-            height: 500px;
+            width: 500px; height: 500px;
             background: var(--lavender);
-            bottom: -150px;
-            left: -100px;
+            bottom: -150px; left: -100px;
             animation-delay: -5s;
         }
-
         .orb-3 {
-            width: 400px;
-            height: 400px;
+            width: 400px; height: 400px;
             background: var(--ocean-blue);
-            top: 50%;
-            left: 50%;
+            top: 50%; left: 50%;
             transform: translate(-50%, -50%);
             opacity: 0.1;
             animation-delay: -10s;
         }
-
         @keyframes float {
             0%, 100% { transform: translate(0, 0) scale(1); }
             33% { transform: translate(30px, -30px) scale(1.1); }
             66% { transform: translate(-20px, 20px) scale(0.9); }
         }
-
+        
         .hero-content {
             text-align: center;
             max-width: 900px;
             z-index: 10;
             position: relative;
         }
-
         .hero-badge {
             display: inline-flex;
             align-items: center;
@@ -213,7 +169,6 @@
             animation: fadeUp 0.8s ease 0.2s forwards;
             border: 1px solid rgba(0, 201, 167, 0.2);
         }
-
         .hero h1 {
             font-family: 'Poppins', sans-serif;
             font-size: clamp(40px, 6vw, 72px);
@@ -226,14 +181,12 @@
             transform: translateY(30px);
             animation: fadeUp 0.8s ease 0.4s forwards;
         }
-
         .hero h1 span {
             background: linear-gradient(135deg, var(--ocean-blue), var(--mint-green));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-
         .hero-subtitle {
             font-size: 22px;
             color: var(--charcoal);
@@ -246,11 +199,8 @@
             transform: translateY(20px);
             animation: fadeUp 0.8s ease 0.6s forwards;
         }
-
-        @keyframes fadeUp {
-            to { opacity: 1; transform: translateY(0); }
-        }
-
+        @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
+        
         .hero-buttons {
             display: flex;
             gap: 20px;
@@ -259,7 +209,6 @@
             opacity: 0;
             animation: fadeUp 0.8s ease 0.8s forwards;
         }
-
         .btn-primary {
             background: var(--ocean-blue);
             color: white;
@@ -275,12 +224,10 @@
             align-items: center;
             gap: 10px;
         }
-
         .btn-primary:hover {
             transform: translateY(-4px) scale(1.02);
             box-shadow: 0 20px 40px rgba(0, 102, 204, 0.3);
         }
-
         .btn-secondary {
             background: transparent;
             color: var(--charcoal);
@@ -293,64 +240,23 @@
             cursor: pointer;
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
-
         .btn-secondary:hover {
             border-color: var(--ocean-blue);
             color: var(--ocean-blue);
             transform: translateY(-4px);
         }
 
-        /* Scroll indicator */
-        .scroll-indicator {
-            position: absolute;
-            bottom: 40px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
-            opacity: 0;
-            animation: fadeUp 0.8s ease 1.2s forwards;
-            cursor: pointer;
-        }
-
-        .scroll-indicator span {
-            font-size: 12px;
-            color: var(--charcoal);
-            opacity: 0.5;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .scroll-arrow {
-            width: 24px;
-            height: 24px;
-            border-right: 2px solid var(--charcoal);
-            border-bottom: 2px solid var(--charcoal);
-            transform: rotate(45deg);
-            animation: bounce 2s infinite;
-            opacity: 0.3;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: rotate(45deg) translateY(0); }
-            50% { transform: rotate(45deg) translateY(10px); }
-        }
-
-        /* ===== PROBLEM SECTION (Wysa-style empathy) ===== */
+        /* PROBLEM SECTION */
         .problem-section {
             padding: 160px 40px;
             background: white;
             position: relative;
         }
-
         .problem-container {
             max-width: 800px;
             margin: 0 auto;
             text-align: center;
         }
-
         .section-label {
             font-size: 13px;
             font-weight: 600;
@@ -359,7 +265,6 @@
             color: var(--lavender);
             margin-bottom: 24px;
         }
-
         .problem-section h2 {
             font-family: 'Poppins', sans-serif;
             font-size: clamp(32px, 4vw, 48px);
@@ -368,13 +273,11 @@
             color: var(--charcoal);
             line-height: 1.3;
         }
-
         .problem-cards {
             display: flex;
             flex-direction: column;
             gap: 24px;
         }
-
         .problem-card {
             background: var(--soft-gray);
             padding: 40px;
@@ -385,40 +288,31 @@
             transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
             border-left: 4px solid transparent;
         }
-
         .problem-card:nth-child(2) {
             transform: translateX(100px);
             margin-left: 40px;
         }
-
-        .problem-card:nth-child(3) {
-            margin-left: 80px;
-        }
-
+        .problem-card:nth-child(3) { margin-left: 80px; }
         .problem-card.visible {
             transform: translateX(0);
             opacity: 1;
         }
-
         .problem-card:hover {
             border-left-color: var(--mint-green);
             transform: translateX(10px);
         }
-
         .problem-card i {
             font-size: 32px;
             color: var(--ocean-blue);
             margin-bottom: 16px;
             display: block;
         }
-
         .problem-card h3 {
             font-family: 'Poppins', sans-serif;
             font-size: 20px;
             font-weight: 600;
             margin-bottom: 12px;
         }
-
         .problem-card p {
             color: var(--charcoal);
             opacity: 0.7;
@@ -426,7 +320,7 @@
             line-height: 1.7;
         }
 
-        /* ===== SOLUTION SECTION (Apple Health-style) ===== */
+        /* SOLUTION SECTION */
         .solution-section {
             padding: 160px 40px;
             background: var(--charcoal);
@@ -434,30 +328,23 @@
             position: relative;
             overflow: hidden;
         }
-
         .solution-bg-pattern {
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
+            top: 0; left: 0; right: 0; bottom: 0;
             background-image: 
                 radial-gradient(circle at 20% 50%, rgba(0, 201, 167, 0.1) 0%, transparent 50%),
                 radial-gradient(circle at 80% 80%, rgba(155, 126, 189, 0.1) 0%, transparent 50%);
         }
-
         .solution-container {
             max-width: 1200px;
             margin: 0 auto;
             position: relative;
             z-index: 10;
         }
-
         .solution-header {
             text-align: center;
             margin-bottom: 100px;
         }
-
         .solution-section h2 {
             font-family: 'Poppins', sans-serif;
             font-size: clamp(40px, 5vw, 64px);
@@ -467,77 +354,12 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-
         .solution-subtitle {
             font-size: 20px;
             opacity: 0.8;
             max-width: 600px;
             margin: 0 auto;
         }
-
-        /* Feature grid - Apple style */
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 30px;
-            margin-bottom: 80px;
-        }
-
-        .feature-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 32px;
-            padding: 48px;
-            text-align: center;
-            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-            opacity: 0;
-            transform: translateY(40px);
-        }
-
-        .feature-card.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .feature-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(0, 201, 167, 0.3);
-        }
-
-        .feature-icon {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, var(--mint-green), var(--ocean-blue));
-            border-radius: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 32px;
-            font-size: 36px;
-            color: white;
-            transition: transform 0.5s ease;
-        }
-
-        .feature-card:hover .feature-icon {
-            transform: scale(1.1) rotate(5deg);
-        }
-
-        .feature-card h3 {
-            font-family: 'Poppins', sans-serif;
-            font-size: 24px;
-            font-weight: 600;
-            margin-bottom: 16px;
-        }
-
-        .feature-card p {
-            font-size: 16px;
-            opacity: 0.7;
-            line-height: 1.7;
-        }
-
-        /* Large showcase card */
         .showcase-card {
             background: linear-gradient(135deg, rgba(0, 102, 204, 0.2), rgba(0, 201, 167, 0.2));
             border-radius: 40px;
@@ -547,34 +369,25 @@
             position: relative;
             overflow: hidden;
         }
-
         .showcase-card::before {
             content: '';
             position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
+            top: -50%; left: -50%;
+            width: 200%; height: 200%;
             background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
             animation: rotate 30s linear infinite;
         }
-
-        @keyframes rotate {
-            to { transform: rotate(360deg); }
-        }
-
+        @keyframes rotate { to { transform: rotate(360deg); } }
         .showcase-content {
             position: relative;
             z-index: 10;
         }
-
         .showcase-card h3 {
             font-family: 'Poppins', sans-serif;
             font-size: 36px;
             font-weight: 700;
             margin-bottom: 24px;
         }
-
         .showcase-card p {
             font-size: 20px;
             opacity: 0.9;
@@ -583,22 +396,19 @@
             line-height: 1.8;
         }
 
-        /* ===== HOW IT WORKS (Step animation) ===== */
+        /* HOW IT WORKS */
         .how-section {
             padding: 160px 40px;
             background: white;
         }
-
         .how-container {
             max-width: 1000px;
             margin: 0 auto;
         }
-
         .how-header {
             text-align: center;
             margin-bottom: 100px;
         }
-
         .how-section h2 {
             font-family: 'Poppins', sans-serif;
             font-size: clamp(36px, 4vw, 52px);
@@ -606,7 +416,6 @@
             color: var(--charcoal);
             margin-bottom: 20px;
         }
-
         .step-item {
             display: flex;
             align-items: center;
@@ -615,25 +424,15 @@
             opacity: 0;
             transform: translateY(60px);
         }
-
-        .step-item:nth-child(even) {
-            flex-direction: row-reverse;
-        }
-
+        .step-item:nth-child(even) { flex-direction: row-reverse; }
         .step-item.visible {
             opacity: 1;
             transform: translateY(0);
             transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
-
-        .step-visual {
-            flex: 1;
-            position: relative;
-        }
-
+        .step-visual { flex: 1; position: relative; }
         .step-circle {
-            width: 200px;
-            height: 200px;
+            width: 200px; height: 200px;
             border-radius: 50%;
             background: linear-gradient(135deg, var(--soft-gray), white);
             display: flex;
@@ -647,17 +446,11 @@
             position: relative;
             transition: transform 0.5s ease;
         }
-
-        .step-item:hover .step-circle {
-            transform: scale(1.05);
-        }
-
+        .step-item:hover .step-circle { transform: scale(1.05); }
         .step-number-badge {
             position: absolute;
-            top: 0;
-            right: 0;
-            width: 60px;
-            height: 60px;
+            top: 0; right: 0;
+            width: 60px; height: 60px;
             background: var(--mint-green);
             border-radius: 50%;
             display: flex;
@@ -669,11 +462,7 @@
             color: white;
             box-shadow: 0 10px 30px rgba(0, 201, 167, 0.3);
         }
-
-        .step-content {
-            flex: 1;
-        }
-
+        .step-content { flex: 1; }
         .step-content h3 {
             font-family: 'Poppins', sans-serif;
             font-size: 32px;
@@ -681,7 +470,6 @@
             margin-bottom: 20px;
             color: var(--charcoal);
         }
-
         .step-content p {
             font-size: 18px;
             color: var(--charcoal);
@@ -689,25 +477,22 @@
             line-height: 1.8;
         }
 
-        /* ===== TESTIMONIALS (Calm-style) ===== */
+        /* TESTIMONIALS */
         .testimonials-section {
             padding: 160px 40px;
             background: linear-gradient(180deg, var(--soft-gray) 0%, white 100%);
         }
-
         .testimonials-container {
             max-width: 1000px;
             margin: 0 auto;
             text-align: center;
         }
-
         .testimonials-section h2 {
             font-family: 'Poppins', sans-serif;
             font-size: 40px;
             font-weight: 700;
             margin-bottom: 80px;
         }
-
         .testimonial-card {
             background: white;
             padding: 60px;
@@ -719,22 +504,18 @@
             opacity: 0;
             transform: scale(0.9);
         }
-
         .testimonial-card.visible {
             opacity: 1;
             transform: scale(1);
             transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
-
         .quote-icon {
             font-size: 60px;
             color: var(--mint-green);
             opacity: 0.3;
             position: absolute;
-            top: 30px;
-            left: 40px;
+            top: 30px; left: 40px;
         }
-
         .testimonial-text {
             font-size: 24px;
             line-height: 1.7;
@@ -742,17 +523,14 @@
             margin-bottom: 40px;
             font-weight: 400;
         }
-
         .testimonial-author {
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 16px;
         }
-
         .author-avatar {
-            width: 56px;
-            height: 56px;
+            width: 56px; height: 56px;
             border-radius: 50%;
             background: linear-gradient(135deg, var(--ocean-blue), var(--mint-green));
             display: flex;
@@ -762,23 +540,11 @@
             font-weight: 600;
             font-size: 20px;
         }
+        .author-info { text-align: left; }
+        .author-name { font-weight: 600; color: var(--charcoal); }
+        .author-role { font-size: 14px; color: var(--charcoal); opacity: 0.6; }
 
-        .author-info {
-            text-align: left;
-        }
-
-        .author-name {
-            font-weight: 600;
-            color: var(--charcoal);
-        }
-
-        .author-role {
-            font-size: 14px;
-            color: var(--charcoal);
-            opacity: 0.6;
-        }
-
-        /* ===== CTA SECTION ===== */
+        /* CTA SECTION */
         .cta-section {
             padding: 160px 40px;
             background: linear-gradient(135deg, var(--ocean-blue) 0%, #0052A3 100%);
@@ -787,51 +553,40 @@
             position: relative;
             overflow: hidden;
         }
-
         .cta-orb {
             position: absolute;
             border-radius: 50%;
             filter: blur(100px);
             opacity: 0.3;
         }
-
         .cta-orb-1 {
-            width: 600px;
-            height: 600px;
+            width: 600px; height: 600px;
             background: var(--mint-green);
-            top: -300px;
-            right: -200px;
+            top: -300px; right: -200px;
         }
-
         .cta-orb-2 {
-            width: 400px;
-            height: 400px;
+            width: 400px; height: 400px;
             background: white;
-            bottom: -200px;
-            left: -100px;
+            bottom: -200px; left: -100px;
             opacity: 0.1;
         }
-
         .cta-container {
             max-width: 700px;
             margin: 0 auto;
             position: relative;
             z-index: 10;
         }
-
         .cta-section h2 {
             font-family: 'Poppins', sans-serif;
             font-size: clamp(36px, 4vw, 52px);
             font-weight: 800;
             margin-bottom: 24px;
         }
-
         .cta-section p {
             font-size: 20px;
             opacity: 0.9;
             margin-bottom: 50px;
         }
-
         .email-form {
             display: flex;
             gap: 16px;
@@ -839,7 +594,6 @@
             flex-wrap: wrap;
             margin-bottom: 24px;
         }
-
         .email-input {
             flex: 1;
             min-width: 300px;
@@ -854,17 +608,12 @@
             backdrop-filter: blur(10px);
             transition: all 0.3s;
         }
-
-        .email-input::placeholder {
-            color: rgba(255, 255, 255, 0.6);
-        }
-
+        .email-input::placeholder { color: rgba(255, 255, 255, 0.6); }
         .email-input:focus {
             outline: none;
             background: rgba(255, 255, 255, 0.25);
             box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.2);
         }
-
         .btn-cta {
             background: var(--mint-green);
             color: var(--charcoal);
@@ -877,24 +626,21 @@
             cursor: pointer;
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
-
         .btn-cta:hover {
             transform: translateY(-4px) scale(1.02);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
         }
-
         .privacy-note {
             font-size: 14px;
             opacity: 0.7;
         }
 
-        /* ===== FOOTER ===== */
+        /* FOOTER */
         footer {
             background: var(--charcoal);
             color: white;
             padding: 80px 40px 40px;
         }
-
         .footer-container {
             max-width: 1200px;
             margin: 0 auto;
@@ -903,23 +649,17 @@
             gap: 60px;
             margin-bottom: 60px;
         }
-
-        .footer-brand {
-            max-width: 300px;
-        }
-
+        .footer-brand { max-width: 300px; }
         .footer-logo {
             height: 40px;
             margin-bottom: 20px;
             opacity: 0.9;
         }
-
         .footer-brand p {
             font-size: 14px;
             opacity: 0.6;
             line-height: 1.7;
         }
-
         .footer-column h4 {
             font-family: 'Poppins', sans-serif;
             font-size: 14px;
@@ -927,7 +667,6 @@
             margin-bottom: 24px;
             opacity: 0.9;
         }
-
         .footer-column a {
             display: block;
             color: white;
@@ -937,11 +676,7 @@
             margin-bottom: 12px;
             transition: opacity 0.3s;
         }
-
-        .footer-column a:hover {
-            opacity: 1;
-        }
-
+        .footer-column a:hover { opacity: 1; }
         .footer-bottom {
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             padding-top: 40px;
@@ -951,20 +686,10 @@
             flex-wrap: wrap;
             gap: 20px;
         }
-
-        .footer-copyright {
-            font-size: 14px;
-            opacity: 0.5;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 16px;
-        }
-
+        .footer-copyright { font-size: 14px; opacity: 0.5; }
+        .social-links { display: flex; gap: 16px; }
         .social-link {
-            width: 44px;
-            height: 44px;
+            width: 44px; height: 44px;
             border-radius: 50%;
             background: rgba(255, 255, 255, 0.1);
             display: flex;
@@ -974,72 +699,640 @@
             text-decoration: none;
             transition: all 0.3s;
         }
-
         .social-link:hover {
             background: var(--mint-green);
             transform: translateY(-4px);
         }
 
-        /* ===== RESPONSIVE ===== */
+        /* PRODUCT SECTION - NOVO DESIGN */
+        .product-section {
+            padding: 120px 40px;
+            background: linear-gradient(180deg, var(--charcoal) 0%, #0a0c14 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        .product-bg-pattern {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: 
+                radial-gradient(circle at 20% 20%, rgba(0, 201, 167, 0.05) 0%, transparent 40%),
+                radial-gradient(circle at 80% 80%, rgba(155, 126, 189, 0.05) 0%, transparent 40%);
+        }
+        .product-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+        }
+
+        /* 1️⃣ HEADLINE */
+        .product-hero {
+            text-align: center;
+            margin-bottom: 100px;
+            padding-top: 40px;
+        }
+        .product-hero h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: clamp(36px, 5vw, 56px);
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 24px;
+            background: linear-gradient(135deg, white 0%, var(--mint-green) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .product-subtitle {
+            font-size: 20px;
+            opacity: 0.8;
+            max-width: 600px;
+            margin: 0 auto 32px;
+            line-height: 1.6;
+        }
+        .btn-product-cta {
+            background: linear-gradient(135deg, var(--mint-green), var(--ocean-blue));
+            color: white;
+            border: none;
+            padding: 18px 36px;
+            border-radius: 50px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            margin-bottom: 24px;
+        }
+        .btn-product-cta:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 201, 167, 0.3);
+        }
+        .btn-product-cta.large {
+            padding: 22px 48px;
+            font-size: 18px;
+        }
+        .poc-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 193, 7, 0.1);
+            color: #FFC107;
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 600;
+            border: 1px solid rgba(255, 193, 7, 0.2);
+        }
+
+        /* 2️⃣ THE PROBLEM */
+        .problem-context {
+            text-align: center;
+            margin-bottom: 120px;
+            padding: 60px 40px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 32px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .context-text {
+            margin-bottom: 40px;
+        }
+        .context-lead {
+            font-size: 24px;
+            opacity: 0.9;
+            line-height: 1.5;
+            margin-bottom: 16px;
+        }
+        .context-highlight {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--mint-green);
+            font-family: 'Poppins', sans-serif;
+        }
+        .context-solution {
+            display: inline-flex;
+            align-items: center;
+            gap: 16px;
+            background: rgba(0, 201, 167, 0.1);
+            padding: 20px 32px;
+            border-radius: 16px;
+            border: 1px solid rgba(0, 201, 167, 0.2);
+        }
+        .context-solution i {
+            font-size: 32px;
+            color: var(--mint-green);
+        }
+        .context-solution p {
+            font-size: 18px;
+            font-weight: 500;
+            margin: 0;
+        }
+
+        /* 3️⃣ HOW IT WORKS */
+        .how-it-works-section {
+            margin-bottom: 120px;
+        }
+        .work-step {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+            margin-bottom: 100px;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .work-step.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .work-step[data-step="2"] {
+            direction: rtl;
+        }
+        .work-step[data-step="2"] > * {
+            direction: ltr;
+        }
+        .work-step.aha-step {
+            background: linear-gradient(135deg, rgba(0, 201, 167, 0.05), rgba(155, 126, 189, 0.05));
+            border-radius: 32px;
+            padding: 60px;
+            border: 1px solid rgba(0, 201, 167, 0.1);
+        }
+        .step-text {
+            max-width: 400px;
+        }
+        .step-number-label {
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--mint-green);
+            margin-bottom: 16px;
+        }
+        .step-text h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            line-height: 1.3;
+        }
+        .step-text p {
+            font-size: 18px;
+            opacity: 0.8;
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+        .step-caption {
+            font-size: 14px !important;
+            opacity: 0.6 !important;
+            font-style: italic;
+        }
+        .aha-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 193, 7, 0.15);
+            color: #FFC107;
+            padding: 12px 20px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-top: 24px;
+        }
+
+        /* PHONE MOCKUP */
+        .phone-mockup {
+            display: flex;
+            justify-content: center;
+        }
+        .phone-frame {
+            width: 280px;
+            background: #1a1d29;
+            border-radius: 40px;
+            padding: 12px;
+            box-shadow: 
+                0 50px 100px rgba(0,0,0,0.5),
+                0 0 0 1px rgba(255,255,255,0.1),
+                inset 0 0 20px rgba(0,0,0,0.5);
+        }
+        .phone-header {
+            display: flex;
+            justify-content: center;
+            padding: 8px 0 16px;
+        }
+        .phone-notch {
+            width: 80px;
+            height: 24px;
+            background: #000;
+            border-radius: 12px;
+        }
+        .phone-content {
+            background: linear-gradient(180deg, #0f1117 0%, #1a1d29 100%);
+            border-radius: 28px;
+            padding: 24px;
+            min-height: 400px;
+        }
+
+        /* CAPTURE CARD */
+        .capture-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 24px;
+            border-left: 4px solid var(--mint-green);
+        }
+        .capture-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--mint-green);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            margin-bottom: 16px;
+        }
+        .capture-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.6;
+            margin-bottom: 8px;
+        }
+        .capture-quote {
+            font-size: 16px;
+            line-height: 1.5;
+            color: white;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+        .capture-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .saved-badge {
+            background: rgba(0, 201, 167, 0.2);
+            color: var(--mint-green);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .date {
+            font-size: 13px;
+            opacity: 0.5;
+        }
+
+        /* TIMELINE */
+        .timeline-title {
+            font-size: 14px;
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 24px;
+            opacity: 0.8;
+        }
+        .timeline-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+        }
+        .timeline-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 16px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+        .timeline-item.active {
+            background: rgba(0, 201, 167, 0.1);
+            border: 1px solid rgba(0, 201, 167, 0.2);
+        }
+        .item-dot {
+            width: 10px;
+            height: 10px;
+            background: var(--mint-green);
+            border-radius: 50%;
+            margin-top: 4px;
+            flex-shrink: 0;
+            box-shadow: 0 0 8px rgba(0, 201, 167, 0.5);
+        }
+        .item-content {
+            flex: 1;
+        }
+        .item-date {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--mint-green);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+        .item-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: white;
+        }
+        .timeline-connector-visual {
+            padding-left: 21px;
+            height: 24px;
+        }
+        .connector-line-v {
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--mint-green), rgba(255,255,255,0.1));
+        }
+
+        /* RECOVERY */
+        .search-box {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 12px 16px;
+            border-radius: 12px;
+            margin-bottom: 16px;
+            font-size: 13px;
+            opacity: 0.6;
+        }
+        .user-query {
+            background: rgba(155, 126, 189, 0.15);
+            border: 1px solid rgba(155, 126, 189, 0.3);
+            padding: 16px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-style: italic;
+            margin-bottom: 20px;
+            color: #d4c4e0;
+        }
+        .recovery-result {
+            background: rgba(0, 201, 167, 0.1);
+            border: 1px solid rgba(0, 201, 167, 0.2);
+            border-radius: 16px;
+            padding: 20px;
+        }
+        .result-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--mint-green);
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+        }
+        .recovery-chain {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        .recovery-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+        .recovery-item.highlight {
+            background: rgba(0, 201, 167, 0.1);
+            padding: 12px;
+            border-radius: 10px;
+            margin: -4px -4px -4px -4px;
+        }
+        .recovery-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--mint-green);
+            border-radius: 50%;
+            margin-top: 6px;
+            flex-shrink: 0;
+        }
+        .recovery-text strong {
+            display: block;
+            font-size: 12px;
+            color: var(--mint-green);
+            margin-bottom: 2px;
+        }
+        .recovery-text span {
+            font-size: 13px;
+            opacity: 0.9;
+        }
+
+        /* 4️⃣ WHY IT'S DIFFERENT */
+        .different-section {
+            margin-bottom: 120px;
+            padding: 60px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 32px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .different-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 36px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 48px;
+            color: white;
+        }
+        .comparison-table {
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+        .table-header {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            padding: 16px 0;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 8px;
+        }
+        .table-header .col-traditional {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.5;
+        }
+        .table-header .col-mind {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--mint-green);
+        }
+        .table-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            padding: 16px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .table-row .col-traditional {
+            font-size: 16px;
+            opacity: 0.6;
+        }
+        .table-row .col-mind {
+            font-size: 16px;
+            color: white;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .table-row .col-mind i {
+            color: var(--mint-green);
+        }
+        .different-closing {
+            text-align: center;
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--mint-green);
+            margin-top: 40px;
+        }
+
+        /* 5️⃣ CATEGORY STATEMENT */
+        .category-statement-large {
+            text-align: center;
+            margin-bottom: 100px;
+            padding: 80px 40px;
+        }
+        .category-statement-large h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 24px;
+            font-weight: 500;
+            opacity: 0.7;
+            margin-bottom: 16px;
+        }
+        .category-statement-large h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: clamp(32px, 4vw, 48px);
+            font-weight: 800;
+            margin-bottom: 24px;
+            background: linear-gradient(135deg, white, var(--mint-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .category-statement-large p {
+            font-size: 20px;
+            opacity: 0.9;
+            margin-bottom: 24px;
+        }
+        .category-tag {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-size: 14px;
+            opacity: 0.7;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* 6️⃣ FINAL CTA */
+        .final-product-cta {
+            text-align: center;
+            padding: 60px 40px;
+            background: rgba(0, 201, 167, 0.05);
+            border-radius: 32px;
+            border: 1px solid rgba(0, 201, 167, 0.1);
+        }
+        .cta-text {
+            font-size: 24px;
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+
+        /* RESPONSIVE */
         @media (max-width: 1024px) {
-            .features-grid {
-                grid-template-columns: 1fr;
-            }
-            
+            .features-grid-compact { grid-template-columns: 1fr; }
             .step-item, .step-item:nth-child(even) {
                 flex-direction: column;
                 text-align: center;
             }
-            
-            .footer-container {
-                grid-template-columns: 1fr 1fr;
+            .footer-container { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 900px) {
+            .work-step {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            .work-step[data-step="2"] {
+                direction: ltr;
+            }
+            .work-step.aha-step {
+                padding: 40px 24px;
+            }
+            .step-text {
+                max-width: 100%;
+                text-align: center;
+            }
+            .phone-mockup {
+                order: -1;
+            }
+            .comparison-table {
+                padding: 0 20px;
+            }
+            .table-header,
+            .table-row {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+            .table-header .col-traditional,
+            .table-row .col-traditional {
+                opacity: 0.4;
+                font-size: 12px;
             }
         }
-
         @media (max-width: 768px) {
-            nav {
-                padding: 16px 20px;
-            }
-            
-            .nav-links {
-                display: none;
-            }
-            
-            .hero {
-                padding: 100px 20px 60px;
-            }
-            
+            nav { padding: 16px 20px; }
+            .nav-links { display: none; }
+            .hero { padding: 100px 20px 60px; }
             .problem-card:nth-child(2),
-            .problem-card:nth-child(3) {
-                margin-left: 0;
+            .problem-card:nth-child(3) { margin-left: 0; }
+            .story-step {
+                flex-direction: column;
+                gap: 20px;
             }
-            
-            .features-grid {
-                grid-template-columns: 1fr;
+            .step-indicator {
+                flex-direction: row;
+                width: 100%;
             }
-            
-            .showcase-card {
-                padding: 40px;
+            .step-line {
+                width: 100%;
+                height: 2px;
+                min-height: auto;
+                margin-top: 0;
+                margin-left: 16px;
             }
-            
+            .cognitive-diagram {
+                flex-direction: column;
+                gap: 20px;
+            }
+            .diagram-arrow {
+                transform: rotate(90deg);
+            }
+            .category-statement {
+                flex-direction: column;
+                gap: 20px;
+            }
+            .statement-line {
+                width: 60px;
+                flex: none;
+            }
             .footer-container {
                 grid-template-columns: 1fr;
                 text-align: center;
             }
-            
-            .footer-brand {
-                max-width: 100%;
-            }
+            .footer-brand { max-width: 100%; }
         }
     </style>
 </head>
 <body>
-    <!-- NAVIGATION -->
     <nav id="navbar">
         <img src="./mycomind_logo_full_transparent.png" alt="My-CoMind" class="nav-logo">
         <div class="nav-links">
             <a href="#problem" class="nav-link">The Problem</a>
-            <a href="#solution" class="nav-link">Solution</a>
+            <a href="#product" class="nav-link">Product</a>
             <a href="#how" class="nav-link">How It Works</a>
         </div>
         <button class="nav-cta" onclick="document.querySelector('.cta-section').scrollIntoView({behavior: 'smooth'})">
@@ -1047,7 +1340,6 @@
         </button>
     </nav>
 
-    <!-- HERO SECTION -->
     <section class="hero">
         <div class="hero-orb orb-1"></div>
         <div class="hero-orb orb-2"></div>
@@ -1055,150 +1347,263 @@
         
         <div class="hero-content">
             <div class="hero-badge">
-				<i class="fas fa-brain"></i>
-				A new way to keep your thinking organized
-				</div>
-
-				<h1>
-				Your mind shouldn't have to<br>
-				start from <span>zero</span> every day.
-				</h1>
-
-				<p class="hero-subtitle">
-				Between work, family, messages, meetings and responsibilities,
-				your thinking gets interrupted hundreds of times a day.
-
-				My-CoMind helps you return to what you were thinking
-				with clarity, context, and confidence.
-				
-				Ask questions about past decisions, recover context,
-				and prepare for what comes next.
-				</p>
+                <i class="fas fa-brain"></i>
+                A new way to keep your thinking organized
+            </div>
+            <h1>Your mind shouldn't have to<br>start from <span>zero</span> every day.</h1>
+            <p class="hero-subtitle">
+                Between work, family, messages, meetings and responsibilities, your thinking gets interrupted hundreds of times a day. My-CoMind helps you return to what you were thinking with clarity, context, and confidence.
+            </p>
             <div class="hero-buttons">
                 <button class="btn-primary" onclick="document.querySelector('.cta-section').scrollIntoView({behavior: 'smooth'})">
-                    <i class="fas fa-rocket"></i>
-                    Get Early Access
+                    <i class="fas fa-rocket"></i>Get Early Access
                 </button>
                 <button class="btn-secondary" onclick="document.querySelector('#problem').scrollIntoView({behavior: 'smooth'})">
                     See the Problem
                 </button>
             </div>
         </div>
-        
-        <div class="scroll-indicator" onclick="document.querySelector('#problem').scrollIntoView({behavior: 'smooth'})">
-            <span>Scroll</span>
-            <div class="scroll-arrow"></div>
-        </div>
     </section>
 
-    <!-- PROBLEM SECTION -->
     <section class="problem-section" id="problem">
         <div class="problem-container">
             <div class="section-label reveal">The Reality</div>
             <h2 class="reveal">Sound familiar?</h2>
-            
             <div class="problem-cards">
                 <div class="problem-card reveal">
                     <i class="fas fa-bolt"></i>
                     <h3>You had it clear yesterday.</h3>
-					<p>
-					You knew exactly why that decision made sense… until the week happened. Meetings, deadlines, school pickups, messages, last-minute changes.
-					</p>
+                    <p>You knew exactly why that decision made sense… until the week happened. Meetings, deadlines, school pickups, messages, last-minute changes.</p>
                 </div>
-                
                 <div class="problem-card reveal">
                     <i class="fas fa-question-circle"></i>
-                    <h3>What did we decide last week?"</h3>
-					<p>
-					You remember there was a reason. A trade-off. A conversation. But now it's blurry. It's not memory failure—it's continuity failure.
-					</p>
+                    <h3>What did we decide last week?</h3>
+                    <p>You remember there was a reason. A trade-off. A conversation. But now it's blurry. It's not memory failure—it's continuity failure.</p>
                 </div>
-                
                 <div class="problem-card reveal">
                     <i class="fas fa-fire"></i>
                     <h3>Your mind is juggling too many things.</h3>
-					<p>
-						Work decisions. Family logistics. Ideas. Tasks. Conversations.
-						The real problem isn’t memory — it’s that your thinking gets constantly interrupted.
-					</p>
+                    <p>Work decisions. Family logistics. Ideas. Tasks. Conversations. The real problem isn't memory — it's that your thinking gets constantly interrupted.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SOLUTION SECTION -->
-    <section class="solution-section" id="solution">
-        <div class="solution-bg-pattern"></div>
-        
-        <div class="solution-container">
-            <div class="solution-header reveal">
-                <div class="section-label" style="color: var(--mint-green);">The Solution</div>
-                <h2>Meet My-CoMind, Your cognitive continuity system</h2>
-				
-                <p class="solution-subtitle">
-					My-CoMind captures the moments where your thinking happens.
-
-					Decisions.
-					Conversations.
-					Insights.
-					Trade-offs.
-
-					It connects them into a living knowledge graph of your reasoning.
-
-					So when you ask:
-
-					“Why did we choose this?”
-
-					You don’t get a note.
-
-					You get the context behind the decision.
-				</p>
-            </div>
+    <section class="product-section" id="product">
+        <div class="product-bg-pattern"></div>
+        <div class="product-container">
             
-            <div class="features-grid">
-                <div class="feature-card reveal">
-                    <div class="feature-icon">
-                        <i class="fas fa-microphone"></i>
-                    </div>
-                    <h3>Capture thoughts instantly</h3>
-                    <p>
-						Speak or write ideas the moment they appear.
-						My-CoMind organizes them into a timeline so nothing important disappears.
-					</p>
-                </div>
-                
-                <div class="feature-card reveal">
-                    <div class="feature-icon">
-                        <i class="fas fa-project-diagram"></i>
-                    </div>
-                    <h3>Ask your own context</h3>
-                    <p>Instead of searching through notes and messages, simply ask your assistant what changed, what was decided, or what matters now.. Context never disappears.</p>
-					<p>Ask anything about yourself. "Why did I choose Feature A?" Get the full context, not just fragments.</p>
-                </div>
-                
-                <div class="feature-card reveal">
-                    <div class="feature-icon">
-                        <i class="fas fa-search"></i>
-                    </div>
-                    <h3>Return exactly where you left off</h3>
-                    <p>When your day interrupts your thinking, My-CoMind helps you recover the thread — so you can continue instead of restarting.</p>
+            <!-- 1️⃣ HEADLINE -->
+            <div class="product-hero reveal">
+                <h2>Your mind moves forward.<br>My-CoMind remembers where it left off.</h2>
+                <p class="product-subtitle">
+                    A personal infrastructure for cognitive continuity.<br>
+                    Capture thoughts, connect context, and recover your thinking anytime.
+                </p>
+                <div class="poc-badge">
+                    <i class="fas fa-flask"></i>
+                    Proof of Concept — Visual subject to change
                 </div>
             </div>
-            
-            <div class="showcase-card reveal">
-                <div class="showcase-content">
-                    <h3>Trust your own thinking again</h3>
-                    <p>My-CoMind doesn't replace your mind.
-						It protects the context around it —
-						Your decisions, insights, and ideas remain connected over time.
-					</p>
+
+            <!-- 2️⃣ THE PROBLEM -->
+            <div class="problem-context reveal">
+                <div class="context-text">
+                    <p class="context-lead">Ideas appear in conversations.<br>Decisions happen across days, meetings and notes.</p>
+                    <p class="context-highlight">But your thinking gets fragmented.</p>
+                </div>
+                <div class="context-solution">
+                    <i class="fas fa-infinity"></i>
+                    <p>My-CoMind preserves the continuity of your thinking.</p>
                 </div>
             </div>
+
+            <!-- 3️⃣ HOW IT WORKS -->
+            <div class="how-it-works-section">
+                
+                <!-- 1 — CAPTURE -->
+                <div class="work-step reveal" data-step="1">
+                    <div class="step-text">
+                        <div class="step-number-label">1 — Capture</div>
+                        <h3>Capture thoughts the moment they happen.</h3>
+                        <p>Voice, text or quick notes during meetings and conversations.</p>
+                    </div>
+                    <div class="phone-mockup">
+                        <div class="phone-frame">
+                            <div class="phone-header">
+                                <div class="phone-notch"></div>
+                            </div>
+                            <div class="phone-content">
+                                <div class="capture-card">
+                                    <div class="capture-icon"><i class="fas fa-microphone"></i></div>
+                                    <div class="capture-label">Meeting note</div>
+                                    <div class="capture-quote">"We should invest more in marketing next quarter."</div>
+                                    <div class="capture-meta">
+                                        <span class="saved-badge"><i class="fas fa-check"></i> Saved</span>
+                                        <span class="date">Nov 3</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2 — CONNECT -->
+                <div class="work-step reveal" data-step="2">
+                    <div class="phone-mockup">
+                        <div class="phone-frame">
+                            <div class="phone-header">
+                                <div class="phone-notch"></div>
+                            </div>
+                            <div class="phone-content">
+                                <div class="timeline-title">Your thinking timeline</div>
+                                <div class="timeline-stack">
+                                    <div class="timeline-item">
+                                        <div class="item-dot"></div>
+                                        <div class="item-content">
+                                            <div class="item-date">Nov 3</div>
+                                            <div class="item-title">Marketing idea</div>
+                                        </div>
+                                    </div>
+                                    <div class="timeline-connector-visual">
+                                        <div class="connector-line-v"></div>
+                                    </div>
+                                    <div class="timeline-item">
+                                        <div class="item-dot"></div>
+                                        <div class="item-content">
+                                            <div class="item-date">Nov 8</div>
+                                            <div class="item-title">Budget discussion</div>
+                                        </div>
+                                    </div>
+                                    <div class="timeline-connector-visual">
+                                        <div class="connector-line-v"></div>
+                                    </div>
+                                    <div class="timeline-item active">
+                                        <div class="item-dot"></div>
+                                        <div class="item-content">
+                                            <div class="item-date">Nov 20</div>
+                                            <div class="item-title">Strategy decision</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="step-text">
+                        <div class="step-number-label">2 — Connect</div>
+                        <h3>My-CoMind connects ideas across time.</h3>
+                        <p>What starts as a thought becomes part of a larger thinking process.</p>
+                        <p class="step-caption">Ideas evolve. Context accumulates. Decisions emerge.</p>
+                    </div>
+                </div>
+
+                <!-- 3 — RECOVER (AHA MOMENT) -->
+                <div class="work-step reveal aha-step" data-step="3">
+                    <div class="step-text">
+                        <div class="step-number-label">3 — Recover</div>
+                        <h3>Instead of searching notes, you recover the thinking behind them.</h3>
+                        <div class="aha-badge">
+                            <i class="fas fa-lightbulb"></i>
+                            <span>That's the key difference.</span>
+                        </div>
+                    </div>
+                    <div class="phone-mockup">
+                        <div class="phone-frame">
+                            <div class="phone-header">
+                                <div class="phone-notch"></div>
+                            </div>
+                            <div class="phone-content">
+                                <div class="search-box">
+                                    <i class="fas fa-search"></i>
+                                    <span>Search your thinking...</span>
+                                </div>
+                                <div class="user-query">
+                                    "What did we decide about the marketing budget?"
+                                </div>
+                                <div class="recovery-result">
+                                    <div class="result-header">
+                                        <i class="fas fa-brain"></i>
+                                        <span>Context recovered</span>
+                                    </div>
+                                    <div class="recovery-chain">
+                                        <div class="recovery-item">
+                                            <div class="recovery-dot"></div>
+                                            <div class="recovery-text">
+                                                <strong>Nov 3</strong>
+                                                <span>Initial idea to increase marketing investment</span>
+                                            </div>
+                                        </div>
+                                        <div class="recovery-item">
+                                            <div class="recovery-dot"></div>
+                                            <div class="recovery-text">
+                                                <strong>Nov 8</strong>
+                                                <span>Budget meeting discussion</span>
+                                            </div>
+                                        </div>
+                                        <div class="recovery-item highlight">
+                                            <div class="recovery-dot"></div>
+                                            <div class="recovery-text">
+                                                <strong>Nov 20</strong>
+                                                <span>Decision: prioritize marketing growth</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- 4️⃣ WHY IT'S DIFFERENT -->
+            <div class="different-section reveal">
+                <h3 class="different-title">This is not a notes app. Notes capture moments. My-CoMind preserves the thinking between them.</h3>
+                <div class="comparison-table">
+                    <div class="table-header">
+                        <div class="col-traditional">Traditional tools</div>
+                        <div class="col-mind">My-CoMind</div>
+                    </div>
+                    <div class="table-row">
+                        <div class="col-traditional">Store notes</div>
+                        <div class="col-mind"><i class="fas fa-check"></i> Preserves thinking</div>
+                    </div>
+                    <div class="table-row">
+                        <div class="col-traditional">Static information</div>
+                        <div class="col-mind"><i class="fas fa-check"></i> Evolving context</div>
+                    </div>
+                    <div class="table-row">
+                        <div class="col-traditional">Search documents</div>
+                        <div class="col-mind"><i class="fas fa-check"></i> Recover decisions</div>
+                    </div>
+                    <div class="table-row">
+                        <div class="col-traditional">Memory fragments</div>
+                        <div class="col-mind"><i class="fas fa-check"></i> Cognitive continuity</div>
+                    </div>
+                </div>
+                <p class="different-closing">Your thinking becomes a continuous memory.</p>
+            </div>
+			
+            <!-- 5️⃣ CATEGORY STATEMENT -->
+            <div class="category-statement-large reveal">
+                <h3>Your second brain shouldn't store information.</h3>
+                <h2>It should remember your thinking.</h2>
+                <p>My-CoMind is a personal infrastructure for cognitive continuity.</p>
+                <span class="category-tag">A memory layer for your ideas, context and decisions.</span>
+            </div>
+
+            <!-- 6️⃣ FINAL CTA -->
+            <div class="final-product-cta reveal">
+                <p class="cta-text">Join Early Access.</p>
+                <button class="btn-product-cta large" onclick="document.querySelector('.cta-section').scrollIntoView({behavior: 'smooth'})">
+                    Join the Waitlist
+                </button>
+            </div>
+
         </div>
     </section>
-
-    <!-- HOW IT WORKS -->
-    <section class="how-section" id="how">
+	
+	<section class="how-section" id="how">
         <div class="how-container">
             <div class="how-header reveal">
                 <div class="section-label">Simple Process</div>
@@ -1266,48 +1671,39 @@
         </div>
     </section>
 
-    <!-- CTA SECTION -->
     <section class="cta-section">
         <div class="cta-orb cta-orb-1"></div>
         <div class="cta-orb cta-orb-2"></div>
-        
         <div class="cta-container reveal">
             <h2>Be among the first to experience My-CoMind</h2>
-            <p>We are building the first Cognitive Continuity System.
-				Join early users helping shape how people work with their own thinking.
-			</p>
-			
-			<form action="https://formspree.io/f/xdawozpv" class="email-form" method="POST">
-			  <input type="email" name="email" class="email-input" placeholder="Enter your email" required>
-			  <button type="submit" class="btn-cta">Join the Waitlist</button>
-			</form>
+            <p>We are building the first Cognitive Continuity System. Join early users helping shape how people work with their own thinking.</p>
+            <form action="https://formspree.io/f/xdawozpv" class="email-form" method="POST">
+                <input type="email" name="email" class="email-input" placeholder="Enter your email" required>
+                <button type="submit" class="btn-cta">Join the Waitlist</button>
+            </form>
+            
         </div>
     </section>
 
-    <!-- FOOTER -->
     <footer>
         <div class="footer-container">
             <div class="footer-brand">
                 <img src="./mycomind_logo_full_transparent.png" alt="My-CoMind" class="footer-logo">
                 <p>Your Personal Cognitive Infrastructure. Preserving how you think, not just what you remember.</p>
             </div>
-            
             <div class="footer-column">
                 <h4>Product</h4>
-                <a href="#features">Features</a>
+                <a href="#product">Features</a>
                 <a href="#how">How It Works</a>
-                <a href="#pricing">Pricing</a>
+                <a href="#problem">The Problem</a>
             </div>          
-            
-            
             <div class="footer-column">
                 <h4>Legal</h4>
-                <a href="#privacy">Privacy</a>
-                <a href="#terms">Terms</a>
-                <a href="#contact">Contact</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Service</a>
+                <a href="contact.html">Contact</a>
             </div>
         </div>
-        
         <div class="footer-bottom">
             <p class="footer-copyright">© 2026 My-CoMind. All rights reserved.</p>
             <div class="social-links">
@@ -1317,22 +1713,13 @@
     </footer>
 
     <script>
-        // Navbar scroll effect
         window.addEventListener('scroll', () => {
             const navbar = document.getElementById('navbar');
-            if (window.scrollY > 50) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
+            if (window.scrollY > 50) navbar.classList.add('scrolled');
+            else navbar.classList.remove('scrolled');
         });
 
-        // Intersection Observer for reveal animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
+        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
@@ -1342,51 +1729,18 @@
             });
         }, observerOptions);
 
-        document.querySelectorAll('.reveal, .problem-card, .feature-card, .step-item, .testimonial-card').forEach(el => {
-            observer.observe(el);
-        });
+        document.querySelectorAll('.reveal, .problem-card, .feature-item, .step-item, .testimonial-card, .story-step, .work-step').forEach(el => observer.observe(el));
 
-        // Stagger animation for cards
-        const cards = document.querySelectorAll('.feature-card');
-        cards.forEach((card, index) => {
-            card.style.transitionDelay = `${index * 0.1}s`;
-        });
+        const cards = document.querySelectorAll('.feature-item');
+        cards.forEach((card, index) => card.style.transitionDelay = `${index * 0.1}s`);
 
-        // Form submission
-        function handleSubmit(e) {
-            e.preventDefault();
-            const email = e.target.querySelector('input').value;
-            alert(`Thank you! We'll contact you at ${email} when early access is available.`);
-            e.target.reset();
-        }
-
-        // Smooth scroll for nav links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
             });
         });
-
-        // GSAP animations if available
-        if (typeof gsap !== 'undefined') {
-            gsap.registerPlugin(ScrollTrigger);
-            
-            // Parallax for orbs
-            gsap.to('.hero-orb', {
-                scrollTrigger: {
-                    trigger: '.hero',
-                    start: 'top top',
-                    end: 'bottom top',
-                    scrub: 1
-                },
-                y: 200,
-                opacity: 0
-            });
-        }
     </script>
 </body>
 </html>

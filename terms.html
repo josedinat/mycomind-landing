@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Service — My-CoMind</title>
+    <meta name="description" content="My-CoMind Terms of Service - Read our terms and conditions for using our cognitive continuity platform.">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --ocean-blue: #0066CC;
+            --mint-green: #00C9A7;
+            --lavender: #9B7EBD;
+            --charcoal: #1A1F36;
+            --soft-gray: #F5F7FA;
+            --light-gray: #E8EBF0;
+            --white: #FFFFFF;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--charcoal);
+            background: var(--soft-gray);
+            line-height: 1.6;
+        }
+
+        /* NAVIGATION */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 60px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            transition: all 0.4s ease;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(20px) saturate(180%);
+            box-shadow: 0 1px 0 rgba(0,0,0,0.05);
+        }
+        .nav-logo { height: 40px; }
+        .nav-links { display: flex; gap: 40px; align-items: center; }
+        .nav-link {
+            font-size: 14px;
+            color: var(--charcoal);
+            text-decoration: none;
+            font-weight: 500;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--ocean-blue);
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after { width: 100%; }
+        .nav-cta {
+            background: var(--ocean-blue);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .nav-cta:hover { background: #0052A3; transform: scale(1.05); }
+
+        /* LEGAL PAGES */
+        .legal-section {
+            padding: 140px 40px 80px;
+            background: white;
+            min-height: 100vh;
+        }
+        .legal-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .legal-header {
+            text-align: center;
+            margin-bottom: 60px;
+            padding-bottom: 40px;
+            border-bottom: 1px solid var(--light-gray);
+        }
+        .legal-section h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: clamp(32px, 4vw, 48px);
+            font-weight: 700;
+            color: var(--charcoal);
+            margin-bottom: 16px;
+        }
+        .last-updated {
+            color: var(--charcoal);
+            opacity: 0.5;
+            font-size: 14px;
+        }
+        .legal-content h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--charcoal);
+            margin: 48px 0 20px;
+            padding-top: 32px;
+            border-top: 1px solid var(--light-gray);
+        }
+        .legal-content h2:first-of-type {
+            border-top: none;
+            padding-top: 0;
+        }
+        .legal-content h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--charcoal);
+            margin: 32px 0 16px;
+        }
+        .legal-content p {
+            font-size: 16px;
+            line-height: 1.8;
+            color: var(--charcoal);
+            opacity: 0.8;
+            margin-bottom: 16px;
+        }
+        .legal-content ul {
+            margin: 16px 0;
+            padding-left: 24px;
+        }
+        .legal-content li {
+            font-size: 16px;
+            line-height: 1.8;
+            color: var(--charcoal);
+            opacity: 0.8;
+            margin-bottom: 8px;
+        }
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(0, 201, 167, 0.1), rgba(0, 102, 204, 0.1));
+            border-left: 4px solid var(--mint-green);
+            padding: 24px;
+            border-radius: 0 12px 12px 0;
+            margin: 24px 0;
+        }
+        .highlight-box p {
+            margin: 0;
+            font-weight: 500;
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--charcoal);
+            color: white;
+            padding: 80px 40px 40px;
+        }
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+        }
+        .footer-brand { max-width: 300px; }
+        .footer-logo {
+            height: 40px;
+            margin-bottom: 20px;
+            opacity: 0.9;
+        }
+        .footer-brand p {
+            font-size: 14px;
+            opacity: 0.6;
+            line-height: 1.7;
+        }
+        .footer-column h4 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            opacity: 0.9;
+        }
+        .footer-column a {
+            display: block;
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            opacity: 0.6;
+            margin-bottom: 12px;
+            transition: opacity 0.3s;
+        }
+        .footer-column a:hover { opacity: 1; }
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .footer-copyright { font-size: 14px; opacity: 0.5; }
+        .social-links { display: flex; gap: 16px; }
+        .social-link {
+            width: 44px; height: 44px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        .social-link:hover {
+            background: var(--mint-green);
+            transform: translateY(-4px);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            .footer-container { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 768px) {
+            nav { padding: 16px 20px; }
+            .nav-links { display: none; }
+            .legal-section { padding: 100px 20px 60px; }
+            .footer-container {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .footer-brand { max-width: 100%; }
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVIGATION -->
+    <nav id="navbar">
+        <a href="index.html"><img src="./mycomind_logo_full_transparent.png" alt="My-CoMind" class="nav-logo"></a>
+        <div class="nav-links">
+            <a href="index.html#problem" class="nav-link">The Problem</a>
+            <a href="index.html#product" class="nav-link">Product</a>
+            <a href="index.html#how" class="nav-link">How It Works</a>
+        </div>
+        <a href="index.html#cta" class="nav-cta">Get Early Access</a>
+    </nav>
+
+    <!-- TERMS OF SERVICE SECTION -->
+    <section class="legal-section">
+        <div class="legal-container">
+            <div class="legal-header">
+                <h1>Terms of Service</h1>
+                <p class="last-updated">Last Updated: March 8, 2026</p>
+            </div>
+            
+            <div class="legal-content">
+                <div class="highlight-box">
+                    <p>By accessing or using My-CoMind, you agree to be bound by these Terms of Service. If you disagree with any part of the terms, you may not access the service.</p>
+                </div>
+
+                <h2>1. Definitions</h2>
+                <p><strong>"Service"</strong> refers to the My-CoMind application, website, and cognitive continuity platform.</p>
+                <p><strong>"User," "You," "Your"</strong> refers to the individual accessing or using the Service.</p>
+                <p><strong>"Company," "We," "Our," "Us"</strong> refers to My-CoMind Inc., a startup company based in Kitchener-Waterloo, Canada.</p>
+                <p><strong>"Content"</strong> refers to voice recordings, transcriptions, notes, and any other information you upload or create using the Service.</p>
+
+                <h2>2. Acceptance of Terms</h2>
+                <p>By creating an account or using My-CoMind, you acknowledge that you have read, understood, and agree to be bound by these Terms of Service and our Privacy Policy. These terms apply to all visitors, users, and others who access or use the Service.</p>
+                <p>You must be at least 13 years old to use this Service. By using My-CoMind, you represent and warrant that you meet this requirement.</p>
+
+                <h2>3. Account Registration</h2>
+                <p>To use certain features of the Service, you must register for an account. You agree to:</p>
+                <ul>
+                    <li>Provide accurate, current, and complete information during registration</li>
+                    <li>Maintain and promptly update your account information</li>
+                    <li>Maintain the security of your password and accept all risks of unauthorized access</li>
+                    <li>Notify us immediately of any unauthorized use of your account</li>
+                    <li>Take responsibility for all activities that occur under your account</li>
+                </ul>
+                <p>We reserve the right to disable any user account at any time if, in our opinion, you have failed to comply with any provision of these Terms.</p>
+
+                <h2>4. Your Content</h2>
+                <h3>4.1 Ownership</h3>
+                <p>You retain all rights to the Content you create, upload, or store using My-CoMind. We do not claim ownership of your intellectual property.</p>
+
+                <h3>4.2 License to Us</h3>
+                <p>By using our Service, you grant us a limited, non-exclusive, royalty-free license to use, process, and store your Content solely for the purpose of:</p>
+                <ul>
+                    <li>Providing the Service to you (transcription, organization, search)</li>
+                    <li>Improving our service quality and performance</li>
+                    <li>Complying with legal obligations</li>
+                </ul>
+                <p>This license terminates when you delete your Content or close your account, except where we are legally required to retain copies.</p>
+
+                <h3>4.3 Content Restrictions</h3>
+                <p>You agree not to use My-CoMind to create, store, or share:</p>
+                <ul>
+                    <li>Content that is illegal, harmful, threatening, abusive, or defamatory</li>
+                    <li>Content that infringes on intellectual property rights of others</li>
+                    <li>Content containing malware, viruses, or malicious code</li>
+                    <li>Content that violates the privacy rights of others</li>
+                    <li>Content related to illegal activities or terrorism</li>
+                </ul>
+
+                <h2>5. Service Availability and Modifications</h2>
+                <h3>5.1 Beta Service</h3>
+                <p>My-CoMind is currently in development. You acknowledge that:</p>
+                <ul>
+                    <li>The Service may contain bugs, errors, or inaccuracies</li>
+                    <li>Features may change, be removed, or added without notice</li>
+                    <li>Service availability is not guaranteed and may experience downtime</li>
+                    <li>Data loss, while unlikely, is possible during the beta phase</li>
+                </ul>
+
+                <h3>5.2 Modifications</h3>
+                <p>We reserve the right to modify or discontinue, temporarily or permanently, the Service (or any part thereof) with or without notice. We shall not be liable to you or any third party for any modification, suspension, or discontinuance of the Service.</p>
+
+                <h2>6. Intellectual Property</h2>
+                <p>The Service and its original content (excluding Content provided by users), features, and functionality are and will remain the exclusive property of My-CoMind Inc. and its licensors. The Service is protected by copyright, trademark, and other laws of both Canada and foreign countries.</p>
+                <p>Our trademarks and trade dress may not be used in connection with any product or service without the prior written consent of My-CoMind Inc.</p>
+
+                <h2>7. Termination</h2>
+                <p>We may terminate or suspend your account immediately, without prior notice or liability, for any reason whatsoever, including without limitation if you breach the Terms.</p>
+                <p>Upon termination, your right to use the Service will immediately cease. If you wish to terminate your account, you may simply discontinue using the Service or contact us to request account deletion.</p>
+                <p>All provisions of the Terms which by their nature should survive termination shall survive termination, including, without limitation, ownership provisions, warranty disclaimers, indemnity, and limitations of liability.</p>
+
+                <h2>8. Limitation of Liability</h2>
+                <p>In no event shall My-CoMind Inc., nor its directors, employees, partners, agents, suppliers, or affiliates, be liable for any indirect, incidental, special, consequential, or punitive damages, including without limitation, loss of profits, data, use, goodwill, or other intangible losses, resulting from:</p>
+                <ul>
+                    <li>Your access to or use of or inability to access or use the Service</li>
+                    <li>Any conduct or content of any third party on the Service</li>
+                    <li>Any content obtained from the Service</li>
+                    <li>Unauthorized access, use, or alteration of your transmissions or content</li>
+                </ul>
+                <p>Our total liability to you for all claims arising from or relating to these Terms or your use of the Service shall not exceed the amount you paid us (if any) during the twelve (12) months immediately preceding the event giving rise to the liability.</p>
+
+                <h2>9. Disclaimer</h2>
+                <p>Your use of the Service is at your sole risk. The Service is provided on an "AS IS" and "AS AVAILABLE" basis. The Service is provided without warranties of any kind, whether express or implied, including, but not limited to, implied warranties of merchantability, fitness for a particular purpose, non-infringement, or course of performance.</p>
+                <p>My-CoMind Inc. does not warrant that:</p>
+                <ul>
+                    <li>The Service will function uninterrupted, secure, or available at any particular time or location</li>
+                    <li>Any errors or defects will be corrected</li>
+                    <li>The Service is free of viruses or other harmful components</li>
+                    <li>The results of using the Service will meet your requirements</li>
+                </ul>
+
+                <h2>10. Governing Law</h2>
+                <p>These Terms shall be governed and construed in accordance with the laws of the Province of Ontario and the federal laws of Canada applicable therein, without regard to its conflict of law provisions.</p>
+                <p>Our failure to enforce any right or provision of these Terms will not be considered a waiver of those rights. If any provision of these Terms is held to be invalid or unenforceable by a court, the remaining provisions of these Terms will remain in effect.</p>
+
+                <h2>11. Changes to Terms</h2>
+                <p>We reserve the right, at our sole discretion, to modify or replace these Terms at any time. If a revision is material, we will try to provide at least 30 days' notice prior to any new terms taking effect. What constitutes a material change will be determined at our sole discretion.</p>
+                <p>By continuing to access or use our Service after those revisions become effective, you agree to be bound by the revised terms. If you do not agree to the new terms, please stop using the Service.</p>
+
+                <h2>12. Contact Us</h2>
+                <p>If you have any questions about these Terms, please contact us:</p>
+                <ul>
+                    <li><strong>Email:</strong> legal@mycomind.com</li>
+                    <li><strong>Address:</strong> My-CoMind Inc., Communitech Hub, 151 Charles Street West, Kitchener, ON N2G 1H6, Canada</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-brand">
+                <img src="./mycomind_logo_full_transparent.png" alt="My-CoMind" class="footer-logo">
+                <p>Your Personal Cognitive Infrastructure. Preserving how you think, not just what you remember.</p>
+            </div>
+            <div class="footer-column">
+                <h4>Product</h4>
+                <a href="index.html#product">Features</a>
+                <a href="index.html#how">How It Works</a>
+                <a href="index.html#problem">The Problem</a>
+            </div>          
+            <div class="footer-column">
+                <h4>Legal</h4>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="terms.html">Terms of Service</a>
+                <a href="contact.html">Contact</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p class="footer-copyright">© 2026 My-CoMind. All rights reserved.</p>
+            <div class="social-links">
+                <a href="https://www.linkedin.com/company/my-comind" class="social-link" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
