@@ -1,0 +1,1454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My-CoMind - Your Personal Cognitive Infrastructure</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --ocean-blue: #0066CC;
+            --mint-green: #00C9A7;
+            --lavender: #9B7EBD;
+            --charcoal: #1A1F36;
+            --soft-gray: #F5F7FA;
+            --light-gray: #E8EBF0;
+            --white: #FFFFFF;
+            --warning: #FFB84D;
+            --danger: #FF6B6B;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--soft-gray);
+            color: var(--charcoal);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header Minimalista */
+        .header {
+            background: var(--white);
+            padding: 16px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--ocean-blue), var(--mint-green));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+        }
+
+        .logo-text {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 20px;
+            color: var(--charcoal);
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: 8px;
+            border: none;
+            font-family: 'Inter', sans-serif;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+        }
+
+        .btn-primary {
+            background: var(--ocean-blue);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #0052A3;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: var(--mint-green);
+            color: white;
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--charcoal);
+            border: 1px solid var(--light-gray);
+        }
+
+        /* Main Layout - SIMPLIFICADO: 3 colunas -> 2 colunas */
+        .main-container {
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 24px;
+            padding: 90px 24px 24px;
+            max-width: 1200px;
+            margin: 0 auto;
+            height: calc(100vh - 80px);
+        }
+
+        /* Left Panel - Capture + Timeline */
+        .left-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            overflow: hidden;
+        }
+
+        /* Demo Mode Banner */
+        .demo-banner {
+            background: linear-gradient(135deg, var(--ocean-blue), var(--lavender));
+            color: white;
+            padding: 16px 20px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            animation: slideDown 0.5s ease;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .demo-banner h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
+
+        .demo-banner p {
+            font-size: 13px;
+            opacity: 0.9;
+        }
+
+        .demo-btn {
+            background: rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 13px;
+            transition: all 0.2s;
+        }
+
+        .demo-btn:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        /* Capture Area - DESTACADO */
+        .capture-area {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            border: 2px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .capture-area:focus-within {
+            border-color: var(--ocean-blue);
+            box-shadow: 0 8px 30px rgba(0,102,204,0.15);
+        }
+
+        .capture-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .capture-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .capture-tabs {
+            display: flex;
+            gap: 8px;
+        }
+
+        .capture-tab {
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .capture-tab.active {
+            background: var(--ocean-blue);
+            color: white;
+        }
+
+        .capture-tab:not(.active) {
+            background: var(--soft-gray);
+        }
+
+        .capture-input-area {
+            position: relative;
+        }
+
+        .capture-textarea {
+            width: 100%;
+            min-height: 100px;
+            padding: 16px;
+            border: 2px solid var(--light-gray);
+            border-radius: 12px;
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            resize: vertical;
+            transition: border-color 0.2s;
+        }
+
+        .capture-textarea:focus {
+            outline: none;
+            border-color: var(--ocean-blue);
+        }
+
+        .capture-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 12px;
+        }
+
+        .category-selector {
+            display: flex;
+            gap: 8px;
+        }
+
+        .cat-btn {
+            padding: 6px 14px;
+            border-radius: 20px;
+            border: 2px solid var(--light-gray);
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: white;
+        }
+
+        .cat-btn:hover {
+            border-color: var(--ocean-blue);
+        }
+
+        .cat-btn.selected {
+            border-color: var(--charcoal);
+            background: var(--charcoal);
+            color: white;
+        }
+
+        /* Timeline - SIMPLIFICADO */
+        .timeline-container {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .timeline-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        .memory-card {
+            background: var(--soft-gray);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+            border-left: 3px solid var(--ocean-blue);
+            transition: all 0.2s;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .memory-card:hover {
+            transform: translateX(4px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+        }
+
+        .memory-card.decision { border-left-color: var(--mint-green); }
+        .memory-card.insight { border-left-color: var(--lavender); }
+        .memory-card.conversation { border-left-color: var(--warning); }
+
+        .memory-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6px;
+        }
+
+        .memory-type {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #666;
+        }
+
+        .memory-time {
+            font-size: 12px;
+            color: #999;
+        }
+
+        .memory-content {
+            font-size: 14px;
+            line-height: 1.5;
+            color: var(--charcoal);
+        }
+
+        /* Right Panel - Assistant FOCADO */
+        .right-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .assistant-panel {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            border: 2px solid var(--ocean-blue);
+        }
+
+        .assistant-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid var(--soft-gray);
+        }
+
+        .assistant-avatar {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--ocean-blue), var(--mint-green));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(0,102,204,0.4); }
+            50% { box-shadow: 0 0 0 10px rgba(0,102,204,0); }
+        }
+
+        .assistant-info h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .assistant-info p {
+            font-size: 13px;
+            color: var(--ocean-blue);
+            font-weight: 500;
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            margin-bottom: 16px;
+            max-height: 350px;
+        }
+
+        .message {
+            margin-bottom: 16px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .message-user {
+            text-align: right;
+        }
+
+        .message-bubble {
+            display: inline-block;
+            padding: 12px 16px;
+            border-radius: 16px;
+            max-width: 95%;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .message-user .message-bubble {
+            background: var(--ocean-blue);
+            color: white;
+            border-bottom-right-radius: 4px;
+        }
+
+        .message-assistant .message-bubble {
+            background: var(--soft-gray);
+            color: var(--charcoal);
+            border-bottom-left-radius: 4px;
+        }
+
+        /* Magic Moment Highlight */
+        .magic-moment {
+            background: linear-gradient(135deg, #FFF9E6, #FFF3CD);
+            border: 2px solid var(--warning);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 16px;
+            animation: highlight 2s ease;
+        }
+
+        @keyframes highlight {
+            0% { transform: scale(0.95); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .magic-moment-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--warning);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .suggested-questions {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .suggested-q {
+            background: var(--soft-gray);
+            padding: 12px 14px;
+            border-radius: 10px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid transparent;
+            border-left: 3px solid var(--ocean-blue);
+        }
+
+        .suggested-q:hover {
+            background: white;
+            border-color: var(--ocean-blue);
+            transform: translateX(4px);
+        }
+
+        .suggested-q strong {
+            color: var(--ocean-blue);
+        }
+
+        .chat-input-area {
+            display: flex;
+            gap: 8px;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 2px solid var(--light-gray);
+            border-radius: 12px;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+        }
+
+        .chat-input:focus {
+            outline: none;
+            border-color: var(--ocean-blue);
+        }
+
+        /* CVI Minimalista */
+        .cvi-panel {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 16px 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            opacity: 0.8;
+        }
+
+        .cvi-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .cvi-title {
+            font-size: 12px;
+            font-weight: 600;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .cvi-score {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--mint-green);
+        }
+
+        .cvi-bar {
+            height: 6px;
+            background: var(--soft-gray);
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 8px;
+        }
+
+        .cvi-fill {
+            height: 100%;
+            width: 84%;
+            background: linear-gradient(90deg, var(--mint-green), var(--ocean-blue));
+            border-radius: 3px;
+            transition: width 0.5s ease;
+        }
+
+        .cvi-status {
+            font-size: 12px;
+            color: #888;
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: #888;
+        }
+
+        .empty-state i {
+            font-size: 40px;
+            margin-bottom: 12px;
+            color: var(--light-gray);
+        }
+
+        .empty-state h3 {
+            font-family: 'Poppins', sans-serif;
+            margin-bottom: 6px;
+            color: var(--charcoal);
+            font-size: 16px;
+        }
+
+        /* Recording Animation */
+        .recording-indicator {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--danger);
+            color: white;
+            padding: 14px 28px;
+            border-radius: 50px;
+            display: none;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 8px 32px rgba(255,107,107,0.4);
+            z-index: 1500;
+            cursor: pointer;
+        }
+
+        .recording-indicator.active {
+            display: flex;
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateX(-50%) translateY(20px); opacity: 0; }
+            to { transform: translateX(-50%) translateY(0); opacity: 1; }
+        }
+
+        .recording-waves {
+            display: flex;
+            gap: 3px;
+            align-items: center;
+            height: 20px;
+        }
+
+        .wave-bar {
+            width: 3px;
+            background: white;
+            border-radius: 2px;
+            animation: wave 1s ease-in-out infinite;
+        }
+
+        .wave-bar:nth-child(1) { height: 8px; animation-delay: 0s; }
+        .wave-bar:nth-child(2) { height: 16px; animation-delay: 0.1s; }
+        .wave-bar:nth-child(3) { height: 12px; animation-delay: 0.2s; }
+        .wave-bar:nth-child(4) { height: 20px; animation-delay: 0.3s; }
+        .wave-bar:nth-child(5) { height: 10px; animation-delay: 0.4s; }
+
+        @keyframes wave {
+            0%, 100% { transform: scaleY(0.5); }
+            50% { transform: scaleY(1); }
+        }
+
+        /* Tutorial Overlay */
+        .tutorial-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.7);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 3000;
+            padding: 20px;
+        }
+
+        .tutorial-overlay.active {
+            display: flex;
+        }
+
+        .tutorial-card {
+            background: white;
+            border-radius: 20px;
+            padding: 32px;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            animation: modalIn 0.3s ease;
+        }
+
+        @keyframes modalIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .tutorial-card h2 {
+            font-family: 'Poppins', sans-serif;
+            margin-bottom: 16px;
+            color: var(--charcoal);
+        }
+
+        .tutorial-card p {
+            color: #666;
+            margin-bottom: 24px;
+            line-height: 1.6;
+        }
+
+        .tutorial-steps {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .step {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--soft-gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            color: #666;
+        }
+
+        .step.active {
+            background: var(--ocean-blue);
+            color: white;
+        }
+
+        .step.completed {
+            background: var(--mint-green);
+            color: white;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .main-container {
+                grid-template-columns: 1fr;
+                height: auto;
+            }
+            
+            .right-panel {
+                order: -1;
+            }
+        }
+
+        /* Highlight */
+        .highlight {
+            background: #FFEB3B;
+            padding: 2px 4px;
+            border-radius: 4px;
+        }
+
+        /* Typing indicator */
+        .typing-indicator {
+            display: none;
+            padding: 12px 16px;
+            background: var(--soft-gray);
+            border-radius: 16px;
+            border-bottom-left-radius: 4px;
+            margin-bottom: 16px;
+        }
+
+        .typing-indicator.active {
+            display: flex;
+            gap: 4px;
+        }
+
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            background: #999;
+            border-radius: 50%;
+            animation: typing 1.4s infinite;
+        }
+
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes typing {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-10px); }
+        }
+		.nav-logo {
+            display: flex;
+            align-items: center;
+			width: 48px;
+            height: 48px;
+			border-radius: 10px;
+			align-items: center;
+            justify-content: center;
+        }
+		
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">
+                <img src="./mycomind_logo_full_transparent.png" alt="My-CoMind" class="nav-logo">
+            <span class="logo-text">My-CoMind</span>
+        </div>
+        <div class="header-actions">
+            <button class="btn btn-ghost" onclick="showTutorial()">
+                <i class="fas fa-play"></i>
+                Watch Demo
+            </button>
+            <button class="btn btn-primary" onclick="startDemo()">
+                <i class="fas fa-magic"></i>
+                Try Magic Moment
+            </button>
+        </div>
+    </header>
+
+    <!-- Recording Indicator -->
+    <div class="recording-indicator" id="recordingIndicator" onclick="stopRecording()">
+        <div class="recording-waves">
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+            <div class="wave-bar"></div>
+        </div>
+        <span>Recording... Click to stop</span>
+    </div>
+
+    <!-- Tutorial Overlay -->
+    <div class="tutorial-overlay" id="tutorialOverlay" onclick="closeTutorial(event)">
+        <div class="tutorial-card" onclick="event.stopPropagation()">
+            <div style="font-size: 48px; margin-bottom: 16px;">🧠</div>
+            <h2>Welcome to My-CoMind</h2>
+            <p>Your personal cognitive infrastructure. Capture what matters, find it instantly, continue where you left off.</p>
+            
+            <div class="tutorial-steps">
+                <div class="step active" id="step1">1</div>
+                <div class="step" id="step2">2</div>
+                <div class="step" id="step3">3</div>
+            </div>
+            
+            <div id="tutorialContent">
+                <h3 style="margin-bottom: 12px; color: var(--charcoal);">1. Capture</h3>
+                <p style="margin-bottom: 20px;">Record decisions, insights, and conversations as they happen. Use text or voice.</p>
+            </div>
+            
+            <button class="btn btn-primary" onclick="nextTutorialStep()" style="width: 100%; justify-content: center;">
+                Next <i class="fas fa-arrow-right"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Left Panel -->
+        <main class="left-panel">
+            <!-- Demo Banner -->
+            <div class="demo-banner" id="demoBanner">
+                <div>
+                    <h3>🎯 Experience the Magic Moment</h3>
+                    <p>Click "Try Magic Moment" to see how CoMind connects your thoughts</p>
+                </div>
+                <button class="demo-btn" onclick="startDemo()">Try it Now</button>
+            </div>
+
+            <!-- Capture Area -->
+            <div class="capture-area">
+                <div class="capture-header">
+                    <span class="capture-title"><i class="fas fa-plus-circle" style="color: var(--ocean-blue); margin-right: 8px;"></i>Capture Thought</span>
+                    <div class="capture-tabs">
+                        <div class="capture-tab active" onclick="switchTab('text')">
+                            <i class="fas fa-keyboard"></i> Text
+                        </div>
+                        <div class="capture-tab" onclick="switchTab('voice')">
+                            <i class="fas fa-microphone"></i> Voice
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="capture-input-area">
+                    <textarea 
+                        class="capture-textarea" 
+                        id="captureInput"
+                        placeholder="What are you thinking? A decision, insight, or conversation worth remembering..."
+                    ></textarea>
+                    
+                    <div class="capture-actions">
+                        <div class="category-selector">
+                            <button class="cat-btn" onclick="selectCategory('decision')" data-cat="decision">📊 Decision</button>
+                            <button class="cat-btn" onclick="selectCategory('insight')" data-cat="insight">💡 Insight</button>
+                            <button class="cat-btn" onclick="selectCategory('conversation')" data-cat="conversation">💬 Conversation</button>
+                        </div>
+                        
+                        <button class="btn btn-primary" onclick="captureMemory()">
+                            <i class="fas fa-save"></i> Capture
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Timeline -->
+            <div class="timeline-container">
+                <div class="timeline-header">
+                    <h2 class="timeline-title">Your Timeline</h2>
+                    <span style="font-size: 13px; color: #888;" id="memoryCount">6 memories</span>
+                </div>
+                
+                <div id="timelineContent">
+                    <!-- Memories populated by JS -->
+                </div>
+            </div>
+        </main>
+
+        <!-- Right Panel - Assistant FOCADO -->
+        <aside class="right-panel">
+            <!-- AI Assistant -->
+            <div class="assistant-panel">
+                <div class="assistant-header">
+                    <div class="assistant-avatar">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="assistant-info">
+                        <h3>CoMind Assistant</h3>
+                        <p>Ask anything about yourself</p>
+                    </div>
+                </div>
+
+                <div class="chat-messages" id="chatMessages">
+                    <div class="message message-assistant">
+                        <div class="message-bubble">
+                            Hi! I'm your CoMind. I remember everything you capture so you can focus on thinking. Try asking me about a decision you made or an insight you had.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="typing-indicator" id="typingIndicator">
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                </div>
+
+                <!-- Magic Moment Box -->
+                <div class="magic-moment" id="magicMoment" style="display: none;">
+                    <div class="magic-moment-label">
+                        <i class="fas fa-star"></i> Magic Moment
+                    </div>
+                    <p style="font-size: 13px; color: #666; margin: 0;">
+                        This is where CoMind shines. I connected your question to 3 related memories from the past week.
+                    </p>
+                </div>
+
+                <div class="suggested-questions">
+                    <div class="suggested-q" onclick="askQuestion('Why did we choose Feature A?')">
+                        <strong>"Why did we choose Feature A?"</strong><br>
+                        <span style="font-size: 12px; color: #888;">See how CoMind connects decisions</span>
+                    </div>
+                    <div class="suggested-q" onclick="askQuestion('What did the client say about churn?')">
+                        <strong>"What did the client say about churn?"</strong><br>
+                        <span style="font-size: 12px; color: #888;">Recall conversation details</span>
+                    </div>
+                    <div class="suggested-q" onclick="askQuestion('What do I need to follow up on?')">
+                        <strong>"What do I need to follow up on?"</strong><br>
+                        <span style="font-size: 12px; color: #888;">Find pending tasks</span>
+                    </div>
+                </div>
+
+                <div class="chat-input-area">
+                    <input type="text" class="chat-input" id="chatInput" placeholder="Ask about your memories..." onkeypress="handleChatKeypress(event)">
+                    <button class="btn btn-primary" onclick="sendMessage()">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- CVI Minimalista -->
+            <div class="cvi-panel">
+                <div class="cvi-header">
+                    <span class="cvi-title">Cognitive Load</span>
+                    <span class="cvi-score" id="cviScore">8.4</span>
+                </div>
+                <div class="cvi-bar">
+                    <div class="cvi-fill" id="cviFill"></div>
+                </div>
+                <div class="cvi-status" id="cviStatus">
+                    <i class="fas fa-check-circle" style="color: var(--mint-green); margin-right: 4px;"></i>
+                    Optimal state for deep work
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <script>
+        // State Management
+        let memories =  [];
+        let currentCategory = null;
+        let isRecording = false;
+        let tutorialStep = 1;
+
+        // Demo Data - Focado no Magic Moment
+        const demoMemories = [
+            {
+                id: 1,
+                content: "Decision: We're choosing Feature A because it simplifies onboarding and reduces early drop-off by 40%. The trade-off is longer development time, but the client prioritized user retention over speed.",
+                type: "decision",
+                timestamp: new Date(Date.now() - 86400000 * 2).toISOString(),
+                tags: ["project", "client", "feature-a", "onboarding"],
+                connections: [2, 3]
+            },
+            {
+                id: 2,
+                content: "Insight from client call: They're worried about user churn in the first week. This validates our decision to prioritize onboarding flow over additional features.",
+                type: "insight",
+                timestamp: new Date(Date.now() - 86400000 * 3).toISOString(),
+                tags: ["client", "churn", "onboarding", "validation"],
+                connections: [1]
+            },
+            {
+                id: 3,
+                content: "Conversation with Sarah: She mentioned the design team needs 2 extra weeks for the new UI components. Need to factor this into the timeline.",
+                type: "conversation",
+                timestamp: new Date(Date.now() - 86400000 * 4).toISOString(),
+                tags: ["sarah", "design", "timeline", "ui"],
+                connections: [1]
+            },
+            {
+                id: 4,
+                content: "Follow-up needed: Check with legal team about data privacy compliance for the new feature. Deadline is next Friday.",
+                type: "insight",
+                timestamp: new Date(Date.now() - 3600000 * 8).toISOString(),
+                tags: ["legal", "privacy", "compliance", "urgent"],
+                connections: []
+            },
+            {
+                id: 5,
+                content: "Decision: Switching to weekly sprints instead of bi-weekly. The team needs faster feedback loops given the project complexity.",
+                type: "decision",
+                timestamp: new Date(Date.now() - 86400000 * 5).toISOString(),
+                tags: ["agile", "process", "team", "sprints"],
+                connections: []
+            },
+            {
+                id: 6,
+                content: "Client mentioned competitors are launching similar features next quarter. We need to move faster on our unique differentiators.",
+                type: "conversation",
+                timestamp: new Date(Date.now() - 86400000 * 6).toISOString(),
+                tags: ["competition", "strategy", "client"],
+                connections: [1]
+            }
+        ];
+
+        // Initialize with demo data if empty
+        if (memories.length === 0) {
+            memories = demoMemories;
+            saveMemories();
+        }
+
+        // Core Functions
+        function saveMemories() {
+            localStorage.setItem('mycomind_memories', JSON.stringify(memories));
+            updateStats();
+        }
+
+        function updateStats() {
+            document.getElementById('memoryCount').textContent = `${memories.length} memories`;
+        }
+
+        function captureMemory() {
+            const input = document.getElementById('captureInput');
+            const content = input.value.trim();
+            
+            if (!content) {
+                showNotification('Please enter something to capture', 'warning');
+                return;
+            }
+
+            const memory = {
+                id: Date.now(),
+                content: content,
+                type: currentCategory || 'insight',
+                timestamp: new Date().toISOString(),
+                tags: extractTags(content),
+                connections: findConnections(content)
+            };
+
+            memories.unshift(memory);
+            saveMemories();
+            renderTimeline();
+            
+            input.value = '';
+            currentCategory = null;
+            document.querySelectorAll('.cat-btn').forEach(btn => btn.classList.remove('selected'));
+            
+            showNotification('Memory captured! CoMind is connecting it to your existing thoughts...', 'success');
+            
+            // Simulate AI processing
+            setTimeout(() => {
+                if (memory.connections.length > 0) {
+                    showNotification(`Connected to ${memory.connections.length} related memories`, 'info');
+                }
+            }, 1000);
+        }
+
+        function extractTags(content) {
+            const commonWords = ['the', 'and', 'for', 'are', 'but', 'not', 'you', 'all', 'can', 'had', 'her', 'was', 'one', 'our', 'out', 'day', 'get', 'has', 'him', 'his', 'how', 'man', 'new', 'now', 'old', 'see', 'two', 'way', 'who', 'boy', 'did', 'its', 'let', 'put', 'say', 'she', 'too', 'use'];
+            const words = content.toLowerCase().match(/\b\w{4,}\b/g) || [];
+            const tags = words.filter(w => !commonWords.includes(w)).slice(0, 5);
+            return [...new Set(tags)];
+        }
+
+        function findConnections(content) {
+            const connected = [];
+            const contentLower = content.toLowerCase();
+            const keywords = contentLower.split(' ').filter(w => w.length > 4);
+            
+            memories.forEach(m => {
+                const matchCount = keywords.filter(k => m.content.toLowerCase().includes(k)).length;
+                if (matchCount >= 2 && m.id !== parseInt(content)) {
+                    connected.push(m.id);
+                }
+            });
+            
+            return connected.slice(0, 3);
+        }
+
+        function renderTimeline() {
+            const container = document.getElementById('timelineContent');
+            
+            if (memories.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-wind"></i>
+                        <h3>No memories yet</h3>
+                        <p>Start by capturing your first thought above</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = memories.slice(0, 6).map(memory => {
+                const date = new Date(memory.timestamp);
+                const timeStr = date.toLocaleDateString('en-US', { 
+                    weekday: 'short', 
+                    month: 'short', 
+                    day: 'numeric'
+                });
+                
+                const shortContent = memory.content.length > 120 
+                    ? memory.content.substring(0, 120) + '...' 
+                    : memory.content;
+
+                return `
+                    <div class="memory-card ${memory.type}" onclick="viewMemory(${memory.id})">
+                        <div class="memory-header">
+                            <span class="memory-type">
+                                <i class="fas fa-${getIconForType(memory.type)}"></i>
+                                ${memory.type} • ${timeStr}
+                            </span>
+                            ${memory.connections?.length ? `<span style="font-size: 11px; color: var(--ocean-blue);"><i class="fas fa-link"></i> ${memory.connections.length}</span>` : ''}
+                        </div>
+                        <div class="memory-content">${shortContent}</div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function getIconForType(type) {
+            const icons = {
+                decision: 'check-circle',
+                insight: 'lightbulb',
+                conversation: 'comments',
+                idea: 'seedling',
+                task: 'tasks'
+            };
+            return icons[type] || 'circle';
+        }
+
+        // Magic Moment Demo
+        function startDemo() {
+            // Scroll to assistant
+            document.querySelector('.assistant-panel').scrollIntoView({ behavior: 'smooth' });
+            
+            // Simulate the magic moment
+            setTimeout(() => {
+                askQuestion('Why did we choose Feature A?');
+            }, 500);
+            
+            // Hide banner after first use
+            localStorage.setItem('mycomind_demo_seen', 'true');
+            document.getElementById('demoBanner').style.display = 'none';
+        }
+
+        // Voice Recording
+        function startRecording() {
+            if (!navigator.mediaDevices) {
+                alert('Voice recording not supported in this browser');
+                return;
+            }
+            
+            isRecording = true;
+            document.getElementById('recordingIndicator').classList.add('active');
+            
+            // Simulate recording for PoC
+            setTimeout(() => {
+                if (isRecording) {
+                    document.getElementById('captureInput').value = "Decision: We're postponing the launch by one week to ensure quality standards. The team agrees this is better than rushing and fixing later.";
+                    stopRecording();
+                    selectCategory('decision');
+                }
+            }, 3000);
+        }
+
+        function stopRecording() {
+            isRecording = false;
+            document.getElementById('recordingIndicator').classList.remove('active');
+        }
+
+        // AI Assistant - MELHORADO para Magic Moment
+        function askQuestion(question) {
+            document.getElementById('chatInput').value = question;
+            sendMessage();
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const question = input.value.trim();
+            
+            if (!question) return;
+
+            // Add user message
+            addMessage(question, 'user');
+            input.value = '';
+
+            // Show typing indicator
+            document.getElementById('typingIndicator').classList.add('active');
+
+            // Generate response with delay for realism
+            setTimeout(() => {
+                document.getElementById('typingIndicator').classList.remove('active');
+                const response = generateResponse(question);
+                addMessage(response, 'assistant');
+                
+                // Show magic moment highlight for specific questions
+                if (question.toLowerCase().includes('feature a') || 
+                    question.toLowerCase().includes('why did we choose')) {
+                    showMagicMoment();
+                }
+            }, 1200);
+        }
+
+        function addMessage(text, sender) {
+            const container = document.getElementById('chatMessages');
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message message-${sender}`;
+            messageDiv.innerHTML = `<div class="message-bubble">${text}</div>`;
+            container.appendChild(messageDiv);
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function showMagicMoment() {
+            const magicDiv = document.getElementById('magicMoment');
+            magicDiv.style.display = 'block';
+            magicDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            
+            // Highlight connected memories in timeline
+            document.querySelectorAll('.memory-card').forEach((card, index) => {
+                if (index < 3) { // First 3 are connected in demo
+                    card.style.background = '#E3F2FD';
+                    card.style.borderLeftWidth = '4px';
+                }
+            });
+        }
+
+        function generateResponse(question) {
+            const q = question.toLowerCase();
+            
+            // MAGIC MOMENT - Feature A question
+            if (q.includes('feature a') || (q.includes('why') && q.includes('choose'))) {
+                return `You chose Feature A <strong>2 days ago</strong> because it simplifies onboarding and reduces early drop-off by 40%.<br><br>🔍 <strong>Connected insights:</strong><br>• The client specifically mentioned churn concerns 3 days ago<br>• Sarah noted design needs 2 extra weeks for this<br>• This aligns with your decision to prioritize retention over speed`;
+            }
+            
+            if (q.includes('churn') || q.includes('client')) {
+                return `The client expressed concerns about user churn in the first week during your call 3 days ago. This actually <strong>validated</strong> your decision to prioritize Feature A (onboarding) over additional features.`;
+            }
+            
+            if (q.includes('follow up') || q.includes('task') || q.includes('need to')) {
+                return `You have <strong>1 follow-up</strong> recorded:<br><br>Check with the legal team about data privacy compliance for the new feature. <strong>Deadline: Next Friday</strong>.<br><br>This relates to your Feature A decision since compliance affects the onboarding flow.`;
+            }
+            
+            if (q.includes('sarah') || q.includes('design')) {
+                return `Sarah mentioned the design team needs <strong>2 extra weeks</strong> for the new UI components. You noted this needs to be factored into the timeline for Feature A.`;
+            }
+            
+            // Default response
+            const relevant = memories.filter(m => 
+                q.split(' ').some(word => word.length > 3 && m.content.toLowerCase().includes(word))
+            );
+            
+            if (relevant.length > 0) {
+                return `I found ${relevant.length} related memories. The most recent is from ${formatTimeAgo(relevant[0].timestamp)}: "${relevant[0].content.substring(0, 100)}..."`;
+            }
+            
+            return "I don't have specific memories about that yet. Try asking about Feature A, the client churn concerns, or what you need to follow up on.";
+        }
+
+        function formatTimeAgo(timestamp) {
+            const diff = Date.now() - new Date(timestamp).getTime();
+            const days = Math.floor(diff / 86400000);
+            if (days === 0) return 'today';
+            if (days === 1) return 'yesterday';
+            return `${days} days ago`;
+        }
+
+        function handleChatKeypress(event) {
+            if (event.key === 'Enter') sendMessage();
+        }
+
+        // UI Functions
+        function switchTab(tab) {
+            document.querySelectorAll('.capture-tab').forEach(t => t.classList.remove('active'));
+            event.target.closest('.capture-tab').classList.add('active');
+            
+            if (tab === 'voice') {
+                startRecording();
+            }
+        }
+
+        function selectCategory(cat) {
+            currentCategory = cat;
+            document.querySelectorAll('.cat-btn').forEach(btn => {
+                btn.classList.toggle('selected', btn.dataset.cat === cat);
+            });
+        }
+
+        function viewMemory(id) {
+            const memory = memories.find(m => m.id === id);
+            if (memory) {
+                document.getElementById('captureInput').value = memory.content;
+                selectCategory(memory.type);
+                document.querySelector('.capture-area').scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // Tutorial
+        function showTutorial() {
+            document.getElementById('tutorialOverlay').classList.add('active');
+            tutorialStep = 1;
+            updateTutorialStep();
+        }
+
+        function closeTutorial(event) {
+            if (!event || event.target.id === 'tutorialOverlay') {
+                document.getElementById('tutorialOverlay').classList.remove('active');
+            }
+        }
+
+        function nextTutorialStep() {
+            tutorialStep++;
+            if (tutorialStep > 3) {
+                closeTutorial();
+                startDemo();
+                return;
+            }
+            updateTutorialStep();
+        }
+
+        function updateTutorialStep() {
+            // Update steps indicator
+            for (let i = 1; i <= 3; i++) {
+                const stepEl = document.getElementById(`step${i}`);
+                stepEl.classList.remove('active', 'completed');
+                if (i < tutorialStep) stepEl.classList.add('completed');
+                else if (i === tutorialStep) stepEl.classList.add('active');
+            }
+            
+            // Update content
+            const content = document.getElementById('tutorialContent');
+            const titles = ['1. Capture', '2. Connect', '3. Ask'];
+            const descriptions = [
+                'Record decisions, insights, and conversations as they happen. Use text or voice.',
+                'CoMind automatically connects related thoughts across time, creating your personal knowledge graph.',
+                'Ask "Why did we choose Feature A?" and get the full context instantly. No more searching through notes.'
+            ];
+            
+            content.innerHTML = `
+                <h3 style="margin-bottom: 12px; color: var(--charcoal);">${titles[tutorialStep-1]}</h3>
+                <p style="margin-bottom: 20px;">${descriptions[tutorialStep-1]}</p>
+            `;
+        }
+
+        // Notifications
+        function showNotification(message, type = 'info') {
+            const colors = {
+                success: '#00C9A7',
+                warning: '#FFB84D',
+                info: '#0066CC',
+                error: '#FF6B6B'
+            };
+            
+            const div = document.createElement('div');
+            div.style.cssText = `
+                position: fixed;
+                top: 80px;
+                right: 20px;
+                background: ${colors[type]};
+                color: white;
+                padding: 14px 20px;
+                border-radius: 10px;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+                z-index: 3000;
+                animation: slideIn 0.3s ease;
+                font-size: 14px;
+                max-width: 300px;
+            `;
+            div.textContent = message;
+            document.body.appendChild(div);
+            setTimeout(() => div.remove(), 4000);
+        }
+
+        // CVI Update
+        function updateCVI() {
+            const baseScore = 7.5;
+            const variance = Math.random() * 2 - 1;
+            const score = (baseScore + variance).toFixed(1);
+            document.getElementById('cviScore').textContent = score;
+            document.getElementById('cviFill').style.width = `${score * 10}%`;
+            
+            const statuses = {
+                high: { text: 'Optimal state for deep work', color: '#00C9A7' },
+                med: { text: 'Moderate cognitive load', color: '#FFB84D' },
+                low: { text: 'Consider taking a break', color: '#FF6B6B' }
+            };
+            
+            const status = score > 8 ? statuses.high : score > 6 ? statuses.med : statuses.low;
+            document.getElementById('cviStatus').innerHTML = `
+                <i class="fas fa-circle" style="color: ${status.color}; margin-right: 4px; font-size: 8px;"></i>
+                ${status.text}
+            `;
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            renderTimeline();
+            updateStats();
+            updateCVI();
+            
+            // Check if demo was already seen
+            if (localStorage.getItem('mycomind_demo_seen')) {
+                document.getElementById('demoBanner').style.display = 'none';
+            }
+            
+            // Update CVI periodically
+            setInterval(updateCVI, 30000);
+            
+            // Keyboard shortcuts
+            document.addEventListener('keydown', (e) => {
+                if (e.ctrlKey && e.key === 'Enter') {
+                    captureMemory();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,2142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>My-CoMind — Interactive Demo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --ocean-blue: #0066CC;
+            --mint-green: #00C9A7;
+            --lavender: #9B7EBD;
+            --charcoal: #1A1F36;
+            --soft-gray: #F5F7FA;
+            --light-gray: #E8EBF0;
+            --white: #FFFFFF;
+            --warning: #FFB84D;
+            --danger: #FF6B6B;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html, body {
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            font-family: 'Inter', sans-serif;
+            background: var(--charcoal);
+            color: var(--charcoal);
+        }
+
+        .demo-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            overflow: hidden;
+        }
+
+        /* ── Header ── */
+        .demo-header {
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            padding: 12px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            flex-shrink: 0;
+            height: 60px;
+            z-index: 100;
+        }
+
+        .demo-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .demo-logo-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--ocean-blue), var(--mint-green));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(0,201,167,0.4); }
+            50% { box-shadow: 0 0 0 10px rgba(0,201,167,0); }
+        }
+
+        .demo-logo-text {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 20px;
+            color: white;
+        }
+
+        .demo-badge {
+            background: var(--mint-green);
+            color: var(--charcoal);
+            padding: 6px 12px;
+            border-radius: 16px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        /* ── Stage ── */
+        .demo-stage {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .scene {
+            position: absolute;
+            inset: 0;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 20px;
+            opacity: 0;
+            transform: scale(0.97);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        .scene.active {
+            display: flex;
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* ── Scene 0: Hook ── */
+        .scene-hook {
+            text-align: center;
+            color: white;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hook-text {
+            font-family: 'Poppins', sans-serif;
+            font-size: clamp(32px, 7vw, 68px);
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 28px;
+            animation: fadeInUp 0.9s ease forwards;
+            opacity: 0;
+        }
+
+        .hook-text .highlight {
+            background: linear-gradient(135deg, var(--mint-green), var(--ocean-blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: block;
+            margin-top: 10px;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hook-subtitle {
+            font-size: clamp(15px, 2.5vw, 20px);
+            opacity: 0;
+            max-width: 600px;
+            animation: fadeInUp 0.9s ease 0.5s forwards;
+            line-height: 1.7;
+            color: rgba(255,255,255,0.8);
+        }
+
+        /* ── Scene 1: Problem ── */
+        .scene-problem {
+            text-align: center;
+            color: white;
+            justify-content: center;
+            padding: 30px 20px;
+        }
+
+        .scene-problem h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: clamp(26px, 5vw, 52px);
+            font-weight: 800;
+            margin-bottom: 18px;
+            line-height: 1.2;
+            animation: fadeInUp 0.8s ease forwards;
+            opacity: 0;
+        }
+
+        .scene-problem > p {
+            font-size: clamp(14px, 2.2vw, 19px);
+            opacity: 0;
+            max-width: 580px;
+            margin: 0 auto 28px;
+            line-height: 1.6;
+            animation: fadeInUp 0.8s ease 0.3s forwards;
+            color: rgba(255,255,255,0.75);
+        }
+
+        .problem-cards {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 16px;
+            justify-content: center;
+            max-width: 900px;
+        }
+
+        .problem-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 24px;
+            width: 100%;
+            max-width: 270px;
+            text-align: left;
+            transition: all 0.3s;
+            animation: fadeInUp 0.8s ease forwards;
+            opacity: 0;
+        }
+
+        .problem-card:nth-child(1) { animation-delay: 0.5s; }
+        .problem-card:nth-child(2) { animation-delay: 0.7s; }
+        .problem-card:nth-child(3) { animation-delay: 0.9s; }
+
+        .problem-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--mint-green);
+            background: rgba(255,255,255,0.08);
+        }
+
+        .problem-card i {
+            font-size: 26px;
+            color: var(--mint-green);
+            margin-bottom: 10px;
+        }
+
+        .problem-card h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 15px;
+            margin-bottom: 7px;
+            color: white;
+        }
+
+        .problem-card p {
+            font-size: 13px;
+            opacity: 0.65;
+            margin: 0;
+            line-height: 1.5;
+            color: white;
+        }
+
+        /* ── Scene 2: Audio Capture ── */
+        .scene-capture {
+            padding: 16px;
+            align-items: stretch;
+            justify-content: flex-start;
+        }
+
+        .capture-demo-container {
+            background: var(--soft-gray);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            width: 100%;
+            max-width: 960px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            max-height: calc(100vh - 160px);
+            animation: slideUp 0.7s ease forwards;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .capture-header-bar {
+            background: white;
+            padding: 14px 20px;
+            border-bottom: 1px solid var(--light-gray);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .capture-header-title {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--charcoal);
+        }
+
+        .capture-mode-indicator {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 7px 14px;
+            background: var(--soft-gray);
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+            color: #666;
+            transition: all 0.3s;
+        }
+
+        .capture-mode-indicator.recording {
+            background: rgba(255,107,107,0.12);
+            color: var(--danger);
+        }
+
+        .capture-mode-indicator.processing {
+            background: rgba(0,102,204,0.1);
+            color: var(--ocean-blue);
+        }
+
+        .capture-mode-indicator.done {
+            background: rgba(0,201,167,0.12);
+            color: #00a88a;
+        }
+
+        .recording-dot {
+            width: 9px;
+            height: 9px;
+            background: var(--danger);
+            border-radius: 50%;
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.2; }
+        }
+
+        .capture-main {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            flex: 1;
+            overflow: hidden;
+            min-height: 0;
+        }
+
+        .capture-left {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            overflow: hidden;
+        }
+
+        /* Audio Visualizer */
+        .audio-visualizer {
+            background: white;
+            border-radius: 16px;
+            padding: 28px 20px;
+            text-align: center;
+            border: 2px solid transparent;
+            transition: all 0.4s;
+            min-height: 170px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 0;
+        }
+
+        .audio-visualizer.recording {
+            border-color: var(--danger);
+            background: rgba(255,107,107,0.02);
+        }
+
+        .audio-visualizer.processing {
+            border-color: var(--ocean-blue);
+            background: rgba(0,102,204,0.02);
+        }
+
+        .audio-visualizer.done {
+            border-color: var(--mint-green);
+            background: rgba(0,201,167,0.02);
+        }
+
+        .mic-button {
+            width: 76px;
+            height: 76px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--ocean-blue), var(--mint-green));
+            border: none;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 14px;
+            box-shadow: 0 8px 28px rgba(0,102,204,0.3);
+        }
+
+        .mic-button:hover { transform: scale(1.06); }
+
+        .mic-button.recording {
+            background: var(--danger);
+            animation: micPulse 1.5s infinite;
+        }
+
+        @keyframes micPulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(255,107,107,0.4); }
+            50% { box-shadow: 0 0 0 22px rgba(255,107,107,0); }
+        }
+
+        .mic-label {
+            font-size: 13px;
+            color: #888;
+            margin-bottom: 4px;
+        }
+
+        .mic-hint {
+            font-size: 11px;
+            color: #bbb;
+        }
+
+        /* Waveform */
+        .wave-container {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            height: 44px;
+            margin: 10px 0 4px;
+        }
+
+        .wave-container.active { display: flex; }
+
+        .wave-bar {
+            width: 4px;
+            border-radius: 2px;
+            background: var(--danger);
+            animation: wave 0.8s ease-in-out infinite;
+        }
+
+        .wave-bar:nth-child(1)  { height: 12px; animation-delay: 0.0s; }
+        .wave-bar:nth-child(2)  { height: 28px; animation-delay: 0.1s; }
+        .wave-bar:nth-child(3)  { height: 20px; animation-delay: 0.2s; }
+        .wave-bar:nth-child(4)  { height: 36px; animation-delay: 0.3s; }
+        .wave-bar:nth-child(5)  { height: 24px; animation-delay: 0.4s; }
+        .wave-bar:nth-child(6)  { height: 40px; animation-delay: 0.5s; }
+        .wave-bar:nth-child(7)  { height: 18px; animation-delay: 0.6s; }
+        .wave-bar:nth-child(8)  { height: 32px; animation-delay: 0.7s; }
+        .wave-bar:nth-child(9)  { height: 14px; animation-delay: 0.8s; }
+        .wave-bar:nth-child(10) { height: 26px; animation-delay: 0.9s; }
+
+        @keyframes wave {
+            0%, 100% { transform: scaleY(0.4); }
+            50% { transform: scaleY(1); }
+        }
+
+        .timer-display {
+            font-size: 13px;
+            color: var(--danger);
+            font-variant-numeric: tabular-nums;
+            font-weight: 600;
+            margin-top: 4px;
+        }
+
+        /* Transcription */
+        .transcription-box {
+            background: white;
+            border-radius: 12px;
+            padding: 16px;
+            border: 2px solid var(--light-gray);
+            font-size: 13px;
+            line-height: 1.6;
+            display: none;
+            animation: fadeInUp 0.5s ease forwards;
+        }
+
+        .transcription-box.show { display: block; }
+
+        .transcription-label {
+            font-size: 10px;
+            color: var(--ocean-blue);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .transcription-text { color: var(--charcoal); }
+
+        /* Category buttons */
+        .category-row {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .cat-btn {
+            padding: 7px 14px;
+            border-radius: 20px;
+            border: 2px solid var(--light-gray);
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: white;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            color: var(--charcoal);
+        }
+
+        .cat-btn:hover { border-color: var(--ocean-blue); }
+
+        .cat-btn.selected {
+            border-color: var(--charcoal);
+            background: var(--charcoal);
+            color: white;
+        }
+
+        /* Timeline panel */
+        .timeline-panel {
+            background: white;
+            border-left: 1px solid var(--light-gray);
+            padding: 18px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 14px;
+            flex-shrink: 0;
+        }
+
+        .timeline-title {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 13px;
+        }
+
+        .timeline-count {
+            font-size: 11px;
+            color: #888;
+        }
+
+        .timeline-list {
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .memory-card {
+            background: var(--soft-gray);
+            border-radius: 10px;
+            padding: 12px;
+            margin-bottom: 9px;
+            border-left: 3px solid var(--ocean-blue);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            opacity: 0;
+            transform: translateX(-20px) scale(0.97);
+        }
+
+        .memory-card.show {
+            opacity: 1;
+            transform: translateX(0) scale(1);
+        }
+
+        .memory-card.new-mem {
+            background: #E8F5E9;
+            border-left-color: var(--mint-green);
+            border-left-width: 4px;
+            box-shadow: 0 4px 18px rgba(0,201,167,0.2);
+        }
+
+        .memory-card.decision { border-left-color: var(--mint-green); }
+        .memory-card.insight  { border-left-color: var(--lavender); }
+        .memory-card.conversation { border-left-color: var(--warning); }
+
+        .memory-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+
+        .memory-type-label {
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #888;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .memory-time { font-size: 10px; color: #bbb; }
+
+        .memory-text {
+            font-size: 11px;
+            line-height: 1.5;
+            color: var(--charcoal);
+        }
+
+        .conn-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: var(--ocean-blue);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 10px;
+            font-size: 10px;
+            font-weight: 600;
+            margin-top: 7px;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.3s;
+        }
+
+        .conn-badge.show { opacity: 1; transform: scale(1); }
+
+        /* Magic Moment Banner (inside capture scene) */
+        .magic-banner {
+            background: linear-gradient(135deg, #FFF9E6, #FFF3CD);
+            border: 2px solid var(--warning);
+            border-radius: 12px;
+            padding: 14px 18px;
+            margin-top: 4px;
+            display: none;
+            animation: fadeInUp 0.5s ease forwards;
+            flex-shrink: 0;
+        }
+
+        .magic-banner.show { display: block; }
+
+        .magic-banner-label {
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--warning);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .magic-banner-text {
+            font-size: 13px;
+            color: var(--charcoal);
+            line-height: 1.5;
+        }
+
+        .magic-banner-cta {
+            margin-top: 10px;
+            background: var(--ocean-blue);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .magic-banner-cta:hover {
+            background: #0055aa;
+            transform: translateY(-1px);
+        }
+
+        /* ── Scene 3: CoMind Assistant ── */
+        .scene-assistant {
+            padding: 16px;
+            align-items: stretch;
+            justify-content: flex-start;
+        }
+
+        .assistant-container {
+            background: var(--soft-gray);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            width: 100%;
+            max-width: 960px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            max-height: calc(100vh - 160px);
+            animation: slideUp 0.7s ease forwards;
+        }
+
+        .assistant-header-bar {
+            background: linear-gradient(135deg, var(--charcoal), #2d3561);
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-shrink: 0;
+        }
+
+        .assistant-avatar {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, var(--ocean-blue), var(--mint-green));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .assistant-info h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: white;
+        }
+
+        .assistant-info p {
+            font-size: 12px;
+            color: var(--mint-green);
+        }
+
+        .assistant-body {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            flex: 1;
+            overflow: hidden;
+            min-height: 0;
+        }
+
+        /* Chat area */
+        .chat-area {
+            display: flex;
+            flex-direction: column;
+            padding: 16px;
+            overflow: hidden;
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            margin-bottom: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .msg {
+            opacity: 0;
+            transform: translateY(8px);
+            animation: msgAppear 0.35s ease forwards;
+        }
+
+        @keyframes msgAppear {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .msg-user { text-align: right; }
+
+        .msg-bubble {
+            display: inline-block;
+            padding: 10px 14px;
+            border-radius: 14px;
+            max-width: 88%;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .msg-user .msg-bubble {
+            background: var(--ocean-blue);
+            color: white;
+            border-bottom-right-radius: 4px;
+        }
+
+        .msg-assistant .msg-bubble {
+            background: white;
+            color: var(--charcoal);
+            border-bottom-left-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        /* Magic Moment box inside chat */
+        .magic-moment-box {
+            background: linear-gradient(135deg, #FFF9E6, #FFF3CD);
+            border: 2px solid var(--warning);
+            border-radius: 12px;
+            padding: 14px;
+            display: none;
+            animation: msgAppear 0.5s ease forwards;
+            flex-shrink: 0;
+        }
+
+        .magic-moment-box.show { display: block; }
+
+        .magic-moment-label {
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--warning);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .magic-moment-text {
+            font-size: 13px;
+            color: var(--charcoal);
+            line-height: 1.5;
+        }
+
+        /* Suggested questions */
+        .suggested-questions {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            margin-bottom: 12px;
+            flex-shrink: 0;
+        }
+
+        .suggested-q {
+            background: white;
+            padding: 10px 14px;
+            border-radius: 10px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border-left: 3px solid var(--ocean-blue);
+            box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+        }
+
+        .suggested-q:hover {
+            box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+            transform: translateX(4px);
+        }
+
+        .suggested-q strong { color: var(--ocean-blue); display: block; margin-bottom: 2px; }
+
+        .chat-input-row {
+            display: flex;
+            gap: 8px;
+            flex-shrink: 0;
+        }
+
+        .chat-input {
+            flex: 1;
+            padding: 10px 14px;
+            border: 2px solid var(--light-gray);
+            border-radius: 10px;
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            transition: border-color 0.2s;
+        }
+
+        .chat-input:focus {
+            outline: none;
+            border-color: var(--ocean-blue);
+        }
+
+        .chat-send-btn {
+            background: var(--ocean-blue);
+            color: white;
+            border: none;
+            padding: 10px 16px;
+            border-radius: 10px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .chat-send-btn:hover {
+            background: #0055aa;
+            transform: translateY(-1px);
+        }
+
+        /* CVI panel (right side of assistant) */
+        .cvi-panel {
+            background: white;
+            border-left: 1px solid var(--light-gray);
+            padding: 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            overflow-y: auto;
+        }
+
+        .cvi-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--charcoal);
+            margin-bottom: 4px;
+        }
+
+        .cvi-score-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 6px;
+        }
+
+        .cvi-label { font-size: 10px; color: #888; text-transform: uppercase; letter-spacing: 0.5px; }
+        .cvi-score { font-size: 22px; font-weight: 700; color: var(--mint-green); }
+
+        .cvi-bar {
+            height: 6px;
+            background: var(--light-gray);
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 6px;
+        }
+
+        .cvi-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--mint-green), var(--ocean-blue));
+            border-radius: 3px;
+            transition: width 1.5s ease;
+        }
+
+        .cvi-status { font-size: 11px; color: #888; }
+
+        .cvi-divider {
+            height: 1px;
+            background: var(--light-gray);
+        }
+
+        .context-memory {
+            background: var(--soft-gray);
+            border-radius: 10px;
+            padding: 12px;
+            border-left: 3px solid var(--ocean-blue);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .context-memory:hover {
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transform: translateX(3px);
+        }
+
+        .context-memory.highlighted {
+            background: #EEF4FF;
+            border-left-color: var(--ocean-blue);
+            box-shadow: 0 0 0 2px rgba(0,102,204,0.15);
+        }
+
+        .ctx-type { font-size: 10px; font-weight: 700; text-transform: uppercase; color: #888; margin-bottom: 4px; }
+        .ctx-text { font-size: 11px; line-height: 1.5; color: var(--charcoal); }
+
+        /* ── Scene 4: Magic Moment Visualization ── */
+        .scene-magic {
+            text-align: center;
+            color: white;
+            justify-content: center;
+            padding: 30px 20px;
+        }
+
+        .scene-magic h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: clamp(26px, 5vw, 46px);
+            margin-bottom: 14px;
+            line-height: 1.2;
+            animation: fadeInUp 0.8s ease forwards;
+            opacity: 0;
+        }
+
+        .scene-magic > p {
+            font-size: clamp(14px, 2.2vw, 19px);
+            opacity: 0;
+            max-width: 580px;
+            margin: 0 auto 28px;
+            line-height: 1.6;
+            color: rgba(255,255,255,0.75);
+            animation: fadeInUp 0.8s ease 0.3s forwards;
+        }
+
+        .magic-viz {
+            background: rgba(255,255,255,0.05);
+            border-radius: 24px;
+            padding: 36px 24px;
+            max-width: 820px;
+            width: 100%;
+            border: 1px solid rgba(255,255,255,0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .magic-viz::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at center, rgba(0,201,167,0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .connection-flow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 28px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .flow-node {
+            background: white;
+            color: var(--charcoal);
+            padding: 18px 22px;
+            border-radius: 16px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 13px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+            text-align: center;
+            min-width: 130px;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            opacity: 0.4;
+        }
+
+        .flow-node.active {
+            opacity: 1;
+            transform: scale(1.05);
+            box-shadow: 0 16px 40px rgba(0,201,167,0.3);
+        }
+
+        .flow-node i {
+            display: block;
+            font-size: 22px;
+            margin-bottom: 8px;
+            color: var(--ocean-blue);
+        }
+
+        .flow-arrow {
+            color: var(--mint-green);
+            font-size: 22px;
+            opacity: 0.6;
+            animation: arrowPulse 1.5s infinite;
+        }
+
+        @keyframes arrowPulse {
+            0%, 100% { transform: translateX(0); opacity: 0.6; }
+            50% { transform: translateX(4px); opacity: 1; }
+        }
+
+        .insight-box {
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 16px;
+            padding: 20px 24px;
+            text-align: left;
+            position: relative;
+            z-index: 2;
+        }
+
+        .insight-box-label {
+            font-size: 10px;
+            font-weight: 700;
+            color: var(--mint-green);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .insight-box-text {
+            font-size: 15px;
+            line-height: 1.6;
+            color: rgba(255,255,255,0.9);
+        }
+
+        .insight-box-text strong { color: var(--mint-green); }
+
+        /* ── Scene 5: Value ── */
+        .scene-value {
+            text-align: center;
+            color: white;
+            justify-content: center;
+            padding: 30px 20px;
+        }
+
+        .scene-value h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: clamp(26px, 5vw, 46px);
+            margin-bottom: 14px;
+            line-height: 1.2;
+            animation: fadeInUp 0.8s ease forwards;
+            opacity: 0;
+        }
+
+        .scene-value > p {
+            font-size: clamp(14px, 2.2vw, 19px);
+            opacity: 0;
+            margin-bottom: 28px;
+            animation: fadeInUp 0.8s ease 0.3s forwards;
+            color: rgba(255,255,255,0.75);
+        }
+
+        .value-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 18px;
+            max-width: 900px;
+            width: 100%;
+        }
+
+        .value-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 20px;
+            padding: 28px 22px;
+            transition: all 0.4s;
+            opacity: 0;
+            transform: translateY(28px);
+        }
+
+        .value-card.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .value-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--mint-green);
+            background: rgba(255,255,255,0.08);
+        }
+
+        .value-icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, var(--mint-green), var(--ocean-blue));
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 18px;
+            font-size: 26px;
+            color: white;
+        }
+
+        .value-card h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 17px;
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        .value-card p {
+            font-size: 13px;
+            opacity: 0.7;
+            line-height: 1.6;
+            color: white;
+        }
+
+        /* ── Scene 6: CTA ── */
+        .scene-cta {
+            text-align: center;
+            color: white;
+            justify-content: center;
+            padding: 30px 20px;
+        }
+
+        .scene-cta h2 {
+            font-family: 'Poppins', sans-serif;
+            font-size: clamp(26px, 5vw, 46px);
+            margin-bottom: 14px;
+            line-height: 1.2;
+            animation: fadeInUp 0.8s ease forwards;
+            opacity: 0;
+        }
+
+        .scene-cta > p {
+            font-size: clamp(14px, 2.2vw, 19px);
+            opacity: 0;
+            margin-bottom: 32px;
+            animation: fadeInUp 0.8s ease 0.3s forwards;
+            color: rgba(255,255,255,0.75);
+        }
+
+        .cta-box {
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 24px;
+            padding: 36px 32px;
+            max-width: 520px;
+            width: 100%;
+            animation: fadeInUp 0.8s ease 0.5s forwards;
+            opacity: 0;
+        }
+
+        .cta-box h3 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 22px;
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        .cta-box > p {
+            font-size: 14px;
+            opacity: 0.7;
+            margin-bottom: 24px;
+            color: white;
+        }
+
+        .email-form {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .email-input {
+            flex: 1;
+            min-width: 180px;
+            padding: 13px 18px;
+            border: none;
+            border-radius: 12px;
+            font-size: 14px;
+            background: rgba(255,255,255,0.15);
+            color: white;
+        }
+
+        .email-input::placeholder { color: rgba(255,255,255,0.45); }
+        .email-input:focus { outline: 2px solid var(--mint-green); }
+
+        .btn-cta {
+            background: var(--mint-green);
+            color: var(--charcoal);
+            padding: 13px 26px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 14px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+
+        .btn-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 28px rgba(0,201,167,0.35);
+        }
+
+        .privacy-note {
+            margin-top: 18px;
+            opacity: 0.5;
+            font-size: 12px;
+            color: white;
+        }
+
+        /* ── Controls ── */
+        .demo-controls {
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            padding: 14px 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 14px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            flex-shrink: 0;
+        }
+
+        .control-btn {
+            background: transparent;
+            border: none;
+            color: white;
+            font-size: 17px;
+            cursor: pointer;
+            padding: 9px;
+            border-radius: 50%;
+            transition: all 0.3s;
+            width: 42px;
+            height: 42px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .control-btn:hover { background: rgba(255,255,255,0.1); transform: scale(1.1); }
+
+        .control-btn.primary { background: var(--ocean-blue); font-size: 18px; }
+        .control-btn.primary:hover { background: var(--mint-green); }
+
+        .progress-bar {
+            flex: 1;
+            max-width: 300px;
+            height: 4px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 2px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--mint-green), var(--ocean-blue));
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .time-display {
+            color: rgba(255,255,255,0.7);
+            font-size: 12px;
+            font-variant-numeric: tabular-nums;
+            min-width: 80px;
+            text-align: center;
+        }
+
+        /* Scene dots */
+        .scene-dots {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+        }
+
+        .scene-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.25);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .scene-dot.active {
+            background: var(--mint-green);
+            transform: scale(1.3);
+        }
+
+        /* ── Narrator ── */
+        .narrator-overlay {
+            position: fixed;
+            bottom: 86px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(15, 23, 42, 0.96);
+            backdrop-filter: blur(12px);
+            color: white;
+            padding: 14px 22px;
+            border-radius: 12px;
+            max-width: 90%;
+            width: 480px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.1);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s;
+            z-index: 1000;
+        }
+
+        .narrator-overlay.show { opacity: 1; }
+        .narrator-text { font-size: 13px; line-height: 1.5; margin-bottom: 4px; }
+        .narrator-label { font-size: 10px; color: var(--mint-green); text-transform: uppercase; letter-spacing: 2px; font-weight: 600; }
+
+        /* ── Skip button ── */
+        .skip-btn {
+            position: fixed;
+            top: 72px;
+            right: 16px;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: white;
+            padding: 9px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+
+        .skip-btn:hover { background: rgba(255,255,255,0.2); }
+
+        /* ── Mobile ── */
+        @media (max-width: 768px) {
+            .demo-header { padding: 10px 14px; height: 54px; }
+            .demo-logo-text { font-size: 17px; }
+            .demo-badge { display: none; }
+
+            .capture-main,
+            .assistant-body {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto auto;
+            }
+
+            .timeline-panel {
+                border-left: none;
+                border-top: 1px solid var(--light-gray);
+                max-height: 220px;
+            }
+
+            .cvi-panel {
+                border-left: none;
+                border-top: 1px solid var(--light-gray);
+                max-height: 220px;
+            }
+
+            .problem-cards { flex-direction: column; align-items: center; }
+            .problem-card { max-width: 100%; }
+
+            .connection-flow { flex-direction: column; gap: 12px; }
+            .flow-arrow { transform: rotate(90deg); }
+
+            .value-grid { grid-template-columns: 1fr; }
+
+            .email-form { flex-direction: column; }
+            .email-input, .btn-cta { width: 100%; }
+
+            .demo-controls { padding: 10px 14px; gap: 10px; }
+            .progress-bar { max-width: 140px; }
+
+            .skip-btn { top: 66px; right: 10px; padding: 7px 12px; }
+            .narrator-overlay { padding: 12px 16px; width: 92%; bottom: 80px; }
+        }
+
+        @media (max-width: 480px) {
+            .hook-text { font-size: 28px; }
+            .scene-problem h1,
+            .scene-magic h2,
+            .scene-value h2,
+            .scene-cta h2 { font-size: 24px; }
+
+            .audio-visualizer { min-height: 140px; padding: 20px; }
+            .mic-button { width: 62px; height: 62px; font-size: 24px; }
+
+            .capture-header-bar { flex-direction: column; gap: 8px; align-items: flex-start; }
+        }
+		
+		.nav-logo {
+            display: flex;
+            align-items: center;
+			width: 48px;
+            height: 48px;
+			border-radius: 10px;
+			align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+<div class="demo-container">
+
+    <!-- Header -->
+    <header class="demo-header">
+        <div class="demo-logo">
+            <img src="./mycomind_logo_full_transparent.png" alt="My-CoMind" class="nav-logo">
+            <span class="demo-logo-text">My-CoMind</span>
+        </div>
+		
+		
+		
+        <div class="demo-badge"><i class="fas fa-play-circle"></i> Interactive Demo</div>
+    </header>
+
+    <button class="skip-btn" onclick="skipToAssistant()">Skip to Assistant ↵</button>
+
+    <!-- Stage -->
+    <main class="demo-stage">
+
+        <!-- Scene 0: Hook -->
+        <div class="scene scene-hook active" data-scene="0">
+            <div class="hook-text">
+                Imagine you could search<br>your own thinking.
+                <span class="highlight">Just ask "Why did I decide that?"</span>
+            </div>
+            <div class="hook-subtitle">
+                My-CoMind captures your decisions, insights, and conversations—then connects them into a living knowledge graph you can query anytime.
+            </div>
+        </div>
+
+        <!-- Scene 1: Problem -->
+        <div class="scene scene-problem" data-scene="1">
+            <h1>Your mind shouldn't start<br>from zero every day.</h1>
+            <p>Between work, family, messages, and meetings, your thinking gets interrupted hundreds of times.</p>
+            <div class="problem-cards">
+                <div class="problem-card">
+                    <i class="fas fa-bolt"></i>
+                    <h3>You had it clear yesterday</h3>
+                    <p>You knew exactly why that decision made sense... until the week happened.</p>
+                </div>
+                <div class="problem-card">
+                    <i class="fas fa-question-circle"></i>
+                    <h3>"What did we decide?"</h3>
+                    <p>You remember there was a reason. A trade-off. But now it's blurry.</p>
+                </div>
+                <div class="problem-card">
+                    <i class="fas fa-fire"></i>
+                    <h3>Too many threads</h3>
+                    <p>Work decisions. Family logistics. Ideas. Your thinking gets constantly interrupted.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scene 2: Audio Capture Demo -->
+        <div class="scene scene-capture" data-scene="2">
+            <div class="capture-demo-container">
+                <div class="capture-header-bar">
+                    <div class="capture-header-title">
+                        <i class="fas fa-plus-circle" style="color: var(--ocean-blue);"></i>
+                        Capture Thought
+                    </div>
+                    <div class="capture-mode-indicator" id="modeIndicator">
+                        <i class="fas fa-microphone" style="color: var(--ocean-blue);"></i>
+                        Voice Mode
+                    </div>
+                </div>
+
+                <div class="capture-main">
+                    <div class="capture-left">
+                        <!-- Audio Visualizer -->
+                        <div class="audio-visualizer" id="audioViz">
+                            <button class="mic-button" id="micBtn" onclick="startRecording()">
+                                <i class="fas fa-microphone"></i>
+                            </button>
+                            <div class="mic-label" id="micLabel">Tap to record a thought</div>
+                            <div class="mic-hint" id="micHint">Voice is transcribed automatically</div>
+
+                            <div class="wave-container" id="waveContainer">
+                                <div class="wave-bar"></div>
+                                <div class="wave-bar"></div>
+                                <div class="wave-bar"></div>
+                                <div class="wave-bar"></div>
+                                <div class="wave-bar"></div>
+                                <div class="wave-bar"></div>
+                                <div class="wave-bar"></div>
+                                <div class="wave-bar"></div>
+                                <div class="wave-bar"></div>
+                            </div>
+                            <div class="timer-display" id="recTimer" style="display:none;">0:00</div>
+                        </div>
+
+                        <!-- Transcription -->
+                        <div class="transcription-box" id="transcriptionBox">
+                            <div class="transcription-label">
+                                <i class="fas fa-check-circle"></i> Transcribed
+                            </div>
+                            <div class="transcription-text" id="transcriptionText"></div>
+                        </div>
+
+                        <!-- Category -->
+                        <div class="category-row" id="categoryRow" style="display:none;">
+                            <button class="cat-btn" data-cat="decision">📊 Decision</button>
+                            <button class="cat-btn" data-cat="insight">💡 Insight</button>
+                            <button class="cat-btn selected" data-cat="conversation">💬 Conversation</button>
+                        </div>
+
+                        <!-- Magic Banner -->
+                        <div class="magic-banner" id="magicBanner">
+                            <div class="magic-banner-label">
+                                <i class="fas fa-magic"></i> Magic Moment
+                            </div>
+                            <div class="magic-banner-text">
+                                My-CoMind just connected this conversation to <strong>2 existing memories</strong>. It found that Sarah's timeline concern directly relates to your Feature A decision and the client churn insight.
+                            </div>
+                            <button class="magic-banner-cta" onclick="showScene(3); resetAutoPlay();">
+                                Ask CoMind about this →
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Timeline Panel -->
+                    <div class="timeline-panel">
+                        <div class="timeline-header">
+                            <span class="timeline-title">Your Timeline</span>
+                            <span class="timeline-count" id="timelineCount">5 memories</span>
+                        </div>
+                        <div class="timeline-list" id="timelineList"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scene 3: CoMind Assistant -->
+        <div class="scene scene-assistant" data-scene="3">
+            <div class="assistant-container">
+                <div class="assistant-header-bar">
+                    <div class="assistant-avatar"><i class="fas fa-robot"></i></div>
+                    <div class="assistant-info">
+                        <h3>CoMind Assistant</h3>
+                        <p>Searching only your memories · Never generates new content</p>
+                    </div>
+                </div>
+
+                <div class="assistant-body">
+                    <div class="chat-area">
+                        <!-- Suggested questions -->
+                        <div class="suggested-questions" id="suggestedQuestions">
+                            <div class="suggested-q" onclick="askQuestion('Why did we choose Feature A?')">
+                                <strong>Why did we choose Feature A?</strong>
+                                Recover the full reasoning behind that decision
+                            </div>
+                            <div class="suggested-q" onclick="askQuestion('What do I know about user churn?')">
+                                <strong>What do I know about user churn?</strong>
+                                See everything you captured on this topic
+                            </div>
+                            <div class="suggested-q" onclick="askQuestion('What has been the evolution of the project timeline?')">
+                                <strong>What has been the evolution of the project timeline?</strong>
+                                Trace how your thinking changed over time
+                            </div>
+                        </div>
+
+                        <!-- Chat messages -->
+                        <div class="chat-messages" id="chatMessages">
+                            <div class="msg msg-assistant">
+                                <div class="msg-bubble">
+                                    Hi! I'm your CoMind. I only answer from what <em>you</em> have captured — your personal Google, not a chatbot. Ask me anything about your decisions, insights, or conversations.
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Magic Moment box -->
+                        <div class="magic-moment-box" id="magicMomentBox">
+                            <div class="magic-moment-label">
+                                <i class="fas fa-magic"></i> Magic Moment
+                            </div>
+                            <div class="magic-moment-text" id="magicMomentText"></div>
+                        </div>
+
+                        <!-- Input -->
+                        <div class="chat-input-row">
+                            <input type="text" class="chat-input" id="chatInput" placeholder="Ask about your memories…" onkeydown="if(event.key==='Enter') sendChat()">
+                            <button class="chat-send-btn" onclick="sendChat()"><i class="fas fa-paper-plane"></i></button>
+                        </div>
+                    </div>
+
+                    <!-- CVI Panel -->
+                    <div class="cvi-panel">
+                        <div>
+                            <div class="cvi-title">Cognitive Variability Index</div>
+                            <div class="cvi-score-row">
+                                <span class="cvi-label">Current CVI</span>
+                                <span class="cvi-score">84</span>
+                            </div>
+                            <div class="cvi-bar"><div class="cvi-fill" id="cviFill" style="width:0%"></div></div>
+                            <div class="cvi-status">Stable Flow · Balanced cognitive load</div>
+                        </div>
+
+                        <div class="cvi-divider"></div>
+
+                        <div>
+                            <div class="cvi-title" style="margin-bottom:10px;">Context Used</div>
+                            <div class="context-memory" id="ctx1">
+                                <div class="ctx-type">📊 Decision · 2 days ago</div>
+                                <div class="ctx-text">We chose Feature A because it simplifies onboarding and reduces drop-off by 40%…</div>
+                            </div>
+                            <div class="context-memory" id="ctx2">
+                                <div class="ctx-type">💡 Insight · 3 days ago</div>
+                                <div class="ctx-text">Client is worried about user churn in the first week…</div>
+                            </div>
+                            <div class="context-memory" id="ctx3">
+                                <div class="ctx-type">💬 Conversation · Just now</div>
+                                <div class="ctx-text">Sarah: design team needs 2 extra weeks for new UI components…</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scene 4: Magic Moment Visualization -->
+        <div class="scene scene-magic" data-scene="4">
+            <h2>The Magic Moment</h2>
+            <p>CoMind doesn't just store notes. It understands relationships between your thoughts — across time, context, and topic.</p>
+
+            <div class="magic-viz">
+                <div class="connection-flow">
+                    <div class="flow-node" id="flowNode1">
+                        <i class="fas fa-microphone"></i>
+                        Voice<br>Recording
+                    </div>
+                    <div class="flow-arrow"><i class="fas fa-chevron-right"></i></div>
+                    <div class="flow-node" id="flowNode2">
+                        <i class="fas fa-file-alt"></i>
+                        Auto<br>Transcription
+                    </div>
+                    <div class="flow-arrow"><i class="fas fa-chevron-right"></i></div>
+                    <div class="flow-node" id="flowNode3">
+                        <i class="fas fa-project-diagram"></i>
+                        Semantic<br>Connections
+                    </div>
+                    <div class="flow-arrow"><i class="fas fa-chevron-right"></i></div>
+                    <div class="flow-node" id="flowNode4">
+                        <i class="fas fa-search"></i>
+                        Instant<br>Retrieval
+                    </div>
+                </div>
+
+                <div class="insight-box">
+                    <div class="insight-box-label">
+                        <i class="fas fa-lightbulb"></i> CoMind Insight
+                    </div>
+                    <div class="insight-box-text">
+                        You chose <strong>Feature A</strong> 2 days ago to reduce churn. Your client raised the same concern 3 days ago. Sarah's design delay of 2 weeks may impact the timeline you committed to. <strong>These 3 thoughts are connected</strong> — and CoMind found that automatically.
+                    </div>
+                </div>
+            </div>
+
+            <p style="margin-top: 20px; font-size: 15px; opacity: 0.7;">
+                <i class="fas fa-brain" style="color: var(--mint-green); margin-right: 8px;"></i>
+                Your reasoning, preserved. Your context, reconstructed.
+            </p>
+        </div>
+
+        <!-- Scene 5: Value -->
+        <div class="scene scene-value" data-scene="5">
+            <h2>More Than Memory</h2>
+            <p>It's cognitive continuity. Your personal infrastructure for thinking.</p>
+
+            <div class="value-grid">
+                <div class="value-card" id="valCard1">
+                    <div class="value-icon"><i class="fas fa-microphone"></i></div>
+                    <h3>Seamless Capture</h3>
+                    <p>Record thoughts, decisions, and context instantly without friction. Voice or text, wherever you are.</p>
+                </div>
+                <div class="value-card" id="valCard2">
+                    <div class="value-icon"><i class="fas fa-project-diagram"></i></div>
+                    <h3>Contextual Processing</h3>
+                    <p>AI organizes chaos into structured insights and patterns. Your thinking, connected over time.</p>
+                </div>
+                <div class="value-card" id="valCard3">
+                    <div class="value-icon"><i class="fas fa-search"></i></div>
+                    <h3>Intelligent Retrieval</h3>
+                    <p>Find the "why" behind decisions, not just the "what". Ask naturally, get complete context.</p>
+                </div>
+            </div>
+        </div>      
+
+    </main>
+
+    <!-- Narrator -->
+    <div class="narrator-overlay" id="narrator">
+        <div class="narrator-text" id="narratorText">Welcome to My-CoMind</div>
+        <div class="narrator-label">Demo Narration</div>
+    </div>
+
+    <!-- Controls -->
+    <div class="demo-controls">
+        <button class="control-btn" onclick="previousScene()" title="Previous"><i class="fas fa-step-backward"></i></button>
+        <button class="control-btn primary" id="playBtn" onclick="togglePlay()"><i class="fas fa-pause"></i></button>
+        <button class="control-btn" onclick="nextScene()" title="Next"><i class="fas fa-step-forward"></i></button>
+
+        <div class="scene-dots" id="sceneDots"></div>
+
+        <div class="progress-bar" onclick="seek(event)">
+            <div class="progress-fill" id="progressFill"></div>
+        </div>
+
+        <span class="time-display" id="timeDisplay">0:00 / 2:45</span>
+    </div>
+</div>
+
+<script>
+// ── Data ──────────────────────────────────────────────────────────────────────
+const initialMemories = [
+    { id:1, content:"Decision: We're choosing Feature A because it simplifies onboarding and reduces early drop-off by 40%.", type:"decision", time:"2 days ago", icon:"check-circle", color:"#00C9A7", conns:2 },
+    { id:2, content:"Insight from client call: They're worried about user churn in the first week.", type:"insight", time:"3 days ago", icon:"lightbulb", color:"#9B7EBD", conns:1 },
+    { id:3, content:"Follow-up: Check with legal team about data privacy compliance.", type:"insight", time:"8 hours ago", icon:"lightbulb", color:"#9B7EBD", conns:0 },
+    { id:4, content:"Decision: Switching to weekly sprints instead of bi-weekly.", type:"decision", time:"5 days ago", icon:"check-circle", color:"#00C9A7", conns:0 },
+    { id:5, content:"Client mentioned competitors are launching similar features next quarter.", type:"conversation", time:"6 days ago", icon:"comments", color:"#FFB84D", conns:1 }
+];
+
+const newMemory = {
+    id:6,
+    content:"Conversation with Sarah: She mentioned the design team needs 2 extra weeks for the new UI components. Need to factor this into the timeline.",
+    type:"conversation", time:"Just now", icon:"comments", color:"#FFB84D", conns:2, isNew:true
+};
+
+const responses = {
+    'feature a': `You chose <strong>Feature A</strong> 2 days ago because it simplifies onboarding and reduces early drop-off by 40%.<br><br>🔍 <strong>Connected insights from your memories:</strong><br>• Client raised churn concerns 3 days ago — this directly influenced the decision<br>• Sarah's design team needs 2 extra weeks — may affect the timeline you committed to<br>• You prioritized retention over speed`,
+    'churn': `Your client expressed concerns about <strong>user churn in the first week</strong> 3 days ago.<br><br>🔍 <strong>Connected decisions:</strong><br>• This concern directly led to choosing Feature A (simplifies onboarding)<br>• Weekly sprints were adopted to iterate faster on retention metrics`,
+    'timeline': `Here's the evolution of your project timeline from your memories:<br><br>📅 <strong>6 days ago</strong> — Competitor threat noted<br>📅 <strong>5 days ago</strong> — Switched to weekly sprints<br>📅 <strong>3 days ago</strong> — Client churn concern raised<br>📅 <strong>2 days ago</strong> — Feature A chosen for onboarding<br>📅 <strong>Just now</strong> — Sarah: design needs +2 weeks<br><br>⚠️ The +2 weeks may conflict with your current sprint commitment.`,
+    'sarah': `From your memory captured <strong>just now</strong>: Sarah mentioned the design team needs <strong>2 extra weeks</strong> for the new UI components.<br><br>🔗 CoMind connected this to:<br>• Your Feature A decision (onboarding simplification)<br>• The client's churn concern<br><br>This creates a potential timeline risk you may want to address.`,
+    'default': `Based on your captured memories, I found relevant context. You have 6 memories covering decisions, insights, and conversations from the past week. Try asking about a specific topic — I'll search only what you've recorded.`
+};
+
+// ── Scene Management ──────────────────────────────────────────────────────────
+let currentScene = 0;
+const totalScenes = 6;
+let isPlaying = true;
+let autoPlayTimer = null;
+let sceneTimer = null;
+const sceneDurations = [5000, 6000, 20000, 17000, 10000, 8000];
+let currentSceneTime = 0;
+let hasRecorded = false;
+let recInterval = null;
+let recSeconds = 0;
+
+const narrations = [
+    "Imagine searching your own thinking. Just ask 'Why did I decide that?'",
+    "The problem: Context loss. You knew why yesterday, but can't remember today.",
+    "Watch how it works: Record a voice note, and see it automatically connect to your existing thoughts.",
+    "Now ask CoMind anything. It searches only your memories — never invents content.",
+    "The Magic Moment: CoMind connects scattered thoughts into coherent reasoning.",
+    "Three pillars: Seamless capture, contextual processing, intelligent retrieval."
+];
+
+// ── Init ──────────────────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+    renderTimeline(initialMemories);
+    buildDots();
+    startAutoPlay();
+    updateProgress();
+    // Animate CVI fill when scene 3 is shown
+});
+
+function buildDots() {
+    const container = document.getElementById('sceneDots');
+    for (let i = 0; i < totalScenes; i++) {
+        const dot = document.createElement('div');
+        dot.className = 'scene-dot' + (i === 0 ? ' active' : '');
+        dot.onclick = () => { showScene(i); resetAutoPlay(); };
+        container.appendChild(dot);
+    }
+}
+
+function updateDots(index) {
+    document.querySelectorAll('.scene-dot').forEach((d, i) => {
+        d.classList.toggle('active', i === index);
+    });
+}
+
+// ── Timeline ──────────────────────────────────────────────────────────────────
+function renderTimeline(memories) {
+    const container = document.getElementById('timelineList');
+    container.innerHTML = memories.map(m => `
+        <div class="memory-card ${m.type} ${m.isNew ? 'new-mem' : ''}" id="mem${m.id}">
+            <div class="memory-meta">
+                <span class="memory-type-label">
+                    <i class="fas fa-${m.icon}" style="color:${m.color}"></i>
+                    ${m.type}
+                </span>
+                <span class="memory-time">${m.time}</span>
+            </div>
+            <div class="memory-text">${m.content}</div>
+            ${m.conns > 0 ? `<div class="conn-badge" id="conn${m.id}"><i class="fas fa-link"></i> ${m.conns} connection${m.conns>1?'s':''}</div>` : ''}
+        </div>
+    `).join('');
+}
+
+// ── Recording ─────────────────────────────────────────────────────────────────
+function startRecording() {
+    if (hasRecorded) return;
+    hasRecorded = true;
+
+    const micBtn = document.getElementById('micBtn');
+    const waveContainer = document.getElementById('waveContainer');
+    const audioViz = document.getElementById('audioViz');
+    const modeIndicator = document.getElementById('modeIndicator');
+    const micLabel = document.getElementById('micLabel');
+    const micHint = document.getElementById('micHint');
+    const recTimer = document.getElementById('recTimer');
+
+    micBtn.classList.add('recording');
+    micBtn.innerHTML = '<i class="fas fa-stop"></i>';
+    waveContainer.classList.add('active');
+    audioViz.classList.add('recording');
+    modeIndicator.className = 'capture-mode-indicator recording';
+    modeIndicator.innerHTML = '<div class="recording-dot"></div> Recording…';
+    micLabel.textContent = 'Recording… tap to stop';
+    micHint.style.display = 'none';
+    recTimer.style.display = 'block';
+
+    recSeconds = 0;
+    recInterval = setInterval(() => {
+        recSeconds++;
+        const m = Math.floor(recSeconds / 60);
+        const s = recSeconds % 60;
+        recTimer.textContent = `${m}:${s.toString().padStart(2,'0')}`;
+    }, 1000);
+
+    // Auto-stop after 5 seconds
+    setTimeout(stopRecording, 5000);
+}
+
+function stopRecording() {
+    clearInterval(recInterval);
+
+    const micBtn = document.getElementById('micBtn');
+    const waveContainer = document.getElementById('waveContainer');
+    const audioViz = document.getElementById('audioViz');
+    const modeIndicator = document.getElementById('modeIndicator');
+    const micLabel = document.getElementById('micLabel');
+    const recTimer = document.getElementById('recTimer');
+
+    micBtn.classList.remove('recording');
+    micBtn.innerHTML = '<i class="fas fa-microphone"></i>';
+    waveContainer.classList.remove('active');
+    audioViz.classList.remove('recording');
+    audioViz.classList.add('processing');
+    modeIndicator.className = 'capture-mode-indicator processing';
+    modeIndicator.innerHTML = '<i class="fas fa-cog fa-spin"></i> Transcribing…';
+    micLabel.textContent = 'Processing audio…';
+    recTimer.style.display = 'none';
+
+    // Show transcription after 1.5s
+    setTimeout(() => {
+        const box = document.getElementById('transcriptionBox');
+        document.getElementById('transcriptionText').textContent = newMemory.content;
+        box.classList.add('show');
+
+        document.getElementById('categoryRow').style.display = 'flex';
+
+        audioViz.classList.remove('processing');
+        audioViz.classList.add('done');
+        modeIndicator.className = 'capture-mode-indicator done';
+        modeIndicator.innerHTML = '<i class="fas fa-check-circle"></i> Captured!';
+        micLabel.textContent = 'Thought captured ✓';
+
+        // Add to timeline after 1s
+        setTimeout(addToTimeline, 1000);
+    }, 1500);
+}
+
+function addToTimeline() {
+    const allMemories = [newMemory, ...initialMemories];
+    renderTimeline(allMemories);
+    document.getElementById('timelineCount').textContent = '6 memories';
+
+    setTimeout(() => {
+        const card = document.getElementById(`mem${newMemory.id}`);
+        if (card) {
+            card.classList.add('show');
+            setTimeout(() => {
+                document.querySelectorAll('.conn-badge').forEach(b => b.classList.add('show'));
+                setTimeout(() => {
+                    document.getElementById('magicBanner').classList.add('show');
+                    if (isPlaying) togglePlay(); // pause so user reads the magic moment
+                }, 600);
+            }, 500);
+        }
+    }, 100);
+
+    // Show existing memories
+    initialMemories.forEach((m, i) => {
+        setTimeout(() => {
+            const el = document.getElementById(`mem${m.id}`);
+            if (el) el.classList.add('show');
+        }, i * 120);
+    });
+}
+
+// ── Assistant ─────────────────────────────────────────────────────────────────
+function askQuestion(question) {
+    document.getElementById('suggestedQuestions').style.display = 'none';
+    addMessage('user', question);
+    setTimeout(() => {
+        const key = Object.keys(responses).find(k => question.toLowerCase().includes(k)) || 'default';
+        addMessage('assistant', responses[key]);
+
+        if (question.toLowerCase().includes('feature a') || question.toLowerCase().includes('churn')) {
+            setTimeout(() => {
+                document.getElementById('magicMomentText').innerHTML =
+                    'CoMind found <strong>3 connected memories</strong> that together explain the full context — across different days and topics. This is cognitive continuity in action.';
+                document.getElementById('magicMomentBox').classList.add('show');
+                highlightContext();
+            }, 800);
+        }
+    }, 700);
+}
+
+function sendChat() {
+    const input = document.getElementById('chatInput');
+    const question = input.value.trim();
+    if (!question) return;
+    input.value = '';
+    askQuestion(question);
+}
+
+function addMessage(role, html) {
+    const container = document.getElementById('chatMessages');
+    const div = document.createElement('div');
+    div.className = `msg msg-${role}`;
+    div.innerHTML = `<div class="msg-bubble">${html}</div>`;
+    container.appendChild(div);
+    container.scrollTop = container.scrollHeight;
+}
+
+function highlightContext() {
+    ['ctx1','ctx2','ctx3'].forEach((id, i) => {
+        setTimeout(() => {
+            document.getElementById(id).classList.add('highlighted');
+        }, i * 300);
+    });
+    // Animate CVI bar
+    document.getElementById('cviFill').style.width = '84%';
+}
+
+// ── Scene Control ─────────────────────────────────────────────────────────────
+function showScene(index) {
+    document.querySelectorAll('.scene').forEach(s => s.classList.remove('active'));
+    const target = document.querySelector(`[data-scene="${index}"]`);
+    if (!target) return;
+
+    target.classList.add('active');
+    currentScene = index;
+    currentSceneTime = 0;
+    updateDots(index);
+
+    if (index === 2) {
+        // Reset capture scene
+        if (!hasRecorded) {
+            setTimeout(() => {
+                if (currentScene === 2 && !hasRecorded && isPlaying) startRecording();
+            }, 3500);
+        }
+        renderTimeline(initialMemories);
+        initialMemories.forEach((m, i) => {
+            setTimeout(() => {
+                const el = document.getElementById(`mem${m.id}`);
+                if (el) el.classList.add('show');
+            }, 400 + i * 130);
+        });
+    }
+
+    if (index === 3) {
+        setTimeout(() => document.getElementById('cviFill').style.width = '84%', 600);
+    }
+
+    if (index === 4) animateConnectionFlow();
+    if (index === 5) animateValueCards();
+
+    showNarration(narrations[index]);
+    updateProgress();
+}
+
+function animateConnectionFlow() {
+    ['flowNode1','flowNode2','flowNode3','flowNode4'].forEach((id, i) => {
+        setTimeout(() => document.getElementById(id).classList.add('active'), 300 + i * 500);
+    });
+}
+
+function animateValueCards() {
+    ['valCard1','valCard2','valCard3'].forEach((id, i) => {
+        setTimeout(() => document.getElementById(id).classList.add('show'), 200 + i * 300);
+    });
+}
+
+function showNarration(text) {
+    const el = document.getElementById('narrator');
+    document.getElementById('narratorText').textContent = text;
+    el.classList.add('show');
+    if (currentScene !== 2 && currentScene !== 3 && currentScene < totalScenes - 1) {
+        setTimeout(() => el.classList.remove('show'), 5000);
+    }
+}
+
+function nextScene() {
+    if (currentScene < totalScenes - 1) { showScene(currentScene + 1); resetAutoPlay(); }
+}
+
+function previousScene() {
+    if (currentScene > 0) { showScene(currentScene - 1); resetAutoPlay(); }
+}
+
+function togglePlay() {
+    isPlaying = !isPlaying;
+    document.getElementById('playBtn').innerHTML = isPlaying
+        ? '<i class="fas fa-pause"></i>'
+        : '<i class="fas fa-play"></i>';
+    if (isPlaying) startAutoPlay();
+    else { clearTimeout(autoPlayTimer); clearInterval(sceneTimer); }
+}
+
+function startAutoPlay() {
+    if (!isPlaying || currentScene === totalScenes - 1) return;
+    const duration = sceneDurations[currentScene] || 6000;
+
+    sceneTimer = setInterval(() => {
+        currentSceneTime += 100;
+        updateProgress();
+    }, 100);
+
+    autoPlayTimer = setTimeout(() => {
+        clearInterval(sceneTimer);
+        nextScene();
+    }, duration);
+}
+
+function resetAutoPlay() {
+    clearTimeout(autoPlayTimer);
+    clearInterval(sceneTimer);
+    if (isPlaying) startAutoPlay();
+}
+
+function updateProgress() {
+    const total = sceneDurations.reduce((a, b) => a + b, 0);
+    let elapsed = 0;
+    for (let i = 0; i < currentScene; i++) elapsed += sceneDurations[i] || 6000;
+    elapsed += currentSceneTime;
+
+    document.getElementById('progressFill').style.width = Math.min((elapsed / total) * 100, 100) + '%';
+
+    const cur = Math.floor(elapsed / 1000);
+    const tot = Math.floor(total / 1000);
+    document.getElementById('timeDisplay').textContent = `${formatTime(cur)} / ${formatTime(tot)}`;
+}
+
+function formatTime(s) {
+    return `${Math.floor(s/60)}:${(s%60).toString().padStart(2,'0')}`;
+}
+
+function seek(event) {
+    const rect = event.currentTarget.getBoundingClientRect();
+    const pct = (event.clientX - rect.left) / rect.width;
+    const total = sceneDurations.reduce((a, b) => a + b, 0);
+    const target = pct * total;
+    let acc = 0;
+    for (let i = 0; i < sceneDurations.length; i++) {
+        acc += sceneDurations[i] || 6000;
+        if (target <= acc) { showScene(i); resetAutoPlay(); break; }
+    }
+}
+
+function skipToAssistant() {
+    showScene(3);
+    resetAutoPlay();
+}
+
+function handleSubmit(e) {
+    e.preventDefault();
+    const email = e.target.querySelector('input').value;
+    alert(`Thank you! We'll contact you at ${email} when early access opens.`);
+    e.target.reset();
+}
+
+// Keyboard shortcuts
+document.addEventListener('keydown', e => {
+    if (e.key === ' ') { e.preventDefault(); togglePlay(); }
+    else if (e.key === 'ArrowRight') nextScene();
+    else if (e.key === 'ArrowLeft') previousScene();
+});
+</script>
+</body>
+</html>
