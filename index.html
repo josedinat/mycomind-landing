@@ -1,1748 +1,828 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My-CoMind — Your Personal Cognitive Infrastructure</title>
-    <meta name="description" content="Preserve how you think, not just what you remember. Keep your thinking with you under pressure.">
-    
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
-    
-    <style>
-        :root {
-            --ocean-blue: #0066CC;
-            --mint-green: #00C9A7;
-            --lavender: #9B7EBD;
-            --charcoal: #1A1F36;
-            --soft-gray: #F5F7FA;
-            --light-gray: #E8EBF0;
-            --white: #FFFFFF;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My-CoMind — Your Personal Cognitive Infrastructure</title>
+  <meta name="description" content="My-CoMind captures your decisions, insights and conversations into a living knowledge graph you can query anytime. Start thinking continuously.">
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
-        body {
-            font-family: 'Inter', sans-serif;
-            color: var(--charcoal);
-            background: var(--soft-gray);
-            overflow-x: hidden;
-            line-height: 1.6;
-        }
+  <!-- Open Graph -->
+  <meta property="og:title" content="My-CoMind — Your Thinking, Connected">
+  <meta property="og:description" content="Capture decisions, insights and conversations into a living knowledge graph you can query anytime.">
+  <meta property="og:image" content="https://www.my-comind.com/og-image.png">
+  <meta property="og:url" content="https://www.my-comind.com">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
 
-        .reveal {
-            opacity: 0;
-            transform: translateY(60px);
-            transition: all 1s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .reveal.active { opacity: 1; transform: translateY(0); }
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%230066CC' rx='20' width='100' height='100'/><text x='50' y='70' font-size='50' text-anchor='middle' fill='white' font-family='Arial'>M</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 
-        /* NAVIGATION */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 20px 60px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 1000;
-            transition: all 0.4s ease;
-        }
-        nav.scrolled {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(20px) saturate(180%);
-            box-shadow: 0 1px 0 rgba(0,0,0,0.05);
-            padding: 16px 60px;
-        }
-        .nav-logo {
-            height: 40px;
-            opacity: 0;
-            transform: translateY(-20px);
-            animation: fadeDown 0.8s ease forwards;
-        }
-        @keyframes fadeDown { to { opacity: 1; transform: translateY(0); } }
-        
-        .nav-links { display: flex; gap: 40px; align-items: center; }
-        .nav-link {
-            font-size: 14px;
-            color: var(--charcoal);
-            text-decoration: none;
-            font-weight: 500;
-            opacity: 0.8;
-            transition: opacity 0.3s;
-            position: relative;
-        }
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--ocean-blue);
-            transition: width 0.3s ease;
-        }
-        .nav-link:hover::after { width: 100%; }
-        
-        .nav-cta {
-            background: var(--ocean-blue);
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 50px;
-            font-family: 'Inter', sans-serif;
-            font-weight: 600;
-            font-size: 14px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            opacity: 0;
-            animation: fadeIn 0.8s ease 0.3s forwards;
-        }
-        .nav-cta:hover { background: #0052A3; transform: scale(1.05); }
+  <style>
+    :root {
+      --blue: #0066CC;
+      --blue-dark: #0052A3;
+      --green: #00C9A7;
+      --lavender: #9B7EBD;
+      --charcoal: #1A1F36;
+      --gray: #F5F7FA;
+      --gray-light: #E8EBF0;
+      --white: #FFFFFF;
+      --text-muted: rgba(26,31,54,.6);
+    }
 
-        /* HERO */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            background: linear-gradient(180deg, var(--soft-gray) 0%, white 100%);
-            overflow: hidden;
-            padding: 120px 40px 80px;
-        }
-        .hero-orb {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.4;
-            animation: float 20s infinite ease-in-out;
-        }
-        .orb-1 {
-            width: 600px; height: 600px;
-            background: var(--mint-green);
-            top: -200px; right: -100px;
-            animation-delay: 0s;
-        }
-        .orb-2 {
-            width: 500px; height: 500px;
-            background: var(--lavender);
-            bottom: -150px; left: -100px;
-            animation-delay: -5s;
-        }
-        .orb-3 {
-            width: 400px; height: 400px;
-            background: var(--ocean-blue);
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            opacity: 0.1;
-            animation-delay: -10s;
-        }
-        @keyframes float {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(30px, -30px) scale(1.1); }
-            66% { transform: translate(-20px, 20px) scale(0.9); }
-        }
-        
-        .hero-content {
-            text-align: center;
-            max-width: 900px;
-            z-index: 10;
-            position: relative;
-        }
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(0, 201, 167, 0.1);
-            color: var(--mint-green);
-            padding: 8px 16px;
-            border-radius: 50px;
-            font-size: 13px;
-            font-weight: 600;
-            margin-bottom: 40px;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeUp 0.8s ease 0.2s forwards;
-            border: 1px solid rgba(0, 201, 167, 0.2);
-        }
-        .hero h1 {
-            font-family: 'Poppins', sans-serif;
-            font-size: clamp(40px, 6vw, 72px);
-            font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: 32px;
-            color: var(--charcoal);
-            letter-spacing: -2px;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeUp 0.8s ease 0.4s forwards;
-        }
-        .hero h1 span {
-            background: linear-gradient(135deg, var(--ocean-blue), var(--mint-green));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        .hero-subtitle {
-            font-size: 22px;
-            color: var(--charcoal);
-            opacity: 0.7;
-            max-width: 600px;
-            margin: 0 auto 50px;
-            line-height: 1.6;
-            font-weight: 400;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeUp 0.8s ease 0.6s forwards;
-        }
-        @keyframes fadeUp { to { opacity: 1; transform: translateY(0); } }
-        
-        .hero-buttons {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
-            opacity: 0;
-            animation: fadeUp 0.8s ease 0.8s forwards;
-        }
-        .btn-primary {
-            background: var(--ocean-blue);
-            color: white;
-            border: none;
-            padding: 18px 40px;
-            border-radius: 50px;
-            font-family: 'Inter', sans-serif;
-            font-weight: 600;
-            font-size: 16px;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .btn-primary:hover {
-            transform: translateY(-4px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(0, 102, 204, 0.3);
-        }
-        .btn-secondary {
-            background: transparent;
-            color: var(--charcoal);
-            border: 2px solid var(--light-gray);
-            padding: 16px 38px;
-            border-radius: 50px;
-            font-family: 'Inter', sans-serif;
-            font-weight: 600;
-            font-size: 16px;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .btn-secondary:hover {
-            border-color: var(--ocean-blue);
-            color: var(--ocean-blue);
-            transform: translateY(-4px);
-        }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--charcoal);
+      background: var(--white);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
 
-        /* PROBLEM SECTION */
-        .problem-section {
-            padding: 160px 40px;
-            background: white;
-            position: relative;
-        }
-        .problem-container {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-        }
-        .section-label {
-            font-size: 13px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 3px;
-            color: var(--lavender);
-            margin-bottom: 24px;
-        }
-        .problem-section h2 {
-            font-family: 'Poppins', sans-serif;
-            font-size: clamp(32px, 4vw, 48px);
-            font-weight: 700;
-            margin-bottom: 60px;
-            color: var(--charcoal);
-            line-height: 1.3;
-        }
-        .problem-cards {
-            display: flex;
-            flex-direction: column;
-            gap: 24px;
-        }
-        .problem-card {
-            background: var(--soft-gray);
-            padding: 40px;
-            border-radius: 24px;
-            text-align: left;
-            transform: translateX(-100px);
-            opacity: 0;
-            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-            border-left: 4px solid transparent;
-        }
-        .problem-card:nth-child(2) {
-            transform: translateX(100px);
-            margin-left: 40px;
-        }
-        .problem-card:nth-child(3) { margin-left: 80px; }
-        .problem-card.visible {
-            transform: translateX(0);
-            opacity: 1;
-        }
-        .problem-card:hover {
-            border-left-color: var(--mint-green);
-            transform: translateX(10px);
-        }
-        .problem-card i {
-            font-size: 32px;
-            color: var(--ocean-blue);
-            margin-bottom: 16px;
-            display: block;
-        }
-        .problem-card h3 {
-            font-family: 'Poppins', sans-serif;
-            font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 12px;
-        }
-        .problem-card p {
-            color: var(--charcoal);
-            opacity: 0.7;
-            font-size: 16px;
-            line-height: 1.7;
-        }
+    /* ── UTILS ── */
+    .container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+    .section-label {
+      font-size: 12px; font-weight: 700; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--green); margin-bottom: 16px;
+      display: block;
+    }
+    .section-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(28px, 4vw, 44px); font-weight: 800;
+      line-height: 1.2; color: var(--charcoal); margin-bottom: 20px;
+    }
+    .section-title span {
+      background: linear-gradient(135deg, var(--blue), var(--green));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .section-sub {
+      font-size: 18px; color: var(--text-muted); line-height: 1.7;
+      max-width: 600px;
+    }
 
-        /* SOLUTION SECTION */
-        .solution-section {
-            padding: 160px 40px;
-            background: var(--charcoal);
-            color: white;
-            position: relative;
-            overflow: hidden;
-        }
-        .solution-bg-pattern {
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-image: 
-                radial-gradient(circle at 20% 50%, rgba(0, 201, 167, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(155, 126, 189, 0.1) 0%, transparent 50%);
-        }
-        .solution-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 10;
-        }
-        .solution-header {
-            text-align: center;
-            margin-bottom: 100px;
-        }
-        .solution-section h2 {
-            font-family: 'Poppins', sans-serif;
-            font-size: clamp(40px, 5vw, 64px);
-            font-weight: 800;
-            margin-bottom: 24px;
-            background: linear-gradient(135deg, white, var(--mint-green));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .solution-subtitle {
-            font-size: 20px;
-            opacity: 0.8;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        .showcase-card {
-            background: linear-gradient(135deg, rgba(0, 102, 204, 0.2), rgba(0, 201, 167, 0.2));
-            border-radius: 40px;
-            padding: 80px;
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            position: relative;
-            overflow: hidden;
-        }
-        .showcase-card::before {
-            content: '';
-            position: absolute;
-            top: -50%; left: -50%;
-            width: 200%; height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-            animation: rotate 30s linear infinite;
-        }
-        @keyframes rotate { to { transform: rotate(360deg); } }
-        .showcase-content {
-            position: relative;
-            z-index: 10;
-        }
-        .showcase-card h3 {
-            font-family: 'Poppins', sans-serif;
-            font-size: 36px;
-            font-weight: 700;
-            margin-bottom: 24px;
-        }
-        .showcase-card p {
-            font-size: 20px;
-            opacity: 0.9;
-            max-width: 600px;
-            margin: 0 auto;
-            line-height: 1.8;
-        }
+    /* REVEAL */
+    .reveal { opacity: 0; transform: translateY(40px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
 
-        /* HOW IT WORKS */
-        .how-section {
-            padding: 160px 40px;
-            background: white;
-        }
-        .how-container {
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-        .how-header {
-            text-align: center;
-            margin-bottom: 100px;
-        }
-        .how-section h2 {
-            font-family: 'Poppins', sans-serif;
-            font-size: clamp(36px, 4vw, 52px);
-            font-weight: 800;
-            color: var(--charcoal);
-            margin-bottom: 20px;
-        }
-        .step-item {
-            display: flex;
-            align-items: center;
-            gap: 60px;
-            margin-bottom: 100px;
-            opacity: 0;
-            transform: translateY(60px);
-        }
-        .step-item:nth-child(even) { flex-direction: row-reverse; }
-        .step-item.visible {
-            opacity: 1;
-            transform: translateY(0);
-            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .step-visual { flex: 1; position: relative; }
-        .step-circle {
-            width: 200px; height: 200px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--soft-gray), white);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 80px;
-            color: var(--ocean-blue);
-            box-shadow: 
-                0 20px 60px rgba(0, 102, 204, 0.15),
-                inset 0 0 0 2px rgba(0, 102, 204, 0.1);
-            position: relative;
-            transition: transform 0.5s ease;
-        }
-        .step-item:hover .step-circle { transform: scale(1.05); }
-        .step-number-badge {
-            position: absolute;
-            top: 0; right: 0;
-            width: 60px; height: 60px;
-            background: var(--mint-green);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Poppins', sans-serif;
-            font-size: 24px;
-            font-weight: 700;
-            color: white;
-            box-shadow: 0 10px 30px rgba(0, 201, 167, 0.3);
-        }
-        .step-content { flex: 1; }
-        .step-content h3 {
-            font-family: 'Poppins', sans-serif;
-            font-size: 32px;
-            font-weight: 700;
-            margin-bottom: 20px;
-            color: var(--charcoal);
-        }
-        .step-content p {
-            font-size: 18px;
-            color: var(--charcoal);
-            opacity: 0.7;
-            line-height: 1.8;
-        }
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 1000;
+      padding: 20px 40px; display: flex; justify-content: space-between;
+      align-items: center; transition: all .3s ease;
+    }
+    nav.scrolled {
+      background: rgba(255,255,255,.92); backdrop-filter: blur(20px);
+      box-shadow: 0 1px 0 rgba(0,0,0,.06); padding: 14px 40px;
+    }
+    .nav-logo { height: 56px; }
+    .nav-links { display: flex; gap: 36px; align-items: center; }
+    .nav-link {
+      font-size: 14px; color: var(--charcoal); text-decoration: none;
+      font-weight: 500; opacity: .75; transition: opacity .2s;
+    }
+    .nav-link:hover { opacity: 1; }
+    .nav-cta {
+      background: var(--blue); color: #fff; border: none;
+      padding: 11px 22px; border-radius: 50px; font-family: 'Inter', sans-serif;
+      font-weight: 600; font-size: 14px; cursor: pointer;
+      transition: all .3s ease; text-decoration: none; display: inline-block;
+    }
+    .nav-cta:hover { background: var(--blue-dark); transform: scale(1.04); }
+    .nav-hamburger { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
 
-        /* TESTIMONIALS */
-        .testimonials-section {
-            padding: 160px 40px;
-            background: linear-gradient(180deg, var(--soft-gray) 0%, white 100%);
-        }
-        .testimonials-container {
-            max-width: 1000px;
-            margin: 0 auto;
-            text-align: center;
-        }
-        .testimonials-section h2 {
-            font-family: 'Poppins', sans-serif;
-            font-size: 40px;
-            font-weight: 700;
-            margin-bottom: 80px;
-        }
-        .testimonial-card {
-            background: white;
-            padding: 60px;
-            border-radius: 32px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
-            max-width: 700px;
-            margin: 0 auto;
-            position: relative;
-            opacity: 0;
-            transform: scale(0.9);
-        }
-        .testimonial-card.visible {
-            opacity: 1;
-            transform: scale(1);
-            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .quote-icon {
-            font-size: 60px;
-            color: var(--mint-green);
-            opacity: 0.3;
-            position: absolute;
-            top: 30px; left: 40px;
-        }
-        .testimonial-text {
-            font-size: 24px;
-            line-height: 1.7;
-            color: var(--charcoal);
-            margin-bottom: 40px;
-            font-weight: 400;
-        }
-        .testimonial-author {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 16px;
-        }
-        .author-avatar {
-            width: 56px; height: 56px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--ocean-blue), var(--mint-green));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 600;
-            font-size: 20px;
-        }
-        .author-info { text-align: left; }
-        .author-name { font-weight: 600; color: var(--charcoal); }
-        .author-role { font-size: 14px; color: var(--charcoal); opacity: 0.6; }
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh; display: flex; align-items: center;
+      justify-content: center; position: relative; overflow: hidden;
+      background: linear-gradient(160deg, #f0f6ff 0%, var(--white) 60%);
+      padding: 130px 24px 80px;
+    }
+    .hero-orb {
+      position: absolute; border-radius: 50%; filter: blur(100px);
+      pointer-events: none;
+    }
+    .orb-1 { width: 700px; height: 700px; background: rgba(0,201,167,.15); top: -200px; right: -150px; }
+    .orb-2 { width: 500px; height: 500px; background: rgba(155,126,189,.12); bottom: -150px; left: -100px; }
 
-        /* CTA SECTION */
-        .cta-section {
-            padding: 160px 40px;
-            background: linear-gradient(135deg, var(--ocean-blue) 0%, #0052A3 100%);
-            color: white;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        .cta-orb {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(100px);
-            opacity: 0.3;
-        }
-        .cta-orb-1 {
-            width: 600px; height: 600px;
-            background: var(--mint-green);
-            top: -300px; right: -200px;
-        }
-        .cta-orb-2 {
-            width: 400px; height: 400px;
-            background: white;
-            bottom: -200px; left: -100px;
-            opacity: 0.1;
-        }
-        .cta-container {
-            max-width: 700px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 10;
-        }
-        .cta-section h2 {
-            font-family: 'Poppins', sans-serif;
-            font-size: clamp(36px, 4vw, 52px);
-            font-weight: 800;
-            margin-bottom: 24px;
-        }
-        .cta-section p {
-            font-size: 20px;
-            opacity: 0.9;
-            margin-bottom: 50px;
-        }
-        .email-form {
-            display: flex;
-            gap: 16px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-bottom: 24px;
-        }
-        .email-input {
-            flex: 1;
-            min-width: 300px;
-            max-width: 400px;
-            padding: 20px 28px;
-            border: none;
-            border-radius: 16px;
-            font-size: 16px;
-            font-family: 'Inter', sans-serif;
-            background: rgba(255, 255, 255, 0.15);
-            color: white;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s;
-        }
-        .email-input::placeholder { color: rgba(255, 255, 255, 0.6); }
-        .email-input:focus {
-            outline: none;
-            background: rgba(255, 255, 255, 0.25);
-            box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.2);
-        }
-        .btn-cta {
-            background: var(--mint-green);
-            color: var(--charcoal);
-            border: none;
-            padding: 20px 40px;
-            border-radius: 16px;
-            font-family: 'Inter', sans-serif;
-            font-weight: 700;
-            font-size: 16px;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .btn-cta:hover {
-            transform: translateY(-4px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-        }
-        .privacy-note {
-            font-size: 14px;
-            opacity: 0.7;
-        }
+    .hero-inner { text-align: center; max-width: 860px; position: relative; z-index: 2; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(0,201,167,.1); color: var(--green);
+      padding: 8px 18px; border-radius: 50px; font-size: 13px; font-weight: 600;
+      border: 1px solid rgba(0,201,167,.25); margin-bottom: 32px;
+      animation: fadeUp .7s ease .1s both;
+    }
+    .hero h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(38px, 6vw, 72px); font-weight: 800;
+      line-height: 1.1; letter-spacing: -2px; color: var(--charcoal);
+      margin-bottom: 24px; animation: fadeUp .7s ease .25s both;
+    }
+    .hero h1 span {
+      background: linear-gradient(135deg, var(--blue), var(--green));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-sub {
+      font-size: clamp(16px, 2vw, 20px); color: var(--text-muted);
+      max-width: 580px; margin: 0 auto 44px; line-height: 1.7;
+      animation: fadeUp .7s ease .4s both;
+    }
+    .hero-btns {
+      display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+      animation: fadeUp .7s ease .55s both;
+    }
+    .btn-primary {
+      background: var(--blue); color: #fff; border: none;
+      padding: 16px 36px; border-radius: 50px; font-family: 'Inter', sans-serif;
+      font-weight: 600; font-size: 16px; cursor: pointer;
+      transition: all .3s cubic-bezier(.16,1,.3,1);
+      display: inline-flex; align-items: center; gap: 8px;
+      text-decoration: none;
+    }
+    .btn-primary:hover { background: var(--blue-dark); transform: translateY(-3px); box-shadow: 0 16px 40px rgba(0,102,204,.28); }
+    .btn-outline {
+      background: transparent; color: var(--charcoal);
+      border: 2px solid var(--gray-light); padding: 14px 34px;
+      border-radius: 50px; font-family: 'Inter', sans-serif;
+      font-weight: 600; font-size: 16px; cursor: pointer;
+      transition: all .3s ease; display: inline-flex; align-items: center; gap: 8px;
+      text-decoration: none;
+    }
+    .btn-outline:hover { border-color: var(--blue); color: var(--blue); transform: translateY(-3px); }
+    .hero-social-proof {
+      margin-top: 56px; display: flex; align-items: center; justify-content: center;
+      gap: 24px; flex-wrap: wrap; animation: fadeUp .7s ease .7s both;
+    }
+    .proof-item { display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--text-muted); font-weight: 500; }
+    .proof-item i { color: var(--green); font-size: 16px; }
 
-        /* FOOTER */
-        footer {
-            background: var(--charcoal);
-            color: white;
-            padding: 80px 40px 40px;
-        }
-        .footer-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 60px;
-            margin-bottom: 60px;
-        }
-        .footer-brand { max-width: 300px; }
-        .footer-logo {
-            height: 40px;
-            margin-bottom: 20px;
-            opacity: 0.9;
-        }
-        .footer-brand p {
-            font-size: 14px;
-            opacity: 0.6;
-            line-height: 1.7;
-        }
-        .footer-column h4 {
-            font-family: 'Poppins', sans-serif;
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 24px;
-            opacity: 0.9;
-        }
-        .footer-column a {
-            display: block;
-            color: white;
-            text-decoration: none;
-            font-size: 14px;
-            opacity: 0.6;
-            margin-bottom: 12px;
-            transition: opacity 0.3s;
-        }
-        .footer-column a:hover { opacity: 1; }
-        .footer-bottom {
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            padding-top: 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-        .footer-copyright { font-size: 14px; opacity: 0.5; }
-        .social-links { display: flex; gap: 16px; }
-        .social-link {
-            width: 44px; height: 44px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            text-decoration: none;
-            transition: all 0.3s;
-        }
-        .social-link:hover {
-            background: var(--mint-green);
-            transform: translateY(-4px);
-        }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* PRODUCT SECTION - NOVO DESIGN */
-        .product-section {
-            padding: 120px 40px;
-            background: linear-gradient(180deg, var(--charcoal) 0%, #0a0c14 100%);
-            color: white;
-            position: relative;
-            overflow: hidden;
-        }
-        .product-bg-pattern {
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background-image: 
-                radial-gradient(circle at 20% 20%, rgba(0, 201, 167, 0.05) 0%, transparent 40%),
-                radial-gradient(circle at 80% 80%, rgba(155, 126, 189, 0.05) 0%, transparent 40%);
-        }
-        .product-container {
-            max-width: 1100px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 10;
-        }
+    /* ── VIDEO ── */
+    .video-section { padding: 100px 24px; background: var(--gray); }
+    .video-wrapper {
+      max-width: 900px; margin: 0 auto; border-radius: 24px; overflow: hidden;
+      box-shadow: 0 32px 80px rgba(0,0,0,.14);
+      position: relative; background: #000;
+    }
+    .video-wrapper video {
+      width: 100%; display: block; border-radius: 24px;
+    }
+    .video-placeholder {
+      aspect-ratio: 16/9; background: linear-gradient(135deg, var(--charcoal) 0%, #0a0c14 100%);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 20px; color: #fff; border-radius: 24px;
+    }
+    .play-btn {
+      width: 72px; height: 72px; background: var(--blue); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; transition: all .3s ease;
+      box-shadow: 0 0 0 16px rgba(0,102,204,.15);
+    }
+    .play-btn:hover { transform: scale(1.1); background: var(--blue-dark); }
+    .play-btn i { font-size: 26px; margin-left: 4px; }
+    .video-placeholder p { font-size: 16px; opacity: .7; }
 
-        /* 1️⃣ HEADLINE */
-        .product-hero {
-            text-align: center;
-            margin-bottom: 100px;
-            padding-top: 40px;
-        }
-        .product-hero h2 {
-            font-family: 'Poppins', sans-serif;
-            font-size: clamp(36px, 5vw, 56px);
-            font-weight: 800;
-            line-height: 1.2;
-            margin-bottom: 24px;
-            background: linear-gradient(135deg, white 0%, var(--mint-green) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        .product-subtitle {
-            font-size: 20px;
-            opacity: 0.8;
-            max-width: 600px;
-            margin: 0 auto 32px;
-            line-height: 1.6;
-        }
-        .btn-product-cta {
-            background: linear-gradient(135deg, var(--mint-green), var(--ocean-blue));
-            color: white;
-            border: none;
-            padding: 18px 36px;
-            border-radius: 50px;
-            font-family: 'Inter', sans-serif;
-            font-weight: 600;
-            font-size: 16px;
-            cursor: pointer;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            margin-bottom: 24px;
-        }
-        .btn-product-cta:hover {
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(0, 201, 167, 0.3);
-        }
-        .btn-product-cta.large {
-            padding: 22px 48px;
-            font-size: 18px;
-        }
-        .poc-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(255, 193, 7, 0.1);
-            color: #FFC107;
-            padding: 8px 16px;
-            border-radius: 50px;
-            font-size: 12px;
-            font-weight: 600;
-            border: 1px solid rgba(255, 193, 7, 0.2);
-        }
+    /* ── VALUE PROPS ── */
+    .value-section { padding: 100px 24px; background: var(--white); }
+    .value-header { text-align: center; margin-bottom: 64px; }
+    .value-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+    }
+    .value-card {
+      background: var(--gray); border-radius: 20px; padding: 36px 28px;
+      border: 1px solid transparent; transition: all .3s ease;
+    }
+    .value-card:hover { border-color: var(--green); transform: translateY(-4px); box-shadow: 0 20px 48px rgba(0,0,0,.07); }
+    .value-icon {
+      width: 52px; height: 52px; border-radius: 14px; margin-bottom: 20px;
+      display: flex; align-items: center; justify-content: center; font-size: 22px;
+    }
+    .value-icon.blue { background: rgba(0,102,204,.1); color: var(--blue); }
+    .value-icon.green { background: rgba(0,201,167,.1); color: var(--green); }
+    .value-icon.lavender { background: rgba(155,126,189,.1); color: var(--lavender); }
+    .value-card h3 { font-family: 'Poppins', sans-serif; font-size: 20px; font-weight: 700; margin-bottom: 10px; }
+    .value-card p { font-size: 15px; color: var(--text-muted); line-height: 1.7; }
 
-        /* 2️⃣ THE PROBLEM */
-        .problem-context {
-            text-align: center;
-            margin-bottom: 120px;
-            padding: 60px 40px;
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: 32px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        .context-text {
-            margin-bottom: 40px;
-        }
-        .context-lead {
-            font-size: 24px;
-            opacity: 0.9;
-            line-height: 1.5;
-            margin-bottom: 16px;
-        }
-        .context-highlight {
-            font-size: 28px;
-            font-weight: 700;
-            color: var(--mint-green);
-            font-family: 'Poppins', sans-serif;
-        }
-        .context-solution {
-            display: inline-flex;
-            align-items: center;
-            gap: 16px;
-            background: rgba(0, 201, 167, 0.1);
-            padding: 20px 32px;
-            border-radius: 16px;
-            border: 1px solid rgba(0, 201, 167, 0.2);
-        }
-        .context-solution i {
-            font-size: 32px;
-            color: var(--mint-green);
-        }
-        .context-solution p {
-            font-size: 18px;
-            font-weight: 500;
-            margin: 0;
-        }
+    /* ── HOW IT WORKS ── */
+    .how-section { padding: 100px 24px; background: var(--gray); }
+    .how-header { text-align: center; margin-bottom: 72px; }
+    .steps { display: flex; flex-direction: column; gap: 0; max-width: 900px; margin: 0 auto; position: relative; }
+    .steps::before {
+      content: ''; position: absolute; left: 39px; top: 52px; bottom: 52px;
+      width: 2px; background: linear-gradient(180deg, var(--blue), var(--green));
+      opacity: .2;
+    }
+    .step-row {
+      display: grid; grid-template-columns: 80px 1fr; gap: 32px;
+      align-items: flex-start; padding: 32px 0;
+    }
+    .step-num {
+      width: 80px; height: 80px; border-radius: 50%; flex-shrink: 0;
+      background: linear-gradient(135deg, var(--blue), var(--green));
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Poppins', sans-serif; font-size: 28px; font-weight: 800;
+      color: #fff; box-shadow: 0 8px 24px rgba(0,102,204,.25);
+    }
+    .step-body { padding-top: 12px; }
+    .step-body h3 { font-family: 'Poppins', sans-serif; font-size: 24px; font-weight: 700; margin-bottom: 10px; }
+    .step-body p { font-size: 16px; color: var(--text-muted); line-height: 1.7; max-width: 540px; }
 
-        /* 3️⃣ HOW IT WORKS */
-        .how-it-works-section {
-            margin-bottom: 120px;
-        }
-        .work-step {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 80px;
-            align-items: center;
-            margin-bottom: 100px;
-            opacity: 0;
-            transform: translateY(40px);
-            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .work-step.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .work-step[data-step="2"] {
-            direction: rtl;
-        }
-        .work-step[data-step="2"] > * {
-            direction: ltr;
-        }
-        .work-step.aha-step {
-            background: linear-gradient(135deg, rgba(0, 201, 167, 0.05), rgba(155, 126, 189, 0.05));
-            border-radius: 32px;
-            padding: 60px;
-            border: 1px solid rgba(0, 201, 167, 0.1);
-        }
-        .step-text {
-            max-width: 400px;
-        }
-        .step-number-label {
-            font-size: 14px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--mint-green);
-            margin-bottom: 16px;
-        }
-        .step-text h3 {
-            font-family: 'Poppins', sans-serif;
-            font-size: 32px;
-            font-weight: 700;
-            margin-bottom: 16px;
-            line-height: 1.3;
-        }
-        .step-text p {
-            font-size: 18px;
-            opacity: 0.8;
-            line-height: 1.6;
-            margin-bottom: 16px;
-        }
-        .step-caption {
-            font-size: 14px !important;
-            opacity: 0.6 !important;
-            font-style: italic;
-        }
-        .aha-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: rgba(255, 193, 7, 0.15);
-            color: #FFC107;
-            padding: 12px 20px;
-            border-radius: 50px;
-            font-size: 14px;
-            font-weight: 600;
-            margin-top: 24px;
-        }
+    /* ── PRODUCT SYSTEM ── */
+    .product-section { padding: 100px 24px; background: var(--charcoal); color: #fff; overflow: hidden; }
+    .product-header { text-align: center; margin-bottom: 72px; }
+    .product-header .section-title { color: #fff; }
+    .product-header .section-sub { color: rgba(255,255,255,.65); margin: 0 auto; }
+    .product-tabs {
+      display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+      margin-bottom: 48px;
+    }
+    .product-tab {
+      padding: 10px 20px; border-radius: 50px; font-size: 14px; font-weight: 600;
+      cursor: pointer; transition: all .3s ease; border: 1px solid rgba(255,255,255,.15);
+      color: rgba(255,255,255,.55); background: transparent;
+    }
+    .product-tab.active, .product-tab:hover {
+      background: rgba(0,201,167,.15); border-color: var(--green);
+      color: var(--green);
+    }
+    .product-showcase {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center;
+      max-width: 1000px; margin: 0 auto;
+    }
+    .product-screenshot {
+      border-radius: 16px; overflow: hidden; position: relative;
+      box-shadow: 0 32px 80px rgba(0,0,0,.6), 0 0 0 1px rgba(255,255,255,.07);
+      background: #e8edf2;
+      aspect-ratio: 16/10; display: flex; align-items: flex-start; justify-content: center;
+    }
+    .screenshot-placeholder {
+      display: flex; flex-direction: column; align-items: center; gap: 16px;
+      color: rgba(255,255,255,.3); padding-top: 60px;
+    }
+    .screenshot-placeholder i { font-size: 48px; }
+    .screenshot-placeholder p { font-size: 13px; }
+    .screenshot-bar {
+      position: absolute; top: 0; left: 0; right: 0; height: 32px;
+      background: #d8dde4; border-bottom: 1px solid rgba(0,0,0,.08);
+      display: flex; align-items: center; padding: 0 14px; gap: 7px; z-index: 2;
+    }
+    .dot-red { width: 10px; height: 10px; border-radius: 50%; background: #FF5F57; }
+    .dot-yellow { width: 10px; height: 10px; border-radius: 50%; background: #FEBC2E; }
+    .dot-green { width: 10px; height: 10px; border-radius: 50%; background: #28C840; }
+    .product-text h3 {
+      font-family: 'Poppins', sans-serif; font-size: 28px; font-weight: 700;
+      color: #fff; margin-bottom: 16px; line-height: 1.3;
+    }
+    .product-text p { font-size: 16px; color: rgba(255,255,255,.65); line-height: 1.7; margin-bottom: 20px; }
+    .product-feature-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .product-feature-list li {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 15px; color: rgba(255,255,255,.75);
+    }
+    .product-feature-list li i { color: var(--green); font-size: 14px; flex-shrink: 0; }
+    .product-screenshot img {
+      width: 100%; height: auto; object-fit: contain; object-position: top;
+      display: block; margin-top: 32px;
+    }
 
-        /* PHONE MOCKUP */
-        .phone-mockup {
-            display: flex;
-            justify-content: center;
-        }
-        .phone-frame {
-            width: 280px;
-            background: #1a1d29;
-            border-radius: 40px;
-            padding: 12px;
-            box-shadow: 
-                0 50px 100px rgba(0,0,0,0.5),
-                0 0 0 1px rgba(255,255,255,0.1),
-                inset 0 0 20px rgba(0,0,0,0.5);
-        }
-        .phone-header {
-            display: flex;
-            justify-content: center;
-            padding: 8px 0 16px;
-        }
-        .phone-notch {
-            width: 80px;
-            height: 24px;
-            background: #000;
-            border-radius: 12px;
-        }
-        .phone-content {
-            background: linear-gradient(180deg, #0f1117 0%, #1a1d29 100%);
-            border-radius: 28px;
-            padding: 24px;
-            min-height: 400px;
-        }
+    /* ── DIFFERENTIATION ── */
+    .diff-section { padding: 100px 24px; background: var(--white); }
+    .diff-header { text-align: center; margin-bottom: 64px; }
+    .diff-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; max-width: 900px; margin: 0 auto; }
+    .diff-col-header {
+      font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+      padding: 12px 20px; border-radius: 8px; margin-bottom: 8px; text-align: center;
+    }
+    .diff-col-header.old { background: var(--gray); color: var(--text-muted); }
+    .diff-col-header.new { background: rgba(0,201,167,.1); color: var(--green); }
+    .diff-row { display: contents; }
+    .diff-cell {
+      padding: 16px 20px; border-radius: 10px; font-size: 15px;
+      margin-bottom: 8px; display: flex; align-items: center; gap: 10px;
+    }
+    .diff-cell.old { background: var(--gray); color: var(--text-muted); }
+    .diff-cell.new { background: rgba(0,201,167,.08); color: var(--charcoal); font-weight: 500; }
+    .diff-cell.new i { color: var(--green); flex-shrink: 0; }
+    .diff-closing {
+      text-align: center; margin-top: 48px; font-size: 20px; font-weight: 600;
+      color: var(--charcoal); font-family: 'Poppins', sans-serif;
+    }
 
-        /* CAPTURE CARD */
-        .capture-card {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            padding: 24px;
-            border-left: 4px solid var(--mint-green);
-        }
-        .capture-icon {
-            width: 48px;
-            height: 48px;
-            background: var(--mint-green);
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 20px;
-            margin-bottom: 16px;
-        }
-        .capture-label {
-            font-size: 12px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            opacity: 0.6;
-            margin-bottom: 8px;
-        }
-        .capture-quote {
-            font-size: 16px;
-            line-height: 1.5;
-            color: white;
-            font-style: italic;
-            margin-bottom: 20px;
-        }
-        .capture-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .saved-badge {
-            background: rgba(0, 201, 167, 0.2);
-            color: var(--mint-green);
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-        }
-        .date {
-            font-size: 13px;
-            opacity: 0.5;
-        }
+    /* ── TARGET USERS ── */
+    .users-section { padding: 100px 24px; background: var(--gray); }
+    .users-header { text-align: center; margin-bottom: 64px; }
+    .users-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .user-card {
+      background: var(--white); border-radius: 20px; padding: 32px 24px;
+      text-align: center; border: 2px solid transparent; transition: all .3s ease;
+    }
+    .user-card:hover { border-color: var(--green); transform: translateY(-4px); box-shadow: 0 20px 48px rgba(0,0,0,.07); }
+    .user-avatar {
+      width: 64px; height: 64px; border-radius: 50%; margin: 0 auto 16px;
+      display: flex; align-items: center; justify-content: center; font-size: 28px;
+    }
+    .user-card h3 { font-family: 'Poppins', sans-serif; font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+    .user-card p { font-size: 14px; color: var(--text-muted); line-height: 1.6; margin-bottom: 16px; }
+    .user-tag {
+      display: inline-block; background: rgba(0,102,204,.08); color: var(--blue);
+      padding: 5px 14px; border-radius: 50px; font-size: 12px; font-weight: 600;
+    }
 
-        /* TIMELINE */
-        .timeline-title {
-            font-size: 14px;
-            font-weight: 600;
-            text-align: center;
-            margin-bottom: 24px;
-            opacity: 0.8;
-        }
-        .timeline-stack {
-            display: flex;
-            flex-direction: column;
-            gap: 0;
-        }
-        .timeline-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-            padding: 16px;
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 12px;
-            transition: all 0.3s ease;
-        }
-        .timeline-item.active {
-            background: rgba(0, 201, 167, 0.1);
-            border: 1px solid rgba(0, 201, 167, 0.2);
-        }
-        .item-dot {
-            width: 10px;
-            height: 10px;
-            background: var(--mint-green);
-            border-radius: 50%;
-            margin-top: 4px;
-            flex-shrink: 0;
-            box-shadow: 0 0 8px rgba(0, 201, 167, 0.5);
-        }
-        .item-content {
-            flex: 1;
-        }
-        .item-date {
-            font-size: 11px;
-            font-weight: 700;
-            color: var(--mint-green);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 4px;
-        }
-        .item-title {
-            font-size: 15px;
-            font-weight: 600;
-            color: white;
-        }
-        .timeline-connector-visual {
-            padding-left: 21px;
-            height: 24px;
-        }
-        .connector-line-v {
-            width: 2px;
-            height: 100%;
-            background: linear-gradient(180deg, var(--mint-green), rgba(255,255,255,0.1));
-        }
+    /* ── FINAL CTA ── */
+    .cta-section {
+      padding: 120px 24px; text-align: center;
+      background: linear-gradient(135deg, var(--blue) 0%, #0044AA 100%);
+      color: #fff; position: relative; overflow: hidden;
+    }
+    .cta-orb {
+      position: absolute; border-radius: 50%; filter: blur(80px); pointer-events: none;
+    }
+    .cta-orb-1 { width: 500px; height: 500px; background: var(--green); top: -200px; right: -100px; opacity: .25; }
+    .cta-orb-2 { width: 400px; height: 400px; background: #fff; bottom: -200px; left: -100px; opacity: .06; }
+    .cta-inner { position: relative; z-index: 2; max-width: 640px; margin: 0 auto; }
+    .cta-inner h2 {
+      font-family: 'Poppins', sans-serif; font-size: clamp(30px, 5vw, 52px);
+      font-weight: 800; margin-bottom: 20px; line-height: 1.2;
+    }
+    .cta-inner p { font-size: 18px; opacity: .85; margin-bottom: 44px; line-height: 1.6; }
+    .cta-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .btn-white {
+      background: #fff; color: var(--blue); border: none;
+      padding: 18px 40px; border-radius: 50px; font-family: 'Inter', sans-serif;
+      font-weight: 700; font-size: 17px; cursor: pointer;
+      transition: all .3s ease; text-decoration: none; display: inline-flex;
+      align-items: center; gap: 10px;
+    }
+    .btn-white:hover { transform: translateY(-4px) scale(1.02); box-shadow: 0 20px 40px rgba(0,0,0,.2); }
+    .btn-white-outline {
+      background: transparent; color: #fff; border: 2px solid rgba(255,255,255,.4);
+      padding: 16px 38px; border-radius: 50px; font-family: 'Inter', sans-serif;
+      font-weight: 600; font-size: 17px; cursor: pointer; transition: all .3s ease;
+      text-decoration: none; display: inline-flex; align-items: center; gap: 10px;
+    }
+    .btn-white-outline:hover { border-color: #fff; background: rgba(255,255,255,.1); transform: translateY(-4px); }
+    .cta-note { margin-top: 24px; font-size: 13px; opacity: .6; }
 
-        /* RECOVERY */
-        .search-box {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            background: rgba(255, 255, 255, 0.05);
-            padding: 12px 16px;
-            border-radius: 12px;
-            margin-bottom: 16px;
-            font-size: 13px;
-            opacity: 0.6;
-        }
-        .user-query {
-            background: rgba(155, 126, 189, 0.15);
-            border: 1px solid rgba(155, 126, 189, 0.3);
-            padding: 16px;
-            border-radius: 12px;
-            font-size: 14px;
-            font-style: italic;
-            margin-bottom: 20px;
-            color: #d4c4e0;
-        }
-        .recovery-result {
-            background: rgba(0, 201, 167, 0.1);
-            border: 1px solid rgba(0, 201, 167, 0.2);
-            border-radius: 16px;
-            padding: 20px;
-        }
-        .result-header {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: var(--mint-green);
-            font-size: 12px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 16px;
-        }
-        .recovery-chain {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-        .recovery-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 12px;
-        }
-        .recovery-item.highlight {
-            background: rgba(0, 201, 167, 0.1);
-            padding: 12px;
-            border-radius: 10px;
-            margin: -4px -4px -4px -4px;
-        }
-        .recovery-dot {
-            width: 8px;
-            height: 8px;
-            background: var(--mint-green);
-            border-radius: 50%;
-            margin-top: 6px;
-            flex-shrink: 0;
-        }
-        .recovery-text strong {
-            display: block;
-            font-size: 12px;
-            color: var(--mint-green);
-            margin-bottom: 2px;
-        }
-        .recovery-text span {
-            font-size: 13px;
-            opacity: 0.9;
-        }
+    /* ── FOOTER ── */
+    footer { background: var(--charcoal); color: #fff; padding: 72px 24px 40px; }
+    .footer-inner {
+      max-width: 1120px; margin: 0 auto;
+      display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 60px;
+      margin-bottom: 60px;
+    }
+    .footer-brand .footer-logo { height: 56px; margin-bottom: 16px; opacity: .9; display: block; }
+    .footer-brand p { font-size: 14px; color: rgba(255,255,255,.5); line-height: 1.7; max-width: 280px; }
+    .footer-col h4 {
+      font-family: 'Poppins', sans-serif; font-size: 13px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 1px; opacity: .5; margin-bottom: 20px;
+    }
+    .footer-col a {
+      display: block; color: rgba(255,255,255,.65); text-decoration: none;
+      font-size: 14px; margin-bottom: 12px; transition: color .2s;
+    }
+    .footer-col a:hover { color: #fff; }
+    .footer-bottom {
+      max-width: 1120px; margin: 0 auto; border-top: 1px solid rgba(255,255,255,.08);
+      padding-top: 32px; display: flex; justify-content: space-between;
+      align-items: center; flex-wrap: wrap; gap: 16px;
+    }
+    .footer-copyright { font-size: 13px; color: rgba(255,255,255,.35); }
+    .social-links { display: flex; gap: 12px; }
+    .social-link {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: rgba(255,255,255,.08); display: flex; align-items: center;
+      justify-content: center; color: rgba(255,255,255,.7); text-decoration: none;
+      transition: all .3s ease;
+    }
+    .social-link:hover { background: var(--green); color: #fff; transform: translateY(-3px); }
 
-        /* 4️⃣ WHY IT'S DIFFERENT */
-        .different-section {
-            margin-bottom: 120px;
-            padding: 60px;
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: 32px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        .different-title {
-            font-family: 'Poppins', sans-serif;
-            font-size: 36px;
-            font-weight: 700;
-            text-align: center;
-            margin-bottom: 48px;
-            color: white;
-        }
-        .comparison-table {
-            max-width: 700px;
-            margin: 0 auto 40px;
-        }
-        .table-header {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            padding: 16px 0;
-            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
-            margin-bottom: 8px;
-        }
-        .table-header .col-traditional {
-            font-size: 12px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            opacity: 0.5;
-        }
-        .table-header .col-mind {
-            font-size: 12px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--mint-green);
-        }
-        .table-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-            padding: 16px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        .table-row .col-traditional {
-            font-size: 16px;
-            opacity: 0.6;
-        }
-        .table-row .col-mind {
-            font-size: 16px;
-            color: white;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .table-row .col-mind i {
-            color: var(--mint-green);
-        }
-        .different-closing {
-            text-align: center;
-            font-size: 20px;
-            font-weight: 600;
-            color: var(--mint-green);
-            margin-top: 40px;
-        }
+    /* ── MOBILE NAV ── */
+    .mobile-menu {
+      display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(255,255,255,.97); backdrop-filter: blur(20px);
+      z-index: 999; flex-direction: column; align-items: center; justify-content: center;
+      gap: 32px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu .nav-link { font-size: 24px; }
+    .mobile-menu .nav-cta { font-size: 18px; padding: 16px 40px; }
+    .close-menu { position: absolute; top: 20px; right: 24px; background: none; border: none; font-size: 24px; cursor: pointer; color: var(--charcoal); }
 
-        /* 5️⃣ CATEGORY STATEMENT */
-        .category-statement-large {
-            text-align: center;
-            margin-bottom: 100px;
-            padding: 80px 40px;
-        }
-        .category-statement-large h3 {
-            font-family: 'Poppins', sans-serif;
-            font-size: 24px;
-            font-weight: 500;
-            opacity: 0.7;
-            margin-bottom: 16px;
-        }
-        .category-statement-large h2 {
-            font-family: 'Poppins', sans-serif;
-            font-size: clamp(32px, 4vw, 48px);
-            font-weight: 800;
-            margin-bottom: 24px;
-            background: linear-gradient(135deg, white, var(--mint-green));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        .category-statement-large p {
-            font-size: 20px;
-            opacity: 0.9;
-            margin-bottom: 24px;
-        }
-        .category-tag {
-            display: inline-block;
-            background: rgba(255, 255, 255, 0.05);
-            padding: 12px 24px;
-            border-radius: 50px;
-            font-size: 14px;
-            opacity: 0.7;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        /* 6️⃣ FINAL CTA */
-        .final-product-cta {
-            text-align: center;
-            padding: 60px 40px;
-            background: rgba(0, 201, 167, 0.05);
-            border-radius: 32px;
-            border: 1px solid rgba(0, 201, 167, 0.1);
-        }
-        .cta-text {
-            font-size: 24px;
-            font-weight: 600;
-            margin-bottom: 24px;
-        }
-
-        /* RESPONSIVE */
-        @media (max-width: 1024px) {
-            .features-grid-compact { grid-template-columns: 1fr; }
-            .step-item, .step-item:nth-child(even) {
-                flex-direction: column;
-                text-align: center;
-            }
-            .footer-container { grid-template-columns: 1fr 1fr; }
-        }
-        @media (max-width: 900px) {
-            .work-step {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-            .work-step[data-step="2"] {
-                direction: ltr;
-            }
-            .work-step.aha-step {
-                padding: 40px 24px;
-            }
-            .step-text {
-                max-width: 100%;
-                text-align: center;
-            }
-            .phone-mockup {
-                order: -1;
-            }
-            .comparison-table {
-                padding: 0 20px;
-            }
-            .table-header,
-            .table-row {
-                grid-template-columns: 1fr;
-                gap: 8px;
-            }
-            .table-header .col-traditional,
-            .table-row .col-traditional {
-                opacity: 0.4;
-                font-size: 12px;
-            }
-        }
-        @media (max-width: 768px) {
-            nav { padding: 16px 20px; }
-            .nav-links { display: none; }
-            .hero { padding: 100px 20px 60px; }
-            .problem-card:nth-child(2),
-            .problem-card:nth-child(3) { margin-left: 0; }
-            .story-step {
-                flex-direction: column;
-                gap: 20px;
-            }
-            .step-indicator {
-                flex-direction: row;
-                width: 100%;
-            }
-            .step-line {
-                width: 100%;
-                height: 2px;
-                min-height: auto;
-                margin-top: 0;
-                margin-left: 16px;
-            }
-            .cognitive-diagram {
-                flex-direction: column;
-                gap: 20px;
-            }
-            .diagram-arrow {
-                transform: rotate(90deg);
-            }
-            .category-statement {
-                flex-direction: column;
-                gap: 20px;
-            }
-            .statement-line {
-                width: 60px;
-                flex: none;
-            }
-            .footer-container {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-            .footer-brand { max-width: 100%; }
-        }
-    </style>
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .value-grid { grid-template-columns: 1fr 1fr; }
+      .users-grid { grid-template-columns: 1fr 1fr; }
+      .product-showcase { grid-template-columns: 1fr; gap: 40px; }
+      .diff-grid { grid-template-columns: 1fr; }
+      .diff-col-header.old { display: none; }
+      .diff-cell.old { display: none; }
+      .footer-inner { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 640px) {
+      nav { padding: 16px 20px; }
+      nav.scrolled { padding: 12px 20px; }
+      .nav-links { display: none; }
+      .nav-cta { display: none; }
+      .nav-hamburger { display: block; }
+      .value-grid { grid-template-columns: 1fr; }
+      .users-grid { grid-template-columns: 1fr; }
+      .steps::before { display: none; }
+      .step-row { grid-template-columns: 60px 1fr; gap: 20px; }
+      .step-num { width: 60px; height: 60px; font-size: 22px; }
+      .footer-inner { grid-template-columns: 1fr; gap: 40px; }
+      .footer-brand p { max-width: 100%; }
+      .footer-bottom { justify-content: center; text-align: center; }
+    }
+  </style>
 </head>
 <body>
-    <nav id="navbar">
-        <img src="./mycomind_logo_full_transparent.png" alt="My-CoMind" class="nav-logo">
-        <div class="nav-links">
-            <a href="#problem" class="nav-link">The Problem</a>
-            <a href="#product" class="nav-link">Product</a>
-            <a href="#how" class="nav-link">How It Works</a>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <img src="./mycomind_logo_full_transparent.png" alt="My-CoMind" class="nav-logo">
+    <div class="nav-links">
+      <a href="#demo" class="nav-link">Demo</a>
+      <a href="#product" class="nav-link">Product</a>
+      <a href="#how" class="nav-link">How It Works</a>
+      <a href="#users" class="nav-link">Who It's For</a>
+    </div>
+    <a href="https://app.my-comind.com/login" class="nav-cta" target="_blank">Get Started Free</a>
+    <button class="nav-hamburger" onclick="document.getElementById('mobileMenu').classList.add('open')" aria-label="Open menu">
+      <i class="fas fa-bars" style="font-size:20px;color:var(--charcoal)"></i>
+    </button>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="close-menu" onclick="document.getElementById('mobileMenu').classList.remove('open')" aria-label="Close menu">
+      <i class="fas fa-times"></i>
+    </button>
+    <a href="#demo" class="nav-link" onclick="document.getElementById('mobileMenu').classList.remove('open')">Demo</a>
+    <a href="#product" class="nav-link" onclick="document.getElementById('mobileMenu').classList.remove('open')">Product</a>
+    <a href="#how" class="nav-link" onclick="document.getElementById('mobileMenu').classList.remove('open')">How It Works</a>
+    <a href="#users" class="nav-link" onclick="document.getElementById('mobileMenu').classList.remove('open')">Who It's For</a>
+    <a href="https://app.my-comind.com/login" class="nav-cta" target="_blank">Get Started Free</a>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-orb orb-1"></div>
+    <div class="hero-orb orb-2"></div>
+    <div class="hero-inner">
+      <div class="hero-badge">
+        <i class="fas fa-brain"></i> Personal Cognitive Infrastructure
+      </div>
+      <h1>Your mind moves fast.<br><span>Never lose the thinking</span><br>behind your decisions.</h1>
+      <p class="hero-sub">
+        My-CoMind captures your decisions, insights and conversations into a living knowledge graph — so you can pick up exactly where you left off, every time.
+      </p>
+      <div class="hero-btns">
+        <a href="https://app.my-comind.com/login" class="btn-primary" target="_blank">
+          <i class="fas fa-arrow-right"></i> Start for Free
+        </a>
+        <a href="#demo" class="btn-outline">
+          <i class="fas fa-play"></i> Watch Demo
+        </a>
+      </div>
+      <div class="hero-social-proof">
+        <div class="proof-item"><i class="fas fa-check-circle"></i> No credit card required</div>
+        <div class="proof-item"><i class="fas fa-check-circle"></i> Live product</div>
+        <div class="proof-item"><i class="fas fa-check-circle"></i> Available now</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEMO VIDEO -->
+  <section class="video-section" id="demo">
+    <div class="container">
+      <div class="reveal" style="text-align:center; margin-bottom:48px;">
+        <span class="section-label">See It In Action</span>
+        <h2 class="section-title">Watch how it works</h2>
+        <p class="section-sub" style="margin: 0 auto;">See how My-CoMind captures your thinking and connects the dots — automatically.</p>
+      </div>
+      <div class="video-wrapper reveal">
+        <video controls poster="" id="demoVideo">
+          <source src="./UsoMyCoMind.mp4" type="video/mp4">
+        </video>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALUE PROPOSITIONS -->
+  <section class="value-section">
+    <div class="container">
+      <div class="value-header reveal">
+        <span class="section-label">Why My-CoMind</span>
+        <h2 class="section-title">Everything you need to<br>think without interruption</h2>
+      </div>
+      <div class="value-grid">
+        <div class="value-card reveal">
+          <div class="value-icon blue"><i class="fas fa-microphone-alt"></i></div>
+          <h3>Capture in seconds</h3>
+          <p>Voice or text — capture decisions, insights and conversations the moment they happen, without breaking your flow.</p>
         </div>
-        <button class="nav-cta" onclick="document.querySelector('.cta-section').scrollIntoView({behavior: 'smooth'})">
-            Get Early Access
-        </button>
-    </nav>
-
-    <section class="hero">
-        <div class="hero-orb orb-1"></div>
-        <div class="hero-orb orb-2"></div>
-        <div class="hero-orb orb-3"></div>
-        
-        <div class="hero-content">
-            <div class="hero-badge">
-                <i class="fas fa-brain"></i>
-                A new way to keep your thinking organized
-            </div>
-            <h1>Your mind shouldn't have to<br>start from <span>zero</span> every day.</h1>
-            <p class="hero-subtitle">
-                Between work, family, messages, meetings and responsibilities, your thinking gets interrupted hundreds of times a day. My-CoMind helps you return to what you were thinking with clarity, context, and confidence.
-            </p>
-            <div class="hero-buttons">
-                <button class="btn-primary" onclick="document.querySelector('.cta-section').scrollIntoView({behavior: 'smooth'})">
-                    <i class="fas fa-rocket"></i>Get Early Access
-                </button>
-                <button class="btn-secondary" onclick="document.querySelector('#problem').scrollIntoView({behavior: 'smooth'})">
-                    See the Problem
-                </button>
-				<a href="poc.html" style="text-decoration: none;"><button class="btn-secondary btn-product-cta large">
-                    Try POC →</button></a>
-            </div>
+        <div class="value-card reveal" style="transition-delay:.1s">
+          <div class="value-icon green"><i class="fas fa-project-diagram"></i></div>
+          <h3>Automatic connections</h3>
+          <p>My-CoMind links related thoughts across time, building a living knowledge graph of your thinking — no tagging needed.</p>
         </div>
-    </section>
-
-    <section class="problem-section" id="problem">
-        <div class="problem-container">
-            <div class="section-label reveal">The Reality</div>
-            <h2 class="reveal">Sound familiar?</h2>
-            <div class="problem-cards">
-                <div class="problem-card reveal">
-                    <i class="fas fa-bolt"></i>
-                    <h3>You had it clear yesterday.</h3>
-                    <p>You knew exactly why that decision made sense… until the week happened. Meetings, deadlines, school pickups, messages, last-minute changes.</p>
-                </div>
-                <div class="problem-card reveal">
-                    <i class="fas fa-question-circle"></i>
-                    <h3>What did we decide last week?</h3>
-                    <p>You remember there was a reason. A trade-off. A conversation. But now it's blurry. It's not memory failure—it's continuity failure.</p>
-                </div>
-                <div class="problem-card reveal">
-                    <i class="fas fa-fire"></i>
-                    <h3>Your mind is juggling too many things.</h3>
-                    <p>Work decisions. Family logistics. Ideas. Tasks. Conversations. The real problem isn't memory — it's that your thinking gets constantly interrupted.</p>
-                </div>
-            </div>
+        <div class="value-card reveal" style="transition-delay:.2s">
+          <div class="value-icon lavender"><i class="fas fa-search"></i></div>
+          <h3>Recover context instantly</h3>
+          <p>Ask "Why did we decide that?" and get the full reasoning, not just the outcome. Return to any decision with complete clarity.</p>
         </div>
-    </section>
-
-    <section class="product-section" id="product">
-        <div class="product-bg-pattern"></div>
-        <div class="product-container">
-            
-            <!-- 1️⃣ HEADLINE -->
-            <div class="product-hero reveal">
-                <h2>Your mind moves forward.<br>My-CoMind remembers where it left off.</h2>
-                <p class="product-subtitle">
-                    A personal infrastructure for cognitive continuity.<br>
-                    Capture thoughts, connect context, and recover your thinking anytime.
-                </p>
-                <div class="poc-badge">
-                    <i class="fas fa-flask"></i>
-                    Proof of Concept — Visual subject to change
-                </div>
-            </div>
-
-            <!-- 2️⃣ THE PROBLEM -->
-            <div class="problem-context reveal">
-                <div class="context-text">
-                    <p class="context-lead">Ideas appear in conversations.<br>Decisions happen across days, meetings and notes.</p>
-                    <p class="context-highlight">But your thinking gets fragmented.</p>
-                </div>
-                <div class="context-solution">
-                    <i class="fas fa-infinity"></i>
-                    <p>My-CoMind preserves the continuity of your thinking.</p>
-                </div>
-            </div>
-
-            <!-- 3️⃣ HOW IT WORKS -->
-            <div class="how-it-works-section">
-                
-                <!-- 1 — CAPTURE -->
-                <div class="work-step reveal" data-step="1">
-                    <div class="step-text">
-                        <div class="step-number-label">1 — Capture</div>
-                        <h3>Capture thoughts the moment they happen.</h3>
-                        <p>Voice, text or quick notes during meetings and conversations.</p>
-                    </div>
-                    <div class="phone-mockup">
-                        <div class="phone-frame">
-                            <div class="phone-header">
-                                <div class="phone-notch"></div>
-                            </div>
-                            <div class="phone-content">
-                                <div class="capture-card">
-                                    <div class="capture-icon"><i class="fas fa-microphone"></i></div>
-                                    <div class="capture-label">Meeting note</div>
-                                    <div class="capture-quote">"We should invest more in marketing next quarter."</div>
-                                    <div class="capture-meta">
-                                        <span class="saved-badge"><i class="fas fa-check"></i> Saved</span>
-                                        <span class="date">Nov 3</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 2 — CONNECT -->
-                <div class="work-step reveal" data-step="2">
-                    <div class="phone-mockup">
-                        <div class="phone-frame">
-                            <div class="phone-header">
-                                <div class="phone-notch"></div>
-                            </div>
-                            <div class="phone-content">
-                                <div class="timeline-title">Your thinking timeline</div>
-                                <div class="timeline-stack">
-                                    <div class="timeline-item">
-                                        <div class="item-dot"></div>
-                                        <div class="item-content">
-                                            <div class="item-date">Nov 3</div>
-                                            <div class="item-title">Marketing idea</div>
-                                        </div>
-                                    </div>
-                                    <div class="timeline-connector-visual">
-                                        <div class="connector-line-v"></div>
-                                    </div>
-                                    <div class="timeline-item">
-                                        <div class="item-dot"></div>
-                                        <div class="item-content">
-                                            <div class="item-date">Nov 8</div>
-                                            <div class="item-title">Budget discussion</div>
-                                        </div>
-                                    </div>
-                                    <div class="timeline-connector-visual">
-                                        <div class="connector-line-v"></div>
-                                    </div>
-                                    <div class="timeline-item active">
-                                        <div class="item-dot"></div>
-                                        <div class="item-content">
-                                            <div class="item-date">Nov 20</div>
-                                            <div class="item-title">Strategy decision</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="step-text">
-                        <div class="step-number-label">2 — Connect</div>
-                        <h3>My-CoMind connects ideas across time.</h3>
-                        <p>What starts as a thought becomes part of a larger thinking process.</p>
-                        <p class="step-caption">Ideas evolve. Context accumulates. Decisions emerge.</p>
-                    </div>
-                </div>
-
-                <!-- 3 — RECOVER (AHA MOMENT) -->
-                <div class="work-step reveal aha-step" data-step="3">
-                    <div class="step-text">
-                        <div class="step-number-label">3 — Recover</div>
-                        <h3>Instead of searching notes, you recover the thinking behind them.</h3>
-                        <div class="aha-badge">
-                            <i class="fas fa-lightbulb"></i>
-                            <span>That's the key difference.</span>
-                        </div>
-                    </div>
-                    <div class="phone-mockup">
-                        <div class="phone-frame">
-                            <div class="phone-header">
-                                <div class="phone-notch"></div>
-                            </div>
-                            <div class="phone-content">
-                                <div class="search-box">
-                                    <i class="fas fa-search"></i>
-                                    <span>Search your thinking...</span>
-                                </div>
-                                <div class="user-query">
-                                    "What did we decide about the marketing budget?"
-                                </div>
-                                <div class="recovery-result">
-                                    <div class="result-header">
-                                        <i class="fas fa-brain"></i>
-                                        <span>Context recovered</span>
-                                    </div>
-                                    <div class="recovery-chain">
-                                        <div class="recovery-item">
-                                            <div class="recovery-dot"></div>
-                                            <div class="recovery-text">
-                                                <strong>Nov 3</strong>
-                                                <span>Initial idea to increase marketing investment</span>
-                                            </div>
-                                        </div>
-                                        <div class="recovery-item">
-                                            <div class="recovery-dot"></div>
-                                            <div class="recovery-text">
-                                                <strong>Nov 8</strong>
-                                                <span>Budget meeting discussion</span>
-                                            </div>
-                                        </div>
-                                        <div class="recovery-item highlight">
-                                            <div class="recovery-dot"></div>
-                                            <div class="recovery-text">
-                                                <strong>Nov 20</strong>
-                                                <span>Decision: prioritize marketing growth</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- 4️⃣ WHY IT'S DIFFERENT -->
-            <div class="different-section reveal">
-                <h3 class="different-title">This is not a notes app. Notes capture moments. My-CoMind preserves the thinking between them.</h3>
-                <div class="comparison-table">
-                    <div class="table-header">
-                        <div class="col-traditional">Traditional tools</div>
-                        <div class="col-mind">My-CoMind</div>
-                    </div>
-                    <div class="table-row">
-                        <div class="col-traditional">Store notes</div>
-                        <div class="col-mind"><i class="fas fa-check"></i> Preserves thinking</div>
-                    </div>
-                    <div class="table-row">
-                        <div class="col-traditional">Static information</div>
-                        <div class="col-mind"><i class="fas fa-check"></i> Evolving context</div>
-                    </div>
-                    <div class="table-row">
-                        <div class="col-traditional">Search documents</div>
-                        <div class="col-mind"><i class="fas fa-check"></i> Recover decisions</div>
-                    </div>
-                    <div class="table-row">
-                        <div class="col-traditional">Memory fragments</div>
-                        <div class="col-mind"><i class="fas fa-check"></i> Cognitive continuity</div>
-                    </div>
-                </div>
-                <p class="different-closing">Your thinking becomes a continuous memory.</p>
-            </div>
-			
-            <!-- 5️⃣ CATEGORY STATEMENT -->
-            <div class="category-statement-large reveal">
-                <h3>Your second brain shouldn't store information.</h3>
-                <h2>It should remember your thinking.</h2>
-                <p>My-CoMind is a personal infrastructure for cognitive continuity.</p>
-                <span class="category-tag">A memory layer for your ideas, context and decisions.</span>
-            </div>
-
-            <!-- 6️⃣ FINAL CTA -->
-            <div class="final-product-cta reveal">
-                <p class="cta-text">Join Early Access.</p>
-                <button class="btn-product-cta large" onclick="document.querySelector('.cta-section').scrollIntoView({behavior: 'smooth'})">
-                    Join the Waitlist
-                </button>
-            </div>
-
+        <div class="value-card reveal" style="transition-delay:.05s">
+          <div class="value-icon green"><i class="fas fa-infinity"></i></div>
+          <h3>Cognitive continuity</h3>
+          <p>Interruptions are inevitable. My-CoMind makes sure your thinking continues where it left off — every single time.</p>
         </div>
-    </section>
-	
-	<section class="how-section" id="how">
-        <div class="how-container">
-            <div class="how-header reveal">
-                <div class="section-label">Simple Process</div>
-                <h2>How It Works</h2>
-            </div>
-            
-            <div class="step-item">
-                <div class="step-visual reveal">
-                    <div class="step-circle">
-                        <i class="fas fa-microphone-alt"></i>
-                        <div class="step-number-badge">1</div>
-                    </div>
-                </div>
-                <div class="step-content reveal">
-                    <h3>You Speak</h3>
-                    <p>Capture what matters in the moment. A decision, an insight, a conversation. No friction, no complex interfaces. Just speak naturally and My-CoMind listens.</p>
-                </div>
-            </div>
-            
-            <div class="step-item">
-                <div class="step-visual reveal">
-                    <div class="step-circle">
-                        <i class="fas fa-brain"></i>
-                        <div class="step-number-badge">2</div>
-                    </div>
-                </div>
-                <div class="step-content reveal">
-                    <h3>It Connects</h3>
-                    <p>Decisions, context, and insights become part of your living timeline. Automatic transcription, intelligent categorization, and connection to related memories.</p>
-                </div>
-            </div>
-            
-            <div class="step-item">
-                <div class="step-visual reveal">
-                    <div class="step-circle">
-                        <i class="fas fa-infinity"></i>
-                        <div class="step-number-badge">3</div>
-                    </div>
-                </div>
-                <div class="step-content reveal">
-                    <h3>You Continue</h3>
-                    <p>When you return, you don't reconstruct. You pick up exactly where you left off. Ask "What did I decide?" and get the full reasoning, not just the outcome.</p>
-                </div>
-            </div>
+        <div class="value-card reveal" style="transition-delay:.15s">
+          <div class="value-icon blue"><i class="fas fa-lock"></i></div>
+          <h3>Private by design</h3>
+          <p>Your thinking is yours. Everything is encrypted, stored securely, and never shared or used to train AI models.</p>
         </div>
-    </section>
-
-    <!-- TESTIMONIALS -->
-    <section class="testimonials-section">
-        <div class="testimonials-container">
-            <div class="section-label reveal">Early Feedback</div>
-            <h2 class="reveal">What people are saying</h2>
-            
-            <div class="testimonial-card reveal">
-                <i class="fas fa-quote-left quote-icon"></i>
-                <p class="testimonial-text">
-				“Some days I felt like I spent more time remembering what I was doing
-				than actually doing it.
-				My-CoMind will help me reconnect my thoughts and decisions.”
-				</p>
-
-				<div class="author-name">Early Beta User</div>
-				<div class="author-role">Product Manager & Parent of two</div>
-            </div>
+        <div class="value-card reveal" style="transition-delay:.25s">
+          <div class="value-icon lavender"><i class="fas fa-bolt"></i></div>
+          <h3>Zero friction</h3>
+          <p>No complex setup, no elaborate workflows. Open the app, speak or type, and My-CoMind handles the rest.</p>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <section class="cta-section">
-        <div class="cta-orb cta-orb-1"></div>
-        <div class="cta-orb cta-orb-2"></div>
-        <div class="cta-container reveal">
-            <h2>Be among the first to experience My-CoMind</h2>
-            <p>We are building the first Cognitive Continuity System. Join early users helping shape how people work with their own thinking.</p>
-            <form action="https://formspree.io/f/xdawozpv" class="email-form" method="POST">
-                <input type="email" name="email" class="email-input" placeholder="Enter your email" required>
-                <button type="submit" class="btn-cta">Join the Waitlist</button>
-            </form>
-            
+  <!-- HOW IT WORKS -->
+  <section class="how-section" id="how">
+    <div class="container">
+      <div class="how-header reveal">
+        <span class="section-label">Simple by Design</span>
+        <h2 class="section-title">How It Works</h2>
+        <p class="section-sub" style="margin: 0 auto;">Three steps to never lose your thinking again.</p>
+      </div>
+      <div class="steps">
+        <div class="step-row reveal">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <h3>Capture</h3>
+            <p>Use voice or text to record a decision, insight, or conversation as it happens. In a meeting, on a walk, between tasks — wherever your thinking is, My-CoMind is there.</p>
+          </div>
         </div>
-    </section>
-
-    <footer>
-        <div class="footer-container">
-            <div class="footer-brand">
-                <img src="./mycomind_logo_full_transparent.png" alt="My-CoMind" class="footer-logo">
-                <p>Your Personal Cognitive Infrastructure. Preserving how you think, not just what you remember.</p>
-            </div>
-            <div class="footer-column">
-                <h4>Product</h4>
-                <a href="#product">Features</a>
-                <a href="#how">How It Works</a>
-                <a href="#problem">The Problem</a>
-            </div>          
-            <div class="footer-column">
-                <h4>Legal</h4>
-                <a href="privacy.html">Privacy Policy</a>
-                <a href="terms.html">Terms of Service</a>
-                <a href="contact.html">Contact</a>
-            </div>
+        <div class="step-row reveal" style="transition-delay:.15s">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <h3>Connect</h3>
+            <p>My-CoMind automatically categorizes your input and connects it to related thoughts across your history. What starts as a note becomes part of a living reasoning chain.</p>
+          </div>
         </div>
-        <div class="footer-bottom">
-            <p class="footer-copyright">© 2026 My-CoMind. All rights reserved.</p>
-            <div class="social-links">
-                <a href="https://www.linkedin.com/company/my-comind" class="social-link" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-            </div>
+        <div class="step-row reveal" style="transition-delay:.3s">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <h3>Continue</h3>
+            <p>When you return — tomorrow, next week, or months later — ask a question in plain language. My-CoMind surfaces the full context behind any decision, instantly.</p>
+          </div>
         </div>
-    </footer>
+      </div>
+    </div>
+  </section>
 
-    <script>
-        window.addEventListener('scroll', () => {
-            const navbar = document.getElementById('navbar');
-            if (window.scrollY > 50) navbar.classList.add('scrolled');
-            else navbar.classList.remove('scrolled');
-        });
+  <!-- PRODUCT SYSTEM -->
+  <section class="product-section" id="product">
+    <div class="container">
+      <div class="product-header reveal">
+        <span class="section-label" style="color:var(--green)">Inside the Product</span>
+        <h2 class="section-title">Built for the way you actually think</h2>
+        <p class="section-sub">A system designed around cognitive continuity — not just note-taking.</p>
+      </div>
 
-        const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    entry.target.classList.add('active');
-                }
-            });
-        }, observerOptions);
+      <div class="product-showcase reveal">
+        <div class="product-screenshot">
+          <div class="screenshot-bar">
+            <div class="dot-red"></div><div class="dot-yellow"></div><div class="dot-green"></div>
+          </div>
+          <img src="./CaptureView.png" alt="My-CoMind — Capture view">
+        </div>
+        <div class="product-text">
+          <h3>Capture without interrupting your flow</h3>
+          <p>The capture interface is designed for speed. One tap, speak or type, done. My-CoMind takes care of categorization, tagging, and linking automatically.</p>
+          <ul class="product-feature-list">
+            <li><i class="fas fa-check"></i> Voice and text input</li>
+            <li><i class="fas fa-check"></i> Auto-categorization (Decision, Insight, Conversation)</li>
+            <li><i class="fas fa-check"></i> Smart tagging — no manual work</li>
+            <li><i class="fas fa-check"></i> Instant save, always synced</li>
+          </ul>
+        </div>
+      </div>
 
-        document.querySelectorAll('.reveal, .problem-card, .feature-item, .step-item, .testimonial-card, .story-step, .work-step').forEach(el => observer.observe(el));
+      <div class="product-showcase reveal" style="margin-top:80px; direction:rtl">
+        <div class="product-screenshot" style="direction:ltr">
+          <div class="screenshot-bar">
+            <div class="dot-red"></div><div class="dot-yellow"></div><div class="dot-green"></div>
+          </div>
+          <img src="./TimeLine.jpeg" alt="My-CoMind — Timeline & knowledge graph view">
+        </div>
+        <div class="product-text" style="direction:ltr">
+          <h3>Your thinking, visualized over time</h3>
+          <p>See how your ideas evolve across days, weeks and months. The timeline connects related decisions, reveals patterns in your thinking, and makes your cognitive history searchable.</p>
+          <ul class="product-feature-list">
+            <li><i class="fas fa-check"></i> Chronological thinking timeline</li>
+            <li><i class="fas fa-check"></i> Visual knowledge graph</li>
+            <li><i class="fas fa-check"></i> Related memory connections</li>
+            <li><i class="fas fa-check"></i> Filter by type, tag, or date</li>
+          </ul>
+        </div>
+      </div>
 
-        const cards = document.querySelectorAll('.feature-item');
-        cards.forEach((card, index) => card.style.transitionDelay = `${index * 0.1}s`);
+      <div class="product-showcase reveal" style="margin-top:80px">
+        <div class="product-screenshot">
+          <div class="screenshot-bar">
+            <div class="dot-red"></div><div class="dot-yellow"></div><div class="dot-green"></div>
+          </div>
+          <img src="./ChatAssistant.png" alt="My-CoMind — AI assistant view">
+        </div>
+        <div class="product-text">
+          <h3>Ask anything about your own thinking</h3>
+          <p>The CoMind Assistant understands your history. Ask "Why did we decide X?" or "What did the client say about churn?" and get a complete, sourced answer drawn from your own captured context.</p>
+          <ul class="product-feature-list">
+            <li><i class="fas fa-check"></i> Natural language queries</li>
+            <li><i class="fas fa-check"></i> Answers grounded in your memories</li>
+            <li><i class="fas fa-check"></i> Full decision context, not just summaries</li>
+            <li><i class="fas fa-check"></i> Highlights connected memories</li>
+          </ul>
+        </div>
+      </div>
 
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            });
-        });
-    </script>
+      <div class="product-showcase reveal" style="margin-top:80px; direction:rtl">
+        <div class="product-screenshot" style="direction:ltr">
+          <div class="screenshot-bar">
+            <div class="dot-red"></div><div class="dot-yellow"></div><div class="dot-green"></div>
+          </div>
+          <img src="./Calendario_Briefing.png" alt="My-CoMind — Calendar Briefing view">
+        </div>
+        <div class="product-text" style="direction:ltr">
+          <h3>Walk into meetings already prepared</h3>
+          <p>Connect your email and let My-CoMind understand your upcoming meetings. Before each meeting, generate a personalized briefing based on your past conversations, decisions, and insights — so you always show up with full context.</p>
+          <ul class="product-feature-list">
+            <li><i class="fas fa-check"></i> Email & calendar integration</li>
+            <li><i class="fas fa-check"></i> Reads meeting title and description</li>
+            <li><i class="fas fa-check"></i> Generates AI briefing on demand</li>
+            <li><i class="fas fa-check"></i> Uses your own memory as context</li>
+            <li><i class="fas fa-check"></i> Helps you prepare in seconds</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DIFFERENTIATION -->
+  <section class="diff-section">
+    <div class="container">
+      <div class="diff-header reveal">
+        <span class="section-label">Why Not Just Use Notes</span>
+        <h2 class="section-title">Notes capture moments.<br><span>My-CoMind preserves thinking.</span></h2>
+        <p class="section-sub" style="margin: 0 auto 48px;">There's a fundamental difference between storing text and preserving cognitive continuity.</p>
+      </div>
+      <div class="diff-grid reveal">
+        <div>
+          <div class="diff-col-header old">Traditional Tools</div>
+          <div class="diff-cell old">Store static notes</div>
+          <div class="diff-cell old">Manual organization</div>
+          <div class="diff-cell old">Search documents</div>
+          <div class="diff-cell old">Memory fragments</div>
+          <div class="diff-cell old">Find information</div>
+          <div class="diff-cell old">Isolated entries</div>
+        </div>
+        <div>
+          <div class="diff-col-header new">My-CoMind</div>
+          <div class="diff-cell new"><i class="fas fa-check"></i> Preserves reasoning and context</div>
+          <div class="diff-cell new"><i class="fas fa-check"></i> Automatic connections and categorization</div>
+          <div class="diff-cell new"><i class="fas fa-check"></i> Recover decisions in natural language</div>
+          <div class="diff-cell new"><i class="fas fa-check"></i> Cognitive continuity across time</div>
+          <div class="diff-cell new"><i class="fas fa-check"></i> Understand the thinking behind information</div>
+          <div class="diff-cell new"><i class="fas fa-check"></i> Living knowledge graph that evolves</div>
+        </div>
+      </div>
+      <p class="diff-closing reveal">Your thinking becomes a continuous, searchable memory.</p>
+    </div>
+  </section>
+
+  <!-- TARGET USERS -->
+  <section class="users-section" id="users">
+    <div class="container">
+      <div class="users-header reveal">
+        <span class="section-label">Who It's For</span>
+        <h2 class="section-title">Built for people who think for a living</h2>
+        <p class="section-sub" style="margin: 0 auto;">If your work depends on context, decisions, and continuity — My-CoMind was built for you.</p>
+      </div>
+      <div class="users-grid">
+        <div class="user-card reveal">
+          <div class="user-avatar" style="background:rgba(0,102,204,.1)">👩‍💼</div>
+          <h3>Leaders & Managers</h3>
+          <p>Dozens of decisions a day, multiple projects, constant context-switching. My-CoMind keeps your reasoning organized so nothing gets lost between meetings.</p>
+          <span class="user-tag">Decision clarity</span>
+        </div>
+        <div class="user-card reveal" style="transition-delay:.1s">
+          <div class="user-avatar" style="background:rgba(0,201,167,.1)">🧑‍💻</div>
+          <h3>Founders & Builders</h3>
+          <p>You're making critical calls under uncertainty every day. My-CoMind gives you a record of your reasoning — so you can learn from your past thinking and explain decisions to your team.</p>
+          <span class="user-tag">Strategic continuity</span>
+        </div>
+        <div class="user-card reveal" style="transition-delay:.2s">
+          <div class="user-avatar" style="background:rgba(155,126,189,.1)">🧠</div>
+          <h3>Knowledge Workers</h3>
+          <p>Researchers, consultants, writers — anyone whose work produces insights that need to connect across time. Stop rebuilding context from scratch. Start where you left off.</p>
+          <span class="user-tag">Insight retention</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="cta-section">
+    <div class="cta-orb cta-orb-1"></div>
+    <div class="cta-orb cta-orb-2"></div>
+    <div class="cta-inner reveal">
+      <h2>Start thinking<br>without limits.</h2>
+      <p>My-CoMind is live and ready to use. Join people who are already capturing their thinking, connecting their ideas, and returning to full context — every time.</p>
+      <div class="cta-btns">
+        <a href="https://app.my-comind.com/login" class="btn-white" target="_blank">
+          <i class="fas fa-arrow-right"></i> Get Started Free
+        </a>
+        <a href="#demo" class="btn-white-outline">
+          <i class="fas fa-play"></i> Watch Demo
+        </a>
+      </div>
+      <p class="cta-note">No credit card required &nbsp;·&nbsp; Available now &nbsp;·&nbsp; Cancel anytime</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="./mycomind_logo_full_transparent.png" alt="My-CoMind" class="footer-logo">
+        <p>Personal cognitive infrastructure. Preserving how you think, not just what you remember.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <a href="#product">Features</a>
+        <a href="#how">How It Works</a>
+        <a href="#demo">Demo</a>
+        <a href="https://app.my-comind.com/login" target="_blank">Sign In</a>
+      </div>
+      <div class="footer-col">
+        <h4>Legal</h4>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms of Service</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copyright">© 2026 My-CoMind. All rights reserved.</p>
+      <div class="social-links">
+        <a href="https://www.linkedin.com/company/my-comind" class="social-link" target="_blank" aria-label="LinkedIn">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Navbar scroll
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 40);
+    });
+
+    // Reveal on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Smooth anchor scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', function(e) {
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+      });
+    });
+
+    // Video fallback — show placeholder if file missing
+    const video = document.getElementById('demoVideo');
+    if (video) {
+      video.addEventListener('error', () => {
+        const wrapper = video.parentElement;
+        wrapper.innerHTML = `
+          <div class="video-placeholder">
+            <div class="play-btn"><i class="fas fa-play" style="color:#fff"></i></div>
+            <p>Demo video coming soon</p>
+          </div>`;
+      });
+    }
+  </script>
 </body>
 </html>
