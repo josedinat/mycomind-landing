@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How Mentors Keep Context Between Sessions — My-CoMind for Mentors</title>
+  <meta name="description" content="Following ten founders means ten separate histories. How to walk into every mentoring session knowing exactly where you left off — without writing session notes or maintaining a CRM.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://www.my-comind.com/for/mentors">
+
+  <meta property="og:title" content="How Mentors Keep Context Between Sessions">
+  <meta property="og:description" content="Ten mentees means ten separate histories. Walk into every session knowing where you left off — without a CRM to fill in.">
+  <meta property="og:image" content="https://www.my-comind.com/og-image.png">
+  <meta property="og:url" content="https://www.my-comind.com/for/mentors">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="My-CoMind">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://www.my-comind.com/og-image.png">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "How Mentors Keep Context Between Sessions",
+    "url": "https://www.my-comind.com/for/mentors",
+    "description": "Continuity across multiple mentees without session notes or a CRM.",
+    "primaryImageOfPage": "https://www.my-comind.com/og-image.png",
+    "about": { "@type": "DefinedTerm", "name": "Cognitive Continuity", "url": "https://www.my-comind.com/resources/cognitive-continuity" },
+    "publisher": { "@type": "Organization", "name": "MY-COMIND INC.", "url": "https://www.my-comind.com/" }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.my-comind.com/" },
+      { "@type": "ListItem", "position": 2, "name": "For Mentors", "item": "https://www.my-comind.com/for/mentors" }
+    ]
+  }
+  </script>
+
+  <!-- Every question below is visible on the page, as Google requires. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do mentors keep context between sessions?",
+        "acceptedAnswer": { "@type": "Answer", "text": "By capturing the session itself rather than writing notes about it. The recording becomes a memory that joins everything else about that mentee, and the workspace for that person stays current on its own — so the next session opens with where things stand, what was decided and what is still open." }
+      },
+      {
+        "@type": "Question",
+        "name": "Do I have to write session notes?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No. You record the conversation, or dictate a couple of minutes afterwards, and the decisions, action items and open questions are extracted automatically. There are no fields to fill in and no folders to file into." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I keep each mentee separate?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Each mentee or company gets its own project, and material only enters a project when you explicitly share it there. Your personal memory stays personal by default." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is what my mentees tell me kept confidential?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Your memory is private by default and is never used to train AI models. Nothing is shared with an organization or another person unless you share it, and a shared memory can be withdrawn at any time. My-CoMind is operated by MY-COMIND INC. in Ontario, Canada, under PIPEDA and CASL." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I compare one topic across all the founders I follow?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. Memory Continuity takes a single subject — go-to-market, hiring, pricing — and returns one reading per project, so you can see who moved on it, who stalled, and what is still unresolved across everyone you follow." }
+      },
+      {
+        "@type": "Question",
+        "name": "What if I already use a meeting recorder?",
+        "acceptedAnswer": { "@type": "Answer", "text": "My-CoMind records natively with Live Capture and also imports transcripts from Fireflies. Imported material arrives as suggestions you approve before anything becomes a memory." }
+      }
+    ]
+  }
+  </script>
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%230066CC' rx='20' width='100' height='100'/><text x='50' y='70' font-size='50' text-anchor='middle' fill='white' font-family='Arial'>M</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+  <style>
+    :root {
+      --blue: #0066CC; --blue-dark: #0052A3; --green: #00C9A7; --amber: #FFB84D;
+      --charcoal: #1A1F36; --gray: #F5F7FA; --gray-light: #E8EBF0;
+      --white: #FFFFFF; --text-muted: rgba(26,31,54,.6);
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; color: var(--charcoal); background: var(--white); line-height: 1.6; }
+    .container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+
+    .site-bar {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 32px; border-bottom: 1px solid var(--gray-light);
+      position: sticky; top: 0; background: rgba(255,255,255,.94);
+      backdrop-filter: blur(16px); z-index: 50;
+    }
+    .site-bar img { height: 54px; display: block; }
+    .site-bar .bar-cta {
+      background: var(--blue); color: #fff; text-decoration: none;
+      padding: 9px 20px; border-radius: 50px; font-size: 14px; font-weight: 600;
+    }
+    .site-bar .bar-cta:hover { background: var(--blue-dark); }
+
+    .page-header { background: linear-gradient(160deg, #f0f6ff 0%, var(--white) 60%); padding: 64px 24px 52px; }
+    .page-header h1 { font-family: 'Poppins', sans-serif; font-size: clamp(30px, 4.5vw, 44px); font-weight: 800; line-height: 1.15; margin-bottom: 18px; }
+    .page-header h1 span { background: linear-gradient(135deg, var(--blue), var(--green)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .page-header .standfirst { font-size: 19px; color: var(--text-muted); line-height: 1.65; max-width: 640px; }
+    .breadcrumb { font-size: 13px; color: var(--text-muted); margin-bottom: 20px; }
+    .breadcrumb a { color: var(--blue); text-decoration: none; }
+    .breadcrumb a:hover { text-decoration: underline; }
+    .header-cta { margin-top: 30px; display: flex; gap: 14px; flex-wrap: wrap; }
+    .btn-solid {
+      background: var(--blue); color: #fff; text-decoration: none; padding: 14px 30px;
+      border-radius: 50px; font-weight: 600; font-size: 15.5px;
+      display: inline-flex; align-items: center; gap: 8px; transition: all .3s ease;
+    }
+    .btn-solid:hover { background: var(--blue-dark); transform: translateY(-2px); }
+    .btn-ghost {
+      background: transparent; color: var(--charcoal); border: 2px solid var(--gray-light);
+      text-decoration: none; padding: 12px 28px; border-radius: 50px; font-weight: 600; font-size: 15.5px;
+      display: inline-flex; align-items: center; gap: 8px; transition: all .3s ease;
+    }
+    .btn-ghost:hover { border-color: var(--blue); color: var(--blue); }
+
+    section { padding: 56px 24px; }
+    section.alt { background: var(--gray); }
+    section h2 { font-family: 'Poppins', sans-serif; font-size: 27px; font-weight: 700; margin-bottom: 16px; line-height: 1.25; }
+    section h3 { font-family: 'Poppins', sans-serif; font-size: 18.5px; font-weight: 700; margin: 26px 0 9px; }
+    section p { font-size: 17px; color: #3A4059; line-height: 1.75; margin-bottom: 18px; }
+    section ul { margin: 0 0 20px 22px; }
+    section li { font-size: 16.5px; color: #3A4059; line-height: 1.7; margin-bottom: 9px; }
+    section strong { color: var(--charcoal); font-weight: 600; }
+    section a { color: var(--blue); }
+
+    .steps { display: grid; gap: 16px; margin-top: 28px; }
+    .step {
+      background: var(--white); border: 2px solid var(--gray-light);
+      border-radius: 16px; padding: 24px 26px; display: flex; gap: 20px; align-items: flex-start;
+    }
+    .step .num {
+      flex-shrink: 0; width: 38px; height: 38px; border-radius: 50%;
+      background: var(--blue); color: #fff; display: flex; align-items: center;
+      justify-content: center; font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 16px;
+    }
+    .step h3 { margin: 0 0 7px; font-size: 17.5px; }
+    .step p { font-size: 15.5px; margin: 0; }
+
+    .shot { border-radius: 14px; overflow: hidden; background: var(--white); box-shadow: 0 18px 44px rgba(26,31,54,.14); border: 1px solid var(--gray-light); margin: 28px 0 10px; }
+    .shot-bar { display: flex; align-items: center; gap: 7px; padding: 10px 14px; background: #EDEFF3; border-bottom: 1px solid var(--gray-light); }
+    .shot-bar i { width: 10px; height: 10px; border-radius: 50%; display: block; }
+    .shot-bar .r { background: #FF5F57; } .shot-bar .y { background: #FEBC2E; } .shot-bar .g { background: #28C840; }
+    .shot img { width: 100%; height: auto; display: block; }
+    .shot-caption { font-size: 13px; color: var(--text-muted); text-align: center; font-style: italic; margin-bottom: 8px; }
+
+    .quote-box {
+      background: var(--white); border-radius: 20px; padding: 32px;
+      border-left: 5px solid var(--green); margin: 8px 0;
+      box-shadow: 0 12px 32px rgba(0,0,0,.05);
+    }
+    .quote-box p { font-family: 'Poppins', sans-serif; font-size: 18px; font-weight: 600; line-height: 1.55; color: var(--charcoal); margin-bottom: 14px; }
+    .quote-box .author { font-size: 14px; color: var(--text-muted); font-weight: 500; }
+
+    .faq-item { background: var(--white); border: 1px solid var(--gray-light); border-radius: 14px; margin-bottom: 12px; overflow: hidden; }
+    .faq-item summary {
+      cursor: pointer; list-style: none; padding: 19px 24px;
+      font-family: 'Poppins', sans-serif; font-size: 16px; font-weight: 600;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item summary::after { content: '\f078'; font-family: 'Font Awesome 6 Free'; font-weight: 900; font-size: 13px; color: var(--blue); transition: transform .25s ease; flex-shrink: 0; }
+    .faq-item[open] summary::after { transform: rotate(180deg); }
+    .faq-item summary:hover { color: var(--blue); }
+    .faq-answer { padding: 0 24px 20px; font-size: 15.5px; color: var(--text-muted); line-height: 1.75; }
+    .faq-answer a { color: var(--blue); }
+
+    .cta-bar {
+      background: linear-gradient(135deg, var(--blue), #0044AA);
+      color: #fff; padding: 44px 26px; text-align: center; border-radius: 20px;
+    }
+    .cta-bar h2 { font-family: 'Poppins', sans-serif; font-size: 24px; font-weight: 700; margin-bottom: 12px; color: #fff; }
+    .cta-bar p { opacity: .88; margin-bottom: 24px; font-size: 16px; color: #fff; }
+    .cta-btn {
+      background: #fff; color: var(--blue); padding: 15px 34px; border-radius: 50px;
+      font-weight: 700; font-size: 15.5px; text-decoration: none; display: inline-flex;
+      align-items: center; gap: 8px; transition: all .3s ease;
+    }
+    .cta-btn:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(0,0,0,.2); }
+
+    .keep-reading { border-top: 1px solid var(--gray-light); padding-top: 30px; margin-top: 8px; }
+    .kr-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .kr-grid a { display: block; text-decoration: none; color: inherit; border: 2px solid var(--gray-light); border-radius: 14px; padding: 18px 20px; transition: all .25s ease; }
+    .kr-grid a:hover { border-color: var(--blue); transform: translateY(-2px); }
+    .kr-grid strong { display: block; font-family: 'Poppins', sans-serif; font-size: 15.5px; margin-bottom: 5px; }
+    .kr-grid span { font-size: 13.5px; color: var(--text-muted); line-height: 1.5; }
+
+    .page-footer { background: var(--charcoal); color: #fff; padding: 40px 24px; text-align: center; }
+    .page-footer a { color: rgba(255,255,255,.65); text-decoration: none; font-size: 14px; }
+    .page-footer a:hover { color: #fff; }
+
+    @media (max-width: 640px) {
+      .site-bar { padding: 12px 18px; }
+      .kr-grid { grid-template-columns: 1fr; }
+      .step { flex-direction: column; gap: 14px; }
+    }
+  </style>
+  <script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+
+  <div class="site-bar">
+    <a href="/"><img src="/mycomind_logo_full_transparent.png" alt="My-CoMind"></a>
+    <a href="https://app.my-comind.com" class="bar-cta" target="_blank" rel="noopener">Start free</a>
+  </div>
+
+  <header class="page-header">
+    <div class="container">
+      <div class="breadcrumb"><a href="/">Home</a> &nbsp;/&nbsp; For Mentors</div>
+      <h1>Ten mentees means<br><span>ten separate histories</span></h1>
+      <p class="standfirst">Walk into every session already knowing where you left off — what was decided, what changed since, and what is still open. Without writing session notes, and without a CRM to fill in.</p>
+      <div class="header-cta">
+        <a href="https://app.my-comind.com" class="btn-solid" target="_blank" rel="noopener"><i class="fas fa-arrow-right"></i> Start for free</a>
+        <a href="#how" class="btn-ghost"><i class="fas fa-list-check"></i> See how it works</a>
+      </div>
+    </div>
+  </header>
+
+  <section>
+    <div class="container">
+      <h2>The problem is not memory. It is the switching.</h2>
+      <p>Mentoring one founder is easy to hold in your head. Following eight or ten is a different job. Each has a distinct arc — a pivot in March, a co-founder conversation you promised to revisit, a hiring decision that was still open last time. None of it is complicated on its own. What makes it hard is that you switch between them every few days, and each switch costs a reconstruction.</p>
+      <p>So the fifteen minutes before a session get spent skimming old notes, or the session opens with "remind me where we landed on..." — which puts the work of remembering onto the person you are meant to be helping.</p>
+
+      <h3>Why the usual tools do not fix it</h3>
+      <ul>
+        <li><strong>A CRM</strong> assumes a pipeline with stages. Mentoring is not a pipeline, and the useful context never fits the fields. So it goes in a free-text box, or nowhere.</li>
+        <li><strong>Session notes</strong> require you to write them, which happens reliably in quiet weeks and stops in busy ones — exactly the weeks that generate the most context.</li>
+        <li><strong>A meeting recorder</strong> gives you a transcript per session. Ten sessions later you have ten documents and still no answer to "where does this stand?".</li>
+      </ul>
+      <p>The common failure is the same in all three: they store what happened and leave you to reconstruct what it means. That gap has a name — <a href="/resources/cognitive-continuity">cognitive continuity</a> — and it is the actual problem.</p>
+    </div>
+  </section>
+
+  <section class="alt" id="how">
+    <div class="container">
+      <h2>What it looks like instead</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="num">1</div>
+          <div>
+            <h3>Record the session, or talk for two minutes after it</h3>
+            <p>Live Capture runs during the call and picks up the conversation, including the other participants. If you would rather not record, dictate a couple of minutes afterwards — it works the same way. Documents and decks can be dropped in too.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="num">2</div>
+          <div>
+            <h3>It files itself against the right founder</h3>
+            <p>Decisions, action items and open questions are pulled out automatically, and the session joins everything else about that person. No tagging, no folders, no naming convention to keep up.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="num">3</div>
+          <div>
+            <h3>Next time, open the workspace instead of your notes</h3>
+            <p>Where things stand today, the milestones that got them here, which decisions are in effect, which were superseded, and what is still unresolved. Ten seconds instead of fifteen minutes.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="shot">
+        <div class="shot-bar"><i class="r"></i><i class="y"></i><i class="g"></i></div>
+        <img src="/Workspace.png" alt="A living workspace for one mentee, showing current status, milestones and open points" loading="lazy">
+      </div>
+      <p class="shot-caption">One workspace per person you follow — current without being maintained</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <h2>The part that only works when you follow several</h2>
+      <p>Once each founder has their own project, a single question can be asked across all of them at once. Search <strong>“go-to-market”</strong> and you get one reading per company: who shifted approach and when, who has not touched it in two months, what is still unresolved.</p>
+      <p>This is the view that does not exist anywhere else, because it requires the per-person context to already be structured. It is useful to you as a mentor, and it is the view a program director normally has to request as a status update from everyone.</p>
+
+      <h3>Seeing a founder change direction</h3>
+      <p>Because positions are kept with their dates rather than overwritten, a change of direction stays visible instead of silently replacing what came before. You can see that a founder held one view of their ICP for four months and now holds another — which is often the most useful thing to raise in the next session, and the easiest thing to miss when you only see the current state.</p>
+      <p>It is descriptive, never a score. Changing your mind is usually evidence of learning; the point is to notice it, not to grade it.</p>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="container">
+      <h2>What your mentees tell you stays yours</h2>
+      <p>Mentoring runs on candour, and candour depends on confidentiality. That constraint shaped how the product works rather than being added to it afterwards.</p>
+      <ul>
+        <li>Your memory is <strong>private by default</strong> — nothing reaches an organization or another person unless you share it.</li>
+        <li>Sharing is <strong>per memory and explicit</strong>, and a shared memory can be withdrawn at any time.</li>
+        <li>Your content is <strong>never used to train AI models</strong>.</li>
+        <li>Built and operated by MY-COMIND INC. in Ontario, Canada, under PIPEDA and CASL.</li>
+      </ul>
+      <p>If you mentor through an accelerator, this is what lets you keep your own working context separate from what the program sees.</p>
+
+      <div class="quote-box">
+        <p>"My-CoMind has helped take my workflow to a new level. It lets me organize my clients, scale my operations, and deliver more relevant, actionable guidance — all without adding more work to my day."</p>
+        <div class="author"><strong>VentureLab Mentor</strong></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <h2>Questions mentors ask</h2>
+
+      <details class="faq-item" open>
+        <summary>How do mentors keep context between sessions?</summary>
+        <div class="faq-answer">By capturing the session itself rather than writing notes about it. The recording becomes a memory that joins everything else about that mentee, and the workspace for that person stays current on its own — so the next session opens with where things stand, what was decided and what is still open.</div>
+      </details>
+      <details class="faq-item">
+        <summary>Do I have to write session notes?</summary>
+        <div class="faq-answer">No. You record the conversation, or dictate a couple of minutes afterwards, and the decisions, action items and open questions are extracted automatically. There are no fields to fill in and no folders to file into.</div>
+      </details>
+      <details class="faq-item">
+        <summary>Can I keep each mentee separate?</summary>
+        <div class="faq-answer">Yes. Each mentee or company gets its own project, and material only enters a project when you explicitly share it there. Your personal memory stays personal by default.</div>
+      </details>
+      <details class="faq-item">
+        <summary>Is what my mentees tell me kept confidential?</summary>
+        <div class="faq-answer">Your memory is private by default and is never used to train AI models. Nothing is shared with an organization or another person unless you share it, and a shared memory can be withdrawn at any time. My-CoMind is operated by MY-COMIND INC. in Ontario, Canada, under PIPEDA and CASL. See the <a href="/privacy">privacy policy</a>.</div>
+      </details>
+      <details class="faq-item">
+        <summary>Can I compare one topic across all the founders I follow?</summary>
+        <div class="faq-answer">Yes. Memory Continuity takes a single subject — go-to-market, hiring, pricing — and returns one reading per project, so you can see who moved on it, who stalled, and what is still unresolved across everyone you follow.</div>
+      </details>
+      <details class="faq-item">
+        <summary>What if I already use a meeting recorder?</summary>
+        <div class="faq-answer">My-CoMind records natively with Live Capture and also imports transcripts from Fireflies. Imported material arrives as suggestions you approve before anything becomes a memory. See the <a href="/alternatives/fireflies">full comparison with Fireflies.ai</a>.</div>
+      </details>
+
+      <div style="margin-top:44px">
+        <div class="cta-bar">
+          <h2>Try it on your next session</h2>
+          <p>Capture one conversation, then open it again before the following session. That is the whole test. Free plan, no credit card.</p>
+          <a href="https://app.my-comind.com" class="cta-btn" target="_blank" rel="noopener">Start for free <i class="fas fa-arrow-right"></i></a>
+        </div>
+      </div>
+
+      <div class="keep-reading">
+        <div class="kr-grid">
+          <a href="/resources/cognitive-continuity">
+            <strong>What is cognitive continuity?</strong>
+            <span>The underlying idea, and a diagnostic you can run on whatever you use today.</span>
+          </a>
+          <a href="/glossary">
+            <strong>Glossary</strong>
+            <span>Cognitive drift, decision memory, context reconstruction and the rest.</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="page-footer">
+    <div class="container">
+      <p style="font-size:14px;color:rgba(255,255,255,.5);margin-bottom:12px;">
+        <a href="/resources">Resources</a> &nbsp;·&nbsp; <a href="/glossary">Glossary</a> &nbsp;·&nbsp; <a href="/">← Back to My-CoMind</a>
+      </p>
+      <p style="font-size:12px;color:rgba(255,255,255,.35);">© 2026 MY-COMIND INC. · Ontario, Canada</p>
+    </div>
+  </footer>
+
+</body>
+</html>
