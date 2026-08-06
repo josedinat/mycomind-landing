@@ -1,0 +1,7 @@
+# Everything in this repo is served as-is from the root, so anything that is
+# tooling rather than site content has to be kept out of the deployment.
+tools/
+
+# Unused second cut of the demo video (~26 MB). Only UsoMyCoMind.mp4 is
+# referenced by the site.
+UsoMyCoMind1.mp4
