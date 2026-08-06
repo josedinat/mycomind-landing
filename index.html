@@ -444,6 +444,9 @@
       border: 1px solid var(--gray-light);
     }
     .trust-card i { font-size: 20px; color: var(--green); margin-bottom: 14px; display: block; }
+    /* Inline SVG so it sits on the same baseline rhythm as the Font Awesome
+       icons in the sibling cards (Free build has no maple leaf glyph). */
+    .trust-card .leaf-icon { height: 23px; width: auto; margin-bottom: 14px; display: block; }
     .trust-card h4 { font-family: 'Poppins', sans-serif; font-size: 16px; font-weight: 700; margin-bottom: 8px; }
     .trust-card p { font-size: 14px; color: var(--text-muted); line-height: 1.65; }
 
@@ -619,7 +622,7 @@
       <div class="hero-social-proof">
         <div class="proof-item"><i class="fas fa-check-circle"></i> Free plan, no credit card</div>
         <div class="proof-item"><i class="fas fa-check-circle"></i> Live product</div>
-        <div class="proof-item"><i class="fas fa-check-circle"></i> Canadian company</div>
+        <div class="proof-item"><i class="fas fa-check-circle"></i> Proud to be Canadian</div>
       </div>
     </div>
   </section>
@@ -1056,8 +1059,14 @@
           <p>A memory only enters a project when you share it, it stays yours, and you can take it back out.</p>
         </div>
         <div class="trust-card reveal" style="transition-delay:.16s">
-          <i class="fas fa-maple-leaf"></i>
-          <h4>Canadian company</h4>
+          <!-- Font Awesome Free has no maple leaf, and a generic flag reads as
+               "some country" (or as a report/flag action). This is the actual
+               11-point leaf from the Flag of Canada — a national symbol, public
+               domain — inlined so it needs no icon library. -->
+          <svg class="leaf-icon" viewBox="2880 340 3840 4150" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Canada">
+            <path fill="#D52B1E" d="m4890 4430-45-863a95 95 0 0 1 111-98l859 151-116-320a65 65 0 0 1 20-73l941-762-212-99a65 65 0 0 1-34-79l186-572-542 115a65 65 0 0 1-73-38l-105-247-423 454a65 65 0 0 1-111-57l204-1052-327 189a65 65 0 0 1-91-27l-332-652-332 652a65 65 0 0 1-91 27l-327-189 204 1052a65 65 0 0 1-111 57l-423-454-105 247a65 65 0 0 1-73 38l-542-115 186 572a65 65 0 0 1-34 79l-212 99 941 762a65 65 0 0 1 20 73l-116 320 859-151a95 95 0 0 1 111 98l-45 863z"/>
+          </svg>
+          <h4>Proud to be Canadian</h4>
           <p>Built and operated by MY-COMIND INC., a company registered in Ontario, Canada, and run to Canadian privacy expectations (PIPEDA, CASL).</p>
         </div>
       </div>
