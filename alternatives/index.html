@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My-CoMind Alternatives &amp; Comparisons — Meeting AI, Notes and Memory Tools</title>
+  <meta name="description" content="How My-CoMind compares to Fireflies.ai, Notion and other meeting AI and note-taking tools. Transcripts and documents store text — cognitive continuity preserves decisions and how your thinking evolved.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://www.my-comind.com/alternatives">
+
+  <meta property="og:title" content="My-CoMind Alternatives &amp; Comparisons">
+  <meta property="og:description" content="How My-CoMind compares to Fireflies.ai, Notion and other meeting AI and note-taking tools.">
+  <meta property="og:image" content="https://www.my-comind.com/og-image.png">
+  <meta property="og:url" content="https://www.my-comind.com/alternatives">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="My-CoMind">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://www.my-comind.com/og-image.png">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.my-comind.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Alternatives", "item": "https://www.my-comind.com/alternatives" }
+    ]
+  }
+  </script>
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%230066CC' rx='20' width='100' height='100'/><text x='50' y='70' font-size='50' text-anchor='middle' fill='white' font-family='Arial'>M</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+  <style>
+    :root {
+      --blue: #0066CC; --blue-dark: #0052A3; --green: #00C9A7;
+      --charcoal: #1A1F36; --gray: #F5F7FA; --gray-light: #E8EBF0;
+      --white: #FFFFFF; --text-muted: rgba(26,31,54,.6);
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; color: var(--charcoal); background: var(--white); line-height: 1.6; }
+    .container { max-width: 860px; margin: 0 auto; padding: 0 24px; }
+
+    .site-bar {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 32px; border-bottom: 1px solid var(--gray-light);
+      position: sticky; top: 0; background: rgba(255,255,255,.94);
+      backdrop-filter: blur(16px); z-index: 50;
+    }
+    .site-bar img { height: 54px; }
+    .site-bar .bar-cta {
+      background: var(--blue); color: #fff; text-decoration: none;
+      padding: 9px 20px; border-radius: 50px; font-size: 14px; font-weight: 600;
+    }
+    .site-bar .bar-cta:hover { background: var(--blue-dark); }
+
+    .page-header { background: linear-gradient(160deg, #f0f6ff 0%, var(--white) 60%); padding: 72px 24px 56px; text-align: center; }
+    .page-header h1 { font-family: 'Poppins', sans-serif; font-size: clamp(28px, 4vw, 42px); font-weight: 800; line-height: 1.2; margin-bottom: 16px; }
+    .page-header h1 span { background: linear-gradient(135deg, var(--blue), var(--green)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .page-header p { font-size: 18px; color: var(--text-muted); max-width: 620px; margin: 0 auto; }
+    .breadcrumb { font-size: 13px; color: var(--text-muted); margin-bottom: 20px; }
+    .breadcrumb a { color: var(--blue); text-decoration: none; }
+    .breadcrumb a:hover { text-decoration: underline; }
+
+    .content-section { padding: 56px 24px; }
+    .content-section.alt { background: var(--gray); }
+    .content-section h2 { font-family: 'Poppins', sans-serif; font-size: 26px; font-weight: 700; margin-bottom: 20px; }
+    .content-section p { font-size: 16px; color: var(--text-muted); line-height: 1.7; margin-bottom: 16px; }
+
+    .compare-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 32px; }
+    .compare-card {
+      display: block; text-decoration: none; color: inherit;
+      background: var(--white); border: 2px solid var(--gray-light);
+      border-radius: 18px; padding: 28px 26px; transition: all .25s ease;
+    }
+    .compare-card:hover { border-color: var(--blue); transform: translateY(-3px); box-shadow: 0 18px 40px rgba(0,0,0,.07); }
+    .compare-card .tag {
+      display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: 1px;
+      text-transform: uppercase; color: var(--green); margin-bottom: 10px;
+    }
+    .compare-card h3 { font-family: 'Poppins', sans-serif; font-size: 19px; font-weight: 700; margin-bottom: 10px; }
+    .compare-card p { font-size: 14.5px; color: var(--text-muted); line-height: 1.6; margin-bottom: 14px; }
+    .compare-card .go { font-size: 14px; font-weight: 600; color: var(--blue); }
+
+    .glossary { background: var(--gray); border-left: 4px solid var(--green); border-radius: 16px; padding: 28px 30px; margin-top: 8px; }
+    .glossary h2 { font-size: 22px; margin-bottom: 12px; }
+    .glossary p { margin-bottom: 0; }
+
+    .cta-bar {
+      background: linear-gradient(135deg, var(--blue), #0044AA);
+      color: #fff; padding: 44px 24px; text-align: center; border-radius: 20px;
+    }
+    .cta-bar h3 { font-family: 'Poppins', sans-serif; font-size: 24px; font-weight: 700; margin-bottom: 12px; }
+    .cta-bar p { opacity: .85; margin-bottom: 24px; font-size: 16px; color: #fff; }
+    .cta-btn {
+      background: #fff; color: var(--blue); padding: 14px 32px; border-radius: 50px;
+      font-weight: 700; font-size: 15px; text-decoration: none; display: inline-flex;
+      align-items: center; gap: 8px; transition: all .3s ease;
+    }
+    .cta-btn:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(0,0,0,.2); }
+
+    .page-footer { background: var(--charcoal); color: #fff; padding: 40px 24px; text-align: center; }
+    .page-footer a { color: rgba(255,255,255,.65); text-decoration: none; font-size: 14px; }
+    .page-footer a:hover { color: #fff; }
+
+    @media (max-width: 640px) {
+      .compare-grid { grid-template-columns: 1fr; }
+      .site-bar { padding: 12px 18px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="site-bar">
+    <a href="/"><img src="/mycomind_logo_full_transparent.png" alt="My-CoMind"></a>
+    <a href="https://app.my-comind.com" class="bar-cta" target="_blank" rel="noopener">Start free</a>
+  </div>
+
+  <header class="page-header">
+    <div class="container">
+      <div class="breadcrumb"><a href="/">Home</a> &nbsp;/&nbsp; Alternatives</div>
+      <h1>Comparisons and<br><span>alternatives</span></h1>
+      <p>Most tools in this space store what was said or what was written. My-CoMind is built for what happens afterwards — the decisions, the open questions, and how the thinking changed.</p>
+    </div>
+  </header>
+
+  <section class="content-section">
+    <div class="container">
+      <h2>Pick the comparison closest to what you use today</h2>
+      <p>These pages are honest about where the other tool is genuinely better. The point isn't that transcription or documents are bad — it's that neither one gives you continuity when you come back to a topic three months later.</p>
+
+      <div class="compare-grid">
+        <a class="compare-card" href="/alternatives/fireflies">
+          <span class="tag">Meeting AI</span>
+          <h3>My-CoMind vs Fireflies.ai</h3>
+          <p>Fireflies transcribes every word. My-CoMind extracts the decisions, connects meetings about the same topic, and tracks how a position shifted.</p>
+          <span class="go">Read the comparison <i class="fas fa-arrow-right"></i></span>
+        </a>
+        <a class="compare-card" href="/alternatives/notion">
+          <span class="tag">Notes &amp; docs</span>
+          <h3>My-CoMind vs Notion</h3>
+          <p>Notion is a great place to put things you already understand. My-CoMind organizes itself and answers where a topic stands without you maintaining it.</p>
+          <span class="go">Read the comparison <i class="fas fa-arrow-right"></i></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-section alt">
+    <div class="container">
+      <div class="glossary">
+        <h2>What is cognitive continuity?</h2>
+        <p>Cognitive continuity is the ability to pick up exactly where you left off on any topic — with full context of the decisions made, the questions still open, and how your thinking evolved to get there. It is the difference between an archive you can search and a memory you can question. Transcript tools and note apps give you the first one; My-CoMind is built for the second.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="content-section">
+    <div class="container">
+      <div class="cta-bar">
+        <h3>Try it on one real conversation</h3>
+        <p>The free plan is enough to judge it — no credit card, nothing to install.</p>
+        <a href="https://app.my-comind.com" class="cta-btn" target="_blank" rel="noopener">Start for Free <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="page-footer">
+    <div class="container">
+      <p style="font-size:14px;color:rgba(255,255,255,.5);margin-bottom:12px;">
+        <a href="/">← Back to My-CoMind</a>
+      </p>
+      <p style="font-size:12px;color:rgba(255,255,255,.35);">© 2026 MY-COMIND INC. · Ontario, Canada</p>
+    </div>
+  </footer>
+
+
+  <!-- Vercel Web Analytics — cookieless, no personal data, no consent
+       banner required. Must be switched on once in the Vercel dashboard:
+       Project -> Analytics -> Enable. Until then this script 404s harmlessly. -->
+  <script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>

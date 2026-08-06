@@ -1,0 +1,44 @@
+# https://www.my-comind.com/robots.txt
+# MY-COMIND INC. — Ontario, Canada
+
+# --- Search engines: everything is open ---
+User-agent: *
+Allow: /
+
+# --- AI assistants / answer engines ---
+# Explicitly welcome. Being cited inside ChatGPT, Claude, Perplexity and
+# Google AI Overviews is a real acquisition channel for this product.
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# --- Nothing is blocked here, on purpose ---
+# Legacy pages (/demo, /poc) stay crawlable but carry
+# <meta name="robots" content="noindex,follow">. Blocking them here would stop
+# crawlers from ever reading that noindex, so they would linger in the index
+# as thin duplicates of the homepage.
+
+Sitemap: https://www.my-comind.com/sitemap.xml

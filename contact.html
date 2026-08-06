@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us — My-CoMind</title>
     <meta name="description" content="Get in touch with the My-CoMind team. We're here to help you preserve your thinking.">
+    <link rel="canonical" href="https://www.my-comind.com/contact">
+    <meta name="robots" content="index, follow">
+    <meta property="og:image" content="https://www.my-comind.com/og-image.png">
     
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
@@ -405,13 +408,13 @@
 <body>
     <!-- NAVIGATION -->
     <nav id="navbar">
-        <a href="index.html"><img src="./mycomind_logo_full_transparent.png" alt="My-CoMind" class="nav-logo"></a>
+        <a href="/"><img src="/mycomind_logo_full_transparent.png" alt="My-CoMind" class="nav-logo"></a>
         <div class="nav-links">
-            <a href="index.html#problem" class="nav-link">The Problem</a>
-            <a href="index.html#product" class="nav-link">Product</a>
-            <a href="index.html#how" class="nav-link">How It Works</a>
+            <a href="/#diff" class="nav-link">Why My-CoMind</a>
+            <a href="/#features" class="nav-link">Features</a>
+            <a href="/#pricing" class="nav-link">Pricing</a>
         </div>
-        <a href="index.html#cta" class="nav-cta">Get Early Access</a>
+        <a href="https://app.my-comind.com" class="nav-cta" target="_blank" rel="noopener">Get Started Free</a>
     </nav>
 
     <!-- CONTACT SECTION -->
@@ -476,7 +479,7 @@
                         </div>
                         <div class="method-content">
                             <h3>Privacy & Legal</h3>
-                            <p><a href="privacy.html">Privacy Policy</a> & <a href="terms.html">Terms</a></p>
+                            <p><a href="/privacy">Privacy Policy</a> & <a href="/terms">Terms</a></p>
                             <p style="font-size: 13px; margin-top: 4px;">Your data belongs to you</p>
                         </div>
                     </div>
@@ -547,20 +550,20 @@
     <footer>
         <div class="footer-container">
             <div class="footer-brand">
-                <img src="./mycomind_logo_full_transparent.png" alt="My-CoMind" class="footer-logo">
+                <img src="/mycomind_logo_full_transparent.png" alt="My-CoMind" class="footer-logo">
                 <p>Your Personal Cognitive Infrastructure. Preserving how you think, not just what you remember.</p>
             </div>
             <div class="footer-column">
                 <h4>Product</h4>
-                <a href="index.html#product">Features</a>
-                <a href="index.html#how">How It Works</a>
-                <a href="index.html#problem">The Problem</a>
+                <a href="/#features">Features</a>
+                <a href="/#more">The rest of the system</a>
+                <a href="/#pricing">Pricing</a>
             </div>          
             <div class="footer-column">
                 <h4>Legal</h4>
-                <a href="privacy.html">Privacy Policy</a>
-                <a href="terms.html">Terms of Service</a>
-                <a href="contact.html">Contact</a>
+                <a href="/privacy">Privacy Policy</a>
+                <a href="/terms">Terms of Service</a>
+                <a href="/contact">Contact</a>
             </div>
         </div>
         <div class="footer-bottom">
@@ -570,5 +573,10 @@
             </div>
         </div>
     </footer>
+
+  <!-- Vercel Web Analytics — cookieless, no personal data, no consent
+       banner required. Must be switched on once in the Vercel dashboard:
+       Project -> Analytics -> Enable. Until then this script 404s harmlessly. -->
+  <script defer src="/_vercel/insights/script.js"></script>
 </body>
 </html>
