@@ -434,10 +434,41 @@
       <p>This is why “just put it all in the prompt” is a weaker answer than it sounds, and why the useful unit is not the volume of material retrieved but whether decisions carry status, open questions persist, and superseded positions are marked as superseded. Those are properties of how the material is <em>structured</em>, not of how much of it fits in a window.</p>
       <p>The distinction between a context window and persistent memory is set out in the <a href="/glossary#persistent-ai-memory">glossary</a>.</p>
 
-      <h2>Where continuity comes in</h2>
-      <p>Reducing reconstruction to near zero requires the state to be maintained rather than rebuilt: material about a topic converging on its own, decisions carrying their own status, open questions persisting until answered, and the reasoning preserved next to the conclusion.</p>
-      <p>That property is what we call <a href="/resources/cognitive-continuity">cognitive continuity</a> — the ability to resume a topic with the decisions in effect, the questions still open, and the reasoning intact. Context reconstruction is what you pay when you do not have it.</p>
-      <p>My-CoMind is built for exactly this, but the framing is more useful than any product. Run the diagnostic against whatever you use today; if reconstruction is cheap for you already, you do not need us.</p>
+      <h2 id="what-we-do">Where continuity comes in — and what that actually means in a product</h2>
+      <p>Reducing reconstruction to near zero requires the state to be <em>maintained</em> rather than rebuilt. That property is what we call <a href="/resources/cognitive-continuity">cognitive continuity</a>, and context reconstruction is what you pay when you do not have it.</p>
+      <p>That is the concept. The fair next question is what a tool does about it, so here is ours mapped directly onto the four failures above — each one is a thing the product does, not a benefit statement.</p>
+
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>The failure</th><th>What My-CoMind does about it</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>The topic is scattered across sources</td>
+              <td>Record the meeting, paste the note, or drop in the PDF — that is the entire filing step. Memories about the same topic then gather into one workspace on their own. No tags, no folders, no deciding where something goes.</td>
+            </tr>
+            <tr>
+              <td>Decisions have no status</td>
+              <td>Decisions are extracted as items rather than left as sentences. When a later decision supersedes an earlier one, the workspace shows which is in effect and links back to the one it replaced, instead of showing you two contradictory statements.</td>
+            </tr>
+            <tr>
+              <td>Open questions stop being tracked</td>
+              <td>Open points are carried in the workspace and persist across sessions until they are answered. Answering one in place is what closes it — nothing quietly falls off the list because a month passed.</td>
+            </tr>
+            <tr>
+              <td>Reasoning is discarded once the conclusion exists</td>
+              <td>One recording becomes one memory, so the reasoning stays attached to the decision it produced. Asking “why did we choose this?” returns the reasoning with the source memories cited, and Cognitive Drift shows the sequence of positions with real dates.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>Put together, opening a workspace answers the four questions from the diagnostic at the top of this page — where it stands, which decisions hold, what is open, and why — without you re-reading anything. That is the whole product thesis in one sentence.</p>
+
+      <div class="callout">
+        <p><strong>Where it does not help.</strong> It cannot recover what was never captured. If a decision was made in a corridor and nobody recorded it anywhere, no system has it. What changes is the cost of keeping it: capture has to be cheap enough that it survives busy weeks, which is why the filing step is the part we removed rather than the part we optimised.</p>
+      </div>
+
+      <p>And the framing matters more than the tool. Run the diagnostic against whatever you use today — if reconstruction is already cheap for you, you do not need us.</p>
 
       <div class="cta-bar">
         <h2>See what zero reconstruction feels like</h2>
