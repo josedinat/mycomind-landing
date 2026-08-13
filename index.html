@@ -625,6 +625,23 @@
       padding: 5px 14px; border-radius: 50px; font-size: 12px; font-weight: 600;
     }
 
+    /* AUDIT INVITE */
+    .audit-invite {
+      margin-top: 40px; background: var(--white); border: 2px solid var(--gray-light);
+      border-radius: 20px; padding: 30px 34px; display: flex; align-items: center;
+      justify-content: space-between; gap: 28px; transition: border-color .25s ease;
+    }
+    .audit-invite:hover { border-color: var(--blue); }
+    .audit-invite h3 { font-family: 'Poppins', sans-serif; font-size: 19px; font-weight: 700; margin-bottom: 8px; }
+    .audit-invite p { font-size: 15px; color: var(--text-muted); line-height: 1.65; margin: 0; }
+    .audit-invite-cta {
+      flex-shrink: 0; display: inline-flex; align-items: center; gap: 9px;
+      background: var(--blue); color: #fff; text-decoration: none;
+      padding: 14px 26px; border-radius: 50px; font-weight: 600; font-size: 15px;
+      transition: all .3s ease;
+    }
+    .audit-invite-cta:hover { background: var(--blue-dark); transform: translateY(-2px); box-shadow: 0 12px 28px rgba(0,102,204,.24); }
+
     /* TRUST */
     .trust-section { padding: 90px 24px; background: var(--white); }
     .trust-inner { max-width: 900px; margin: 0 auto; text-align: center; }
@@ -749,6 +766,8 @@
       .reels-container { max-width: 320px; }
       .quote-box { padding: 28px 24px; }
       .feature-panel { padding: 24px 18px; }
+      .audit-invite { flex-direction: column; align-items: stretch; text-align: center; padding: 26px 22px; }
+      .audit-invite-cta { justify-content: center; }
       /* Tabs scroll horizontally instead of wrapping into 3 stacked rows.
          No negative margins here: bleeding past .container widens the page
          and drags every centered heading off-centre on a 390px screen. */
@@ -1248,6 +1267,20 @@
           <span class="user-tag">Insight retention</span>
         </div>
       </div>
+
+      <!-- Placed right after the role cards on purpose: the visitor has just
+           recognised themselves in one, which is the same gesture the audit
+           opens with. Also the shortest crawl path to /context-audit — the
+           home page is what gets re-crawled most often. -->
+      <div class="audit-invite reveal">
+        <div class="audit-invite-text">
+          <h3>Not sure this is a problem for you?</h3>
+          <p>Five questions on how many separate, evolving situations you are carrying — and how much of that history would survive if you stepped away. Nothing is stored.</p>
+        </div>
+        <a href="/context-audit" class="audit-invite-cta">
+          Take the Context Load Audit <i class="fas fa-arrow-right"></i>
+        </a>
+      </div>
     </div>
   </section>
 
@@ -1362,7 +1395,9 @@
       </div>
       <div class="footer-col">
         <h4>Learn</h4>
+        <a href="/context-audit">Context Load Audit</a>
         <a href="/resources">Resources</a>
+        <a href="/resources/context-reconstruction">Context reconstruction</a>
         <a href="/resources/cognitive-continuity">What is cognitive continuity?</a>
         <a href="/glossary">Glossary</a>
         <a href="/for/mentors">For mentors</a>
