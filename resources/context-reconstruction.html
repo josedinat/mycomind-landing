@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Context Reconstruction: What It Is, Why It Happens, and How to Reduce It</title>
+  <meta name="description" content="Context reconstruction is the work of rebuilding the state of a topic before you can contribute to it — skimming old notes, searching Slack, asking where something landed. What the research says about its cost — including recent 2023-2024 studies — and four ways to reduce it.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://www.my-comind.com/resources/context-reconstruction">
+
+  <meta property="og:title" content="Context Reconstruction: The Work You Do Before You Can Do the Work">
+  <meta property="og:description" content="Most knowledge workers don't have a memory problem. They have a context reconstruction problem. What the research says, and how to estimate your own cost.">
+  <meta property="og:image" content="https://www.my-comind.com/og-image.png">
+  <meta property="og:url" content="https://www.my-comind.com/resources/context-reconstruction">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="My-CoMind">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://www.my-comind.com/og-image.png">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Context Reconstruction: What It Is, Why It Happens, and How to Reduce It",
+    "description": "Context reconstruction is the work of rebuilding the state of a topic before being able to contribute to it. What the research says about its cost, and four ways to reduce it.",
+    "mainEntityOfPage": "https://www.my-comind.com/resources/context-reconstruction",
+    "image": "https://www.my-comind.com/og-image.png",
+    "datePublished": "2026-08-06",
+    "dateModified": "2026-08-06",
+    "about": { "@type": "DefinedTerm", "name": "Context Reconstruction" },
+    "citation": [
+      "Mark, G., Gonzalez, V. M., & Harris, J. (2005). No task left behind? Examining the nature of fragmented work. ACM CHI 2005. https://doi.org/10.1145/1054972.1055017",
+      "Mark, G., Gudith, D., & Klocke, U. (2008). The cost of interrupted work: More speed and stress. ACM CHI 2008. https://doi.org/10.1145/1357054.1357072",
+      "Microsoft. (2023). Microsoft Work Trend Index 2023: Will AI fix work?",
+      "Feldman, S., & Sherman, C. (2004). The high cost of not finding information. IDC White Paper #29127.",
+      "Hirsch, P., Moretti, L., Askin, S., & Koch, I. (2023). Examining the cognitive processes underlying resumption costs in task-interruption contexts. Memory & Cognition, 52(2), 271-284. https://doi.org/10.3758/s13421-023-01458-8",
+      "Zhang, H., Kawashima, T., & Shinohara, K. (2023). Interventions to reduce the negative consequences of interruptions on task performance. Applied Cognitive Psychology, 37(6), 1328-1340. https://doi.org/10.1002/acp.4126",
+      "Jin, H., Liu, L., Luo, Z., Meng, S., & Zhao, Y. (2025). The effects of different interruption conditions on mental workload. Ergonomics, 68(8), 1274-1292. https://doi.org/10.1080/00140139.2024.2400129",
+      "Gupta, A., Sheth, I., Raina, V., Gales, M., & Fritz, M. (2024). LLM task interference: An initial study on the impact of task-switch in conversational history. EMNLP 2024, 14633-14652."
+    ],
+    "author": { "@type": "Organization", "name": "MY-COMIND INC." },
+    "publisher": { "@type": "Organization", "name": "MY-COMIND INC.", "url": "https://www.my-comind.com/" }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.my-comind.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Resources", "item": "https://www.my-comind.com/resources" },
+      { "@type": "ListItem", "position": 3, "name": "Context Reconstruction", "item": "https://www.my-comind.com/resources/context-reconstruction" }
+    ]
+  }
+  </script>
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%230066CC' rx='20' width='100' height='100'/><text x='50' y='70' font-size='50' text-anchor='middle' fill='white' font-family='Arial'>M</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+  <style>
+    :root {
+      --blue: #0066CC; --blue-dark: #0052A3; --green: #00C9A7;
+      --charcoal: #1A1F36; --gray: #F5F7FA; --gray-light: #E8EBF0;
+      --white: #FFFFFF; --text-muted: rgba(26,31,54,.6);
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; color: var(--charcoal); background: var(--white); line-height: 1.6; }
+    .container { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+
+    .site-bar {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 32px; border-bottom: 1px solid var(--gray-light);
+      position: sticky; top: 0; background: rgba(255,255,255,.94);
+      backdrop-filter: blur(16px); z-index: 50;
+    }
+    .site-bar img { height: 54px; display: block; }
+    .site-bar .bar-cta {
+      background: var(--blue); color: #fff; text-decoration: none;
+      padding: 9px 20px; border-radius: 50px; font-size: 14px; font-weight: 600;
+    }
+    .site-bar .bar-cta:hover { background: var(--blue-dark); }
+
+    .page-header { background: linear-gradient(160deg, #f0f6ff 0%, var(--white) 60%); padding: 64px 24px 48px; }
+    .page-header h1 { font-family: 'Poppins', sans-serif; font-size: clamp(30px, 4.5vw, 44px); font-weight: 800; line-height: 1.15; margin-bottom: 18px; }
+    .page-header h1 span { background: linear-gradient(135deg, var(--blue), var(--green)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .page-header .standfirst { font-size: 19px; color: var(--text-muted); line-height: 1.65; }
+    .breadcrumb { font-size: 13px; color: var(--text-muted); margin-bottom: 20px; }
+    .breadcrumb a { color: var(--blue); text-decoration: none; }
+    .breadcrumb a:hover { text-decoration: underline; }
+
+    article { padding: 56px 24px 24px; }
+    article h2 { font-family: 'Poppins', sans-serif; font-size: 27px; font-weight: 700; margin: 48px 0 16px; line-height: 1.25; scroll-margin-top: 90px; }
+    article h2:first-of-type { margin-top: 0; }
+    article h3 { font-family: 'Poppins', sans-serif; font-size: 19px; font-weight: 700; margin: 30px 0 10px; }
+    article p { font-size: 17px; color: #3A4059; line-height: 1.75; margin-bottom: 18px; }
+    article ul, article ol { margin: 0 0 20px 22px; }
+    article li { font-size: 17px; color: #3A4059; line-height: 1.7; margin-bottom: 10px; }
+    article strong { color: var(--charcoal); font-weight: 600; }
+    article a { color: var(--blue); }
+
+    .definition {
+      background: var(--gray); border-left: 5px solid var(--green);
+      border-radius: 16px; padding: 28px 30px; margin: 8px 0 34px;
+    }
+    .definition p { font-family: 'Poppins', sans-serif; font-size: 20px; font-weight: 600; line-height: 1.55; color: var(--charcoal); margin: 0; }
+    .definition .label { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--green); display: block; margin-bottom: 12px; font-family: 'Inter', sans-serif; }
+
+    .callout {
+      background: rgba(0,102,204,.05); border: 1px solid rgba(0,102,204,.15);
+      border-radius: 14px; padding: 22px 26px; margin: 28px 0;
+    }
+    .callout p:last-child { margin-bottom: 0; }
+    .callout p { font-size: 16px; }
+
+    .scene {
+      border-left: 3px solid var(--gray-light); padding-left: 22px; margin: 26px 0;
+    }
+    .scene p { font-size: 17px; color: #3A4059; margin-bottom: 10px; }
+    .scene p:last-child { margin-bottom: 0; }
+
+    .stat-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 30px 0; }
+    .stat {
+      background: var(--gray); border-radius: 14px; padding: 22px 20px; text-align: center;
+    }
+    .stat .n { font-family: 'Poppins', sans-serif; font-size: 30px; font-weight: 800; color: var(--blue); display: block; line-height: 1.1; }
+    .stat .l { font-size: 13.5px; color: var(--text-muted); line-height: 1.5; margin-top: 8px; display: block; }
+    .stat .src { font-size: 11px; color: var(--text-muted); opacity: .8; margin-top: 8px; display: block; }
+    .stat .src a { color: inherit; }
+
+    /* CALCULATOR */
+    .calc {
+      background: var(--charcoal); color: #fff; border-radius: 22px;
+      padding: 34px 34px 30px; margin: 36px 0;
+    }
+    .calc h3 { font-family: 'Poppins', sans-serif; font-size: 22px; font-weight: 700; margin: 0 0 8px; color: #fff; }
+    .calc .intro { font-size: 15px; color: rgba(255,255,255,.6); margin-bottom: 26px; line-height: 1.6; }
+    .calc-field { margin-bottom: 24px; }
+    .calc-field label { display: block; font-size: 15px; font-weight: 500; margin-bottom: 12px; color: rgba(255,255,255,.9); }
+    .calc-input { display: flex; align-items: center; gap: 16px; }
+    .calc-input input[type=range] {
+      flex: 1; -webkit-appearance: none; appearance: none; height: 6px;
+      background: rgba(255,255,255,.18); border-radius: 4px; outline-offset: 4px;
+    }
+    .calc-input input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none; appearance: none; width: 22px; height: 22px;
+      border-radius: 50%; background: var(--green); cursor: pointer; border: none;
+    }
+    .calc-input input[type=range]::-moz-range-thumb {
+      width: 22px; height: 22px; border-radius: 50%; background: var(--green);
+      cursor: pointer; border: none;
+    }
+    .calc-input input[type=number] {
+      width: 84px; padding: 9px 10px; border-radius: 9px; border: 1px solid rgba(255,255,255,.2);
+      background: rgba(255,255,255,.08); color: #fff; font-family: 'Inter', sans-serif;
+      font-size: 15px; font-weight: 600; text-align: center; -moz-appearance: textfield;
+    }
+    .calc-input input[type=number]::-webkit-outer-spin-button,
+    .calc-input input[type=number]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+    .calc-result {
+      border-top: 1px solid rgba(255,255,255,.14); margin-top: 30px; padding-top: 26px;
+      text-align: center;
+    }
+    .calc-result .big {
+      font-family: 'Poppins', sans-serif; font-size: clamp(34px, 7vw, 46px);
+      font-weight: 800; color: var(--green); display: block; line-height: 1.1;
+    }
+    .calc-result .cmp { font-size: 16px; color: rgba(255,255,255,.75); margin-top: 12px; line-height: 1.6; }
+    .calc-result .cmp strong { color: #fff; }
+    .calc-note { font-size: 12.5px; color: rgba(255,255,255,.42); margin-top: 20px; line-height: 1.6; text-align: center; }
+
+    .table-scroll { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; margin: 28px 0; font-size: 15.5px; }
+    th { text-align: left; padding: 13px 14px; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; background: var(--gray); border-bottom: 2px solid var(--gray-light); }
+    td { padding: 13px 14px; border-bottom: 1px solid var(--gray-light); vertical-align: top; color: #3A4059; }
+    td:first-child { font-weight: 600; color: var(--charcoal); width: 32%; }
+
+    .toc { background: var(--gray); border-radius: 14px; padding: 24px 28px; margin-bottom: 40px; }
+    .toc h2 { font-size: 13px !important; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-muted); margin: 0 0 14px !important; font-family: 'Inter', sans-serif; font-weight: 700; }
+    .toc ol { margin: 0 0 0 20px; }
+    .toc li { font-size: 15.5px; margin-bottom: 8px; }
+    .toc a { color: var(--blue); text-decoration: none; }
+    .toc a:hover { text-decoration: underline; }
+
+    .refs { background: var(--gray); border-radius: 14px; padding: 26px 30px; margin-top: 44px; }
+    .refs h2 { font-size: 17px !important; margin: 0 0 16px !important; }
+    .refs ol { margin: 0 0 0 20px; }
+    .refs li { font-size: 14px; color: var(--text-muted); line-height: 1.65; margin-bottom: 12px; }
+    .refs a { color: var(--blue); word-break: break-word; }
+
+    .keep-reading { border-top: 1px solid var(--gray-light); margin-top: 44px; padding-top: 32px; }
+    .keep-reading h2 { font-size: 20px !important; margin: 0 0 18px !important; }
+    .kr-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .kr-grid a {
+      display: block; text-decoration: none; color: inherit;
+      border: 2px solid var(--gray-light); border-radius: 14px; padding: 18px 20px;
+      transition: all .25s ease;
+    }
+    .kr-grid a:hover { border-color: var(--blue); transform: translateY(-2px); }
+    .kr-grid strong { display: block; font-family: 'Poppins', sans-serif; font-size: 15.5px; margin-bottom: 5px; }
+    .kr-grid span { font-size: 13.5px; color: var(--text-muted); line-height: 1.5; }
+
+    .cta-bar {
+      background: linear-gradient(135deg, var(--blue), #0044AA);
+      color: #fff; padding: 42px 26px; text-align: center; border-radius: 20px; margin: 48px 0 8px;
+    }
+    .cta-bar h2 { font-family: 'Poppins', sans-serif; font-size: 23px; font-weight: 700; margin: 0 0 12px !important; color: #fff; }
+    .cta-bar p { opacity: .88; margin-bottom: 22px; font-size: 16px; color: #fff; }
+    .cta-btn {
+      background: #fff; color: var(--blue); padding: 14px 32px; border-radius: 50px;
+      font-weight: 700; font-size: 15px; text-decoration: none; display: inline-flex;
+      align-items: center; gap: 8px; transition: all .3s ease;
+    }
+    .cta-btn:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(0,0,0,.2); }
+
+    .page-footer { background: var(--charcoal); color: #fff; padding: 40px 24px; text-align: center; margin-top: 40px; }
+    .page-footer a { color: rgba(255,255,255,.65); text-decoration: none; font-size: 14px; }
+    .page-footer a:hover { color: #fff; }
+
+    @media (max-width: 640px) {
+      .site-bar { padding: 12px 18px; }
+      .kr-grid { grid-template-columns: 1fr; }
+      .stat-row { grid-template-columns: 1fr; }
+      article { padding: 40px 24px 20px; }
+      .calc { padding: 26px 22px 24px; }
+      td:first-child { width: 40%; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      * { transition-duration: .01ms !important; }
+    }
+  </style>
+  <script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+
+  <div class="site-bar">
+    <a href="/"><img src="/mycomind_logo_full_transparent.png" alt="My-CoMind"></a>
+    <a href="https://app.my-comind.com" class="bar-cta" target="_blank" rel="noopener">Start free</a>
+  </div>
+
+  <header class="page-header">
+    <div class="container">
+      <div class="breadcrumb"><a href="/">Home</a> &nbsp;/&nbsp; <a href="/resources">Resources</a> &nbsp;/&nbsp; Context Reconstruction</div>
+      <h1>Context reconstruction: <span>the work you do before you can do the work</span></h1>
+      <p class="standfirst">Most knowledge workers don't have a memory problem. They have a reconstruction problem — and because it arrives in five-minute pieces, it never shows up anywhere as a cost.</p>
+    </div>
+  </header>
+
+  <article>
+    <div class="container">
+
+      <div class="definition">
+        <span class="label">Definition</span>
+        <p>Context reconstruction is the work of rebuilding the state of a topic — what was decided, what is still open, and why — before you are able to contribute to it again.</p>
+      </div>
+
+      <nav class="toc">
+        <h2>On this page</h2>
+        <ol>
+          <li><a href="#scene">The five minutes before the meeting</a></li>
+          <li><a href="#research">What the research actually shows</a></li>
+          <li><a href="#still-true">“That research is twenty years old” — is it still true?</a></li>
+          <li><a href="#not-search">Why it isn't a search problem</a></li>
+          <li><a href="#estimate">Estimate your own cost</a></li>
+          <li><a href="#sources">The four sources of reconstruction work</a></li>
+          <li><a href="#reduce">Four ways to reduce it</a></li>
+          <li><a href="#ai">The same problem inside the AI</a></li>
+          <li><a href="#references">References</a></li>
+        </ol>
+      </nav>
+
+      <h2 id="scene">The five minutes before the meeting</h2>
+      <p>You have a call in ten minutes. You know you have discussed this topic before. You know a decision was made. You are fairly sure something was left unresolved.</p>
+
+      <div class="scene">
+        <p>So you open the transcript from the last session and skim it.</p>
+        <p>Then the document, because the detail you want is probably there.</p>
+        <p>Then Slack, because you remember someone raising an objection.</p>
+        <p>Then your calendar, to work out when this actually happened.</p>
+        <p>And about five minutes later: <em>“right — that's where we left off.”</em></p>
+      </div>
+
+      <p>Nothing went wrong here. Nothing was lost, nothing was deleted, no tool failed. Every piece of information was exactly where it should have been.</p>
+      <p>And you still had to spend five minutes rebuilding a picture you already had once, because the picture itself was never stored — only the raw material it was made from.</p>
+      <p>That is context reconstruction. It feels like preparation, which is why it is almost never counted as a cost. It happens a few times a day, in amounts too small to complain about, distributed across enough people that it never appears in anyone's numbers.</p>
+
+      <h2 id="research">What the research actually shows</h2>
+      <p>The cost of resuming interrupted work is one of the better-studied areas of human–computer interaction, and the findings are consistently worse than people's intuition.</p>
+
+      <div class="stat-row">
+        <div class="stat">
+          <span class="n">~23 min</span>
+          <span class="l">to fully return to a task after an interruption</span>
+          <span class="src">Mark et al., CHI 2005</span>
+        </div>
+        <div class="stat">
+          <span class="n">~3 min</span>
+          <span class="l">average time on one task before switching</span>
+          <span class="src">Mark et al., CHI 2005</span>
+        </div>
+        <div class="stat">
+          <span class="n">1,200+</span>
+          <span class="l">app and window switches per day</span>
+          <span class="src">Microsoft WTI, 2023</span>
+        </div>
+      </div>
+
+      <p>The 2005 field study by Gloria Mark and colleagues at UC Irvine followed knowledge workers through their actual working days and found that fragmented work is the normal condition rather than the exception. Workers switched tasks roughly every three minutes, and returning fully to an interrupted task took an average of 23 minutes and 15 seconds.<sup>[1]</sup></p>
+      <p>Their follow-up experiment in 2008 found something less intuitive and more important. People who were interrupted did <em>not</em> take longer to finish their work — they finished at a similar speed. They compensated by working faster, and paid for it in significantly higher stress, higher mental workload, and more errors.<sup>[2]</sup></p>
+
+      <div class="callout">
+        <p><strong>This is the finding that matters most.</strong> The cost of broken continuity does not show up as time. It shows up as strain and as errors — which is precisely why measuring it by the clock understates it, and why teams conclude they are “managing fine” when they are simply absorbing the cost somewhere less visible.</p>
+      </div>
+
+      <p>Microsoft's 2023 Work Trend Index, surveying 31,000 people across 31 countries, gives the current scale: the average worker switches between apps and windows more than 1,200 times per day, 68% say they lack enough uninterrupted focus time, and 57% report feeling overloaded by information and communication.<sup>[3]</sup></p>
+
+      <h2 id="still-true">“That research is twenty years old.” Is it still true?</h2>
+      <p>A fair challenge, and worth answering precisely rather than defensively. The honest answer has two halves.</p>
+
+      <h3>What recent work confirms</h3>
+      <p>The <em>mechanism</em> has held up in controlled experiments published in the last three years.</p>
+      <p>Hirsch and colleagues, in <em>Memory &amp; Cognition</em> (2023), tested why resumption is costly at all. Across three experiments they found substantial resumption costs and traced them to a specific cause: after an interruption, the suspended goal has to be actively reactivated, and that reactivation takes time. It is not that the task decayed while you were away — it is that returning is itself cognitive work.<sup>[5]</sup></p>
+      <p>Zhang, Kawashima and Shinohara, in <em>Applied Cognitive Psychology</em> (2023), found that recovery speed depends on working memory capacity: people with higher capacity returned to their pre-interruption level of performance faster.<sup>[6]</sup> Reconstruction cost is not evenly distributed — it falls harder on people who are already loaded.</p>
+      <p>And Jin and colleagues, in <em>Ergonomics</em> (2024, in print 2025), used multimodal measurement to show that mental workload is highest when the interrupting task requires a <em>different kind</em> of processing from the primary one — and modelled the resulting recovery delay.<sup>[7]</sup> That is close to the everyday case: leaving analytical work to answer a relational question, then coming back.</p>
+
+      <div class="callout">
+        <p><strong>The short version:</strong> the technology changed. The cognitive cost of switching did not. If anything, exposure went up — the 1,200 daily app switches in Microsoft's 2023 survey are not a number that existed in 2005.</p>
+      </div>
+
+      <h3>What has not been re-measured — and we will not pretend otherwise</h3>
+      <p>Nobody has repeated Mark's field study in a modern workplace and produced a new headline number. The 23 minutes should be read as the best available field estimate from 2005, not as a current measurement. The recent work above is laboratory work: it establishes the mechanism and its direction rigorously, and it measures resumption in <strong>milliseconds</strong> on controlled tasks, not in minutes on real projects.</p>
+      <p>There is a second gap. All of this research studies interruption at the scale of <strong>minutes</strong> — being pulled away and returning the same morning. Reconstruction across <strong>weeks or months</strong>, the case that hurts most in advisory, consulting and project work, is the same mechanism at a longer timescale, but has not been quantified in the same way. We think it is very likely worse, because after three months the residual memory that makes a same-day return possible is simply gone. That is a reasoned expectation, not a finding.</p>
+      <p>So: treat the evidence as establishing that resumption is real, costly, and structural — and treat the calculator below as your own estimate rather than a measurement.</p>
+
+      <h2 id="not-search">Why it isn't a search problem</h2>
+      <p>The intuitive fix is better search. If reconstruction means hunting through Slack, email and documents, then faster retrieval should solve it.</p>
+      <p>It does not, and the reason is worth being precise about. Search returns <em>documents</em>. Reconstruction requires a <em>state</em>. Those are different objects, and no amount of retrieval speed converts one into the other.</p>
+      <p>When you skim four sources before a call, you are not looking for a document. You are performing a small synthesis: reading fragments, discarding what has been superseded, inferring what was decided, and noticing what was left open. The output of that work is a mental model. You then throw it away, and rebuild it from scratch next time.</p>
+
+      <div class="table-scroll">
+        <table>
+          <thead><tr><th>You need to know</th><th>What search gives you</th></tr></thead>
+          <tbody>
+            <tr><td>Where does this stand today?</td><td>Twelve documents mentioning it, newest first</td></tr>
+            <tr><td>Which decision is in effect?</td><td>Both the March decision and the June one that reversed it, equally weighted</td></tr>
+            <tr><td>What is still unresolved?</td><td>Nothing — open questions are not a searchable type</td></tr>
+            <tr><td>Why was this chosen?</td><td>The conclusion, rarely the reasoning</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p>IDC's much-cited work on information retrieval put knowledge workers at 15–35% of their time spent searching, with only about half of searches succeeding on the first attempt.<sup>[4]</sup> That study is from 2004 and its dollar figures have been recycled far past their shelf life, so we cite it only for the shape of the problem rather than as a current measurement. The shape has not changed: retrieval improved enormously in twenty years, and the reconstruction problem did not go away, because it was never a retrieval problem.</p>
+
+      <h2 id="estimate">Estimate your own cost</h2>
+      <p>Rather than accept an industry average, it is more useful to put your own numbers in. Think about how often in a week you pick up a topic you had put down — a client, a project, a case, a thread — and have to rebuild where it stood before you can contribute.</p>
+
+      <div class="calc">
+        <h3>How much context are you rebuilding?</h3>
+        <p class="intro">Two inputs, your own estimates. Move the sliders.</p>
+
+        <div class="calc-field">
+          <label for="switches">Times per week you resume a topic and rebuild its state</label>
+          <div class="calc-input">
+            <input type="range" id="switches" min="1" max="40" value="8" aria-describedby="calcOut">
+            <input type="number" id="switchesNum" min="1" max="40" value="8" aria-label="Times per week, numeric">
+          </div>
+        </div>
+
+        <div class="calc-field">
+          <label for="minutes">Minutes each time, before you are ready to contribute</label>
+          <div class="calc-input">
+            <input type="range" id="minutes" min="1" max="30" value="10" aria-describedby="calcOut">
+            <input type="number" id="minutesNum" min="1" max="30" value="10" aria-label="Minutes each time, numeric">
+          </div>
+        </div>
+
+        <div class="calc-result">
+          <!-- These defaults must match what render() produces for 8 x 10,
+               so the page is correct before JS runs and for crawlers. -->
+          <output id="calcOut" for="switches minutes" aria-live="polite">
+            <span class="big" id="hoursYear">61 hours</span>
+            <span class="cmp" id="cmpLine">a year rebuilding context — about <strong>8 working days</strong>, or <strong>80 minutes</strong> every week.</span>
+          </output>
+          <p class="calc-note">A diagnostic estimate from your own inputs, not a measurement. It assumes 46 working weeks and 7.5-hour days, and it deliberately counts only the rebuilding — not the errors, the repeated conversations, or the decisions made without full context.</p>
+        </div>
+      </div>
+
+      <div class="callout" style="border-color:rgba(0,201,167,.3);background:rgba(0,201,167,.06)">
+        <p style="margin-bottom:10px"><strong>Founder, mentor, or running a program?</strong> The calculator above counts minutes. In a venture ecosystem the harder question is how many separate, evolving situations you are carrying — and how much of that history would survive if you stepped away.</p>
+        <p style="margin-bottom:0"><a href="/context-audit"><strong>Take the Context Load Audit →</strong></a> Five questions, three paths, nothing stored.</p>
+      </div>
+
+      <p>Most people land somewhere between 40 and 120 hours a year. The number itself matters less than the realisation that it is a recurring line item nobody has ever seen written down.</p>
+
+      <h2 id="sources">The four sources of reconstruction work</h2>
+      <p>Reconstruction cost is not one thing. It comes from four distinct failures, and they need different fixes.</p>
+
+      <h3>1. The topic is scattered across sources</h3>
+      <p>One subject lives in a recording, two documents, a chat thread and a decision someone made verbally. No single artefact holds it, so rebuilding means visiting all of them and assembling the result yourself.</p>
+
+      <h3>2. Decisions have no status</h3>
+      <p>A decision written as a sentence cannot tell you whether it still holds. The March decision and the June reversal sit side by side as equally valid statements, and resolving the contradiction requires a person who was there.</p>
+
+      <h3>3. Open questions stop being tracked</h3>
+      <p>A question raised and unanswered is recorded once and then, usually, never carried forward. Months later it is indistinguishable from a question that was resolved — or from one that was never asked.</p>
+
+      <h3>4. Reasoning is discarded once the conclusion exists</h3>
+      <p>Teams record what they decided far more reliably than why. This is the most expensive loss, because the reasoning is what tells you whether a decision still applies when circumstances change. Without it, people re-decide rather than revisit — sometimes differently, without ever noticing they have contradicted themselves.</p>
+
+      <h2 id="reduce">Four ways to reduce it</h2>
+      <p>These are tool-agnostic. They are worth doing whatever you use.</p>
+
+      <ol>
+        <li><strong>Write the state, not just the event.</strong> After a meeting, most people record what happened. The higher-value artefact is two lines on where the topic now stands and what remains open. It takes a minute and removes most of the reconstruction next time.</li>
+        <li><strong>Give decisions a status.</strong> When a decision is reversed, do not delete the old one — mark it superseded and link the replacement. The pair carries information neither one does alone: that the question was contested, and what was rejected.</li>
+        <li><strong>Carry open questions forward explicitly.</strong> Keep one list per topic that survives between sessions. An open question that is not carried forward is not tracked, no matter how clearly it was written down once.</li>
+        <li><strong>Record the reasoning while it is cheap.</strong> One sentence on why an option was chosen over the alternative, written on the day, is worth more than an hour of reconstruction later — and it is the only part that cannot be recovered from the record afterwards.</li>
+      </ol>
+
+      <p>The honest limitation of all four: they depend on discipline, which is exactly what disappears in busy periods — and busy periods are when the most context is generated. That is the argument for having a system that does it rather than a habit that should.</p>
+
+      <h2 id="ai">The same problem now shows up inside the AI</h2>
+      <p>The obvious response to all of this is to hand the reconstruction to a model: give it the entire history and ask where things stand.</p>
+      <p>That works better than search, and it does not fully solve the problem — for a reason that turns out to mirror the human case.</p>
+      <p>Gupta and colleagues, at <em>EMNLP 2024</em>, studied what happens when the conversational history given to a language model contains a <strong>task switch</strong>. Across five datasets and fifteen task switches, they found that sensitivity to history often helps — but that many task switches produce significant degradation in performance.<sup>[8]</sup> The model had the whole history available. Having it was not the same as being oriented by it.</p>
+
+      <div class="callout">
+        <p><strong>More context is not the same as better context.</strong> A system can hold every transcript you own and still lack a usable representation of where a topic stands — for the same reason a folder full of documents does. Search returns documents. A long context window returns more documents. Reconstruction requires a state, and a state has to be maintained by something.</p>
+      </div>
+
+      <p>This is why “just put it all in the prompt” is a weaker answer than it sounds, and why the useful unit is not the volume of material retrieved but whether decisions carry status, open questions persist, and superseded positions are marked as superseded. Those are properties of how the material is <em>structured</em>, not of how much of it fits in a window.</p>
+      <p>The distinction between a context window and persistent memory is set out in the <a href="/glossary#persistent-ai-memory">glossary</a>.</p>
+
+      <h2>Where continuity comes in</h2>
+      <p>Reducing reconstruction to near zero requires the state to be maintained rather than rebuilt: material about a topic converging on its own, decisions carrying their own status, open questions persisting until answered, and the reasoning preserved next to the conclusion.</p>
+      <p>That property is what we call <a href="/resources/cognitive-continuity">cognitive continuity</a> — the ability to resume a topic with the decisions in effect, the questions still open, and the reasoning intact. Context reconstruction is what you pay when you do not have it.</p>
+      <p>My-CoMind is built for exactly this, but the framing is more useful than any product. Run the diagnostic against whatever you use today; if reconstruction is cheap for you already, you do not need us.</p>
+
+      <div class="cta-bar">
+        <h2>See what zero reconstruction feels like</h2>
+        <p>Capture one real conversation, then come back to it in a week and see how much you have to rebuild.</p>
+        <a href="https://app.my-comind.com" class="cta-btn" target="_blank" rel="noopener">Start for free <i class="fas fa-arrow-right"></i></a>
+      </div>
+
+      <div class="refs" id="references">
+        <h2>References</h2>
+        <ol>
+          <li>Mark, G., Gonzalez, V. M., &amp; Harris, J. (2005). No task left behind? Examining the nature of fragmented work. <em>Proceedings of ACM CHI 2005</em>, 321–330. <a href="https://doi.org/10.1145/1054972.1055017" target="_blank" rel="noopener">doi.org/10.1145/1054972.1055017</a></li>
+          <li>Mark, G., Gudith, D., &amp; Klocke, U. (2008). The cost of interrupted work: More speed and stress. <em>Proceedings of ACM CHI 2008</em>, 107–110. <a href="https://doi.org/10.1145/1357054.1357072" target="_blank" rel="noopener">doi.org/10.1145/1357054.1357072</a></li>
+          <li>Microsoft. (2023). <em>Work Trend Index 2023: Will AI fix work?</em> Survey of 31,000 respondents across 31 countries. <a href="https://www.microsoft.com/en-us/worklab/work-trend-index/will-ai-fix-work" target="_blank" rel="noopener">microsoft.com/worklab</a></li>
+          <li>Feldman, S., &amp; Sherman, C. (2004). <em>The high cost of not finding information.</em> IDC White Paper #29127. Cited here for the proportion of time spent searching; its cost estimates are widely recirculated without re-measurement and should be treated with caution.</li>
+          <li>Hirsch, P., Moretti, L., Askin, S., &amp; Koch, I. (2023). Examining the cognitive processes underlying resumption costs in task-interruption contexts: Decay or inhibition of suspended task goals? <em>Memory &amp; Cognition, 52</em>(2), 271–284. <a href="https://doi.org/10.3758/s13421-023-01458-8" target="_blank" rel="noopener">doi.org/10.3758/s13421-023-01458-8</a></li>
+          <li>Zhang, H., Kawashima, T., &amp; Shinohara, K. (2023). Interventions to reduce the negative consequences of interruptions on task performance and individual differences in working memory capacity. <em>Applied Cognitive Psychology, 37</em>(6), 1328–1340. <a href="https://doi.org/10.1002/acp.4126" target="_blank" rel="noopener">doi.org/10.1002/acp.4126</a></li>
+          <li>Jin, H., Liu, L., Luo, Z., Meng, S., &amp; Zhao, Y. (2025). The effects of different interruption conditions on mental workload: an experimental study based on multimodal measurements. <em>Ergonomics, 68</em>(8), 1274–1292. First published online September 2024. <a href="https://doi.org/10.1080/00140139.2024.2400129" target="_blank" rel="noopener">doi.org/10.1080/00140139.2024.2400129</a></li>
+          <li>Gupta, A., Sheth, I., Raina, V., Gales, M., &amp; Fritz, M. (2024). LLM task interference: An initial study on the impact of task-switch in conversational history. <em>Proceedings of EMNLP 2024</em>, 14633–14652. <a href="https://aclanthology.org/2024.emnlp-main.811/" target="_blank" rel="noopener">aclanthology.org/2024.emnlp-main.811</a></li>
+        </ol>
+        <p style="font-size:13.5px;color:var(--text-muted);margin:16px 0 0;line-height:1.65;">Sources [1]–[4] establish the scale of the problem in real work environments; [5]–[7] are recent controlled studies confirming the underlying mechanism; [8] extends the same question to language models. Where the evidence stops, we have said so in the text rather than extrapolating.</p>
+      </div>
+
+      <div class="keep-reading">
+        <h2>Keep reading</h2>
+        <div class="kr-grid">
+          <a href="/resources/cognitive-continuity">
+            <strong>What is cognitive continuity?</strong>
+            <span>The property that makes reconstruction unnecessary, and the four things it requires.</span>
+          </a>
+          <a href="/glossary">
+            <strong>Glossary</strong>
+            <span>Cognitive drift, decision memory, superseded decisions — the vocabulary, defined.</span>
+          </a>
+          <a href="/for/mentors">
+            <strong>For mentors</strong>
+            <span>The same problem when you follow ten founders instead of one topic.</span>
+          </a>
+          <a href="/alternatives/fireflies">
+            <strong>vs Fireflies.ai</strong>
+            <span>Why a complete transcript still leaves reconstruction to you.</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </article>
+
+  <footer class="page-footer">
+    <div class="container">
+      <p style="font-size:14px;color:rgba(255,255,255,.5);margin-bottom:12px;">
+        <a href="/resources">Resources</a> &nbsp;·&nbsp; <a href="/">← Back to My-CoMind</a>
+      </p>
+      <p style="font-size:12px;color:rgba(255,255,255,.35);">© 2026 MY-COMIND INC. · Ontario, Canada</p>
+    </div>
+  </footer>
+
+  <script>
+    // Diagnostic estimate. 46 working weeks, 7.5-hour day — stated on the page
+    // so the arithmetic is auditable rather than a black box.
+    (function () {
+      const WEEKS = 46, WORKDAY_HOURS = 7.5;
+      const sw = document.getElementById('switches');
+      const swN = document.getElementById('switchesNum');
+      const mi = document.getElementById('minutes');
+      const miN = document.getElementById('minutesNum');
+      const hoursEl = document.getElementById('hoursYear');
+      const cmpEl = document.getElementById('cmpLine');
+
+      function plural(n, word) { return n + ' ' + word + (n === 1 ? '' : 's'); }
+
+      function render() {
+        const perWeekMin = sw.value * mi.value;
+        const hours = Math.round((perWeekMin * WEEKS) / 60);
+        const days = Math.round(hours / WORKDAY_HOURS);
+        const weekly = '<strong>' + plural(Number(perWeekMin), 'minute') + '</strong> every week';
+        hoursEl.textContent = plural(hours, 'hour');
+        // Below a full working day, quoting "0 working days" reads as a bug.
+        cmpEl.innerHTML = days >= 1
+          ? 'a year rebuilding context — about <strong>' + plural(days, 'working day') + '</strong>, or ' + weekly + '.'
+          : 'a year rebuilding context — ' + weekly + '.';
+      }
+
+      // Keep slider and number box in sync, clamping whatever is typed.
+      function link(range, num) {
+        range.addEventListener('input', () => { num.value = range.value; render(); });
+        num.addEventListener('input', () => {
+          const v = Math.min(Math.max(Number(num.value) || range.min, range.min), range.max);
+          range.value = v;
+          render();
+        });
+        num.addEventListener('blur', () => { num.value = range.value; });
+      }
+
+      link(sw, swN);
+      link(mi, miN);
+      render();
+    })();
+  </script>
+
+</body>
+</html>

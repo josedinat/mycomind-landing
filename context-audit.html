@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Context Load Audit — For Founders, Mentors and Programs</title>
+  <meta name="description" content="A short diagnostic for anyone in a venture ecosystem: how many evolving contexts are you actually carrying, and how much of that history would survive if you stepped away? Five questions, nothing stored.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://www.my-comind.com/context-audit">
+
+  <meta property="og:title" content="How much context are you actually carrying?">
+  <meta property="og:description" content="A five-question diagnostic for founders, mentors and mentoring programs. Not a score — a way to make something invisible visible.">
+  <meta property="og:image" content="https://www.my-comind.com/og-image.png">
+  <meta property="og:url" content="https://www.my-comind.com/context-audit">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="My-CoMind">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="https://www.my-comind.com/og-image.png">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Context Load Audit",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Web",
+    "url": "https://www.my-comind.com/context-audit",
+    "description": "A five-question diagnostic estimating how many evolving contexts a founder, mentor or mentoring program is carrying, and how much would survive a handover.",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "CAD" },
+    "publisher": { "@type": "Organization", "name": "MY-COMIND INC.", "url": "https://www.my-comind.com/" }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.my-comind.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Context Load Audit", "item": "https://www.my-comind.com/context-audit" }
+    ]
+  }
+  </script>
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%230066CC' rx='20' width='100' height='100'/><text x='50' y='70' font-size='50' text-anchor='middle' fill='white' font-family='Arial'>M</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+  <style>
+    :root {
+      --blue: #0066CC; --blue-dark: #0052A3; --green: #00C9A7;
+      --amber: #FFB84D; --coral: #FF7A6B; --lavender: #9B7EBD;
+      --charcoal: #1A1F36; --gray: #F5F7FA; --gray-light: #E8EBF0;
+      --white: #FFFFFF; --text-muted: rgba(26,31,54,.6);
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; color: var(--charcoal); background: var(--white); line-height: 1.6; }
+    .container { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+
+    .site-bar {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 32px; border-bottom: 1px solid var(--gray-light);
+      position: sticky; top: 0; background: rgba(255,255,255,.94);
+      backdrop-filter: blur(16px); z-index: 50;
+    }
+    .site-bar img { height: 54px; display: block; }
+    .site-bar .bar-cta {
+      background: var(--blue); color: #fff; text-decoration: none;
+      padding: 9px 20px; border-radius: 50px; font-size: 14px; font-weight: 600;
+    }
+    .site-bar .bar-cta:hover { background: var(--blue-dark); }
+
+    .page-header { background: linear-gradient(160deg, #f0f6ff 0%, var(--white) 60%); padding: 60px 24px 44px; }
+    .page-header h1 { font-family: 'Poppins', sans-serif; font-size: clamp(29px, 4.4vw, 42px); font-weight: 800; line-height: 1.15; margin-bottom: 16px; }
+    .page-header h1 span { background: linear-gradient(135deg, var(--blue), var(--green)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .page-header p { font-size: 18px; color: var(--text-muted); line-height: 1.65; }
+    .breadcrumb { font-size: 13px; color: var(--text-muted); margin-bottom: 18px; }
+    .breadcrumb a { color: var(--blue); text-decoration: none; }
+    .breadcrumb a:hover { text-decoration: underline; }
+
+    .privacy-chip {
+      display: inline-flex; align-items: center; gap: 8px; margin-top: 20px;
+      background: rgba(0,201,167,.1); color: #048f78; border: 1px solid rgba(0,201,167,.28);
+      padding: 7px 15px; border-radius: 50px; font-size: 13px; font-weight: 600;
+    }
+
+    main { padding: 48px 24px 20px; }
+
+    /* ROLE PICKER */
+    .step-label {
+      font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--green); margin-bottom: 12px; display: block;
+    }
+    h2.step-title { font-family: 'Poppins', sans-serif; font-size: 25px; font-weight: 700; margin-bottom: 24px; line-height: 1.3; }
+
+    .roles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 12px; }
+    .role {
+      background: var(--white); border: 2px solid var(--gray-light); border-radius: 16px;
+      padding: 22px 18px; text-align: left; cursor: pointer; font-family: 'Inter', sans-serif;
+      transition: all .22s ease; display: block; width: 100%;
+    }
+    .role:hover { border-color: var(--blue); transform: translateY(-2px); }
+    .role[aria-pressed="true"] { border-color: var(--blue); background: rgba(0,102,204,.045); box-shadow: 0 8px 24px rgba(0,102,204,.12); }
+    .role .ico { font-size: 22px; display: block; margin-bottom: 12px; }
+    .role .nm { font-family: 'Poppins', sans-serif; font-size: 16px; font-weight: 700; display: block; margin-bottom: 5px; color: var(--charcoal); }
+    .role .ds { font-size: 13.5px; color: var(--text-muted); line-height: 1.5; display: block; }
+
+    /* QUESTIONS */
+    #quiz { margin-top: 44px; }
+    .q { margin-bottom: 34px; }
+    .q legend {
+      font-family: 'Poppins', sans-serif; font-size: 17.5px; font-weight: 600;
+      line-height: 1.45; margin-bottom: 14px; padding: 0;
+    }
+    .q .qnum { color: var(--green); font-weight: 700; margin-right: 8px; }
+    .opts { display: flex; flex-direction: column; gap: 9px; }
+    .opt { position: relative; }
+    .opt input { position: absolute; opacity: 0; width: 0; height: 0; }
+    .opt label {
+      display: block; padding: 14px 18px; border: 2px solid var(--gray-light);
+      border-radius: 12px; cursor: pointer; font-size: 15.5px; color: #3A4059;
+      transition: all .18s ease; line-height: 1.45;
+    }
+    .opt label:hover { border-color: rgba(0,102,204,.4); }
+    .opt input:checked + label {
+      border-color: var(--blue); background: rgba(0,102,204,.05);
+      color: var(--charcoal); font-weight: 500;
+    }
+    .opt input:focus-visible + label { outline: 3px solid rgba(0,102,204,.4); outline-offset: 2px; }
+
+    /* RESULT */
+    #result { margin-top: 10px; scroll-margin-top: 90px; }
+    .result-card { border-radius: 22px; padding: 34px 32px; color: #fff; }
+    .result-card.light  { background: linear-gradient(135deg, #0E9F86, #0B7D6A); }
+    .result-card.building { background: linear-gradient(135deg, #D9922B, #B87418); }
+    .result-card.heavy  { background: linear-gradient(135deg, #D9534F, #A83B37); }
+    .result-band {
+      display: inline-flex; align-items: center; gap: 9px; font-size: 12px; font-weight: 700;
+      letter-spacing: 2px; text-transform: uppercase; background: rgba(255,255,255,.18);
+      padding: 7px 15px; border-radius: 50px; margin-bottom: 18px;
+    }
+    .result-card h3 { font-family: 'Poppins', sans-serif; font-size: clamp(22px, 3.6vw, 29px); font-weight: 800; line-height: 1.25; margin-bottom: 16px; }
+    .result-card p { font-size: 16.5px; line-height: 1.7; opacity: .93; margin-bottom: 14px; }
+    .result-card p:last-child { margin-bottom: 0; }
+    .result-card ul { margin: 0 0 4px 20px; }
+    .result-card li { font-size: 16px; line-height: 1.65; opacity: .93; margin-bottom: 7px; }
+
+    .handover {
+      background: var(--gray); border-left: 5px solid var(--lavender);
+      border-radius: 16px; padding: 26px 28px; margin-top: 18px;
+    }
+    .handover h4 { font-family: 'Poppins', sans-serif; font-size: 17px; font-weight: 700; margin-bottom: 10px; }
+    .handover p { font-size: 16px; color: #3A4059; line-height: 1.7; margin: 0; }
+
+    .result-note { font-size: 13px; color: var(--text-muted); line-height: 1.65; margin-top: 18px; }
+
+    .next-steps { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 26px; }
+    .next-steps a {
+      display: block; text-decoration: none; color: inherit;
+      border: 2px solid var(--gray-light); border-radius: 14px; padding: 20px 22px;
+      transition: all .25s ease;
+    }
+    .next-steps a:hover { border-color: var(--blue); transform: translateY(-2px); }
+    .next-steps strong { display: block; font-family: 'Poppins', sans-serif; font-size: 15.5px; margin-bottom: 5px; }
+    .next-steps span { font-size: 13.5px; color: var(--text-muted); line-height: 1.5; }
+    .next-steps a.primary { border-color: var(--blue); background: var(--blue); color: #fff; }
+    .next-steps a.primary span { color: rgba(255,255,255,.85); }
+    .next-steps a.primary:hover { background: var(--blue-dark); }
+
+    .restart {
+      background: none; border: none; color: var(--blue); font-family: 'Inter', sans-serif;
+      font-size: 14.5px; font-weight: 600; cursor: pointer; padding: 8px 0; margin-top: 20px;
+    }
+    .restart:hover { text-decoration: underline; }
+
+    .hidden { display: none !important; }
+
+    .about { border-top: 1px solid var(--gray-light); margin-top: 52px; padding-top: 30px; }
+    .about h2 { font-family: 'Poppins', sans-serif; font-size: 20px; font-weight: 700; margin-bottom: 14px; }
+    .about p { font-size: 16px; color: #3A4059; line-height: 1.75; margin-bottom: 14px; }
+    .about a { color: var(--blue); }
+
+    .page-footer { background: var(--charcoal); color: #fff; padding: 40px 24px; text-align: center; margin-top: 46px; }
+    .page-footer a { color: rgba(255,255,255,.65); text-decoration: none; font-size: 14px; }
+    .page-footer a:hover { color: #fff; }
+
+    @media (max-width: 700px) {
+      .roles { grid-template-columns: 1fr; }
+      .next-steps { grid-template-columns: 1fr; }
+      .site-bar { padding: 12px 18px; }
+      .result-card { padding: 26px 22px; }
+      main { padding: 36px 24px 16px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      * { transition-duration: .01ms !important; }
+    }
+  </style>
+  <script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+
+  <div class="site-bar">
+    <a href="/"><img src="/mycomind_logo_full_transparent.png" alt="My-CoMind"></a>
+    <a href="https://app.my-comind.com" class="bar-cta" target="_blank" rel="noopener">Start free</a>
+  </div>
+
+  <header class="page-header">
+    <div class="container">
+      <div class="breadcrumb"><a href="/">Home</a> &nbsp;/&nbsp; Context Load Audit</div>
+      <h1>How much context are you <span>actually carrying</span>?</h1>
+      <p>Five questions. Not about how busy you are — about how many separate, evolving situations you are holding in your head, and how much of that would survive if you stepped away.</p>
+      <span class="privacy-chip"><i class="fas fa-lock" style="font-size:11px"></i> Runs entirely in your browser — no answers are sent or stored</span>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+
+      <section id="rolePick">
+        <span class="step-label">Step 1 of 2</span>
+        <h2 class="step-title">Which one sounds most like you?</h2>
+        <div class="roles">
+          <button type="button" class="role" data-role="founder" aria-pressed="false">
+            <span class="ico">🚀</span>
+            <span class="nm">I'm a founder</span>
+            <span class="ds">Building a company, with investors, advisors and a team around it.</span>
+          </button>
+          <button type="button" class="role" data-role="mentor" aria-pressed="false">
+            <span class="ico">🧭</span>
+            <span class="nm">I mentor or advise</span>
+            <span class="ds">Following several founders or clients, each with their own history.</span>
+          </button>
+          <button type="button" class="role" data-role="program" aria-pressed="false">
+            <span class="ico">🏢</span>
+            <span class="nm">I run a program</span>
+            <span class="ds">An accelerator, incubator or venture program with mentors and cohorts.</span>
+          </button>
+        </div>
+      </section>
+
+      <section id="quiz" class="hidden" aria-live="polite">
+        <span class="step-label">Step 2 of 2</span>
+        <h2 class="step-title" id="quizTitle"></h2>
+        <form id="quizForm"></form>
+      </section>
+
+      <section id="result" class="hidden" aria-live="polite"></section>
+
+      <div class="about">
+        <h2>What this is, and what it isn't</h2>
+        <p>This is a diagnostic, not a measurement. There is no research establishing how many relationships a mentor can hold or how many contexts a founder can carry — anyone claiming a precise threshold is inventing it. What the audit does is turn a few things you already know into a shape you can look at.</p>
+        <p>We deliberately avoided producing a number out of ten. A score would imply a precision we do not have, and it would invite you to optimise the score rather than notice the pattern. You get a band and a description; the useful part is usually the handover question at the end.</p>
+        <p>If you want the underlying idea, it is <a href="/resources/context-reconstruction">context reconstruction</a> — the work of rebuilding where something stands before you can contribute to it — and the property that removes it, <a href="/resources/cognitive-continuity">cognitive continuity</a>.</p>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="page-footer">
+    <div class="container">
+      <p style="font-size:14px;color:rgba(255,255,255,.5);margin-bottom:12px;">
+        <a href="/resources">Resources</a> &nbsp;·&nbsp; <a href="/glossary">Glossary</a> &nbsp;·&nbsp; <a href="/">← Back to My-CoMind</a>
+      </p>
+      <p style="font-size:12px;color:rgba(255,255,255,.35);">© 2026 MY-COMIND INC. · Ontario, Canada</p>
+    </div>
+  </footer>
+
+  <script>
+  (function () {
+    'use strict';
+
+    // Weights are a transparent heuristic, not a model. Each answer contributes
+    // 0-3; the last question (handover) is weighted double because losing the
+    // only copy of a history is a different class of problem from being busy.
+    const SURVEYS = {
+      founder: {
+        title: "You're building the company — and you're also where its history lives.",
+        questions: [
+          { q: "How many people outside your team do you keep updated on the same story? (investors, advisors, board, mentors)",
+            a: ["1–2", "3–5", "6–10", "More than 10"] },
+          { q: "How often do you revisit a decision that was made more than three months ago?",
+            a: ["Rarely", "Every month or so", "Most weeks", "Constantly — the same questions keep coming back"] },
+          { q: "When someone asks “why did we decide that?”, where is the answer?",
+            a: ["Written down and easy to find", "Partly written, partly memory", "Mostly in my head", "We usually re-derive it from scratch"] },
+          { q: "How much of the company's history exists only with you?",
+            a: ["Very little — the team shares it", "Some of it", "Most of it", "Essentially all of it"] },
+          { q: "If you were unavailable for a month, how much of that history would survive?",
+            a: ["Almost all — it's documented", "Most of it, with some digging", "Some — the team would fill gaps by guessing", "Very little — it would effectively be lost"], weight: 2 }
+        ],
+        insight: {
+          light: "Your context is still small enough to hold, and enough of it is written down that it does not depend on you being available.",
+          building: "You are starting to be the index for your own company. It still works, and it works because you are there.",
+          heavy: "You are not just running a company. You are the only place several versions of its history exist — the reasoning behind decisions, what you told which investor, and what you promised to revisit."
+        }
+      },
+      mentor: {
+        title: "You're not managing relationships. You're maintaining evolving contexts.",
+        questions: [
+          { q: "How many founders or clients are you actively following right now?",
+            a: ["1–3", "4–7", "8–15", "More than 15"] },
+          { q: "How often do you meet each of them?",
+            a: ["Monthly or less", "Every couple of weeks", "Weekly", "Multiple times a week for some"] },
+          { q: "How long do you spend preparing before a session?",
+            a: ["Under 5 minutes", "5–15 minutes", "15–30 minutes", "More than 30 minutes"] },
+          { q: "How often do you have to rebuild where things stand before you can be useful?",
+            a: ["Rarely — I remember", "Sometimes", "Often", "Almost every session"] },
+          { q: "If you handed one of these relationships to another mentor tomorrow, how much would survive?",
+            a: ["Almost all — it's documented", "Most, with some digging", "Some — they'd rebuild from the founder", "Very little — it lives with me"], weight: 2 }
+        ],
+        insight: {
+          light: "Your load is light enough that memory still does the job. That holds while the number stays where it is.",
+          building: "The sessions are not the work any more. The reconstruction between them is starting to be.",
+          heavy: "You are not following ten founders. You are maintaining ten evolving situations — different decisions, different open threads, different histories — and rebuilding a slightly different world every time you switch."
+        }
+      },
+      program: {
+        title: "The context belongs to the companies. Today it lives with whoever was in the room.",
+        questions: [
+          { q: "How many companies are active in your program right now?",
+            a: ["Fewer than 10", "10–25", "26–50", "More than 50"] },
+          { q: "How many mentors or advisors are active alongside them?",
+            a: ["1–3", "4–10", "11–25", "More than 25"] },
+          { q: "Do different mentors work with the same company?",
+            a: ["No — one mentor per company", "Occasionally", "Often", "Routinely, and they overlap"] },
+          { q: "How is context passed between mentors today?",
+            a: ["A shared system everyone actually uses", "Shared docs or a CRM, kept up unevenly", "Slack, email and notes", "Mostly verbal — or no real system"] },
+          { q: "When a mentor leaves or rotates off, how much of that company's history survives?",
+            a: ["Almost all — it's in the program's hands", "Most, with some digging", "Some — we ask the founder to re-explain", "Very little — it leaves with the mentor"], weight: 2 }
+        ],
+        insight: {
+          light: "Your program's memory is mostly institutional rather than personal. That is rarer than you might think.",
+          building: "Your program is accumulating a memory it does not fully own yet — some of it is institutional, and a meaningful share still walks out of the room with individuals.",
+          heavy: "Your program does not have a mentor memory problem. It has an organizational memory problem: dozens of relationships whose history belongs to the companies, but is stored in the heads of whoever happened to attend."
+        }
+      }
+    };
+
+    const BANDS = [
+      { key: 'light',    label: 'Light',    max: 0.42 },
+      { key: 'building', label: 'Building', max: 0.68 },
+      { key: 'heavy',    label: 'Heavy',    max: 1.01 }
+    ];
+
+    // Keyed off the handover answer itself, not the overall band. A small
+    // portfolio can still be a single point of failure, and averaging that
+    // into the total would hide exactly the signal worth surfacing.
+    const HANDOVER = [
+      "Because the history does not depend on one person, a handover is an inconvenience rather than a loss. That is the position everything else here is trying to reach.",
+      "A handover would be survivable, but the digging falls on whoever has the least context — which is the worst place for it to land.",
+      "A handover today would mean asking the other side to re-explain their own history back to you. Whatever the volume, that is the memory living in a person rather than in the work.",
+      "By your own answer, most of this history would simply be lost. That is worth separating from how busy you are: a small portfolio can still be a single point of failure, and this is the one answer that does not improve on its own."
+    ];
+
+    let role = null;
+
+    const rolePick = document.getElementById('rolePick');
+    const quiz = document.getElementById('quiz');
+    const quizForm = document.getElementById('quizForm');
+    const quizTitle = document.getElementById('quizTitle');
+    const result = document.getElementById('result');
+
+    document.querySelectorAll('.role').forEach(btn => {
+      btn.addEventListener('click', () => {
+        role = btn.dataset.role;
+        document.querySelectorAll('.role').forEach(b => b.setAttribute('aria-pressed', String(b === btn)));
+        buildQuiz();
+      });
+    });
+
+    function buildQuiz() {
+      const survey = SURVEYS[role];
+      quizTitle.textContent = survey.title;
+      quizForm.innerHTML = survey.questions.map((item, qi) => `
+        <fieldset class="q" style="border:none">
+          <legend><span class="qnum">${qi + 1}</span>${item.q}</legend>
+          <div class="opts">
+            ${item.a.map((opt, oi) => `
+              <div class="opt">
+                <input type="radio" name="q${qi}" id="q${qi}o${oi}" value="${oi}">
+                <label for="q${qi}o${oi}">${opt}</label>
+              </div>`).join('')}
+          </div>
+        </fieldset>`).join('');
+
+      quiz.classList.remove('hidden');
+      result.classList.add('hidden');
+      quiz.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+      quizForm.addEventListener('change', onAnswer);
+    }
+
+    function onAnswer() {
+      const survey = SURVEYS[role];
+      const answered = survey.questions.every((_, qi) => quizForm.querySelector(`input[name="q${qi}"]:checked`));
+      if (answered) render();
+    }
+
+    function render() {
+      const survey = SURVEYS[role];
+      let score = 0, maxScore = 0;
+
+      survey.questions.forEach((item, qi) => {
+        const w = item.weight || 1;
+        const picked = Number(quizForm.querySelector(`input[name="q${qi}"]:checked`).value);
+        score += picked * w;
+        maxScore += (item.a.length - 1) * w;
+      });
+
+      const ratio = score / maxScore;
+      const band = BANDS.find(b => ratio < b.max) || BANDS[BANDS.length - 1];
+
+      // The handover question is the last one, and it is read on its own.
+      const lastIndex = survey.questions.length - 1;
+      const handoverPick = Number(quizForm.querySelector(`input[name="q${lastIndex}"]:checked`).value);
+
+      result.innerHTML = `
+        <div class="result-card ${band.key}">
+          <span class="result-band"><i class="fas fa-layer-group" style="font-size:11px"></i> Context load: ${band.label}</span>
+          <h3>${survey.insight[band.key]}</h3>
+          <p>${band.key === 'heavy'
+              ? 'This is not a criticism of how you work. It is what happens when the number of relationships grows faster than any system for holding them — which is the normal path, not a failure.'
+              : band.key === 'building'
+              ? 'This is the stage where habits still work but are starting to strain. It is also the cheapest moment to change something, before the volume makes it urgent.'
+              : 'Worth revisiting if the number of relationships grows — the shift usually happens faster than it feels.'}</p>
+        </div>
+
+        <div class="handover">
+          <h4>The part that matters most</h4>
+          <p>${HANDOVER[handoverPick]}</p>
+        </div>
+
+        <p class="result-note">Your answers stayed in this browser — nothing was sent anywhere, and there is nothing to delete. This is a diagnostic based on what you told us, not a measurement of your work.</p>
+
+        <div class="next-steps">
+          <a class="primary" href="https://app.my-comind.com" target="_blank" rel="noopener">
+            <strong>Try it on one real relationship →</strong>
+            <span>Capture a conversation, come back in a week, see how much you have to rebuild. Free plan, no card.</span>
+          </a>
+          <a href="/resources/context-reconstruction">
+            <strong>Read the underlying idea</strong>
+            <span>What context reconstruction costs, what the research shows, and four ways to reduce it.</span>
+          </a>
+          ${role === 'mentor' ? `<a href="/for/mentors"><strong>Written for mentors</strong><span>The switching problem when you follow several founders at once.</span></a>` : ''}
+          ${role === 'program' ? `<a href="/contact"><strong>Talk about your program</strong><span>We're mapping how programs hold context across mentors. We'd like to hear yours.</span></a>` : ''}
+          ${role === 'founder' ? `<a href="/glossary#institutional-memory"><strong>Institutional memory</strong><span>What it means for a company's history to outlive the person holding it.</span></a>` : ''}
+        </div>
+
+        <button type="button" class="restart" id="restart">← Start over with a different role</button>
+      `;
+
+      result.classList.remove('hidden');
+      document.getElementById('restart').addEventListener('click', reset);
+      result.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function reset() {
+      role = null;
+      document.querySelectorAll('.role').forEach(b => b.setAttribute('aria-pressed', 'false'));
+      quiz.classList.add('hidden');
+      result.classList.add('hidden');
+      quizForm.innerHTML = '';
+      rolePick.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  })();
+  </script>
+
+</body>
+</html>
