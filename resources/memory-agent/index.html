@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>From Memory Tool to Memory Agent — How My-CoMind Became Present in Your Thinking | My-CoMind</title>
+  <meta name="description" content="Over the last 30 days, My-CoMind evolved from something you open into something that stays with your thinking. Live Capture, Desktop Agent, Memory Markers, and Cognitive Drift — here's what changed and why it matters.">
+  <meta name="keywords" content="memory agent, cognitive continuity, live meeting capture, desktop agent, memory markers, cognitive drift, AI workspace, second brain">
+  <meta name="author" content="MY-COMIND INC.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://www.my-comind.com/resources/memory-agent">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="From Memory Tool to Memory Agent — My-CoMind">
+  <meta property="og:description" content="My-CoMind is moving from something you open to something that stays with your thinking. Here's what changed in the last 30 days.">
+  <meta property="og:image" content="https://www.my-comind.com/resources/memory-agent-og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:url" content="https://www.my-comind.com/resources/memory-agent">
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="en_CA">
+  <meta property="og:site_name" content="My-CoMind">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="From Memory Tool to Memory Agent — My-CoMind">
+  <meta name="twitter:description" content="My-CoMind is moving from something you open to something that stays with your thinking.">
+  <meta name="twitter:image" content="https://www.my-comind.com/resources/memory-agent-og.png">
+
+  <!-- Article Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "From Memory Tool to Memory Agent",
+    "description": "Over the last 30 days, My-CoMind evolved from something you open into something that stays with your thinking.",
+    "image": "https://www.my-comind.com/resources/memory-agent-og.png",
+    "datePublished": "2026-08-22",
+    "dateModified": "2026-08-22",
+    "author": {
+      "@type": "Organization",
+      "name": "MY-COMIND INC."
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "MY-COMIND INC.",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://www.my-comind.com/mycomind_logo_full_transparent.png"
+      }
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "https://www.my-comind.com/resources/memory-agent"
+    }
+  }
+  </script>
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%230066CC' rx='20' width='100' height='100'/><text x='50' y='70' font-size='50' text-anchor='middle' fill='white' font-family='Arial'>M</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+  <style>
+    :root {
+      --blue: #0066CC;
+      --blue-dark: #0052A3;
+      --green: #00C9A7;
+      --lavender: #9B7EBD;
+      --amber: #FFB84D;
+      --charcoal: #1A1F36;
+      --gray: #F5F7FA;
+      --gray-light: #E8EBF0;
+      --white: #FFFFFF;
+      --text-muted: rgba(26,31,54,.6);
+    }
+
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--charcoal);
+      background: var(--white);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    .container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+    .section-label {
+      font-size: 12px; font-weight: 700; letter-spacing: 3px;
+      text-transform: uppercase; color: var(--green); margin-bottom: 16px;
+      display: block;
+    }
+    .section-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(28px, 4vw, 44px); font-weight: 800;
+      line-height: 1.2; color: var(--charcoal); margin-bottom: 20px;
+    }
+    .section-title span {
+      background: linear-gradient(135deg, var(--blue), var(--green));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .section-sub {
+      font-size: 18px; color: var(--text-muted); line-height: 1.7;
+      max-width: 640px;
+    }
+
+    .reveal { opacity: 0; transform: translateY(40px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; width: 100%; z-index: 1000;
+      padding: 20px 40px; display: flex; justify-content: space-between;
+      align-items: center; transition: all .3s ease;
+    }
+    nav.scrolled {
+      background: rgba(255,255,255,.92); backdrop-filter: blur(20px);
+      box-shadow: 0 1px 0 rgba(0,0,0,.06); padding: 14px 40px;
+    }
+    .nav-logo { height: 56px; }
+    .nav-links { display: flex; gap: 30px; align-items: center; }
+    .nav-link {
+      font-size: 14px; color: var(--charcoal); text-decoration: none;
+      font-weight: 500; opacity: .75; transition: opacity .2s;
+    }
+    .nav-link:hover { opacity: 1; }
+    .nav-actions { display: flex; align-items: center; gap: 18px; }
+    .nav-signin { font-size: 14px; font-weight: 500; color: var(--charcoal); opacity: .75; text-decoration: none; }
+    .nav-signin:hover { opacity: 1; }
+    .nav-cta {
+      background: var(--blue); color: #fff; border: none;
+      padding: 11px 22px; border-radius: 50px; font-family: 'Inter', sans-serif;
+      font-weight: 600; font-size: 14px; cursor: pointer;
+      transition: all .3s ease; text-decoration: none; display: inline-block;
+    }
+    .nav-cta:hover { background: var(--blue-dark); transform: scale(1.04); }
+    .nav-hamburger { display: none; background: none; border: none; cursor: pointer; padding: 4px; }
+
+    /* HERO */
+    .hero {
+      min-height: 80vh; display: flex; align-items: center;
+      justify-content: center; position: relative; overflow: hidden;
+      background: linear-gradient(160deg, #f0f6ff 0%, var(--white) 60%);
+      padding: 130px 24px 80px;
+    }
+    .hero-orb {
+      position: absolute; border-radius: 50%; filter: blur(100px);
+      pointer-events: none;
+    }
+    .orb-1 { width: 700px; height: 700px; background: rgba(0,201,167,.15); top: -200px; right: -150px; }
+    .orb-2 { width: 500px; height: 500px; background: rgba(155,126,189,.12); bottom: -150px; left: -100px; }
+
+    .hero-inner { text-align: center; max-width: 880px; position: relative; z-index: 2; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(0,201,167,.1); color: var(--green);
+      padding: 8px 18px; border-radius: 50px; font-size: 13px; font-weight: 600;
+      border: 1px solid rgba(0,201,167,.25); margin-bottom: 32px;
+    }
+    .hero h1 {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(36px, 5.5vw, 64px); font-weight: 800;
+      line-height: 1.1; letter-spacing: -2px; color: var(--charcoal);
+      margin-bottom: 24px;
+    }
+    .hero h1 span {
+      background: linear-gradient(135deg, var(--blue), var(--green));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-sub {
+      font-size: clamp(16px, 2vw, 20px); color: var(--text-muted);
+      max-width: 640px; margin: 0 auto 44px; line-height: 1.7;
+    }
+    .hero-btns {
+      display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+    }
+    .btn-primary {
+      background: var(--blue); color: #fff; border: none;
+      padding: 16px 36px; border-radius: 50px; font-family: 'Inter', sans-serif;
+      font-weight: 600; font-size: 16px; cursor: pointer;
+      transition: all .3s cubic-bezier(.16,1,.3,1);
+      display: inline-flex; align-items: center; gap: 8px;
+      text-decoration: none;
+    }
+    .btn-primary:hover { background: var(--blue-dark); transform: translateY(-3px); box-shadow: 0 16px 40px rgba(0,102,204,.28); }
+    .btn-outline {
+      background: transparent; color: var(--charcoal);
+      border: 2px solid var(--gray-light); padding: 14px 34px;
+      border-radius: 50px; font-family: 'Inter', sans-serif;
+      font-weight: 600; font-size: 16px; cursor: pointer;
+      transition: all .3s ease; display: inline-flex; align-items: center; gap: 8px;
+      text-decoration: none;
+    }
+    .btn-outline:hover { border-color: var(--blue); color: var(--blue); transform: translateY(-3px); }
+
+    /* SECTIONS */
+    .content-section { padding: 100px 24px; }
+    .content-section.alt { background: var(--gray); }
+    .content-section .container { max-width: 800px; }
+    .content-section.wide .container { max-width: 1120px; }
+
+    .content-section h2 {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(24px, 3.5vw, 36px); font-weight: 700;
+      line-height: 1.25; color: var(--charcoal); margin-bottom: 20px;
+    }
+    .content-section h2 span {
+      background: linear-gradient(135deg, var(--blue), var(--green));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .content-section h3 {
+      font-family: 'Poppins', sans-serif;
+      font-size: 22px; font-weight: 700; margin: 40px 0 16px 0;
+      line-height: 1.3;
+    }
+    .content-section p {
+      font-size: 17px; line-height: 1.8; color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+    .content-section p strong {
+      color: var(--charcoal); font-weight: 600;
+    }
+    .content-section ul {
+      list-style: none; margin: 0 0 24px 0;
+      display: flex; flex-direction: column; gap: 12px;
+    }
+    .content-section ul li {
+      display: flex; align-items: flex-start; gap: 10px;
+      font-size: 16px; color: var(--text-muted); line-height: 1.6;
+    }
+    .content-section ul li i {
+      color: var(--green); font-size: 14px; flex-shrink: 0; margin-top: 5px;
+    }
+    .content-section blockquote {
+      border-left: 4px solid var(--green);
+      padding: 20px 28px; margin: 32px 0;
+      background: var(--gray); border-radius: 0 12px 12px 0;
+      font-style: italic;
+    }
+    .content-section blockquote p {
+      font-size: 18px; color: var(--charcoal); margin: 0;
+      font-weight: 500;
+    }
+
+    /* DIAGRAMS */
+    .diagram {
+      margin: 48px auto; text-align: center;
+    }
+    .diagram img {
+      max-width: 100%; height: auto; border-radius: 16px;
+      box-shadow: 0 20px 60px rgba(0,0,0,.08);
+    }
+    .diagram-caption {
+      font-size: 13px; color: var(--text-muted); margin-top: 14px;
+      font-style: italic;
+    }
+
+    /* BEFORE / AFTER */
+    .ba-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+      margin: 40px 0;
+    }
+    .ba-col {
+      background: var(--white); border-radius: 16px; padding: 32px;
+      border: 2px solid var(--gray-light);
+    }
+    .ba-col.active {
+      border-color: var(--green);
+      box-shadow: 0 12px 32px rgba(0,201,167,.1);
+    }
+    .ba-label {
+      font-size: 11px; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; margin-bottom: 20px; display: block;
+    }
+    .ba-label.before { color: #999; }
+    .ba-label.after { color: var(--green); }
+    .ba-steps {
+      font-size: 15px; line-height: 2.2; color: #888;
+    }
+    .ba-col.active .ba-steps {
+      color: var(--charcoal); font-weight: 500;
+    }
+    .ba-steps .highlight-blue { color: var(--blue); }
+    .ba-steps .highlight-green { color: var(--green); }
+    .ba-steps .highlight-lavender { color: var(--lavender); }
+
+    /* FEATURE CARDS */
+    .feature-cards {
+      display: grid; grid-template-columns: 1fr; gap: 20px;
+      margin: 40px 0;
+    }
+    .feature-card {
+      background: var(--white); border: 1px solid var(--gray-light);
+      border-radius: 16px; padding: 32px;
+      display: flex; gap: 20px; align-items: flex-start;
+      transition: all .3s ease;
+    }
+    .feature-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 40px rgba(0,0,0,.06);
+      border-color: var(--green);
+    }
+    .feature-icon {
+      width: 44px; height: 44px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; flex-shrink: 0;
+    }
+    .feature-card h4 {
+      font-family: 'Poppins', sans-serif; font-size: 18px;
+      font-weight: 700; margin: 0 0 8px 0;
+    }
+    .feature-card p {
+      font-size: 15px; color: var(--text-muted); line-height: 1.65;
+      margin: 0;
+    }
+
+    /* ECOSYSTEM */
+    .ecosystem-box {
+      background: var(--gray); border-radius: 20px; padding: 48px 40px;
+      text-align: center; margin: 40px 0;
+    }
+    .ecosystem-box p {
+      font-size: 16px; line-height: 2.2; color: var(--charcoal);
+      margin: 0; font-weight: 500;
+    }
+
+    /* WHAT'S NEXT */
+    .next-section {
+      padding: 100px 24px;
+      background: linear-gradient(135deg, var(--charcoal) 0%, #2d3454 100%);
+      color: #fff; text-align: center;
+    }
+    .next-section h2 {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(28px, 4vw, 44px); font-weight: 800;
+      margin-bottom: 20px;
+    }
+    .next-section p {
+      font-size: 18px; opacity: .85; line-height: 1.7;
+      max-width: 640px; margin: 0 auto 32px auto;
+    }
+    .next-section .highlight {
+      color: var(--green); font-weight: 600;
+    }
+    .btn-green {
+      background: var(--green); color: #fff; border: none;
+      padding: 16px 36px; border-radius: 50px; font-family: 'Inter', sans-serif;
+      font-weight: 600; font-size: 16px; cursor: pointer;
+      transition: all .3s ease; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-green:hover { background: #00b396; transform: translateY(-3px); box-shadow: 0 16px 40px rgba(0,201,167,.3); }
+
+    /* FINAL CTA */
+    .cta-section {
+      padding: 100px 24px; text-align: center;
+      background: linear-gradient(135deg, var(--blue) 0%, #0044AA 100%);
+      color: #fff;
+    }
+    .cta-section h2 {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(28px, 4vw, 44px); font-weight: 800;
+      margin-bottom: 16px;
+    }
+    .cta-section p {
+      font-size: 18px; opacity: .85; margin-bottom: 36px;
+      max-width: 560px; margin-left: auto; margin-right: auto;
+    }
+
+    /* FOOTER */
+    footer { background: var(--charcoal); color: #fff; padding: 60px 24px 40px; }
+    .footer-inner {
+      max-width: 1120px; margin: 0 auto;
+      display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px;
+      margin-bottom: 48px;
+    }
+    .footer-brand .footer-logo { height: 56px; margin-bottom: 16px; opacity: .9; display: block; }
+    .footer-brand p { font-size: 14px; color: rgba(255,255,255,.5); line-height: 1.7; max-width: 280px; }
+    .footer-col h4 {
+      font-family: 'Poppins', sans-serif; font-size: 13px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 1px; opacity: .5; margin-bottom: 20px;
+    }
+    .footer-col a {
+      display: block; color: rgba(255,255,255,.65); text-decoration: none;
+      font-size: 14px; margin-bottom: 12px; transition: color .2s;
+    }
+    .footer-col a:hover { color: #fff; }
+    .footer-bottom {
+      max-width: 1120px; margin: 0 auto; border-top: 1px solid rgba(255,255,255,.08);
+      padding-top: 32px; display: flex; justify-content: space-between;
+      align-items: center; flex-wrap: wrap; gap: 16px;
+    }
+    .footer-copyright { font-size: 13px; color: rgba(255,255,255,.35); }
+    .social-links { display: flex; gap: 12px; }
+    .social-link {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: rgba(255,255,255,.08); display: flex; align-items: center;
+      justify-content: center; color: rgba(255,255,255,.7); text-decoration: none;
+      transition: all .3s ease;
+    }
+    .social-link:hover { background: var(--green); color: #fff; transform: translateY(-3px); }
+
+    /* MOBILE */
+    .mobile-menu {
+      display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(255,255,255,.97); backdrop-filter: blur(20px);
+      z-index: 999; flex-direction: column; align-items: center; justify-content: center;
+      gap: 28px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu .nav-link { font-size: 22px; }
+    .mobile-menu .nav-cta { font-size: 18px; padding: 16px 40px; }
+    .close-menu { position: absolute; top: 20px; right: 24px; background: none; border: none; font-size: 24px; cursor: pointer; color: var(--charcoal); }
+
+    @media (max-width: 980px) {
+      .footer-inner { grid-template-columns: 1fr 1fr; }
+      .ba-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+    }
+    @media (max-width: 640px) {
+      nav { padding: 16px 20px; }
+      nav.scrolled { padding: 12px 20px; }
+      .nav-actions { display: none; }
+      .nav-hamburger { display: block; }
+      .footer-inner { grid-template-columns: 1fr; gap: 36px; }
+      .footer-bottom { justify-content: center; text-align: center; }
+      .content-section { padding: 64px 24px; }
+      .feature-card { flex-direction: column; }
+      .next-section { padding: 64px 24px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .reveal { opacity: 1; transform: none; transition: none; }
+    }
+  
+    /* READ NEXT */
+    .read-next { padding: 64px 24px; background: var(--white); }
+    .read-next h2 { font-family: 'Poppins', sans-serif; font-size: 22px; font-weight: 700; margin-bottom: 20px; }
+    .rn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .rn-card {
+      display: block; text-decoration: none; color: inherit;
+      border: 2px solid var(--gray-light); border-radius: 14px; padding: 20px 22px;
+      transition: all .25s ease;
+    }
+    .rn-card:hover { border-color: var(--blue); transform: translateY(-2px); }
+    .rn-card strong { display: block; font-family: 'Poppins', sans-serif; font-size: 16px; margin-bottom: 6px; }
+    .rn-card span { font-size: 14px; color: var(--text-muted); line-height: 1.55; }
+    @media (max-width: 640px) { .rn-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="navbar">
+    <a href="/" aria-label="My-CoMind home"><img src="/mycomind_logo_full_transparent.png" alt="My-CoMind logo" class="nav-logo"></a>
+    <div class="nav-links">
+      <a href="/" class="nav-link">Home</a>
+      <a href="/#features" class="nav-link">Features</a>
+      <a href="/#pricing" class="nav-link">Pricing</a>
+      <a href="/resources" class="nav-link">Resources</a>
+      <a href="/#faq" class="nav-link">FAQ</a>
+    </div>
+    <div class="nav-actions">
+      <a href="https://app.my-comind.com/login" class="nav-signin" target="_blank" rel="noopener">Sign In</a>
+      <a href="https://app.my-comind.com" class="nav-cta" target="_blank" rel="noopener">Get Started Free</a>
+    </div>
+    <button class="nav-hamburger" onclick="document.getElementById('mobileMenu').classList.add('open')" aria-label="Open menu">
+      <i class="fas fa-bars" style="font-size:20px;color:var(--charcoal)"></i>
+    </button>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="close-menu" onclick="document.getElementById('mobileMenu').classList.remove('open')" aria-label="Close menu">
+      <i class="fas fa-times"></i>
+    </button>
+    <a href="/" class="nav-link" onclick="document.getElementById('mobileMenu').classList.remove('open')">Home</a>
+    <a href="/#features" class="nav-link" onclick="document.getElementById('mobileMenu').classList.remove('open')">Features</a>
+    <a href="/#pricing" class="nav-link" onclick="document.getElementById('mobileMenu').classList.remove('open')">Pricing</a>
+    <a href="/resources" class="nav-link" onclick="document.getElementById('mobileMenu').classList.remove('open')">Resources</a>
+    <a href="https://app.my-comind.com" class="nav-cta" target="_blank" rel="noopener">Get Started Free</a>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-orb orb-1"></div>
+    <div class="hero-orb orb-2"></div>
+    <div class="hero-inner">
+      <div class="hero-badge">
+        <i class="fas fa-rocket"></i> Product Evolution — August 2026
+      </div>
+      <h1>From Memory Tool<br><span>to Memory Agent</span></h1>
+      <p class="hero-sub">
+        What happens when your memory no longer depends on remembering to take notes?
+      </p>
+      <p class="hero-sub" style="font-size: 16px; margin-top: -20px;">
+        Over the past month, we changed how My-CoMind captures, preserves, and reconnects the thinking that happens around you. Not just after a meeting. <strong>While you're thinking.</strong>
+      </p>
+      <div class="hero-btns">
+        <a href="https://app.my-comind.com" class="btn-primary" target="_blank" rel="noopener">
+          <i class="fas fa-arrow-right"></i> Start for Free
+        </a>
+        <a href="#the-shift" class="btn-outline">
+          <i class="fas fa-book-open"></i> Read the story
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE PROBLEM -->
+  <section class="content-section alt" id="the-shift">
+    <div class="container reveal">
+      <span class="section-label">The Problem</span>
+      <h2>Your thinking happens <span>everywhere</span></h2>
+      <p>In meetings. On calls. Between tasks. In conversations. In the five seconds when someone says something that changes your entire direction.</p>
+      <p>The problem isn't that we don't have enough tools to record information.</p>
+      <blockquote>
+        <p>The problem is that we still have to remember to use them.</p>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- THE SHIFT -->
+  <section class="content-section">
+    <div class="container reveal">
+      <span class="section-label">The Shift</span>
+      <h2>From capture to <span>presence</span></h2>
+      <p>My-CoMind is moving from something you <strong>open</strong> to something that <strong>stays with your thinking.</strong></p>
+
+      <div class="ba-grid">
+        <div class="ba-col">
+          <span class="ba-label before">Before</span>
+          <div class="ba-steps">
+            Think<br>
+            ↓<br>
+            Remember to take a note<br>
+            ↓<br>
+            Open a tool<br>
+            ↓<br>
+            Capture
+          </div>
+        </div>
+        <div class="ba-col active">
+          <span class="ba-label after">After</span>
+          <div class="ba-steps">
+            Think<br>
+            ↓<br>
+            <span class="highlight-blue">My-CoMind captures</span><br>
+            ↓<br>
+            <span class="highlight-lavender">Context becomes memory</span><br>
+            ↓<br>
+            <span class="highlight-green">You continue thinking</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="diagram">
+        <img src="/resources/memory-agent/mcmin_before_after_shift.png" alt="Before and after comparison showing the shift from manual note-taking to automatic capture" width="2934" height="1734">
+      </div>
+    </div>
+  </section>
+
+  <!-- LIVE CAPTURE -->
+  <section class="content-section alt">
+    <div class="container reveal">
+      <span class="section-label">Feature</span>
+      <h2>Live Meeting <span>Capture</span></h2>
+      <p><strong>Live Meeting Capture</strong> now processes conversations while they're happening — not after you upload a recording.</p>
+      <ul>
+        <li><i class="fas fa-check"></i> Records meetings, calls, classes, or thinking out loud</li>
+        <li><i class="fas fa-check"></i> Captures the call's own audio — other participants included</li>
+        <li><i class="fas fa-check"></i> Decisions, action items and open questions extracted as you go</li>
+        <li><i class="fas fa-check"></i> One recording becomes <strong>one memory</strong> — never a pile of fragments</li>
+        <li><i class="fas fa-check"></i> Screen/system audio recorded alongside the microphone and flagged on the session</li>
+      </ul>
+      <p>The capture page was rebuilt around a live session: start, pause, stop, segment progress, running item list, and the resulting memory linked directly from the workspace.</p>
+      <p>You don't wait for the meeting to end. You watch decisions appear while the conversation is still running.</p>
+    </div>
+  </section>
+
+  <!-- DESKTOP AGENT -->
+  <section class="content-section">
+    <div class="container reveal">
+      <span class="section-label">Feature</span>
+      <h2>Your memory shouldn't live in a <span>browser tab</span></h2>
+      <p>My-CoMind now has a presence on your desktop.</p>
+      <p>The <strong>Windows Desktop Agent</strong> is a tray application that:</p>
+      <ul>
+        <li><i class="fas fa-check"></i> <strong>Pairs on first run</strong> with your account via a secure pairing code</li>
+        <li><i class="fas fa-check"></i> <strong>Detects meeting activity passively</strong> — reads device roles and audio activity, never enumerates processes</li>
+        <li><i class="fas fa-check"></i> <strong>Records microphone + system audio together</strong>, with acoustic echo cancellation through the Windows Voice Capture DSP</li>
+        <li><i class="fas fa-check"></i> <strong>Offers to capture</strong> when it notices you're in a call</li>
+        <li><i class="fas fa-check"></i> <strong>Takes a quick note on Ctrl+Shift+M</strong> — a global hotkey that captures a note without opening a window</li>
+        <li><i class="fas fa-check"></i> <strong>Cancels its own echo</strong> — recording with speakers no longer records the call back into itself</li>
+      </ul>
+      <p>Instead of opening a browser every time something important happens, the Desktop Agent stays available while you work. When a meeting starts, it recognizes the activity and offers to capture it.</p>
+
+      <div class="diagram">
+        <img src="/resources/memory-agent/mcmin_memory_pipeline.png" alt="Memory pipeline showing how conversation flows through Live Capture, Agent, Transcript, Memory Marker, Living Memory, Workspace, Cognitive Drift, and Ask/Continue" width="2134" height="3334" loading="lazy" decoding="async">
+        <p class="diagram-caption">The complete memory pipeline: from conversation to continuity</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- MEMORY MARKERS -->
+  <section class="content-section alt">
+    <div class="container reveal">
+      <span class="section-label">Feature</span>
+      <h2>"My-CoMind, remember <span>that…"</span></h2>
+      <p>Not every moment in a conversation deserves equal weight.</p>
+      <p>Sometimes you don't want to record something separately. You simply want to tell your future self:</p>
+      <blockquote>
+        <p>Remember this.</p>
+      </blockquote>
+      <p>During any capture, you can simply say:</p>
+      <blockquote>
+        <p>"My-CoMind, remember that Maria owns the migration plan."</p>
+      </blockquote>
+      <p>The system detects this <strong>semantically</strong> — never a string match, because the assistant's name comes back transcribed as "My comment", "M.Y. Cummings" or "MyCommand" depending on the model. A cheap regex gate keeps ordinary segments free, and semantic detection handles the rest.</p>
+      <p>That moment becomes an <strong>explicit memory marker</strong> inside the conversation.</p>
+      <p>Not another note. Not another transcript. A marker saying: <strong>This matters. Don't lose it.</strong></p>
+      <p>Markers are stored per memory, shown above Key Items on a memory and across a workspace's memories, each removable — always visible, never hover-only.</p>
+
+      <div class="diagram">
+        <img src="/resources/memory-agent/mcmin_memory_marker.png" alt="Memory Marker flow: spoken phrase becomes a persistent marker in the workspace" width="2534" height="1534" loading="lazy" decoding="async">
+        <p class="diagram-caption">From spoken words to persistent memory marker</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- COGNITIVE DRIFT -->
+  <section class="content-section">
+    <div class="container reveal">
+      <span class="section-label">Feature</span>
+      <h2>Memory isn't enough. You need <span>continuity.</span></h2>
+      <p>A transcript tells you what happened.</p>
+      <p>A memory tells you what you kept.</p>
+      <p><strong>Continuity tells you how the thinking evolved.</strong></p>
+      <p><strong>Cognitive Drift</strong> asks a workspace or an organization project what shifted since you last looked, instead of re-reading it.</p>
+      <ul>
+        <li><i class="fas fa-check"></i> Each shift shown as <strong>before → after</strong>, with the real dates</li>
+        <li><i class="fas fa-check"></i> How long a position actually held</li>
+        <li><i class="fas fa-check"></i> Descriptive, never a judgement or a score</li>
+        <li><i class="fas fa-check"></i> Ends with a question worth discussing, not a verdict</li>
+        <li><i class="fas fa-check"></i> Available on <strong>every plan</strong>, including free — gated by credits, not by tier</li>
+      </ul>
+      <p>Personal workspace drift is free and incremental, with a full recompute every 10th update. Organization/project drift runs as a projection over shared memories, with its own prompt and schema.</p>
+
+      <div class="diagram">
+        <img src="/resources/memory-agent/mcmin_cognitive_drift.png" alt="Cognitive Drift timeline showing how thinking evolved from before to after across multiple dates" width="2934" height="1334" loading="lazy" decoding="async">
+        <p class="diagram-caption">A transcript tells you what happened. Continuity tells you how the thinking changed.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ECOSYSTEM -->
+  <section class="content-section alt">
+    <div class="container wide reveal">
+      <span class="section-label">The Ecosystem</span>
+      <h2>One source. One memory. One <span>workspace.</span></h2>
+      <p style="text-align: center; max-width: 640px; margin: 0 auto 40px auto;">My-CoMind isn't trying to create more information. <strong>It's trying to preserve context.</strong></p>
+
+      <div class="diagram">
+        <img src="/resources/memory-agent/mcmin_ecosystem_flow.png" alt="My-CoMind ecosystem flow: Capture anywhere through Browser, Desktop, or Imports, into Living Memory, then Workspace, Drift, or Ask, leading to Continue" width="2134" height="2934" loading="lazy" decoding="async">
+        <p class="diagram-caption">The recorder is not the product. The recorder is a doorway.</p>
+      </div>
+
+      <p style="text-align: center; max-width: 640px; margin: 32px auto 0 auto;">What matters is what happens after: the workspace that stays current, the drift that shows how thinking changed, the questions you can ask and get answers grounded in your own material.</p>
+    </div>
+  </section>
+
+  <!-- EVERYTHING ELSE -->
+  <section class="content-section">
+    <div class="container reveal">
+      <span class="section-label">Also Shipped</span>
+      <h2>The rest of the <span>release</span></h2>
+      <p>Beyond the headline features, here's what else landed in My-CoMind 1.1.0:</p>
+
+      <div class="feature-cards">
+        <div class="feature-card">
+          <div class="feature-icon" style="background:rgba(0,102,204,.1);color:var(--blue)"><i class="fas fa-share-nodes"></i></div>
+          <div>
+            <h4>Sharing & Reports</h4>
+            <p>Workspace public share: token link valid for 7 days over a frozen snapshot, zero credit cost. Organization-wide share scope, alongside team and project. Print-CSS report view that becomes a PDF straight from the browser.</p>
+          </div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" style="background:rgba(0,201,167,.1);color:var(--green)"><i class="fas fa-sitemap"></i></div>
+          <div>
+            <h4>Organization View</h4>
+            <p>Memory Continuity grouped by project: one AI call per read, cached, with its own prompt. Remove and restore a shared memory from a project (admin or author) — the personal memory is never touched.</p>
+          </div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" style="background:rgba(155,126,189,.1);color:var(--lavender)"><i class="fas fa-credit-card"></i></div>
+          <div>
+            <h4>Plans & Credits</h4>
+            <p>Two plans instead of four: every paid slug maps to the same full-access tier with unlimited organizations. One-time Stripe Checkout for credit add-on purchases. Admin dashboard controls for plan grants and credit adjustments.</p>
+          </div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" style="background:rgba(0,102,204,.1);color:var(--blue)"><i class="fas fa-file-import"></i></div>
+          <div>
+            <h4>Fireflies Import</h4>
+            <p>Imports now carry the full transcript and go through the same pipeline as a direct capture. The import window is chosen and previewed instead of a hardcoded 90 days. 1 credit per approved import.</p>
+          </div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" style="background:rgba(0,201,167,.1);color:var(--green)"><i class="fas fa-language"></i></div>
+          <div>
+            <h4>Language</h4>
+            <p>Everything generated follows your language — summaries, narratives, syntheses, and chat answers. The interface stays in English; your content doesn't have to. Language selector in Security Settings.</p>
+          </div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" style="background:rgba(155,126,189,.1);color:var(--lavender)"><i class="fas fa-envelope"></i></div>
+          <div>
+            <h4>Retention Email Program</h4>
+            <p>Six opt-in jobs — agenda reminder, weekly summary, re-engagement, rediscovery, knowledge gap, companion digest. All defaulting to off. CASL-compliant footer on every outbound email through Resend.</p>
+          </div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon" style="background:rgba(0,102,204,.1);color:var(--blue)"><i class="fas fa-shield-halved"></i></div>
+          <div>
+            <h4>Security</h4>
+            <p>revokeAllDevices() wired into both password paths, including reset. Device tokens separate from web sessions and individually revocable. Changing a password reports how many devices it signed out.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT'S NEXT -->
+  <section class="next-section">
+    <div class="container reveal">
+      <span class="section-label" style="color: var(--green); opacity: .8;">What's Next</span>
+      <h2>The next question</h2>
+      <p>Today, My-CoMind lives in your browser and on your desktop.</p>
+      <p>But thinking doesn't happen in browsers. It happens wherever you are.</p>
+      <p>So we're exploring what it means for a cognitive system to become available <span class="highlight">without asking you to stop what you're doing.</span></p>
+      <p style="margin-bottom: 36px;">The goal isn't to record everything. <span class="highlight">It's to make sure you don't lose what matters.</span></p>
+      <a href="https://app.my-comind.com" class="btn-green" target="_blank" rel="noopener">
+        <i class="fas fa-arrow-right"></i> Start building your memory
+      </a>
+    </div>
+  </section>
+
+  <!-- RELATED — the article only linked out to cognitive-continuity. These
+       pass authority into the cluster and give the reader a next step. -->
+  <section class="read-next">
+    <div class="container">
+      <h2>Read next</h2>
+      <div class="rn-grid">
+        <a href="/resources/context-reconstruction" class="rn-card">
+          <strong>Context reconstruction</strong>
+          <span>The problem all of this exists to remove — with cited research and a calculator.</span>
+        </a>
+        <a href="/context-audit" class="rn-card">
+          <strong>Context Load Audit</strong>
+          <span>Five questions on how much context you are carrying. Nothing is stored.</span>
+        </a>
+        <a href="/resources/cognitive-continuity" class="rn-card">
+          <strong>What is cognitive continuity?</strong>
+          <span>The property these features add up to, defined.</span>
+        </a>
+        <a href="/glossary" class="rn-card">
+          <strong>Glossary</strong>
+          <span>Memory Marker, Cognitive Drift, decision memory — the vocabulary.</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="cta-section">
+    <div class="container reveal">
+      <h2>Ready to stop rebuilding context?</h2>
+      <p>Capture one real conversation and see what comes back. The free plan is enough to judge it for yourself.</p>
+      <div class="hero-btns">
+        <a href="https://app.my-comind.com" class="btn-white" target="_blank" rel="noopener">
+          <i class="fas fa-arrow-right"></i> Start for Free
+        </a>
+        <a href="/" class="btn-white-outline">
+          <i class="fas fa-home"></i> Back to Home
+        </a>
+      </div>
+      <p style="margin-top: 24px; font-size: 13px; opacity: .6;">Free plan available · No credit card required · Cancel anytime</p>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="/mycomind_logo_full_transparent.png" alt="My-CoMind" class="footer-logo">
+        <p>Cognitive continuity. Preserving how you think, not just what you remember.</p>
+        <p style="font-size: 12px; color: rgba(255,255,255,.35); margin-top: 16px;">MY-COMIND INC.<br>Ontario, Canada</p>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <a href="/">Home</a>
+        <a href="/#features">Features</a>
+        <a href="/#pricing">Pricing</a>
+        <a href="/#demo">Demo</a>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <a href="/resources">Resources</a>
+        <a href="/resources/cognitive-continuity">What is cognitive continuity?</a>
+        <a href="/alternatives">All comparisons</a>
+      </div>
+      <div class="footer-col">
+        <h4>Account</h4>
+        <a href="https://app.my-comind.com" target="_blank" rel="noopener">Get Started Free</a>
+        <a href="https://app.my-comind.com/login" target="_blank" rel="noopener">Sign In</a>
+        <a href="/privacy">Privacy Policy</a>
+        <a href="/terms">Terms of Service</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copyright">© 2026 MY-COMIND INC. All rights reserved.</p>
+      <div class="social-links">
+        <a href="https://www.linkedin.com/company/my-comind" class="social-link" target="_blank" aria-label="LinkedIn">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Navbar scroll
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 40);
+    });
+
+    // Reveal on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Smooth anchor scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', function(e) {
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+      });
+    });
+  </script>
+
+  <script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>
