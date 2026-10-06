@@ -1,6 +1,9 @@
 # Everything in this repo is served as-is from the root, so anything that is
 # tooling rather than site content has to be kept out of the deployment.
 tools/
+# Source of the shared header/footer — copied into every page by
+# tools/sync-chrome.mjs, never served on its own.
+partials/
 
 # Unused second cut of the demo video (~26 MB). Only UsoMyCoMind.mp4 is
 # referenced by the site.

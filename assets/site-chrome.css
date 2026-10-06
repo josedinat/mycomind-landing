@@ -1,0 +1,135 @@
+/* ============================================================================
+   Site chrome — ONE header and ONE footer for every page of my-comind.com.
+
+   The markup lives in /partials/header.html and /partials/footer.html and is
+   copied into each page by tools/sync-chrome.mjs. Edit the partials, run the
+   script — never edit a page's header/footer by hand.
+
+   Every selector is .mc-*: pages were written by different people and many
+   carry generic rules (`nav { position: fixed }`, `footer { padding }`, `<nav
+   class="toc">` for tables of contents). Nothing here may leak into them, and
+   the rules below are specific enough to win over theirs.
+   ========================================================================= */
+
+:root { --mc-header-h: 68px; }
+@media (max-width: 640px) { :root { --mc-header-h: 60px; } }
+
+/* ---------- HEADER ---------- */
+.mc-header {
+  position: sticky; top: 0; z-index: 1000;
+  background: rgba(255,255,255,.94);
+  -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(26,31,54,.08);
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+.mc-header.mc-scrolled { box-shadow: 0 6px 24px rgba(26,31,54,.06); }
+.mc-header nav.mc-nav {
+  position: static; top: auto; width: auto; z-index: auto; background: none; box-shadow: none; transition: none;
+  max-width: 1200px; height: var(--mc-header-h); margin: 0 auto; padding: 0 24px;
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+}
+.mc-header .mc-logo { display: inline-flex; align-items: center; min-height: 44px; flex-shrink: 0; }
+.mc-header .mc-logo img { height: 54px; width: auto; display: block; }   /* assets/logo.png is the logo cropped to its content */
+.mc-header .mc-links { display: flex; align-items: center; gap: 6px; }
+.mc-header .mc-links a, .mc-header .mc-panel > a {
+  color: #1A1F36; text-decoration: none; font-size: 14.5px; font-weight: 500;
+  padding: 0 14px; min-height: 44px; display: inline-flex; align-items: center; border-radius: 10px;
+  opacity: .78; transition: opacity .15s, background .15s;
+}
+.mc-header .mc-links a:hover { opacity: 1; background: rgba(0,102,204,.06); }
+.mc-header a.mc-active { opacity: 1; color: #0066CC; font-weight: 600; }
+.mc-header .mc-actions { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
+.mc-header .mc-signin {
+  color: #1A1F36; text-decoration: none; font-size: 14.5px; font-weight: 500; opacity: .78;
+  min-height: 44px; display: inline-flex; align-items: center; padding: 0 8px;
+}
+.mc-header .mc-signin:hover { opacity: 1; }
+.mc-header .mc-cta {
+  background: #0066CC; color: #fff; text-decoration: none; font-size: 14px; font-weight: 600;
+  padding: 0 20px; min-height: 44px; display: inline-flex; align-items: center; border-radius: 50px;
+  white-space: nowrap; transition: background .2s;
+}
+.mc-header .mc-cta:hover { background: #0052A3; }
+.mc-header .mc-burger {
+  display: none; width: 44px; height: 44px; border: 0; background: transparent; cursor: pointer;
+  border-radius: 10px; padding: 0; position: relative;
+}
+.mc-header .mc-burger span {
+  position: absolute; left: 12px; width: 20px; height: 2px; background: #1A1F36; border-radius: 2px;
+  transition: transform .2s, opacity .2s;
+}
+.mc-header .mc-burger span:nth-child(1) { top: 15px; }
+.mc-header .mc-burger span:nth-child(2) { top: 21px; }
+.mc-header .mc-burger span:nth-child(3) { top: 27px; }
+.mc-header .mc-burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.mc-header .mc-burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.mc-header .mc-burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+.mc-header .mc-panel {
+  border-top: 1px solid rgba(26,31,54,.08); background: #fff;
+  padding: 8px 16px 18px; display: flex; flex-direction: column;
+  max-height: calc(100dvh - var(--mc-header-h)); overflow-y: auto;
+}
+.mc-header .mc-panel[hidden] { display: none; }
+.mc-header .mc-panel > a { font-size: 17px; padding: 0 8px; min-height: 52px; border-bottom: 1px solid rgba(26,31,54,.06); border-radius: 0; opacity: 1; }
+.mc-header .mc-panel-actions { display: flex; gap: 10px; margin-top: 16px; }
+.mc-header .mc-panel-actions .mc-signin, .mc-header .mc-panel-actions .mc-cta { flex: 1; justify-content: center; }
+.mc-header .mc-panel-actions .mc-signin { border: 1px solid rgba(26,31,54,.15); border-radius: 50px; opacity: 1; }
+
+/* Links fold into the menu below 960px — the burger appears the moment the
+   links disappear, so no width is ever left without navigation. */
+@media (max-width: 959px) {
+  .mc-header .mc-links, .mc-header .mc-actions > .mc-signin { display: none; }
+  .mc-header .mc-burger { display: inline-block; }
+}
+@media (max-width: 640px) {
+  .mc-header nav.mc-nav { padding: 0 12px 0 16px; gap: 8px; }
+  .mc-header .mc-logo img { height: 46px; }
+  .mc-header .mc-actions > .mc-cta { padding: 0 14px; font-size: 13px; }
+}
+@media (max-width: 379px) {
+  .mc-header .mc-actions > .mc-cta { display: none; }   /* still in the menu */
+}
+
+/* ---------- FOOTER ---------- */
+footer.mc-footer {
+  background: #1A1F36; color: #fff; padding: 64px 24px 36px; margin: 0;
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif; text-align: left;
+}
+.mc-footer .mc-footer-inner {
+  max-width: 1200px; margin: 0 auto 44px;
+  display: grid; grid-template-columns: 1.6fr 1fr 1.3fr 1fr; gap: 40px;
+}
+.mc-footer .mc-footer-brand img { height: 72px; width: auto; display: block; margin-bottom: 16px; background: #fff; border-radius: 14px; padding: 6px 8px; box-sizing: content-box; } /* the navy wordmark disappears on the dark footer without a light tile */
+.mc-footer .mc-footer-brand p { font-size: 14px; line-height: 1.7; color: rgba(255,255,255,.55); max-width: 290px; margin: 0; }
+.mc-footer .mc-footer-brand .mc-entity { font-size: 12px; color: rgba(255,255,255,.38); margin-top: 14px; }
+.mc-footer h4 {
+  font-family: 'Poppins', 'Inter', sans-serif; font-size: 12.5px; font-weight: 700; letter-spacing: 1px;
+  text-transform: uppercase; color: rgba(255,255,255,.5); margin: 0 0 14px;
+}
+.mc-footer .mc-footer-col a {
+  display: flex; align-items: center; min-height: 36px; color: rgba(255,255,255,.72);
+  text-decoration: none; font-size: 14px; line-height: 1.4;
+}
+.mc-footer .mc-footer-col a:hover { color: #fff; }
+.mc-footer .mc-footer-bottom {
+  max-width: 1200px; margin: 0 auto; padding-top: 26px; border-top: 1px solid rgba(255,255,255,.08);
+  display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap;
+}
+.mc-footer .mc-footer-bottom p { font-size: 13px; color: rgba(255,255,255,.38); margin: 0; }
+.mc-footer .mc-social {
+  width: 44px; height: 44px; border-radius: 50%; background: rgba(255,255,255,.08);
+  display: inline-flex; align-items: center; justify-content: center;
+  color: rgba(255,255,255,.8); text-decoration: none; font: 700 15px 'Inter', sans-serif;
+}
+.mc-footer .mc-social:hover { background: #00C9A7; color: #fff; }
+@media (max-width: 900px) { .mc-footer .mc-footer-inner { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px) {
+  .mc-footer .mc-footer-inner { grid-template-columns: 1fr; gap: 28px; }
+  .mc-footer .mc-footer-bottom { justify-content: center; text-align: center; }
+}
+
+/* Anchored sections land below the sticky header, on every page. */
+:target { scroll-margin-top: calc(var(--mc-header-h) + 12px); }
+
+@media print { .mc-header { display: none; } }

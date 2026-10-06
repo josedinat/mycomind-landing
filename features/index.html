@@ -28,6 +28,42 @@
     })();
   </script>
 
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "My-CoMind",
+    "url": "https://www.my-comind.com/features",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Web browser; Windows (desktop agent)",
+    "description": "Capture meetings, calls, documents and notes; related memories gather into living workspaces; find anything in the Memory Room; prepare for meetings from your own memories; work as an organization; ask any memory what was decided and turn a conversation into a shareable report.",
+    "image": "https://www.my-comind.com/features/images/workspace.jpg",
+    "featureList": [
+      "Live Capture in the browser, with decisions, actions and open questions extracted while you talk",
+      "Desktop agent for Windows that asks to capture when a call starts",
+      "Document upload (PDF, DOC, DOCX, TXT) and text notes",
+      "Fireflies and Microsoft Teams meeting import",
+      "Living workspaces with current state, next step, decisions in effect and open points",
+      "Cognitive Drift: how a position changed over time",
+      "Memory Room: timeline, views, filters and search",
+      "Meeting briefings from your calendar (Google, Outlook / Microsoft 365)",
+      "Organizations and projects with shared memories",
+      "Ask this memory and chat-to-report"
+    ],
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "CAD", "description": "Free plan available" },
+    "publisher": { "@type": "Organization", "name": "MY-COMIND INC.", "url": "https://www.my-comind.com/" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.my-comind.com/" },
+      { "@type": "ListItem", "position": 2, "name": "Features", "item": "https://www.my-comind.com/features" }
+    ]
+  }
+  </script>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%230066CC' rx='20' width='100' height='100'/><text x='50' y='70' font-size='50' text-anchor='middle' fill='white' font-family='Arial'>M</text></svg>">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
@@ -66,7 +102,7 @@
     html:not(.pt) .lang-switch [data-set="en"], html.pt .lang-switch [data-set="pt"] { background: var(--charcoal); color: #fff; }
 
     /* HERO */
-    .hero { position: relative; overflow: hidden; background: linear-gradient(160deg, #f0f6ff 0%, var(--white) 60%); padding: 150px 24px 70px; text-align: center; }
+    .hero { position: relative; overflow: hidden; background: linear-gradient(160deg, #f0f6ff 0%, var(--white) 60%); padding: 64px 24px 70px; text-align: center; }
     .hero-orb { position: absolute; border-radius: 50%; filter: blur(100px); pointer-events: none; }
     .orb-1 { width: 600px; height: 600px; background: rgba(0,201,167,.14); top: -220px; right: -160px; }
     .orb-2 { width: 460px; height: 460px; background: rgba(155,126,189,.12); bottom: -180px; left: -120px; }
@@ -79,7 +115,7 @@
     .flow i { color: var(--green); font-size: 12px; }
 
     /* JUMP CHIPS */
-    .jump { position: sticky; top: 84px; z-index: 50; background: rgba(255,255,255,.94); backdrop-filter: blur(14px); border-bottom: 1px solid var(--gray-light); }
+    .jump { position: sticky; top: var(--mc-header-h, 68px); z-index: 50; background: rgba(255,255,255,.94); backdrop-filter: blur(14px); border-bottom: 1px solid var(--gray-light); }
     .jump .container { display: flex; gap: 8px; overflow-x: auto; padding-top: 10px; padding-bottom: 10px; scrollbar-width: none; }
     .jump .container::-webkit-scrollbar { display: none; }
     .jump a { flex-shrink: 0; display: inline-flex; align-items: center; gap: 6px; min-height: 40px; padding: 0 14px; border-radius: 50px; border: 1px solid var(--gray-light); background: #fff; color: var(--charcoal); font-size: 13px; font-weight: 600; text-decoration: none; }
@@ -87,7 +123,8 @@
     .jump a.new { border-color: rgba(0,201,167,.5); color: #00806E; }
 
     /* FEATURE SECTIONS */
-    .feature { padding: 90px 0; scroll-margin-top: 140px; }
+    .feature { padding: 90px 0; scroll-margin-top: calc(var(--mc-header-h, 68px) + 64px); }
+    .hero-lang { margin: 0 auto 22px; } .lang-switch button { min-height: 40px; padding: 0 16px; font-size: 13px; }
     .feature.alt { background: var(--gray); }
     .f-head { max-width: 760px; margin-bottom: 36px; }
     .f-label { font-size: 12px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: #00957C; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
@@ -178,10 +215,10 @@
       nav, nav.scrolled { padding: 12px 16px; }
       .nav-logo { height: 44px; }
       .nav-actions .nav-signin, .nav-actions .nav-cta { display: none; }
-      .jump { top: 76px; } /* measured mobile nav height: 44px logo row + padding */
+      .jump { top: var(--mc-header-h, 60px); }
       .container { padding: 0 16px; }
-      .hero { padding: 120px 16px 56px; }
-      .feature { padding: 64px 0; scroll-margin-top: 124px; }
+      .hero { padding: 40px 16px 56px; }
+      .feature { padding: 64px 0; }
       .ways, .privacy-grid { grid-template-columns: 1fr; }
       .agent { padding: 26px 20px; }
       .footer-inner { grid-template-columns: 1fr; gap: 36px; }
@@ -189,41 +226,47 @@
     }
     @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .reveal { opacity: 1; transform: none; transition: none; } }
   </style>
+  <link rel="stylesheet" href="/assets/site-chrome.css">
 </head>
 <body>
 
-  <nav id="navbar">
-    <a href="/" aria-label="My-CoMind home"><img src="/mycomind_logo_full_transparent.png" alt="My-CoMind logo" class="nav-logo"></a>
-    <div class="nav-links">
-      <a href="/" class="nav-link">Home</a>
-      <a href="/features" class="nav-link active"><span data-l="en">Features</span><span data-l="pt">Funcionalidades</span></a>
-      <a href="/release-notes" class="nav-link"><span data-l="en">What's new</span><span data-l="pt">Novidades</span></a>
-      <a href="/#pricing" class="nav-link"><span data-l="en">Pricing</span><span data-l="pt">Planos</span></a>
-      <a href="/resources" class="nav-link">Resources</a>
+  <!-- SITE-HEADER:START (generated by tools/sync-chrome.mjs — edit partials/header.html) -->
+<header class="mc-header" id="mc-header">
+  <nav class="mc-nav" aria-label="Main">
+    <a href="/" class="mc-logo" aria-label="My-CoMind home"><img src="/assets/logo.png" alt="My-CoMind" width="195" height="200"></a>
+    <div class="mc-links">
+      <a href="/features" data-match="/features">Features</a>
+      <a href="/#pricing">Pricing</a>
+      <a href="/release-notes" data-match="/release-notes">What's New</a>
+      <a href="/resources" data-match="/resources /alternatives /glossary /for /context-audit">Resources</a>
+      <a href="/#faq">FAQ</a>
     </div>
-    <div class="nav-actions">
-      <div class="lang-switch" role="group" aria-label="Language">
-        <button type="button" data-set="en">EN</button><button type="button" data-set="pt">PT</button>
-      </div>
-      <a href="https://app.my-comind.com/login" class="nav-signin" target="_blank" rel="noopener"><span data-l="en">Sign In</span><span data-l="pt">Entrar</span></a>
-      <a href="https://app.my-comind.com" class="nav-cta" target="_blank" rel="noopener"><span data-l="en">Get Started Free</span><span data-l="pt">Comece grátis</span></a>
-      <button class="nav-hamburger" onclick="document.getElementById('mobileMenu').classList.add('open')" aria-label="Open menu"><i class="fas fa-bars" style="font-size:20px;color:var(--charcoal)"></i></button>
+    <div class="mc-actions">
+      <a href="https://app.my-comind.com/login" class="mc-signin" target="_blank" rel="noopener">Sign In</a>
+      <a href="https://app.my-comind.com" class="mc-cta" target="_blank" rel="noopener">Get Started Free</a>
+      <button type="button" class="mc-burger" aria-label="Open menu" aria-expanded="false" aria-controls="mc-panel">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </nav>
-
-  <div class="mobile-menu" id="mobileMenu">
-    <button class="close-menu" onclick="document.getElementById('mobileMenu').classList.remove('open')" aria-label="Close menu"><i class="fas fa-times"></i></button>
-    <a href="/" class="nav-link">Home</a>
-    <a href="/features" class="nav-link"><span data-l="en">Features</span><span data-l="pt">Funcionalidades</span></a>
-    <a href="/release-notes" class="nav-link"><span data-l="en">What's new</span><span data-l="pt">Novidades</span></a>
-    <a href="/#pricing" class="nav-link"><span data-l="en">Pricing</span><span data-l="pt">Planos</span></a>
-    <a href="/resources" class="nav-link">Resources</a>
-    <a href="https://app.my-comind.com" class="nav-cta" target="_blank" rel="noopener"><span data-l="en">Get Started Free</span><span data-l="pt">Comece grátis</span></a>
+  <div class="mc-panel" id="mc-panel" hidden>
+    <a href="/features" data-match="/features">Features</a>
+    <a href="/#pricing">Pricing</a>
+    <a href="/release-notes" data-match="/release-notes">What's New</a>
+    <a href="/resources" data-match="/resources /alternatives /glossary /for /context-audit">Resources</a>
+    <a href="/#faq">FAQ</a>
+    <div class="mc-panel-actions">
+      <a href="https://app.my-comind.com/login" class="mc-signin" target="_blank" rel="noopener">Sign In</a>
+      <a href="https://app.my-comind.com" class="mc-cta" target="_blank" rel="noopener">Get Started Free</a>
+    </div>
   </div>
+</header>
+<!-- SITE-HEADER:END -->
 
   <header class="hero">
     <div class="hero-orb orb-1"></div><div class="hero-orb orb-2"></div>
     <div class="hero-inner">
+      <div class="lang-switch hero-lang" role="group" aria-label="Language / Idioma"><button type="button" data-set="en">English</button><button type="button" data-set="pt">Português</button></div>
       <div class="hero-badge"><i class="fas fa-layer-group"></i><span data-l="en">Features</span><span data-l="pt">Funcionalidades</span></div>
       <h1 data-l="en">Everything <span class="grad brand">My&#8209;CoMind</span> does</h1>
       <h1 data-l="pt">Tudo o que o <span class="grad brand">My&#8209;CoMind</span> faz</h1>
@@ -234,6 +277,7 @@
     </div>
   </header>
 
+  <div class="jump-scope">
   <div class="jump" aria-label="Sections">
     <div class="container">
       <a href="#capture"><i class="fas fa-microphone"></i><span data-l="en">Capture</span><span data-l="pt">Captura</span></a>
@@ -646,6 +690,8 @@
     </div>
   </section>
 
+  </div><!-- /jump-scope -->
+
   <section class="cta-section">
     <div class="container">
       <h2 data-l="en">Start with one real conversation</h2>
@@ -659,39 +705,46 @@
     </div>
   </section>
 
-  <footer>
-    <div class="footer-inner">
-      <div class="footer-brand">
-        <img src="/mycomind_logo_full_transparent.png" alt="My-CoMind" class="footer-logo">
-        <p>Cognitive continuity. Preserving how you think, not just what you remember.</p>
-        <p style="font-size: 12px; color: rgba(255,255,255,.35); margin-top: 16px;">MY-COMIND INC.<br>Ontario, Canada</p>
-      </div>
-      <div class="footer-col">
-        <h4>Product</h4>
-        <a href="/">Home</a>
-        <a href="/features">Features</a>
-        <a href="/release-notes">What's new</a>
-        <a href="/#pricing">Pricing</a>
-      </div>
-      <div class="footer-col">
-        <h4>Learn</h4>
-        <a href="/resources">Resources</a>
-        <a href="/resources/cognitive-continuity">What is cognitive continuity?</a>
-        <a href="/alternatives">All comparisons</a>
-      </div>
-      <div class="footer-col">
-        <h4>Account</h4>
-        <a href="https://app.my-comind.com" target="_blank" rel="noopener">Get Started Free</a>
-        <a href="https://app.my-comind.com/login" target="_blank" rel="noopener">Sign In</a>
-        <a href="/privacy">Privacy Policy</a>
-        <a href="/terms">Terms of Service</a>
-      </div>
+  <!-- SITE-FOOTER:START (generated by tools/sync-chrome.mjs — edit partials/footer.html) -->
+<footer class="mc-footer">
+  <div class="mc-footer-inner">
+    <div class="mc-footer-brand">
+      <img src="/assets/logo.png" alt="My-CoMind" width="195" height="200">
+      <p>Cognitive continuity. Preserving how you think, not just what you remember.</p>
+      <p class="mc-entity">MY-COMIND INC.<br>Ontario, Canada</p>
     </div>
-    <div class="footer-bottom">
-      <p class="footer-copyright">© 2026 MY-COMIND INC. All rights reserved.</p>
-      <a href="https://www.linkedin.com/company/my-comind" class="social-link" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+    <div class="mc-footer-col">
+      <h4>Product</h4>
+      <a href="/features">Features</a>
+      <a href="/release-notes">What's New</a>
+      <a href="/#pricing">Pricing</a>
+      <a href="/for/mentors">For mentors</a>
+      <a href="/context-audit">Context Load Audit</a>
     </div>
-  </footer>
+    <div class="mc-footer-col">
+      <h4>Learn</h4>
+      <a href="/resources">Resources</a>
+      <a href="/resources/memory-agent">From memory tool to memory agent</a>
+      <a href="/resources/context-reconstruction">Context reconstruction</a>
+      <a href="/resources/cognitive-continuity">What is cognitive continuity?</a>
+      <a href="/glossary">Glossary</a>
+      <a href="/alternatives">Comparisons: Fireflies, Notion</a>
+    </div>
+    <div class="mc-footer-col">
+      <h4>Company</h4>
+      <a href="https://app.my-comind.com" target="_blank" rel="noopener">Get Started Free</a>
+      <a href="https://app.my-comind.com/login" target="_blank" rel="noopener">Sign In</a>
+      <a href="/contact">Talk to us</a>
+      <a href="/privacy">Privacy Policy</a>
+      <a href="/terms">Terms of Service</a>
+    </div>
+  </div>
+  <div class="mc-footer-bottom">
+    <p>© 2026 MY-COMIND INC. All rights reserved.</p>
+    <a href="https://www.linkedin.com/company/my-comind" class="mc-social" target="_blank" rel="noopener" aria-label="My-CoMind on LinkedIn">in</a>
+  </div>
+</footer>
+<!-- SITE-FOOTER:END -->
 
   <script>
     document.querySelectorAll('.lang-switch [data-set]').forEach(function (b) {
@@ -702,16 +755,14 @@
         try { localStorage.setItem('mcm_site_lang', pt ? 'pt' : 'en'); } catch (e) {}
       });
     });
-    var navbar = document.getElementById('navbar');
-    window.addEventListener('scroll', function () { navbar.classList.toggle('scrolled', window.scrollY > 40); });
+
     var observer = new IntersectionObserver(function (entries) {
       entries.forEach(function (e) { if (e.isIntersecting) e.target.classList.add('visible'); });
     }, { threshold: 0.06, rootMargin: '0px 0px -40px 0px' });
     document.querySelectorAll('.reveal').forEach(function (el) { observer.observe(el); });
-    document.querySelectorAll('.mobile-menu a').forEach(function (a) {
-      a.addEventListener('click', function () { document.getElementById('mobileMenu').classList.remove('open'); });
-    });
+
   </script>
   <script defer src="/_vercel/insights/script.js"></script>
+  <script src="/assets/site-chrome.js" defer></script>
 </body>
 </html>
