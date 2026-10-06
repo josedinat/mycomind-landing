@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Release Notes — What's New in My-CoMind | My-CoMind</title>
+  <meta name="description" content="Everything new in My-CoMind, release by release: Ask this memory, chat reports, Microsoft Teams meetings, organization seats, Live Meeting Capture, the desktop agent and more.">
+  <meta name="author" content="MY-COMIND INC.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://www.my-comind.com/release-notes">
+
+  <meta property="og:title" content="Release Notes — What's New in My-CoMind">
+  <meta property="og:description" content="Everything new in My-CoMind, release by release.">
+  <meta property="og:image" content="https://www.my-comind.com/release-notes/2026-10/chat-report.jpg">
+  <meta property="og:url" content="https://www.my-comind.com/release-notes">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="en_CA">
+  <meta property="og:locale:alternate" content="pt_BR">
+  <meta property="og:site_name" content="My-CoMind">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- Language before first paint: ?lang= wins, then the visitor's last choice,
+       then the browser. Portuguese-speaking users get here from the PT email. -->
+  <script>
+    (function () {
+      var q = new URLSearchParams(location.search).get('lang');
+      var saved = null; try { saved = localStorage.getItem('mcm_site_lang'); } catch (e) {}
+      var lang = (q === 'pt' || q === 'en') ? q : (saved || ((navigator.language || '').toLowerCase().indexOf('pt') === 0 ? 'pt' : 'en'));
+      if (lang === 'pt') { document.documentElement.classList.add('pt'); document.documentElement.lang = 'pt-BR'; }
+    })();
+  </script>
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%230066CC' rx='20' width='100' height='100'/><text x='50' y='70' font-size='50' text-anchor='middle' fill='white' font-family='Arial'>M</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+  <style>
+    :root {
+      --blue: #0066CC; --blue-dark: #0052A3; --green: #00C9A7; --lavender: #9B7EBD;
+      --amber: #FFB84D; --charcoal: #1A1F36; --gray: #F5F7FA; --gray-light: #E8EBF0;
+      --white: #FFFFFF; --text-muted: rgba(26,31,54,.6);
+    }
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; color: var(--charcoal); background: var(--white); overflow-x: hidden; line-height: 1.6; }
+
+    /* Language switch: content exists in both languages; one is hidden. */
+    html:not(.pt) [data-l="pt"], html.pt [data-l="en"] { display: none !important; }
+
+    .container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
+    .reveal { opacity: 0; transform: translateY(32px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* NAV */
+    nav { position: fixed; top: 0; width: 100%; z-index: 1000; padding: 20px 40px; display: flex; justify-content: space-between; align-items: center; transition: all .3s ease; }
+    nav.scrolled { background: rgba(255,255,255,.92); backdrop-filter: blur(20px); box-shadow: 0 1px 0 rgba(0,0,0,.06); padding: 14px 40px; }
+    .nav-logo { height: 56px; }
+    .nav-links { display: flex; gap: 30px; align-items: center; }
+    .nav-link { font-size: 14px; color: var(--charcoal); text-decoration: none; font-weight: 500; opacity: .75; transition: opacity .2s; }
+    .nav-link:hover, .nav-link.active { opacity: 1; }
+    .nav-actions { display: flex; align-items: center; gap: 18px; }
+    .nav-signin { font-size: 14px; font-weight: 500; color: var(--charcoal); opacity: .75; text-decoration: none; }
+    .nav-cta { background: var(--blue); color: #fff; padding: 11px 22px; border-radius: 50px; font-weight: 600; font-size: 14px; text-decoration: none; display: inline-block; transition: all .3s ease; }
+    .nav-cta:hover { background: var(--blue-dark); transform: scale(1.04); }
+    .nav-hamburger { display: none; background: none; border: none; cursor: pointer; min-width: 44px; min-height: 44px; }
+    .lang-switch { display: inline-flex; border: 1px solid var(--gray-light); border-radius: 50px; overflow: hidden; background: #fff; }
+    .lang-switch button { border: 0; background: transparent; font: 600 12px 'Inter', sans-serif; color: var(--text-muted); padding: 0 12px; min-height: 36px; min-width: 44px; cursor: pointer; }
+    html:not(.pt) .lang-switch [data-set="en"], html.pt .lang-switch [data-set="pt"] { background: var(--charcoal); color: #fff; }
+
+    /* HERO */
+    .hero { position: relative; overflow: hidden; background: linear-gradient(160deg, #f0f6ff 0%, var(--white) 60%); padding: 150px 24px 70px; text-align: center; }
+    .hero-orb { position: absolute; border-radius: 50%; filter: blur(100px); pointer-events: none; }
+    .orb-1 { width: 600px; height: 600px; background: rgba(0,201,167,.14); top: -220px; right: -160px; }
+    .orb-2 { width: 460px; height: 460px; background: rgba(155,126,189,.12); bottom: -180px; left: -120px; }
+    .hero-inner { position: relative; z-index: 2; max-width: 760px; margin: 0 auto; }
+    .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(0,201,167,.1); color: #00957C; padding: 8px 18px; border-radius: 50px; font-size: 13px; font-weight: 600; border: 1px solid rgba(0,201,167,.25); margin-bottom: 28px; }
+    .hero h1 { font-family: 'Poppins', sans-serif; font-size: clamp(34px, 5vw, 56px); font-weight: 800; line-height: 1.1; letter-spacing: -1.5px; margin-bottom: 20px; }
+    .grad { background: linear-gradient(135deg, var(--blue), var(--green)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hero-sub { font-size: clamp(16px, 2vw, 19px); color: var(--text-muted); max-width: 600px; margin: 0 auto; line-height: 1.7; }
+
+    /* VERSION INDEX */
+    .toc { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 32px; }
+    .toc a { display: inline-flex; align-items: center; gap: 5px; min-height: 44px; padding: 0 16px; border-radius: 50px; border: 1px solid var(--gray-light); background: #fff; color: var(--charcoal); font-size: 14px; font-weight: 600; text-decoration: none; }
+    .toc a:hover { border-color: var(--blue); color: var(--blue); }
+
+    /* RELEASES */
+    .release { padding: 72px 24px; border-top: 1px solid var(--gray-light); scroll-margin-top: 90px; }
+    .release.latest { background: var(--gray); border-top: 0; }
+    .release-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px 14px; margin-bottom: 8px; }
+    .version { font: 700 13px 'Inter', sans-serif; color: var(--blue); background: rgba(0,102,204,.08); border-radius: 50px; padding: 4px 12px; }
+    .release-date { font-size: 14px; color: var(--text-muted); }
+    .latest-tag { font: 700 11px 'Inter', sans-serif; letter-spacing: 1.5px; text-transform: uppercase; color: #00957C; }
+    .release h2 { font-family: 'Poppins', sans-serif; font-size: clamp(24px, 3.4vw, 34px); font-weight: 700; line-height: 1.25; margin-bottom: 14px; }
+    .release .lead { font-size: 17px; color: var(--text-muted); line-height: 1.75; margin-bottom: 28px; }
+    .release h3 { font-family: 'Poppins', sans-serif; font-size: 20px; font-weight: 700; margin: 36px 0 12px; }
+    .release p { font-size: 16px; line-height: 1.75; color: var(--text-muted); margin-bottom: 16px; }
+    .release p strong, .release li strong { color: var(--charcoal); font-weight: 600; }
+    .points { list-style: none; display: flex; flex-direction: column; gap: 14px; margin: 0 0 8px; }
+    .points li { display: flex; gap: 12px; font-size: 16px; line-height: 1.65; color: var(--text-muted); }
+    .points li i { color: var(--green); font-size: 14px; margin-top: 6px; flex-shrink: 0; }
+    .steps { margin: 0 0 16px 22px; color: var(--text-muted); font-size: 16px; line-height: 1.7; }
+    .steps li { margin-bottom: 6px; padding-left: 4px; }
+    .shot { margin: 28px auto; text-align: center; }
+    .shot img { max-width: 100%; height: auto; border-radius: 16px; border: 1px solid var(--gray-light); box-shadow: 0 20px 60px rgba(0,0,0,.08); background: #fff; }
+    .shot.narrow img { max-width: 360px; width: 100%; }
+    .shot figcaption { font-size: 13px; color: var(--text-muted); margin-top: 12px; font-style: italic; }
+    .note { background: #fff; border-left: 4px solid var(--green); border-radius: 0 12px 12px 0; padding: 16px 20px; margin: 20px 0 0; }
+    .note p { margin: 0; font-size: 15px; }
+
+    /* CTA + FOOTER */
+    .cta-section { padding: 90px 24px; text-align: center; background: linear-gradient(135deg, var(--blue) 0%, #0044AA 100%); color: #fff; }
+    .cta-section h2 { font-family: 'Poppins', sans-serif; font-size: clamp(26px, 4vw, 40px); font-weight: 800; margin-bottom: 14px; }
+    .cta-section p { font-size: 17px; opacity: .85; margin: 0 auto 32px; max-width: 560px; }
+    .btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .btn-white { background: #fff; color: var(--blue); padding: 15px 32px; border-radius: 50px; font-weight: 700; font-size: 16px; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; min-height: 48px; }
+    .btn-white-outline { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,.6); padding: 13px 30px; border-radius: 50px; font-weight: 600; font-size: 16px; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; min-height: 48px; }
+    footer { background: var(--charcoal); color: #fff; padding: 60px 24px 40px; }
+    .footer-inner { max-width: 1120px; margin: 0 auto 48px; display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; }
+    .footer-logo { height: 56px; margin-bottom: 16px; opacity: .9; display: block; }
+    .footer-brand p { font-size: 14px; color: rgba(255,255,255,.5); line-height: 1.7; max-width: 280px; }
+    .footer-col h4 { font-family: 'Poppins', sans-serif; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; opacity: .5; margin-bottom: 20px; }
+    .footer-col a { display: block; color: rgba(255,255,255,.65); text-decoration: none; font-size: 14px; margin-bottom: 12px; }
+    .footer-col a:hover { color: #fff; }
+    .footer-bottom { max-width: 1120px; margin: 0 auto; border-top: 1px solid rgba(255,255,255,.08); padding-top: 32px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+    .footer-copyright { font-size: 13px; color: rgba(255,255,255,.35); }
+    .social-link { width: 44px; height: 44px; border-radius: 50%; background: rgba(255,255,255,.08); display: inline-flex; align-items: center; justify-content: center; color: rgba(255,255,255,.7); text-decoration: none; }
+
+    /* MOBILE MENU */
+    .mobile-menu { display: none; position: fixed; inset: 0; background: rgba(255,255,255,.97); backdrop-filter: blur(20px); z-index: 999; flex-direction: column; align-items: center; justify-content: center; gap: 26px; }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu .nav-link { font-size: 22px; }
+    .close-menu { position: absolute; top: 16px; right: 16px; background: none; border: none; font-size: 24px; cursor: pointer; min-width: 44px; min-height: 44px; }
+
+    @media (max-width: 980px) { .footer-inner { grid-template-columns: 1fr 1fr; } }
+    /* The menu button appears as soon as the links hide — the original template
+       only showed it below 640px, leaving tablets with no navigation at all. */
+    @media (max-width: 900px) { .nav-links { display: none; } .nav-hamburger { display: block; } }
+    @media (max-width: 640px) {
+      nav, nav.scrolled { padding: 12px 16px; }
+      .nav-logo { height: 44px; }
+      .nav-actions .nav-signin, .nav-actions .nav-cta { display: none; }
+      .nav-hamburger { display: block; }
+      .footer-inner { grid-template-columns: 1fr; gap: 36px; }
+      .footer-bottom { justify-content: center; text-align: center; }
+      .release { padding: 56px 16px; }
+      .container { padding: 0 4px; }
+      .hero { padding: 120px 16px 56px; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .reveal { opacity: 1; transform: none; transition: none; } }
+  </style>
+</head>
+<body>
+
+  <nav id="navbar">
+    <a href="/" aria-label="My-CoMind home"><img src="/mycomind_logo_full_transparent.png" alt="My-CoMind logo" class="nav-logo"></a>
+    <div class="nav-links">
+      <a href="/" class="nav-link">Home</a>
+      <a href="/features" class="nav-link"><span data-l="en">Features</span><span data-l="pt">Funcionalidades</span></a>
+      <a href="/release-notes" class="nav-link active"><span data-l="en">What's new</span><span data-l="pt">Novidades</span></a>
+      <a href="/#pricing" class="nav-link"><span data-l="en">Pricing</span><span data-l="pt">Planos</span></a>
+      <a href="/resources" class="nav-link">Resources</a>
+    </div>
+    <div class="nav-actions">
+      <div class="lang-switch" role="group" aria-label="Language">
+        <button type="button" data-set="en">EN</button><button type="button" data-set="pt">PT</button>
+      </div>
+      <a href="https://app.my-comind.com/login" class="nav-signin" target="_blank" rel="noopener"><span data-l="en">Sign In</span><span data-l="pt">Entrar</span></a>
+      <a href="https://app.my-comind.com" class="nav-cta" target="_blank" rel="noopener"><span data-l="en">Get Started Free</span><span data-l="pt">Comece grátis</span></a>
+      <button class="nav-hamburger" onclick="document.getElementById('mobileMenu').classList.add('open')" aria-label="Open menu">
+        <i class="fas fa-bars" style="font-size:20px;color:var(--charcoal)"></i>
+      </button>
+    </div>
+  </nav>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="close-menu" onclick="document.getElementById('mobileMenu').classList.remove('open')" aria-label="Close menu"><i class="fas fa-times"></i></button>
+    <a href="/" class="nav-link">Home</a>
+    <a href="/features" class="nav-link"><span data-l="en">Features</span><span data-l="pt">Funcionalidades</span></a>
+    <a href="/release-notes" class="nav-link"><span data-l="en">What's new</span><span data-l="pt">Novidades</span></a>
+    <a href="/#pricing" class="nav-link"><span data-l="en">Pricing</span><span data-l="pt">Planos</span></a>
+    <a href="/resources" class="nav-link">Resources</a>
+    <a href="https://app.my-comind.com" class="nav-cta" target="_blank" rel="noopener"><span data-l="en">Get Started Free</span><span data-l="pt">Comece grátis</span></a>
+  </div>
+
+  <header class="hero">
+    <div class="hero-orb orb-1"></div><div class="hero-orb orb-2"></div>
+    <div class="hero-inner">
+      <div class="hero-badge"><i class="fas fa-wand-magic-sparkles"></i><span data-l="en">Release notes</span><span data-l="pt">Notas de versão</span></div>
+      <h1 data-l="en">What's new in <span class="grad" style="white-space:nowrap">My&#8209;CoMind</span></h1>
+      <h1 data-l="pt">Novidades do <span class="grad" style="white-space:nowrap">My&#8209;CoMind</span></h1>
+      <p class="hero-sub" data-l="en">Everything we've shipped, release by release — written from what you'll notice, not from the code.</p>
+      <p class="hero-sub" data-l="pt">Tudo o que lançamos, versão por versão — contado pelo que você vai perceber no dia a dia.</p>
+      <div class="toc">
+        <a href="#v1-5">1.5 · <span data-l="en">Oct 2026</span><span data-l="pt">out 2026</span></a>
+        <a href="#v1-4">1.4 · <span data-l="en">Sep 2026</span><span data-l="pt">set 2026</span></a>
+        <a href="#v1-3">1.3 · <span data-l="en">Sep 2026</span><span data-l="pt">set 2026</span></a>
+        <a href="#v1-2">1.2 · <span data-l="en">Aug 2026</span><span data-l="pt">ago 2026</span></a>
+        <a href="#v1-1">1.1 · <span data-l="en">Aug 2026</span><span data-l="pt">ago 2026</span></a>
+      </div>
+    </div>
+  </header>
+
+  <!-- 1.5 -->
+  <section class="release latest" id="v1-5">
+    <div class="container reveal">
+      <div class="release-head">
+        <span class="version">1.5</span>
+        <span class="release-date" data-l="en">October 5, 2026</span><span class="release-date" data-l="pt">5 de outubro de 2026</span>
+        <span class="latest-tag" data-l="en">Latest</span><span class="latest-tag" data-l="pt">Mais recente</span>
+      </div>
+
+      <div data-l="en">
+        <h2>Ask a memory, and turn a conversation into a <span class="grad">report</span></h2>
+        <p class="lead">A one-hour meeting can hold a dozen decisions. Until now, finding them meant re-reading the transcript. This release changes that — and lets you hand over what you worked out.</p>
+
+        <h3>Ask this memory</h3>
+        <p>Every memory now has its own conversation. Ask what was decided, what was left open, who agreed to what — or debate it. The answer comes from the <strong>whole memory</strong>, not just its summary, and if something isn't in it, it tells you.</p>
+        <figure class="shot narrow"><img src="/release-notes/2026-10/ask-this-memory.jpg" alt="The Ask this memory panel answering what was decided and what was left open" width="335" height="600" loading="lazy"><figcaption>Asking a meeting what was decided — and what is still open.</figcaption></figure>
+        <ol class="steps">
+          <li>Open any memory.</li>
+          <li>Use the <strong>Ask this memory</strong> panel on the right. On your phone, tap the white <strong>Ask this memory</strong> button at the top.</li>
+          <li>Pick a suggested question, or write your own.</li>
+        </ol>
+        <p>The conversation stays with the memory, so it's there when you come back. <strong>Start over</strong> clears it — the memory itself never changes.</p>
+
+        <h3>Turn a conversation into a report</h3>
+        <p>Some conversations end in something worth handing over: the key points of a meeting, a step-by-step plan, how a project evolved. <strong>Create report</strong> turns the conversation into that document — organised by theme and ready to share, not a copy of the questions and answers.</p>
+        <figure class="shot"><img src="/release-notes/2026-10/chat-report.jpg" alt="A shared report with a title, summary, next steps and open points" width="736" height="740" loading="lazy"><figcaption>What the person you send it to sees — no account needed.</figcaption></figure>
+        <ol class="steps">
+          <li>In any chat — a memory, a workspace or AI Chat — tap <strong>Create report</strong>.</li>
+          <li>Review the draft. Edit any text, reorder or remove sections, or ask for a different version: "shorter", "in 5 points", "as a step-by-step".</li>
+          <li>Create a link and send it. It lasts 7 days, and the reader can save the report as a PDF.</li>
+        </ol>
+        <div class="note"><p>Nothing is shared until you create the link, and the reader sees the report only — never the conversation behind it. In an organization's project chat, only owners and admins can create reports, because the content comes from what members shared with the organization.</p></div>
+
+        <h3>Also in this release</h3>
+        <ul class="points">
+          <li><i class="fas fa-check"></i><span>The memory page and the chats work properly on every phone: buttons no longer run off the screen, and the help bubble no longer covers Send.</span></li>
+        </ul>
+      </div>
+
+      <div data-l="pt">
+        <h2>Converse com cada memória e transforme a conversa em <span class="grad">relatório</span></h2>
+        <p class="lead">Uma reunião de uma hora pode ter uma dúzia de decisões. Até agora, encontrar cada uma significava reler a transcrição. Esta versão muda isso — e ainda permite entregar o que você concluiu.</p>
+
+        <h3>Ask this memory — converse com a memória</h3>
+        <p>Agora cada memória tem a sua própria conversa. Pergunte o que foi decidido, o que ficou em aberto, quem combinou o quê — ou discuta. A resposta vem da <strong>memória inteira</strong>, não só do resumo, e, se o assunto não está nela, ela avisa.</p>
+        <figure class="shot narrow"><img src="/release-notes/2026-10/ask-this-memory.jpg" alt="O painel Ask this memory respondendo o que foi decidido e o que ficou em aberto" width="335" height="600" loading="lazy"><figcaption>Perguntando a uma reunião o que foi decidido — e o que continua em aberto.</figcaption></figure>
+        <ol class="steps">
+          <li>Abra qualquer memória.</li>
+          <li>Use o painel <strong>Ask this memory</strong>, à direita. No celular, toque no botão branco <strong>Ask this memory</strong>, no topo da página.</li>
+          <li>Escolha uma pergunta sugerida ou escreva a sua — pode perguntar em português.</li>
+        </ol>
+        <p>A conversa fica guardada junto com a memória, então continua lá quando você voltar. <strong>Start over</strong> apaga a conversa — a memória em si nunca muda.</p>
+
+        <h3>Transforme uma conversa em relatório</h3>
+        <p>Algumas conversas terminam em algo que vale entregar para alguém: os pontos principais de uma reunião, um passo a passo, como um projeto evoluiu. <strong>Create report</strong> transforma a conversa nesse documento — organizado por tema e pronto para compartilhar, e não uma cópia das perguntas e respostas.</p>
+        <figure class="shot"><img src="/release-notes/2026-10/chat-report.jpg" alt="Um relatório compartilhado com título, resumo, próximos passos e pontos em aberto" width="736" height="740" loading="lazy"><figcaption>O que a pessoa que recebe o link vê — sem precisar de conta.</figcaption></figure>
+        <ol class="steps">
+          <li>Em qualquer chat — de uma memória, de um workspace ou no Chat IA — toque em <strong>Create report</strong>.</li>
+          <li>Revise o rascunho. Edite qualquer trecho, reordene ou remova seções, ou peça outra versão: "mais curto", "em 5 pontos", "em formato de passo a passo".</li>
+          <li>Gere o link e envie. Ele vale por 7 dias, e quem recebe pode salvar o relatório em PDF.</li>
+        </ol>
+        <div class="note"><p>Nada é compartilhado até você gerar o link, e quem recebe vê só o relatório — nunca a conversa por trás dele. No chat de um projeto da organização, só donos e administradores podem gerar relatórios, porque o conteúdo vem do que os membros compartilharam com a organização.</p></div>
+
+        <h3>Também nesta versão</h3>
+        <ul class="points">
+          <li><i class="fas fa-check"></i><span>A página da memória e os chats funcionam direito em qualquer celular: os botões não saem mais da tela, e o botão de ajuda não cobre mais o enviar.</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 1.4 -->
+  <section class="release" id="v1-4">
+    <div class="container reveal">
+      <div class="release-head"><span class="version">1.4</span><span class="release-date" data-l="en">September 30, 2026</span><span class="release-date" data-l="pt">30 de setembro de 2026</span></div>
+      <div data-l="en">
+        <h2>The organization plan, and work that <span class="grad">stays with it</span></h2>
+        <ul class="points">
+          <li><i class="fas fa-check"></i><span><strong>If someone else pays for your account</strong>, My-CoMind asks one question after each capture: is this yours, or does it belong to them? Answer "mine" and nothing changes. Nobody paying for their own subscription is ever asked.</span></li>
+          <li><i class="fas fa-check"></i><span><strong>Share a whole workspace with them in one go</strong> — everything in it, and anything you add to it later.</span></li>
+          <li><i class="fas fa-check"></i><span><strong>When a mentor or employee leaves</strong>, their workspaces pass to whoever takes over in one step, with the full history intact.</span></li>
+          <li><i class="fas fa-check"></i><span><strong>The organization sees what it holds, not what is in it</strong> — a list of workspaces and who holds each. A program leader cannot open anyone's memories.</span></li>
+          <li><i class="fas fa-check"></i><span><strong>An organization can hand the work back</strong>: releasing a workspace returns every memory in it to the people who captured it.</span></li>
+          <li><i class="fas fa-check"></i><span><strong>The organization plan</strong> now sits next to Free and Full Access on the signup screen, priced per person.</span></li>
+        </ul>
+      </div>
+      <div data-l="pt">
+        <h2>O plano para organizações, e o trabalho que <span class="grad">fica com ela</span></h2>
+        <ul class="points">
+          <li><i class="fas fa-check"></i><span><strong>Se outra pessoa paga pela sua conta</strong>, o My-CoMind faz uma pergunta depois de cada captura: isto é seu ou é deles? Responda "meu" e nada muda. Quem paga a própria assinatura nunca é perguntado.</span></li>
+          <li><i class="fas fa-check"></i><span><strong>Compartilhe um workspace inteiro de uma vez</strong> — tudo o que está nele e o que você acrescentar depois.</span></li>
+          <li><i class="fas fa-check"></i><span><strong>Quando um mentor ou funcionário sai</strong>, os workspaces dele passam para quem assume, em um passo, com todo o histórico.</span></li>
+          <li><i class="fas fa-check"></i><span><strong>A organização vê o que tem, não o que há dentro</strong> — a lista de workspaces e quem cuida de cada um. Um líder de programa não consegue abrir as memórias de ninguém.</span></li>
+          <li><i class="fas fa-check"></i><span><strong>A organização pode devolver o trabalho</strong>: liberar um workspace devolve cada memória a quem a registrou.</span></li>
+          <li><i class="fas fa-check"></i><span><strong>O plano para organizações</strong> agora aparece ao lado do Free e do Full Access na tela de cadastro, com preço por pessoa.</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 1.3 -->
+  <section class="release" id="v1-3">
+    <div class="container reveal">
+      <div class="release-head"><span class="version">1.3</span><span class="release-date" data-l="en">September 16, 2026</span><span class="release-date" data-l="pt">16 de setembro de 2026</span></div>
+      <div data-l="en">
+        <h2>Microsoft Teams <span class="grad">meetings</span></h2>
+        <ul class="points">
+          <li><i class="fas fa-check"></i><span><strong>Teams meetings can become memories.</strong> Connect Microsoft Teams once and the meetings you were in arrive as possible memories, ready to review. No recorder to install.</span></li>
+          <li><i class="fas fa-check"></i><span><strong>Meetings you were invited to count too</strong>, not only the ones you organized — the case that matters for mentors and advisors.</span></li>
+          <li><i class="fas fa-check"></i><span><strong>Possible memories say where they came from</strong>, with a filter by source once you connect more than one tool.</span></li>
+          <li><i class="fas fa-check"></i><span><strong>"Sync now" syncs all your tools</strong>, not just the first one you connected.</span></li>
+          <li><i class="fas fa-check"></i><span><strong>Teams needs your administrator's approval</strong> — My-CoMind writes that request for you, ready to send.</span></li>
+        </ul>
+      </div>
+      <div data-l="pt">
+        <h2>Reuniões do Microsoft <span class="grad">Teams</span></h2>
+        <ul class="points">
+          <li><i class="fas fa-check"></i><span><strong>Reuniões do Teams podem virar memórias.</strong> Conecte o Microsoft Teams uma vez e as reuniões de que você participou chegam como possíveis memórias, prontas para revisar. Nada para instalar.</span></li>
+          <li><i class="fas fa-check"></i><span><strong>Reuniões para as quais você foi convidado também contam</strong>, não só as que você organizou — o caso que importa para mentores e conselheiros.</span></li>
+          <li><i class="fas fa-check"></i><span><strong>As possíveis memórias mostram de onde vieram</strong>, com filtro por origem quando você conecta mais de uma ferramenta.</span></li>
+          <li><i class="fas fa-check"></i><span><strong>"Sync now" sincroniza todas as ferramentas</strong>, não só a primeira que você conectou.</span></li>
+          <li><i class="fas fa-check"></i><span><strong>O Teams precisa da aprovação do administrador da sua empresa</strong> — o My-CoMind escreve esse pedido para você, pronto para enviar.</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 1.2 -->
+  <section class="release" id="v1-2">
+    <div class="container reveal">
+      <div class="release-head"><span class="version">1.2</span><span class="release-date" data-l="en">August 24, 2026</span><span class="release-date" data-l="pt">24 de agosto de 2026</span></div>
+      <div data-l="en">
+        <h2>Programs can pay for a <span class="grad">group</span></h2>
+        <ul class="points">
+          <li><i class="fas fa-check"></i><span><strong>An accelerator, university or venture program can buy seats</strong> and hand them out by email. The people in those seats pay nothing.</span></li>
+          <li><i class="fas fa-check"></i><span><strong>Adding someone gives them access right away</strong> — no invitation to find. Someone without an account keeps the seat until they sign up with that address.</span></li>
+          <li><i class="fas fa-check"></i><span><strong>Swapping people is free</strong>: a removed person's seat is immediately available for the next one.</span></li>
+          <li><i class="fas fa-check"></i><span><strong>Leaving a program costs you nothing</strong> — your memories, workspaces and conversations stay exactly as they are.</span></li>
+          <li><i class="fas fa-check"></i><span><strong>The program administers, it does not read</strong>: a program leader manages seats and has no access to anyone's memories.</span></li>
+        </ul>
+      </div>
+      <div data-l="pt">
+        <h2>Programas podem pagar por um <span class="grad">grupo</span></h2>
+        <ul class="points">
+          <li><i class="fas fa-check"></i><span><strong>Uma aceleradora, universidade ou programa pode comprar assentos</strong> e distribuí-los por e-mail. Quem ocupa o assento não paga nada.</span></li>
+          <li><i class="fas fa-check"></i><span><strong>Adicionar alguém dá acesso na hora</strong> — sem convite para procurar. Quem ainda não tem conta fica com o assento até se cadastrar com aquele e-mail.</span></li>
+          <li><i class="fas fa-check"></i><span><strong>Trocar pessoas não custa nada</strong>: o assento de quem sai fica disponível na hora para a próxima.</span></li>
+          <li><i class="fas fa-check"></i><span><strong>Sair de um programa não custa nada</strong> — suas memórias, workspaces e conversas continuam exatamente como estão.</span></li>
+          <li><i class="fas fa-check"></i><span><strong>O programa administra, não lê</strong>: o líder gerencia os assentos e não tem acesso às memórias de ninguém.</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 1.1 -->
+  <section class="release" id="v1-1">
+    <div class="container reveal">
+      <div class="release-head"><span class="version">1.1</span><span class="release-date" data-l="en">August 22, 2026</span><span class="release-date" data-l="pt">22 de agosto de 2026</span></div>
+      <div data-l="en">
+        <h2>Meeting capture, desktop agent, <span class="grad">continuity</span></h2>
+        <ul class="points">
+          <li><i class="fas fa-check"></i><span><strong>Live Meeting Capture</strong> — record a meeting in the browser, microphone plus the meeting's own audio, and watch decisions and actions appear while it is still running.</span></li>
+          <li><i class="fas fa-check"></i><span><strong>Windows Desktop Agent</strong> — a tray app that notices you are probably in a call and asks whether to record it — it never starts on its own — and takes a quick note with Ctrl+Shift+M without opening anything.</span></li>
+          <li><i class="fas fa-check"></i><span><strong>"My-CoMind, remember that…"</strong> — said out loud during a capture, it becomes a marker on the memory, removable if the transcript got it wrong.</span></li>
+          <li><i class="fas fa-check"></i><span><strong>Cognitive Drift</strong> — ask a workspace or a project what shifted since you last looked, instead of re-reading it.</span></li>
+          <li><i class="fas fa-check"></i><span><strong>Share a workspace outside My-CoMind</strong> — a 7-day link and a printable report.</span></li>
+          <li><i class="fas fa-check"></i><span><strong>Everything generated follows your language</strong> — summaries, narratives and chat answers, in English or Portuguese.</span></li>
+        </ul>
+        <p style="margin-top:20px"><a href="/resources/memory-agent" style="color:var(--blue);font-weight:600;text-decoration:none">The full story of this release <i class="fas fa-arrow-right" style="font-size:12px"></i></a></p>
+      </div>
+      <div data-l="pt">
+        <h2>Captura de reuniões, agente desktop, <span class="grad">continuidade</span></h2>
+        <ul class="points">
+          <li><i class="fas fa-check"></i><span><strong>Live Meeting Capture</strong> — grave uma reunião no navegador, microfone e o áudio da própria reunião, e veja decisões e ações aparecerem enquanto ela ainda acontece.</span></li>
+          <li><i class="fas fa-check"></i><span><strong>Agente para Windows</strong> — um app na bandeja do sistema que percebe quando você provavelmente está numa chamada e pergunta se quer gravar — ele nunca começa sozinho — e faz uma nota rápida com Ctrl+Shift+M sem abrir nada.</span></li>
+          <li><i class="fas fa-check"></i><span><strong>"My-CoMind, remember that…"</strong> — dito em voz alta durante uma captura, vira uma marcação na memória, que você pode remover se a transcrição errou.</span></li>
+          <li><i class="fas fa-check"></i><span><strong>Cognitive Drift</strong> — pergunte a um workspace ou projeto o que mudou desde a última vez, em vez de reler tudo.</span></li>
+          <li><i class="fas fa-check"></i><span><strong>Compartilhe um workspace fora do My-CoMind</strong> — um link de 7 dias e um relatório para imprimir.</span></li>
+          <li><i class="fas fa-check"></i><span><strong>Tudo o que é gerado segue o seu idioma</strong> — resumos, narrativas e respostas do chat, em inglês ou português.</span></li>
+        </ul>
+        <p style="margin-top:20px"><a href="/resources/memory-agent" style="color:var(--blue);font-weight:600;text-decoration:none">A história completa desta versão (em inglês) <i class="fas fa-arrow-right" style="font-size:12px"></i></a></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <div class="container">
+      <h2 data-l="en">See it with your own work</h2>
+      <h2 data-l="pt">Veja com o seu próprio trabalho</h2>
+      <p data-l="en">Capture one real conversation and ask it what was decided.</p>
+      <p data-l="pt">Registre uma conversa de verdade e pergunte a ela o que foi decidido.</p>
+      <div class="btns">
+        <a href="https://app.my-comind.com" class="btn-white" target="_blank" rel="noopener"><i class="fas fa-arrow-right"></i><span data-l="en">Open My-CoMind</span><span data-l="pt">Abrir o My-CoMind</span></a>
+        <a href="/features" class="btn-white-outline"><i class="fas fa-layer-group"></i><span data-l="en">All features</span><span data-l="pt">Todas as funcionalidades</span></a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="/mycomind_logo_full_transparent.png" alt="My-CoMind" class="footer-logo">
+        <p>Cognitive continuity. Preserving how you think, not just what you remember.</p>
+        <p style="font-size: 12px; color: rgba(255,255,255,.35); margin-top: 16px;">MY-COMIND INC.<br>Ontario, Canada</p>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <a href="/">Home</a>
+        <a href="/features">Features</a>
+        <a href="/release-notes">What's new</a>
+        <a href="/#pricing">Pricing</a>
+      </div>
+      <div class="footer-col">
+        <h4>Learn</h4>
+        <a href="/resources">Resources</a>
+        <a href="/resources/cognitive-continuity">What is cognitive continuity?</a>
+        <a href="/alternatives">All comparisons</a>
+      </div>
+      <div class="footer-col">
+        <h4>Account</h4>
+        <a href="https://app.my-comind.com" target="_blank" rel="noopener">Get Started Free</a>
+        <a href="https://app.my-comind.com/login" target="_blank" rel="noopener">Sign In</a>
+        <a href="/privacy">Privacy Policy</a>
+        <a href="/terms">Terms of Service</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copyright">© 2026 MY-COMIND INC. All rights reserved.</p>
+      <a href="https://www.linkedin.com/company/my-comind" class="social-link" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+    </div>
+  </footer>
+
+  <script>
+    // Language switch — remembered per visitor; ?lang= in a link still wins.
+    document.querySelectorAll('.lang-switch [data-set]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var pt = b.getAttribute('data-set') === 'pt';
+        document.documentElement.classList.toggle('pt', pt);
+        document.documentElement.lang = pt ? 'pt-BR' : 'en';
+        try { localStorage.setItem('mcm_site_lang', pt ? 'pt' : 'en'); } catch (e) {}
+      });
+    });
+    var navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', function () { navbar.classList.toggle('scrolled', window.scrollY > 40); });
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(function (el) { observer.observe(el); });
+    document.querySelectorAll('.mobile-menu a').forEach(function (a) {
+      a.addEventListener('click', function () { document.getElementById('mobileMenu').classList.remove('open'); });
+    });
+  </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+</body>
+</html>

@@ -750,6 +750,9 @@
       .diff-col-header.old { display: none; }
       .diff-cell.old { display: none; }
       .nav-links { display: none; }
+      /* The menu button must appear as soon as the links hide — it used to wait
+         until 640px, leaving tablets (641–900px) with no navigation at all. */
+      .nav-hamburger { display: block; min-width: 44px; min-height: 44px; }
     }
     @media (max-width: 640px) {
       nav { padding: 16px 20px; }
@@ -805,6 +808,7 @@
       <a href="#features" class="nav-link">Features</a>
       <a href="#diff" class="nav-link">Why Us</a>
       <a href="#pricing" class="nav-link">Pricing</a>
+      <a href="/release-notes" class="nav-link">What's New</a>
       <a href="/resources" class="nav-link">Resources</a>
       <a href="#faq" class="nav-link">FAQ</a>
       <a href="#demo" class="nav-link">Demo</a>
@@ -826,6 +830,7 @@
     <a href="#features" class="nav-link" onclick="document.getElementById('mobileMenu').classList.remove('open')">Features</a>
     <a href="#diff" class="nav-link" onclick="document.getElementById('mobileMenu').classList.remove('open')">Why Us</a>
     <a href="#pricing" class="nav-link" onclick="document.getElementById('mobileMenu').classList.remove('open')">Pricing</a>
+    <a href="/release-notes" class="nav-link">What's New</a>
     <a href="#faq" class="nav-link" onclick="document.getElementById('mobileMenu').classList.remove('open')">FAQ</a>
     <a href="#demo" class="nav-link" onclick="document.getElementById('mobileMenu').classList.remove('open')">Demo</a>
     <a href="https://app.my-comind.com" class="nav-cta" target="_blank" rel="noopener">Get Started Free</a>
@@ -1388,6 +1393,8 @@
       <div class="footer-col">
         <h4>Product</h4>
         <a href="#features">Features</a>
+        <a href="/features">All features, explained</a>
+        <a href="/release-notes">What's new</a>
         <a href="#more">The rest of the system</a>
         <a href="#diff">Why My-CoMind</a>
         <a href="#pricing">Pricing</a>
