@@ -1,0 +1,28 @@
+/* The role brain: used as the home page hero and on /for.
+   A picture with shortcuts on it, not anatomy. Every shortcut is also a plain
+   link somewhere else on the page (cards on /for, chips on the home page). */
+.brain { position: relative; max-width: 780px; margin: 26px auto 0; }
+.brain svg { width: 100%; height: auto; display: block; }
+.brain .node circle.halo { transition: r .2s ease, opacity .2s ease; }
+.brain .node:hover circle.halo, .brain .node:focus circle.halo, .brain .node.lit circle.halo { r: 22; opacity: .35; }
+.brain .node:focus { outline: none; }
+.brain .node:focus-visible circle.dot { stroke: var(--charcoal); stroke-width: 3; }
+.pin { position: absolute; transform: translateY(-50%); display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 16px; background: #fff; border: 1px solid var(--gray-light); border-radius: 50px; box-shadow: 0 8px 24px rgba(26,31,54,.08); font-weight: 600; font-size: 14.5px; color: var(--charcoal); text-decoration: none; white-space: nowrap; transition: all .2s ease; }
+.pin i { color: var(--blue); font-size: 13px; }
+.pin.r { transform: translate(0, -50%); }
+.pin.l { transform: translate(-100%, -50%); }
+.pin:hover, .pin:focus-visible, .pin.lit { border-color: var(--blue); color: var(--blue); box-shadow: 0 10px 28px rgba(0,102,204,.18); }
+.brain-hint { font-size: 13.5px; color: var(--text-muted); margin-top: 6px; }
+
+
+.brain-chips { display: none; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 14px; }
+.brain-chips a { display: inline-flex; align-items: center; gap: 7px; min-height: 44px; padding: 0 14px; background: #fff; border: 1px solid #E8EBF0; border-radius: 50px; font-weight: 600; font-size: 14px; color: #1A1F36; text-decoration: none; }
+.brain-chips i { color: #0066CC; font-size: 12px; }
+
+/* Below this width the pins would collide with the drawing: the brain stays as
+   the picture (its dots are still links) and chips or cards do the navigation. */
+@media (max-width: 760px) {
+  .pin, .brain .lines { display: none; }
+  .brain { max-width: 420px; }
+  .brain-chips { display: flex; }
+}
