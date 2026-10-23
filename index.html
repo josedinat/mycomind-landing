@@ -876,39 +876,18 @@
            below, so nothing depends on hovering or on hitting a small dot. -->
       <div class="brain" id="brain">
         <svg viewBox="0 0 1000 430" role="img" aria-labelledby="brain-title">
-          <title id="brain-title">A brain made of connected memories, with one point for each role</title>
-          <defs>
-            <linearGradient id="hemi-l" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#2F6FD1"/><stop offset="100%" stop-color="#1A3F86"/></linearGradient>
-            <linearGradient id="hemi-r" x1="1" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#2BD3B4"/><stop offset="100%" stop-color="#0F9C86"/></linearGradient>
-            <filter id="soft" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="22"/></filter>
-          </defs>
-          <ellipse cx="500" cy="220" rx="230" ry="170" fill="#7FB6F0" opacity=".25" filter="url(#soft)"/>
-
-          <g class="lines" stroke="#9AB1D6" stroke-width="1.5" stroke-dasharray="4 5" fill="none">
-            <path d="M385 115 H265"/><path d="M615 115 H735"/>
-            <path d="M350 215 H265"/><path d="M650 215 H735"/>
-            <path d="M400 315 H265"/><path d="M600 315 H735"/>
-          </g>
-
-          <path d="M496 60 C440 40 370 55 340 105 C300 115 280 165 295 205 C270 240 285 300 325 315 C335 360 390 385 440 370 C465 390 490 385 496 370 Z" fill="url(#hemi-l)"/>
-          <path d="M504 60 C560 40 630 55 660 105 C700 115 720 165 705 205 C730 240 715 300 675 315 C665 360 610 385 560 370 C535 390 510 385 504 370 Z" fill="url(#hemi-r)"/>
-          <g stroke="#fff" stroke-opacity=".38" stroke-width="3" stroke-linecap="round" fill="none">
-            <path d="M350 130 C390 120 410 150 450 140"/><path d="M310 200 C360 190 380 230 440 215"/><path d="M330 280 C370 265 400 300 455 285"/><path d="M400 90 C415 120 460 110 470 95"/><path d="M390 340 C415 320 450 345 480 330"/>
-            <path d="M650 130 C610 120 590 150 550 140"/><path d="M690 200 C640 190 620 230 560 215"/><path d="M670 280 C630 265 600 300 545 285"/><path d="M600 90 C585 120 540 110 530 95"/><path d="M610 340 C585 320 550 345 520 330"/>
-          </g>
-
-          <g stroke="#fff" stroke-opacity=".55" stroke-width="1.5" fill="none">
-            <path d="M385 115 L500 215 L615 115 M350 215 H650 M400 315 L500 215 L600 315"/>
-          </g>
-          <circle cx="500" cy="215" r="44" fill="#fff" opacity=".95"/>
-          <text x="500" y="210" text-anchor="middle" font-family="Inter, sans-serif" font-size="12.5" font-weight="700" fill="#1A3F86" letter-spacing="1">YOUR</text>
-          <text x="500" y="227" text-anchor="middle" font-family="Inter, sans-serif" font-size="12.5" font-weight="700" fill="#1A3F86" letter-spacing="1">CONTEXT</text>
-          <a href="/for/mentors" class="node" data-role="mentors" aria-label="Mentors"><circle class="halo" cx="385" cy="115" r="16" fill="#fff" opacity=".2"/><circle class="dot" cx="385" cy="115" r="10" fill="#fff"/></a>
-          <a href="/for/founders" class="node" data-role="founders" aria-label="Founders"><circle class="halo" cx="615" cy="115" r="16" fill="#fff" opacity=".2"/><circle class="dot" cx="615" cy="115" r="10" fill="#fff"/></a>
-          <a href="/for/project-managers" class="node" data-role="pm" aria-label="Project managers"><circle class="halo" cx="350" cy="215" r="16" fill="#fff" opacity=".2"/><circle class="dot" cx="350" cy="215" r="10" fill="#fff"/></a>
-          <a href="/for/sales" class="node" data-role="sales" aria-label="Sales"><circle class="halo" cx="650" cy="215" r="16" fill="#fff" opacity=".2"/><circle class="dot" cx="650" cy="215" r="10" fill="#fff"/></a>
-          <a href="/for/hr" class="node" data-role="hr" aria-label="HR and people teams"><circle class="halo" cx="400" cy="315" r="16" fill="#fff" opacity=".2"/><circle class="dot" cx="400" cy="315" r="10" fill="#fff"/></a>
-          <a href="/for/therapists-coaches" class="node" data-role="care" aria-label="Therapists and coaches"><circle class="halo" cx="600" cy="315" r="16" fill="#fff" opacity=".2"/><circle class="dot" cx="600" cy="315" r="10" fill="#fff"/></a>
+          <title id="brain-title">The My-CoMind brain, with one point for each role</title>
+          <defs><filter id="soft" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="26"/></filter></defs>
+          <ellipse cx="500" cy="215" rx="215" ry="175" fill="#59B39A" opacity=".18" filter="url(#soft)"/>
+          <g class="lines" stroke="#9FB3C8" stroke-width="1.5" stroke-dasharray="4 5" fill="none"><path d="M403 115 H265"/><path d="M611 115 H735"/><path d="M328 215 H265"/><path d="M658 215 H735"/><path d="M434 315 H265"/><path d="M619 315 H735"/></g>
+          <!-- the brain itself is the official logo artwork (cut from mycomind_logo_full_transparent.png) -->
+          <image href="/assets/brain-logo.webp" x="281" y="15" width="438" height="400"/>
+          <a href="/for/mentors" class="node" data-role="mentors" aria-label="Mentors"><circle class="halo" cx="403" cy="115" r="16" fill="#fff" opacity=".25"/><circle class="dot" cx="403" cy="115" r="9" fill="#fff"/></a>
+          <a href="/for/founders" class="node" data-role="founders" aria-label="Founders"><circle class="halo" cx="611" cy="115" r="16" fill="#fff" opacity=".25"/><circle class="dot" cx="611" cy="115" r="9" fill="#fff"/></a>
+          <a href="/for/project-managers" class="node" data-role="pm" aria-label="Project managers"><circle class="halo" cx="328" cy="215" r="16" fill="#fff" opacity=".25"/><circle class="dot" cx="328" cy="215" r="9" fill="#fff"/></a>
+          <a href="/for/sales" class="node" data-role="sales" aria-label="Sales"><circle class="halo" cx="658" cy="215" r="16" fill="#fff" opacity=".25"/><circle class="dot" cx="658" cy="215" r="9" fill="#fff"/></a>
+          <a href="/for/hr" class="node" data-role="hr" aria-label="HR and people teams"><circle class="halo" cx="434" cy="315" r="16" fill="#fff" opacity=".25"/><circle class="dot" cx="434" cy="315" r="9" fill="#fff"/></a>
+          <a href="/for/therapists-coaches" class="node" data-role="care" aria-label="Therapists and coaches"><circle class="halo" cx="619" cy="315" r="16" fill="#fff" opacity=".25"/><circle class="dot" cx="619" cy="315" r="9" fill="#fff"/></a>
         </svg>
 
         <!-- left/top = the end of each dashed line, as % of the 1000×430 drawing -->

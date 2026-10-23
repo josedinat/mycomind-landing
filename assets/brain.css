@@ -4,7 +4,7 @@
 .brain { position: relative; max-width: 780px; margin: 26px auto 0; }
 .brain svg { width: 100%; height: auto; display: block; }
 .brain .node circle.halo { transition: r .2s ease, opacity .2s ease; }
-.brain .node:hover circle.halo, .brain .node:focus circle.halo, .brain .node.lit circle.halo { r: 22; opacity: .35; }
+.brain .node:hover circle.halo, .brain .node:focus circle.halo, .brain .node.lit circle.halo { r: 22; opacity: .5; }
 .brain .node:focus { outline: none; }
 .brain .node:focus-visible circle.dot { stroke: var(--charcoal); stroke-width: 3; }
 .pin { position: absolute; transform: translateY(-50%); display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 16px; background: #fff; border: 1px solid var(--gray-light); border-radius: 50px; box-shadow: 0 8px 24px rgba(26,31,54,.08); font-weight: 600; font-size: 14.5px; color: var(--charcoal); text-decoration: none; white-space: nowrap; transition: all .2s ease; }
