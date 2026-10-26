@@ -29,7 +29,13 @@
   display: flex; align-items: center; justify-content: space-between; gap: 16px;
 }
 .mc-header .mc-logo { display: inline-flex; align-items: center; min-height: 44px; flex-shrink: 0; }
-.mc-header .mc-logo img { height: 54px; width: auto; display: block; }   /* assets/logo.png is the logo cropped to its content */
+.mc-header .mc-logo { gap: 10px; text-decoration: none; }
+.mc-header .mc-logo img { height: 34px; width: auto; display: block; }
+/* The name is real text, not part of the image: the old image logo made
+   "My-CoMind" unreadable at header size. Mind uses a darker mint than the
+   logo artwork so it passes contrast on white (large-text AA). */
+.mc-header .mc-word { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 21px; letter-spacing: -.3px; color: #1F2F49; }
+.mc-header .mc-word span { color: #2E8C73; }
 .mc-header .mc-links { display: flex; align-items: center; gap: 6px; }
 .mc-header .mc-links a, .mc-header .mc-panel > a {
   color: #1A1F36; text-decoration: none; font-size: 14.5px; font-weight: 500;
@@ -84,7 +90,8 @@
 }
 @media (max-width: 640px) {
   .mc-header nav.mc-nav { padding: 0 12px 0 16px; gap: 8px; }
-  .mc-header .mc-logo img { height: 46px; }
+  .mc-header .mc-logo img { height: 30px; }
+  .mc-header .mc-word { font-size: 19px; }
   .mc-header .mc-actions > .mc-cta { padding: 0 14px; font-size: 13px; }
 }
 @media (max-width: 379px) {

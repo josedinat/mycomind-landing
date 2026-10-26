@@ -10,7 +10,7 @@ html { scroll-behavior: smooth; }
 body { font-family: 'Inter', sans-serif; color: var(--charcoal); background: var(--white); overflow-x: hidden; line-height: 1.6; }
 html:not(.pt) [data-l="pt"], html.pt [data-l="en"] { display: none !important; }
 .container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
-.grad { background: linear-gradient(135deg, var(--blue), var(--green)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.grad { background: linear-gradient(135deg, var(--blue), #00957C); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 
 .lang-switch { display: inline-flex; border: 1px solid var(--gray-light); border-radius: 50px; overflow: hidden; background: #fff; }
 .lang-switch button { border: 0; background: transparent; font: 600 13px 'Inter', sans-serif; color: var(--text-muted); padding: 0 16px; min-height: 40px; min-width: 44px; cursor: pointer; }
@@ -43,7 +43,7 @@ html:not(.pt) .lang-switch [data-set="en"], html.pt .lang-switch [data-set="pt"]
 .crumb { font-size: 13.5px; color: var(--text-muted); margin-bottom: 18px; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
 .crumb a { color: var(--blue); text-decoration: none; }
 .r-hero-grid { display: grid; grid-template-columns: .95fr 1.05fr; gap: 48px; align-items: center; }
-.eyebrow { font-size: 12px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: #00957C; margin-bottom: 14px; display: inline-flex; align-items: center; gap: 8px; }
+.eyebrow { font-size: 12px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: #00806E; margin-bottom: 14px; display: inline-flex; align-items: center; gap: 8px; }
 .r-hero h1 { font-family: 'Poppins', sans-serif; font-size: clamp(30px, 4.2vw, 48px); font-weight: 800; line-height: 1.12; letter-spacing: -1px; margin-bottom: 18px; }
 .r-hero .sub { font-size: 18px; color: var(--text-muted); line-height: 1.7; margin-bottom: 28px; }
 .r-hero .btns { display: flex; gap: 12px; flex-wrap: wrap; }

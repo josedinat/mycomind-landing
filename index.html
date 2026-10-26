@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My-CoMind (MyCoMind) — Never Lose Where You Left Off</title>
-  <meta name="description" content="Never lose the thinking behind your decisions. My-CoMind turns meetings, decisions and insights into living workspaces you can question — with AI-powered continuity, Cognitive Drift, and team memory.">
+  <title>My-CoMind (MyCoMind) — Never Lose the Thread of Your Thinking</title>
+  <meta name="description" content="Your conversations, decisions and promises — remembered, connected, and ready when you need them. Free plan, no credit card.">
   <meta name="keywords" content="cognitive continuity, meeting notes AI, decision tracking, team memory, AI workspace, second brain, knowledge management, mentor tools, founder tools">
   <meta name="author" content="MY-COMIND INC.">
   <meta name="robots" content="index, follow">
   <link rel="canonical" href="https://www.my-comind.com/">
 
   <!-- Open Graph -->
-  <meta property="og:title" content="My-CoMind (MyCoMind) — Never Lose Where You Left Off">
+  <meta property="og:title" content="My-CoMind (MyCoMind) — Never Lose the Thread of Your Thinking">
   <meta property="og:description" content="Never lose the thinking behind your decisions. Living workspaces you can question — where things stand, what was decided, and how your thinking got there.">
   <meta property="og:image" content="https://www.my-comind.com/og-image.png">
   <meta property="og:image:width" content="1200">
@@ -95,14 +95,6 @@
     "mainEntity": [
       {
         "@type": "Question",
-        "name": "What is cognitive continuity?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Cognitive continuity is the ability to pick up exactly where you left off on any topic — with full context of decisions made, open questions, and how your thinking evolved over time. It is the difference between an archive you can search and a memory you can question."
-        }
-      },
-      {
-        "@type": "Question",
         "name": "Is my data used to train AI models?",
         "acceptedAnswer": {
           "@type": "Answer",
@@ -111,26 +103,10 @@
       },
       {
         "@type": "Question",
-        "name": "How does My-CoMind differ from Notion or Fireflies?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Notion stores documents you organize yourself and Fireflies stores transcripts of what was said. My-CoMind automatically connects related memories into living workspaces, tracks how your decisions evolved through Cognitive Drift, and answers questions grounded in your own material with the sources attached."
-        }
-      },
-      {
-        "@type": "Question",
         "name": "Do I have to tag or organize anything?",
         "acceptedAnswer": {
           "@type": "Answer",
           "text": "No. Memories about the same topic gather into a workspace on their own — no folders, no tags, no manual linking. You can force a refresh of any workspace at any time, and it re-checks every loose memory that might belong to it."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Can I use it with a meeting recorder I already have?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes. My-CoMind records meetings natively with Live Capture, and it also imports transcripts from Fireflies. Imported material arrives as suggestions that you approve before anything becomes a memory."
         }
       },
       {
@@ -184,7 +160,7 @@
     .container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
     .section-label {
       font-size: 12px; font-weight: 700; letter-spacing: 3px;
-      text-transform: uppercase; color: var(--green); margin-bottom: 16px;
+      text-transform: uppercase; color: #00806E; margin-bottom: 16px;
       display: block;
     }
     .section-title {
@@ -236,7 +212,7 @@
 
     /* HERO */
     .hero {
-      min-height: 100vh; display: flex; align-items: center;
+      min-height: 72vh; display: flex; align-items: center;
       justify-content: center; position: relative; overflow: hidden;
       background: linear-gradient(160deg, #f0f6ff 0%, var(--white) 60%);
       padding: 64px 24px 80px;
@@ -251,7 +227,7 @@
     .hero-inner { text-align: center; max-width: 960px; width: 100%; position: relative; z-index: 2; }
     .hero-badge {
       display: inline-flex; align-items: center; gap: 8px;
-      background: rgba(0,201,167,.1); color: var(--green);
+      background: rgba(0,201,167,.1); color: #00806E;
       padding: 8px 18px; border-radius: 50px; font-size: 13px; font-weight: 600;
       border: 1px solid rgba(0,201,167,.25); margin-bottom: 32px;
       animation: fadeUp .7s ease .1s both;
@@ -260,10 +236,10 @@
       font-family: 'Poppins', sans-serif;
       font-size: clamp(38px, 6vw, 68px); font-weight: 800;
       line-height: 1.1; letter-spacing: -2px; color: var(--charcoal);
-      margin-bottom: 24px; animation: fadeUp .7s ease .25s both;
+      margin: 0 auto 24px; max-width: 900px; animation: fadeUp .7s ease .25s both;
     }
     .hero h1 span {
-      background: linear-gradient(135deg, var(--blue), var(--green));
+      background: linear-gradient(135deg, var(--blue), #00957C);
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
       background-clip: text;
     }
@@ -300,8 +276,17 @@
     }
     .proof-item { display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--text-muted); font-weight: 500; }
     .proof-item i { color: var(--green); font-size: 16px; }
+    a.proof-item { text-decoration: none; } a.proof-item:hover { color: var(--blue); }
 
     @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+
+    .roles-section { padding: 90px 24px; text-align: center; }
+    .roles-head { margin-bottom: 8px; }
+    @media (max-width: 640px) { .roles-section { padding: 64px 16px; } }
+
+    .section-more { text-align: center; margin-top: 26px; }
+    .section-more a { color: var(--blue); font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; min-height: 44px; }
+    .section-more a:hover { text-decoration: underline; }
 
     /* REELS VIDEO */
     .video-section { padding: 60px 24px; background: var(--gray); }
@@ -566,7 +551,7 @@
       padding: 12px 20px; border-radius: 8px; margin-bottom: 8px; text-align: center;
     }
     .diff-col-header.old { background: var(--gray-light); color: var(--text-muted); }
-    .diff-col-header.new { background: rgba(0,201,167,.1); color: var(--green); }
+    .diff-col-header.new { background: rgba(0,201,167,.1); color: #00806E; }
     .diff-cell {
       padding: 16px 20px; border-radius: 10px; font-size: 15px;
       margin-bottom: 8px; display: flex; align-items: center; gap: 10px;
@@ -597,7 +582,7 @@
     .price-card.featured { border-color: var(--blue); box-shadow: 0 20px 48px rgba(0,102,204,.12); background: var(--white); }
     .price-flag {
       position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
-      background: linear-gradient(135deg, var(--blue), var(--green)); color: #fff;
+      background: var(--blue); color: #fff;
       font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
       padding: 6px 16px; border-radius: 50px; white-space: nowrap;
     }
@@ -862,17 +847,14 @@
 <!-- SITE-HEADER:START (generated by tools/sync-chrome.mjs — edit partials/header.html) -->
 <header class="mc-header" id="mc-header">
   <nav class="mc-nav" aria-label="Main">
-    <a href="/" class="mc-logo" aria-label="My-CoMind home"><img src="/assets/logo.png" alt="My-CoMind" width="195" height="200"></a>
+    <a href="/" class="mc-logo" aria-label="My-CoMind home"><img src="/assets/brain-logo.webp" alt="" width="558" height="509"><span class="mc-word">My-Co<span>Mind</span></span></a>
     <div class="mc-links">
       <a href="/features" data-match="/features">Features</a>
-      <a href="/#pricing">Pricing</a>
-      <a href="/release-notes" data-match="/release-notes">What's New</a>
-      <a href="/resources" data-match="/resources /alternatives /glossary /for /context-audit">Resources</a>
-      <a href="/#faq">FAQ</a>
+      <a href="/pricing" data-match="/pricing">Pricing</a>
+      <a href="/faq" data-match="/faq">FAQ</a>
     </div>
     <div class="mc-actions">
-      <a href="https://app.my-comind.com/login" class="mc-signin" target="_blank" rel="noopener">Sign In</a>
-      <a href="https://app.my-comind.com" class="mc-cta" target="_blank" rel="noopener">Get Started Free</a>
+      <a href="https://app.my-comind.com/" class="mc-cta" target="_blank" rel="noopener">Get Started Free</a>
       <button type="button" class="mc-burger" aria-label="Open menu" aria-expanded="false" aria-controls="mc-panel">
         <span></span><span></span><span></span>
       </button>
@@ -880,13 +862,10 @@
   </nav>
   <div class="mc-panel" id="mc-panel" hidden>
     <a href="/features" data-match="/features">Features</a>
-    <a href="/#pricing">Pricing</a>
-    <a href="/release-notes" data-match="/release-notes">What's New</a>
-    <a href="/resources" data-match="/resources /alternatives /glossary /for /context-audit">Resources</a>
-    <a href="/#faq">FAQ</a>
+    <a href="/pricing" data-match="/pricing">Pricing</a>
+    <a href="/faq" data-match="/faq">FAQ</a>
     <div class="mc-panel-actions">
-      <a href="https://app.my-comind.com/login" class="mc-signin" target="_blank" rel="noopener">Sign In</a>
-      <a href="https://app.my-comind.com" class="mc-cta" target="_blank" rel="noopener">Get Started Free</a>
+      <a href="https://app.my-comind.com/" class="mc-cta" target="_blank" rel="noopener">Get Started Free</a>
     </div>
   </div>
 </header>
@@ -897,55 +876,26 @@
     <div class="hero-orb orb-1"></div>
     <div class="hero-orb orb-2"></div>
     <div class="hero-inner">
-      <h1>Never lose<br><span>where you left off.</span></h1>
-      <p class="hero-sub">Pick your work and see how.</p>
-      <!-- The brain is a picture with shortcuts on it, not anatomy: which region
-           a role sits on means nothing. On phones the pins give way to the chips
-           below, so nothing depends on hovering or on hitting a small dot. -->
-      <div class="brain" id="brain">
-        <svg viewBox="0 0 1000 430" role="img" aria-labelledby="brain-title">
-          <title id="brain-title">The My-CoMind brain, with one point for each role</title>
-          <defs><filter id="soft" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="26"/></filter></defs>
-          <ellipse cx="500" cy="215" rx="215" ry="175" fill="#59B39A" opacity=".18" filter="url(#soft)"/>
-          <g class="lines" stroke="#9FB3C8" stroke-width="1.5" stroke-dasharray="4 5" fill="none"><path d="M403 115 H265"/><path d="M611 115 H735"/><path d="M328 215 H265"/><path d="M658 215 H735"/><path d="M434 315 H265"/><path d="M619 315 H735"/></g>
-          <!-- the brain itself is the official logo artwork (cut from mycomind_logo_full_transparent.png) -->
-          <image href="/assets/brain-logo.webp" x="281" y="15" width="438" height="400"/>
-          <a href="/for/mentors" class="node" data-role="mentors" aria-label="Mentors"><circle class="halo" cx="403" cy="115" r="16" fill="#fff" opacity=".25"/><circle class="dot" cx="403" cy="115" r="9" fill="#fff"/></a>
-          <a href="/for/founders" class="node" data-role="founders" aria-label="Founders"><circle class="halo" cx="611" cy="115" r="16" fill="#fff" opacity=".25"/><circle class="dot" cx="611" cy="115" r="9" fill="#fff"/></a>
-          <a href="/for/project-managers" class="node" data-role="pm" aria-label="Project managers"><circle class="halo" cx="328" cy="215" r="16" fill="#fff" opacity=".25"/><circle class="dot" cx="328" cy="215" r="9" fill="#fff"/></a>
-          <a href="/for/sales" class="node" data-role="sales" aria-label="Sales"><circle class="halo" cx="658" cy="215" r="16" fill="#fff" opacity=".25"/><circle class="dot" cx="658" cy="215" r="9" fill="#fff"/></a>
-          <a href="/for/hr" class="node" data-role="hr" aria-label="HR and people teams"><circle class="halo" cx="434" cy="315" r="16" fill="#fff" opacity=".25"/><circle class="dot" cx="434" cy="315" r="9" fill="#fff"/></a>
-          <a href="/for/therapists-coaches" class="node" data-role="care" aria-label="Therapists and coaches"><circle class="halo" cx="619" cy="315" r="16" fill="#fff" opacity=".25"/><circle class="dot" cx="619" cy="315" r="9" fill="#fff"/></a>
-        </svg>
-
-        <!-- left/top = the end of each dashed line, as % of the 1000×430 drawing -->
-        <a class="pin l" style="left:26.5%;top:26.7%" href="/for/mentors" data-role="mentors"><i class="fas fa-compass"></i>Mentors</a>
-        <a class="pin l" style="left:26.5%;top:50%" href="/for/project-managers" data-role="pm"><i class="fas fa-diagram-project"></i>Project managers</a>
-        <a class="pin l" style="left:26.5%;top:73.3%" href="/for/hr" data-role="hr"><i class="fas fa-people-group"></i>HR &amp; people</a>
-        <a class="pin r" style="left:73.5%;top:26.7%" href="/for/founders" data-role="founders"><i class="fas fa-rocket"></i>Founders</a>
-        <a class="pin r" style="left:73.5%;top:50%" href="/for/sales" data-role="sales"><i class="fas fa-store"></i>Sales</a>
-        <a class="pin r" style="left:73.5%;top:73.3%" href="/for/therapists-coaches" data-role="care"><i class="fas fa-hand-holding-heart"></i>Therapists &amp; coaches</a>
-      </div>
-      <div class="brain-chips" role="navigation" aria-label="My-CoMind by role">
-        <a href="/for/mentors"><i class="fas fa-compass"></i>Mentors</a>
-        <a href="/for/founders"><i class="fas fa-rocket"></i>Founders</a>
-        <a href="/for/project-managers"><i class="fas fa-diagram-project"></i>Project managers</a>
-        <a href="/for/sales"><i class="fas fa-store"></i>Sales</a>
-        <a href="/for/hr"><i class="fas fa-people-group"></i>HR &amp; people</a>
-        <a href="/for/therapists-coaches"><i class="fas fa-hand-holding-heart"></i>Therapists &amp; coaches</a>
-      </div>
+      <!-- Hero = the feeling, not the product (approved 2026-10-26; same line as the app login screen): the demo right
+           below, /features and /for explain how. Keep it to these two lines. -->
+      <h1>Never lose the thread <span>of your thinking.</span></h1>
+      <p class="hero-sub">Your conversations, decisions and promises — remembered, connected, and ready when you need them.</p>
       <div class="hero-btns">
-        <a href="https://app.my-comind.com" class="btn-primary" target="_blank" rel="noopener">
-          <i class="fas fa-arrow-right"></i> Start for Free
+        <a href="https://app.my-comind.com/" class="btn-primary" target="_blank" rel="noopener">
+          <i class="fas fa-arrow-right"></i> Get Started Free
         </a>
         <a href="#demo" class="btn-outline">
-          <i class="fas fa-play"></i> Watch Demo
+          <i class="fas fa-play"></i> Watch the demo
         </a>
       </div>
+      <!-- "5 releases" = the public entries on /release-notes. Update the number
+           whenever a new release note is published there. -->
       <div class="hero-social-proof">
-        <div class="proof-item"><i class="fas fa-check-circle"></i> Free plan, no credit card</div>
         <div class="proof-item"><i class="fas fa-check-circle"></i> Live product</div>
-        <div class="proof-item"><i class="fas fa-check-circle"></i> Proud to be Canadian</div>
+        <a class="proof-item" href="/release-notes"><i class="fas fa-check-circle"></i> 5 releases since August</a>
+        <div class="proof-item"><i class="fas fa-check-circle"></i> Private by default</div>
+        <div class="proof-item"><i class="fas fa-check-circle"></i> Built in Canada</div>
+        <div class="proof-item"><i class="fas fa-check-circle"></i> No credit card</div>
       </div>
     </div>
   </section>
@@ -987,6 +937,50 @@
 
   <!-- SOCIAL PROOF — what people who use it say. Quotes are the users' own
        words (translated from Portuguese where noted); keep them verbatim. -->
+  <section class="roles-section" id="roles">
+    <div class="container">
+      <div class="roles-head reveal">
+        <span class="section-label">For your kind of work</span>
+        <h2 class="section-title">See it for your kind of work</h2>
+      </div>
+        <!-- The brain is a picture with shortcuts on it, not anatomy: which region
+             a role sits on means nothing. On phones the pins give way to the chips
+             below, so nothing depends on hovering or on hitting a small dot. -->
+        <div class="brain" id="brain">
+          <svg viewBox="0 0 1000 430" role="img" aria-labelledby="brain-title">
+            <title id="brain-title">The My-CoMind brain, with one point for each role</title>
+            <defs><filter id="soft" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="26"/></filter></defs>
+            <ellipse cx="500" cy="215" rx="215" ry="175" fill="#59B39A" opacity=".18" filter="url(#soft)"/>
+            <g class="lines" stroke="#9FB3C8" stroke-width="1.5" stroke-dasharray="4 5" fill="none"><path d="M403 115 H265"/><path d="M611 115 H735"/><path d="M328 215 H265"/><path d="M658 215 H735"/><path d="M434 315 H265"/><path d="M619 315 H735"/></g>
+            <!-- the brain itself is the official logo artwork (cut from mycomind_logo_full_transparent.png) -->
+            <image href="/assets/brain-logo.webp" x="281" y="15" width="438" height="400"/>
+            <a href="/for/mentors" class="node" data-role="mentors" aria-label="Mentors"><circle class="halo" cx="403" cy="115" r="16" fill="#fff" opacity=".25"/><circle class="dot" cx="403" cy="115" r="9" fill="#fff"/></a>
+            <a href="/for/founders" class="node" data-role="founders" aria-label="Founders"><circle class="halo" cx="611" cy="115" r="16" fill="#fff" opacity=".25"/><circle class="dot" cx="611" cy="115" r="9" fill="#fff"/></a>
+            <a href="/for/project-managers" class="node" data-role="pm" aria-label="Project managers"><circle class="halo" cx="328" cy="215" r="16" fill="#fff" opacity=".25"/><circle class="dot" cx="328" cy="215" r="9" fill="#fff"/></a>
+            <a href="/for/sales" class="node" data-role="sales" aria-label="Sales"><circle class="halo" cx="658" cy="215" r="16" fill="#fff" opacity=".25"/><circle class="dot" cx="658" cy="215" r="9" fill="#fff"/></a>
+            <a href="/for/hr" class="node" data-role="hr" aria-label="HR and people teams"><circle class="halo" cx="434" cy="315" r="16" fill="#fff" opacity=".25"/><circle class="dot" cx="434" cy="315" r="9" fill="#fff"/></a>
+            <a href="/for/therapists-coaches" class="node" data-role="care" aria-label="Therapists and coaches"><circle class="halo" cx="619" cy="315" r="16" fill="#fff" opacity=".25"/><circle class="dot" cx="619" cy="315" r="9" fill="#fff"/></a>
+          </svg>
+
+          <!-- left/top = the end of each dashed line, as % of the 1000×430 drawing -->
+          <a class="pin l" style="left:26.5%;top:26.7%" href="/for/mentors" data-role="mentors"><i class="fas fa-compass"></i>Mentors</a>
+          <a class="pin l" style="left:26.5%;top:50%" href="/for/project-managers" data-role="pm"><i class="fas fa-diagram-project"></i>Project managers</a>
+          <a class="pin l" style="left:26.5%;top:73.3%" href="/for/hr" data-role="hr"><i class="fas fa-people-group"></i>HR &amp; people</a>
+          <a class="pin r" style="left:73.5%;top:26.7%" href="/for/founders" data-role="founders"><i class="fas fa-rocket"></i>Founders</a>
+          <a class="pin r" style="left:73.5%;top:50%" href="/for/sales" data-role="sales"><i class="fas fa-store"></i>Sales</a>
+          <a class="pin r" style="left:73.5%;top:73.3%" href="/for/therapists-coaches" data-role="care"><i class="fas fa-hand-holding-heart"></i>Therapists &amp; coaches</a>
+        </div>
+        <div class="brain-chips" role="navigation" aria-label="My-CoMind by role">
+          <a href="/for/mentors"><i class="fas fa-compass"></i>Mentors</a>
+          <a href="/for/founders"><i class="fas fa-rocket"></i>Founders</a>
+          <a href="/for/project-managers"><i class="fas fa-diagram-project"></i>Project managers</a>
+          <a href="/for/sales"><i class="fas fa-store"></i>Sales</a>
+          <a href="/for/hr"><i class="fas fa-people-group"></i>HR &amp; people</a>
+          <a href="/for/therapists-coaches"><i class="fas fa-hand-holding-heart"></i>Therapists &amp; coaches</a>
+        </div>
+    </div>
+  </section>
+
   <section class="quote-section" id="testimonials">
     <div class="container">
       <div class="quotes-header reveal">
@@ -1016,7 +1010,7 @@
             <p>"I can get quick, effective summaries of each session… saving me time and helping me work in a more organized, efficient way."</p>
           </blockquote>
           <figcaption>
-            <span class="quote-avatar" style="background:rgba(0,201,167,.12);color:#00957C">M</span>
+            <span class="quote-avatar" style="background:rgba(0,201,167,.12);color:#00806E">M</span>
             <span><strong>Marcela</strong><span class="quote-role">Clinical Psychologist</span></span>
           </figcaption>
           <p class="quote-note"><i class="fas fa-pen" style="font-size:11px"></i> Writes her notes after the session — sessions are never recorded.</p>
@@ -1321,10 +1315,11 @@
             <li><i class="fas fa-check"></i> Living workspaces with decisions and open points</li>
             <li><i class="fas fa-check"></i> AI chat over your own memory</li>
             <li><i class="fas fa-check"></i> Cognitive Drift</li>
+            <li><i class="fas fa-check"></i> Microsoft Teams and Fireflies meetings</li>
           </ul>
           <div class="price-cta">
-            <a href="https://app.my-comind.com" class="btn-block ghost" target="_blank" rel="noopener">
-              Start free <i class="fas fa-arrow-right"></i>
+            <a href="https://app.my-comind.com/" class="btn-block ghost" target="_blank" rel="noopener">
+              Get Started Free <i class="fas fa-arrow-right"></i>
             </a>
           </div>
         </div>
@@ -1345,11 +1340,10 @@
             <li><i class="fas fa-check"></i> Memory Continuity compared across projects</li>
             <li><i class="fas fa-check"></i> Cognitive Map</li>
             <li><i class="fas fa-check"></i> Calendar Briefings</li>
-            <li><i class="fas fa-check"></i> Meeting integrations (Fireflies)</li>
           </ul>
           <div class="price-cta">
-            <a href="https://app.my-comind.com" class="btn-block solid" target="_blank" rel="noopener">
-              Get Full Access <i class="fas fa-arrow-right"></i>
+            <a href="https://app.my-comind.com/" class="btn-block solid" target="_blank" rel="noopener">
+              Get Started Free <i class="fas fa-arrow-right"></i>
             </a>
           </div>
         </div>
@@ -1364,6 +1358,7 @@
         costs by the minute; capturing a note or asking a question costs a fraction of a credit. Reading your
         workspaces, your timeline and everything already generated is always free.
       </p>
+      <p class="section-more reveal"><a href="/pricing">Compare plans, including teams and programs <i class="fas fa-arrow-right"></i></a></p>
     </div>
   </section>
 
@@ -1410,24 +1405,12 @@
       </div>
       <div class="faq-list reveal">
         <details class="faq-item" open>
-          <summary>What is cognitive continuity?</summary>
-          <div class="faq-answer">Cognitive continuity is the ability to pick up exactly where you left off on any topic — with full context of decisions made, open questions, and how your thinking evolved over time. It is the difference between an archive you can search and a memory you can question. <a href="/resources/cognitive-continuity">Full explanation, with a diagnostic you can run</a>.</div>
-        </details>
-        <details class="faq-item">
           <summary>Is my data used to train AI models?</summary>
           <div class="faq-answer">No. Your content is processed only to serve you and is never used to train AI models. Your memory stays personal by default and nothing is shared with a team or project unless you explicitly share it.</div>
         </details>
         <details class="faq-item">
-          <summary>How does My-CoMind differ from Notion or Fireflies?</summary>
-          <div class="faq-answer">Notion stores documents you organize yourself and Fireflies stores transcripts of what was said. My-CoMind automatically connects related memories into living workspaces, tracks how your decisions evolved through Cognitive Drift, and answers questions grounded in your own material with the sources attached. Full breakdowns: <a href="/alternatives/notion">vs Notion</a> and <a href="/alternatives/fireflies">vs Fireflies.ai</a>.</div>
-        </details>
-        <details class="faq-item">
           <summary>Do I have to tag or organize anything?</summary>
           <div class="faq-answer">No. Memories about the same topic gather into a workspace on their own — no folders, no tags, no manual linking. You can force a refresh of any workspace at any time, and it re-checks every loose memory that might belong to it.</div>
-        </details>
-        <details class="faq-item">
-          <summary>Can I use it with a meeting recorder I already have?</summary>
-          <div class="faq-answer">Yes. My-CoMind records meetings natively with Live Capture, and it also imports transcripts from Fireflies. Imported material arrives as suggestions that you approve before anything becomes a memory.</div>
         </details>
         <details class="faq-item">
           <summary>What does the free plan include?</summary>
@@ -1438,6 +1421,7 @@
           <div class="faq-answer">My-CoMind is built and operated by MY-COMIND INC., a company registered in Ontario, Canada, and run to Canadian privacy expectations under PIPEDA and CASL. Sharing is always explicit and a shared memory can be withdrawn at any time. See the <a href="/privacy">privacy policy</a> for the detail.</div>
         </details>
       </div>
+      <p class="section-more reveal"><a href="/faq">All questions: privacy, recording, plans <i class="fas fa-arrow-right"></i></a></p>
     </div>
   </section>
 
@@ -1449,8 +1433,8 @@
       <h2>Stop rebuilding<br>context.</h2>
       <p>Capture one real conversation and see what comes back. The free plan is enough to judge it for yourself — no credit card, nothing to install.</p>
       <div class="cta-btns">
-        <a href="https://app.my-comind.com" class="btn-white" target="_blank" rel="noopener">
-          <i class="fas fa-arrow-right"></i> Start for Free
+        <a href="https://app.my-comind.com/" class="btn-white" target="_blank" rel="noopener">
+          <i class="fas fa-arrow-right"></i> Get Started Free
         </a>
         <a href="/contact" class="btn-white-outline">
           <i class="fas fa-comments"></i> Talk about your team
@@ -1472,7 +1456,8 @@
       <h4>Product</h4>
       <a href="/features">Features</a>
       <a href="/release-notes">What's New</a>
-      <a href="/#pricing">Pricing</a>
+      <a href="/pricing">Pricing</a>
+      <a href="/faq">FAQ</a>
       <a href="/for">Who it's for</a>
       <a href="/context-audit">Context Load Audit</a>
     </div>
@@ -1487,8 +1472,7 @@
     </div>
     <div class="mc-footer-col">
       <h4>Company</h4>
-      <a href="https://app.my-comind.com" target="_blank" rel="noopener">Get Started Free</a>
-      <a href="https://app.my-comind.com/login" target="_blank" rel="noopener">Sign In</a>
+      <a href="https://app.my-comind.com/" target="_blank" rel="noopener">Get Started Free</a>
       <a href="/contact">Talk to us</a>
       <a href="/privacy">Privacy Policy</a>
       <a href="/terms">Terms of Service</a>

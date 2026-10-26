@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pricing — Free, Full Access, Teams &amp; Programs | My-CoMind</title>
+  <meta name="description" content="Start free with 30 credits a month, no credit card. Full Access is CA$14.90/month. Teams and programs buy seats at CA$35 per person per month.">
+  <meta name="author" content="MY-COMIND INC.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://www.my-comind.com/pricing">
+  <meta property="og:title" content="My-CoMind pricing">
+  <meta property="og:description" content="Start free, no credit card. One paid plan unlocks everything. Seats for teams and programs.">
+  <meta property="og:image" content="https://www.my-comind.com/og-image.png">
+  <meta property="og:url" content="https://www.my-comind.com/pricing">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="My-CoMind">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <!-- What is paid-only comes from backend src/services/entitlements.js
+       (calendar, cognitive_map, voice_analysis, create_org); integrations are on every plan.
+       Prices: keep in sync with the app (Credits page) and with the pricing
+       summary on the home page. Seat price/minimum: docs/features-fact-sheet.md. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "My-CoMind",
+    "applicationCategory": "ProductivityApplication",
+    "operatingSystem": "Web",
+    "url": "https://www.my-comind.com/pricing",
+    "offers": [
+      { "@type": "Offer", "name": "Free", "price": "0", "priceCurrency": "CAD" },
+      { "@type": "Offer", "name": "Full Access", "price": "14.90", "priceCurrency": "CAD" },
+      { "@type": "Offer", "name": "Teams & Programs (per seat)", "price": "35.00", "priceCurrency": "CAD" }
+    ]
+  }
+  </script>
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%230066CC' rx='20' width='100' height='100'/><text x='50' y='70' font-size='50' text-anchor='middle' fill='white' font-family='Arial'>M</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/roles.css">
+  <style>
+    .p-hero { background: linear-gradient(160deg, #f0f6ff 0%, var(--white) 65%); padding: 56px 0 24px; text-align: center; }
+    .p-hero h1 { font-family: 'Poppins', sans-serif; font-size: clamp(32px, 4.6vw, 50px); font-weight: 800; letter-spacing: -1px; line-height: 1.12; margin-bottom: 14px; }
+    .p-hero p { font-size: 18px; color: var(--text-muted); max-width: 620px; margin: 0 auto; }
+    .plans { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; padding: 36px 0 20px; align-items: stretch; }
+    .plan { background: #fff; border: 2px solid var(--gray-light); border-radius: 20px; padding: 28px 26px; display: flex; flex-direction: column; gap: 14px; position: relative; }
+    .plan.featured { border-color: var(--blue); box-shadow: 0 20px 48px rgba(0,102,204,.12); }
+    .plan .flag { position: absolute; top: -13px; left: 26px; background: var(--blue); color: #fff; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 6px 14px; border-radius: 50px; }
+    .plan h2 { font-family: 'Poppins', sans-serif; font-size: 20px; font-weight: 700; }
+    .plan .who { font-size: 15px; color: var(--text-muted); line-height: 1.55; min-height: 46px; }
+    .plan .price { font-family: 'Poppins', sans-serif; font-size: 38px; font-weight: 800; letter-spacing: -1px; }
+    .plan .price small { font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 500; color: var(--text-muted); letter-spacing: 0; }
+    .plan .credits { font-size: 14px; font-weight: 600; color: #00806E; }
+    .plan ul { list-style: none; display: flex; flex-direction: column; gap: 9px; flex: 1; }
+    .plan li { display: flex; gap: 10px; font-size: 14.5px; line-height: 1.5; color: #3A4059; }
+    .plan li i { color: var(--green); margin-top: 4px; font-size: 12px; width: 14px; flex-shrink: 0; }
+    .plan .btn { width: 100%; }
+    .note { text-align: center; font-size: 14.5px; color: var(--text-muted); max-width: 720px; margin: 0 auto; line-height: 1.7; }
+    .note strong { color: var(--charcoal); }
+    .compare { margin: 56px 0 0; overflow-x: auto; }
+    .compare table { width: 100%; border-collapse: collapse; min-width: 620px; background: #fff; border-radius: 16px; overflow: hidden; border: 1px solid var(--gray-light); }
+    .compare th, .compare td { padding: 14px 18px; text-align: left; font-size: 14.5px; border-bottom: 1px solid var(--gray-light); }
+    .compare th { font-family: 'Poppins', sans-serif; font-size: 14px; background: var(--gray); }
+    .compare td:not(:first-child), .compare th:not(:first-child) { text-align: center; width: 18%; }
+    .compare .y { color: #00806E; } .compare .n { color: #B0B6C3; }
+    .teams { margin-top: 56px; background: linear-gradient(135deg, #1F2F49, #2d3e5f); color: #fff; border-radius: 22px; padding: 36px; display: grid; grid-template-columns: 1.2fr 1fr; gap: 32px; align-items: center; }
+    .teams h2 { font-family: 'Poppins', sans-serif; font-size: 26px; font-weight: 800; margin-bottom: 10px; }
+    .teams p { color: rgba(255,255,255,.8); font-size: 15.5px; line-height: 1.7; }
+    .teams ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .teams li { display: flex; gap: 10px; font-size: 14.5px; color: rgba(255,255,255,.88); }
+    .teams li i { color: #7FD8C2; margin-top: 4px; }
+    .teams .btn { background: #fff; color: #1F2F49; margin-top: 18px; }
+    @media (max-width: 980px) { .plans, .teams { grid-template-columns: 1fr; } .plan .who { min-height: 0; } }
+    @media (max-width: 640px) { .teams { padding: 26px 20px; } }
+  </style>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <link rel="stylesheet" href="/assets/site-chrome.css">
+</head>
+<body>
+
+  <!-- SITE-HEADER:START (generated by tools/sync-chrome.mjs — edit partials/header.html) -->
+<header class="mc-header" id="mc-header">
+  <nav class="mc-nav" aria-label="Main">
+    <a href="/" class="mc-logo" aria-label="My-CoMind home"><img src="/assets/brain-logo.webp" alt="" width="558" height="509"><span class="mc-word">My-Co<span>Mind</span></span></a>
+    <div class="mc-links">
+      <a href="/features" data-match="/features">Features</a>
+      <a href="/pricing" data-match="/pricing">Pricing</a>
+      <a href="/faq" data-match="/faq">FAQ</a>
+    </div>
+    <div class="mc-actions">
+      <a href="https://app.my-comind.com/" class="mc-cta" target="_blank" rel="noopener">Get Started Free</a>
+      <button type="button" class="mc-burger" aria-label="Open menu" aria-expanded="false" aria-controls="mc-panel">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+  <div class="mc-panel" id="mc-panel" hidden>
+    <a href="/features" data-match="/features">Features</a>
+    <a href="/pricing" data-match="/pricing">Pricing</a>
+    <a href="/faq" data-match="/faq">FAQ</a>
+    <div class="mc-panel-actions">
+      <a href="https://app.my-comind.com/" class="mc-cta" target="_blank" rel="noopener">Get Started Free</a>
+    </div>
+  </div>
+</header>
+<!-- SITE-HEADER:END -->
+
+  <header class="p-hero">
+    <div class="container">
+      <h1>Start free. Pay when it earns it.</h1>
+      <p>Most people know in a week whether it changes how they work. No credit card to find out.</p>
+    </div>
+  </header>
+
+  <section>
+    <div class="container">
+      <div class="plans">
+        <div class="plan">
+          <h2>Free</h2>
+          <p class="who">For trying it on your own conversations.</p>
+          <div class="price">CA$0</div>
+          <div class="credits">30 credits / month</div>
+          <ul>
+            <li><i class="fas fa-check"></i>Record meetings, write notes, upload documents</li>
+            <li><i class="fas fa-check"></i>A living page for every topic, with decisions and open points</li>
+            <li><i class="fas fa-check"></i>Ask questions about your own memory</li>
+            <li><i class="fas fa-check"></i>See when your thinking on something changed</li>
+            <li><i class="fas fa-check"></i>Microsoft Teams and Fireflies meetings</li>
+          </ul>
+          <a href="https://app.my-comind.com/" class="btn btn-ghost" target="_blank" rel="noopener">Get Started Free</a>
+        </div>
+
+        <div class="plan featured">
+          <span class="flag">Everything unlocked</span>
+          <h2>Full Access</h2>
+          <p class="who">For people who follow many clients, candidates or projects.</p>
+          <div class="price">CA$14.90 <small>/ month</small></div>
+          <div class="credits">350 credits / month</div>
+          <ul>
+            <li><i class="fas fa-check"></i>Everything in Free</li>
+            <li><i class="fas fa-check"></i>Unlimited organizations and projects — one page per client or person</li>
+            <li><i class="fas fa-check"></i>Compare one topic across every project</li>
+            <li><i class="fas fa-check"></i>Meeting prep from your calendar</li>
+            <li><i class="fas fa-check"></i>Voice stress readings in your meetings</li>
+            <li><i class="fas fa-check"></i>Cognitive Map</li>
+          </ul>
+          <a href="https://app.my-comind.com/" class="btn btn-solid" target="_blank" rel="noopener">Get Started Free</a>
+        </div>
+
+        <div class="plan">
+          <h2>Teams &amp; Programs</h2>
+          <p class="who">For accelerators, mentoring programs and teams that give access to their people.</p>
+          <div class="price">CA$35 <small>/ person / month</small></div>
+          <div class="credits">350 credits per person · minimum 5 seats</div>
+          <ul>
+            <li><i class="fas fa-check"></i>Full Access for every seat</li>
+            <li><i class="fas fa-check"></i>You manage seats and billing in one place</li>
+            <li><i class="fas fa-check"></i>You never see anyone's memories — only what they choose to share</li>
+            <li><i class="fas fa-check"></i>Shared work can stay with the program when someone leaves</li>
+          </ul>
+          <a href="/contact" class="btn btn-ghost">Talk to us</a>
+        </div>
+      </div>
+
+      <p class="note">Need more in a busy month? <strong>Add 100 credits for CA$6</strong> — a one-time top-up, no plan change. Credits measure the AI work: a recorded meeting costs by the minute, a note or a question costs a fraction of a credit, and <strong>reading everything already generated is always free</strong>.</p>
+
+      <div class="compare">
+        <table>
+          <thead><tr><th>What you get</th><th>Free</th><th>Full Access</th><th>Teams &amp; Programs</th></tr></thead>
+          <tbody>
+            <tr><td>Record, write and upload</td><td class="y"><i class="fas fa-check"></i></td><td class="y"><i class="fas fa-check"></i></td><td class="y"><i class="fas fa-check"></i></td></tr>
+            <tr><td>Ask questions, with the source of every answer</td><td class="y"><i class="fas fa-check"></i></td><td class="y"><i class="fas fa-check"></i></td><td class="y"><i class="fas fa-check"></i></td></tr>
+            <tr><td>Private by default, never used to train AI</td><td class="y"><i class="fas fa-check"></i></td><td class="y"><i class="fas fa-check"></i></td><td class="y"><i class="fas fa-check"></i></td></tr>
+            <tr><td>Credits per month</td><td>30</td><td>350</td><td>350 / person</td></tr>
+            <tr><td>One page per client, candidate or project</td><td class="n">—</td><td class="y"><i class="fas fa-check"></i></td><td class="y"><i class="fas fa-check"></i></td></tr>
+            <tr><td>Compare a topic across projects</td><td class="n">—</td><td class="y"><i class="fas fa-check"></i></td><td class="y"><i class="fas fa-check"></i></td></tr>
+            <tr><td>Microsoft Teams &amp; Fireflies</td><td class="y"><i class="fas fa-check"></i></td><td class="y"><i class="fas fa-check"></i></td><td class="y"><i class="fas fa-check"></i></td></tr>
+            <tr><td>Seat management and one invoice</td><td class="n">—</td><td class="n">—</td><td class="y"><i class="fas fa-check"></i></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="teams">
+        <div>
+          <h2>Giving it to a team or a cohort?</h2>
+          <p>Each person keeps their own private memory and works the way they already do. You get one place to manage seats and billing — and nobody's notes become visible to you unless they decide to share them.</p>
+          <a href="/contact" class="btn">Talk to us <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <ul>
+          <li><i class="fas fa-check"></i>Minimum 5 seats; add or remove people any time</li>
+          <li><i class="fas fa-check"></i>The person leaving keeps their own memory</li>
+          <li><i class="fas fa-check"></i>Built and operated in Ontario, Canada, under PIPEDA and CASL</li>
+        </ul>
+      </div>
+
+      <p class="note" style="margin-top:44px">Questions before you start? <a href="/faq" style="color:var(--blue);font-weight:600">Read the FAQ →</a></p>
+    </div>
+  </section>
+
+  <section class="cta">
+    <h2>Try it on your next conversation</h2>
+    <p>Free plan, no credit card.</p>
+    <a href="https://app.my-comind.com/" class="btn btn-white" target="_blank" rel="noopener">Get Started Free <i class="fas fa-arrow-right"></i></a>
+  </section>
+
+  <!-- SITE-FOOTER:START (generated by tools/sync-chrome.mjs — edit partials/footer.html) -->
+<footer class="mc-footer">
+  <div class="mc-footer-inner">
+    <div class="mc-footer-brand">
+      <img src="/assets/logo.png" alt="My-CoMind" width="195" height="200">
+      <p>Cognitive continuity. Preserving how you think, not just what you remember.</p>
+      <p class="mc-entity">MY-COMIND INC. · MyCoMind<br>Ontario, Canada</p>
+    </div>
+    <div class="mc-footer-col">
+      <h4>Product</h4>
+      <a href="/features">Features</a>
+      <a href="/release-notes">What's New</a>
+      <a href="/pricing">Pricing</a>
+      <a href="/faq">FAQ</a>
+      <a href="/for">Who it's for</a>
+      <a href="/context-audit">Context Load Audit</a>
+    </div>
+    <div class="mc-footer-col">
+      <h4>Learn</h4>
+      <a href="/resources">Resources</a>
+      <a href="/resources/memory-agent">From memory tool to memory agent</a>
+      <a href="/resources/context-reconstruction">Context reconstruction</a>
+      <a href="/resources/cognitive-continuity">What is cognitive continuity?</a>
+      <a href="/glossary">Glossary</a>
+      <a href="/alternatives">Comparisons: Fireflies, Notion</a>
+    </div>
+    <div class="mc-footer-col">
+      <h4>Company</h4>
+      <a href="https://app.my-comind.com/" target="_blank" rel="noopener">Get Started Free</a>
+      <a href="/contact">Talk to us</a>
+      <a href="/privacy">Privacy Policy</a>
+      <a href="/terms">Terms of Service</a>
+    </div>
+  </div>
+  <div class="mc-footer-bottom">
+    <p>© 2026 MY-COMIND INC. All rights reserved.</p>
+    <a href="https://www.linkedin.com/company/my-comind" class="mc-social" target="_blank" rel="noopener" aria-label="My-CoMind on LinkedIn">in</a>
+  </div>
+</footer>
+<!-- SITE-FOOTER:END -->
+
+  <script src="/assets/site-chrome.js" defer></script>
+</body>
+</html>
