@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My-CoMind — Cognitive Continuity for People and Teams</title>
+  <title>My-CoMind (MyCoMind) — Never Lose Where You Left Off</title>
   <meta name="description" content="Never lose the thinking behind your decisions. My-CoMind turns meetings, decisions and insights into living workspaces you can question — with AI-powered continuity, Cognitive Drift, and team memory.">
   <meta name="keywords" content="cognitive continuity, meeting notes AI, decision tracking, team memory, AI workspace, second brain, knowledge management, mentor tools, founder tools">
   <meta name="author" content="MY-COMIND INC.">
@@ -11,7 +11,7 @@
   <link rel="canonical" href="https://www.my-comind.com/">
 
   <!-- Open Graph -->
-  <meta property="og:title" content="My-CoMind — Cognitive Continuity for People and Teams">
+  <meta property="og:title" content="My-CoMind (MyCoMind) — Never Lose Where You Left Off">
   <meta property="og:description" content="Never lose the thinking behind your decisions. Living workspaces you can question — where things stand, what was decided, and how your thinking got there.">
   <meta property="og:image" content="https://www.my-comind.com/og-image.png">
   <meta property="og:image:width" content="1200">
@@ -27,11 +27,40 @@
   <meta name="twitter:image" content="https://www.my-comind.com/og-image.png">
 
   <!-- Schema.org SoftwareApplication -->
+  <!-- Brand name variants: Google reads WebSite.name/alternateName for the site
+       name it shows and for matching searches like "mycomind" or "my comind". -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://www.my-comind.com/#website",
+        "name": "My-CoMind",
+        "alternateName": ["MyCoMind", "My CoMind", "Mycomind", "My Comind", "my-comind.com"],
+        "url": "https://www.my-comind.com/",
+        "publisher": { "@id": "https://www.my-comind.com/#organization" }
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://www.my-comind.com/#organization",
+        "name": "MY-COMIND INC.",
+        "alternateName": ["My-CoMind", "MyCoMind", "My CoMind", "Mycomind"],
+        "url": "https://www.my-comind.com/",
+        "logo": "https://www.my-comind.com/mycomind_logo_full_transparent.png",
+        "sameAs": ["https://www.linkedin.com/company/my-comind"],
+        "address": { "@type": "PostalAddress", "addressRegion": "Ontario", "addressCountry": "CA" }
+      }
+    ]
+  }
+  </script>
+
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
     "name": "My-CoMind",
+    "alternateName": "MyCoMind",
     "applicationCategory": "ProductivityApplication",
     "operatingSystem": "Web",
     "offers": {
@@ -804,9 +833,8 @@
     .features-all-link i { font-size: 12px; }
   /* Testimonials: three cards, stacked on phones. */
     .quotes-header { text-align: center; margin-bottom: 44px; }
-    .quotes-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; max-width: 1040px; margin: 0 auto; align-items: stretch; }
-    .quote-card.wide { grid-column: 1 / -1; }
-    .quote-card.wide blockquote p:not(.quote-pull) { font-size: 16.5px; }
+    .quotes-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; max-width: 1120px; margin: 0 auto; align-items: stretch; }
+    .quote-value { align-self: flex-start; display: inline-flex; align-items: center; gap: 7px; font-size: 12px; font-weight: 700; letter-spacing: .4px; text-transform: uppercase; color: #00806E; background: rgba(0,201,167,.12); border-radius: 50px; padding: 6px 12px; }
     .quote-card { margin: 0; background: var(--gray); border-radius: 22px; padding: 30px 28px; border-top: 4px solid var(--green); display: flex; flex-direction: column; gap: 16px; }
     .quote-card blockquote { margin: 0; }
     .quote-card blockquote p { font-size: 15.5px; line-height: 1.7; color: var(--text-muted); margin: 0 0 12px; }
@@ -965,12 +993,14 @@
         <span class="section-label">In Their Words</span>
         <h2 class="section-title">What people who use it say</h2>
       </div>
+      <!-- Short on purpose: a value label (our words, styled apart), their own pull
+           line, and ONE verbatim excerpt. Excerpts are cut with "…", never reworded. -->
       <div class="quotes-grid">
         <figure class="quote-card reveal">
+          <span class="quote-value"><i class="fas fa-bullseye"></i> Full attention, nothing missed</span>
           <blockquote>
             <p class="quote-pull">"I can focus 100% on meetings and classes."</p>
-            <p>My-CoMind has become essential to my routine, both at work and in my studies. I have several meetings a week, and being able to record my calls, capture my English classes and jot down anything important has changed how I manage my work. Now I can focus 100% on meetings and classes without worrying about writing everything down and missing something — which helps me pay much more attention and understand the content better.</p>
-            <p>When it's time to review, I don't waste time re-listening to the whole recording: I just glance at the summary it generates, or ask it a direct question. Whenever I need to double-check a deadline, study the material or confirm what was agreed, the information is there in seconds. It has brought much more speed, accuracy and peace of mind to my day, and saves me a great deal of time.</p>
+            <p>"When it's time to review, I don't waste time re-listening to the whole recording… the information is there in seconds."</p>
           </blockquote>
           <figcaption>
             <span class="quote-avatar" style="background:rgba(0,102,204,.1);color:var(--blue)">B</span>
@@ -980,24 +1010,24 @@
         </figure>
 
         <figure class="quote-card reveal" style="transition-delay:.08s">
+          <span class="quote-value"><i class="fas fa-clock"></i> Faster session prep</span>
           <blockquote>
             <p class="quote-pull">"It has made my professional routine much easier."</p>
-            <p>My experience with My-CoMind has been excellent! It has made a real difference to how I organize my sessions with patients: I write down what I need in a practical, structured way, it works as my clinical record, and I can get quick, effective summaries of each session — plus feedback on the aspects I'm currently working on.</p>
-            <p>Another big plus is how practical it makes preparing the documents my practice requires, based on the summaries of my notes and my patients' progress. The whole process is faster and more workable.</p>
-            <p>I highly recommend My-CoMind! It has made my professional routine much easier, saving me time and helping me work in a more organized, efficient way.</p>
+            <p>"I can get quick, effective summaries of each session… saving me time and helping me work in a more organized, efficient way."</p>
           </blockquote>
           <figcaption>
             <span class="quote-avatar" style="background:rgba(0,201,167,.12);color:#00957C">M</span>
             <span><strong>Marcela</strong><span class="quote-role">Clinical Psychologist</span></span>
           </figcaption>
-          <p class="quote-note"><i class="fas fa-pen" style="font-size:11px"></i> Captures her written session notes — therapy sessions are never recorded.</p>
+          <p class="quote-note"><i class="fas fa-pen" style="font-size:11px"></i> Writes her notes after the session — sessions are never recorded.</p>
           <span class="quote-badge"><i class="fas fa-star" style="color:var(--amber);font-size:11px;"></i> Verified user · translated from Portuguese</span>
         </figure>
 
-        <figure class="quote-card wide reveal" style="transition-delay:.16s">
+        <figure class="quote-card reveal" style="transition-delay:.16s">
+          <span class="quote-value"><i class="fas fa-compass"></i> Better guidance, no extra work</span>
           <blockquote>
             <p class="quote-pull">"It has taken my workflow to a new level."</p>
-            <p>My-CoMind has helped take my workflow to a new level. It lets me organize my clients, scale my operations, and deliver more relevant, actionable guidance — all without adding more work to my day.</p>
+            <p>"It lets me organize my clients… and deliver more relevant, actionable guidance — all without adding more work to my day."</p>
           </blockquote>
           <figcaption>
             <span class="quote-avatar" style="background:rgba(155,126,189,.14);color:var(--lavender)">V</span>
@@ -1436,7 +1466,7 @@
     <div class="mc-footer-brand">
       <img src="/assets/logo.png" alt="My-CoMind" width="195" height="200">
       <p>Cognitive continuity. Preserving how you think, not just what you remember.</p>
-      <p class="mc-entity">MY-COMIND INC.<br>Ontario, Canada</p>
+      <p class="mc-entity">MY-COMIND INC. · MyCoMind<br>Ontario, Canada</p>
     </div>
     <div class="mc-footer-col">
       <h4>Product</h4>
