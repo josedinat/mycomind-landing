@@ -25,7 +25,7 @@ const GROUPS = [
     ['If my company or program pays for my seat, can they read my notes?',
      'No. Whoever manages the seats handles access and billing, and cannot read anyone’s memories. They only see what a person decides to share with them.'],
     ['Where is my data stored?',
-     'On secure cloud servers in Canada and the United States, run by infrastructure partners with SOC 2 Type II and ISO 27001 certifications. Some services, including the AI models that read your content to answer you, process data in the United States. The <a href="/privacy">privacy policy</a> has the detail.'],
+     'In Canada (Toronto), on secure cloud servers run by infrastructure partners with SOC 2 Type II and ISO 27001 certifications. To transcribe, summarize and answer, the AI models that read your content process it in the United States; it is not stored there. The <a href="/privacy">privacy policy</a> has the detail.'],
     ['Can I export or delete everything?',
      'Yes. In Settings → Security you can export all your data, or delete your account and everything in it.'],
   ]},
